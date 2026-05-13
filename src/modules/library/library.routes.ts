@@ -7,6 +7,7 @@ import { LibraryRepository } from './library.repository.js';
 import {
   CreateLibraryEntryInput,
   LibraryEntrySchema,
+  LibraryStatsSchema,
   UpdateLibraryEntryInput,
 } from './library.schema.js';
 import { LibraryService } from './library.service.js';
@@ -43,6 +44,16 @@ export async function libraryRoutes(app: FastifyInstance) {
       response: { 200: z.array(LibraryEntrySchema) },
     },
     handler: controller.list,
+  });
+
+  app.get('/library/stats', {
+    ...opts,
+    schema: {
+      ...opts.schema,
+      summary: 'Estatísticas da biblioteca do usuário',
+      response: { 200: LibraryStatsSchema },
+    },
+    handler: controller.getStats,
   });
 
   app.get('/library/:id', {

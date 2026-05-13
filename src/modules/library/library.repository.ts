@@ -30,4 +30,51 @@ export class LibraryRepository {
   delete(id: string) {
     return this.db.libraryEntry.delete({ where: { id } });
   }
+
+  async getStats(userId: string) {
+    const [totalGames, totalHoursAgg, statusGroups, ratingGroups, topGenres, topPlatforms, completedTimeline] =
+      await Promise.all([
+        this.db.libraryEntry.count({ where: { userId } }),
+        this.db.libraryEntry.aggregate({ where: { userId }, _sum: { hoursPlayed: true } }),
+        this.db.libraryEntry.groupBy({
+          by: ['status'],
+          where: { userId },
+          _count: { status: true },
+        }),
+        this.db.libraryEntry.groupBy({
+          by: ['rating'],
+          where: { userId, rating: { not: null } },
+          _count: { rating: true },
+          orderBy: { rating: 'asc' },
+        }),
+        this.db.$queryRaw<Array<{ genre: string; count: bigint }>>`
+          SELECT unnest(genres) AS genre, COUNT(*) AS count
+          FROM "LibraryEntry"
+          WHERE "userId" = ${userId}
+          GROUP BY genre
+          ORDER BY count DESC
+          LIMIT 5
+        `,
+        this.db.$queryRaw<Array<{ platform: string; count: bigint }>>`
+          SELECT COALESCE("userPlatform", platforms[1]) AS platform, COUNT(*) AS count
+          FROM "LibraryEntry"
+          WHERE "userId" = ${userId}
+            AND COALESCE("userPlatform", platforms[1]) IS NOT NULL
+          GROUP BY platform
+          ORDER BY count DESC
+          LIMIT 5
+        `,
+        this.db.$queryRaw<Array<{ month: string; count: bigint }>>`
+          SELECT TO_CHAR(DATE_TRUNC('month', "completedAt"), 'YYYY-MM') AS month, COUNT(*) AS count
+          FROM "LibraryEntry"
+          WHERE "userId" = ${userId}
+            AND "completedAt" IS NOT NULL
+            AND "completedAt" >= NOW() - INTERVAL '12 months'
+          GROUP BY month
+          ORDER BY month ASC
+        `,
+      ]);
+
+    return { totalGames, totalHoursAgg, statusGroups, ratingGroups, topGenres, topPlatforms, completedTimeline };
+  }
 }

@@ -1,7 +1,9 @@
 import type { GameService } from '@/modules/game/game.service.js';
 import { LibraryEntryAlreadyExistsError, LibraryEntryNotFoundError } from './library.errors.js';
 import type { LibraryRepository } from './library.repository.js';
-import type { CreateLibraryEntryInput, UpdateLibraryEntryInput } from './library.schema.js';
+import type { CreateLibraryEntryInput, LibraryStats, UpdateLibraryEntryInput } from './library.schema.js';
+
+const ALL_STATUSES = ['WISHLIST', 'BACKLOG', 'PLAYING', 'PAUSED', 'COMPLETED', 'DROPPED'] as const;
 
 export class LibraryService {
   constructor(
@@ -55,5 +57,28 @@ export class LibraryService {
     const entry = await this.repo.findByIdAndUser(id, userId);
     if (!entry) throw new LibraryEntryNotFoundError();
     await this.repo.delete(id);
+  }
+
+  async getStats(userId: string): Promise<LibraryStats> {
+    const { totalGames, totalHoursAgg, statusGroups, ratingGroups, topGenres, topPlatforms, completedTimeline } =
+      await this.repo.getStats(userId);
+
+    const countByStatus = Object.fromEntries(ALL_STATUSES.map((s) => [s, 0])) as Record<
+      (typeof ALL_STATUSES)[number],
+      number
+    >;
+    for (const g of statusGroups) {
+      countByStatus[g.status] = g._count.status;
+    }
+
+    return {
+      totalGames,
+      totalHours: totalHoursAgg._sum.hoursPlayed ? Number(totalHoursAgg._sum.hoursPlayed) : 0,
+      countByStatus,
+      topGenres: topGenres.map((r) => ({ genre: r.genre, count: Number(r.count) })),
+      topPlatforms: topPlatforms.map((r) => ({ platform: r.platform, count: Number(r.count) })),
+      ratingDistribution: ratingGroups.map((r) => ({ rating: r.rating as number, count: r._count.rating })),
+      completedTimeline: completedTimeline.map((r) => ({ month: r.month, count: Number(r.count) })),
+    };
   }
 }

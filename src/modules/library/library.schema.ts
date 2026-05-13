@@ -50,5 +50,17 @@ export const UpdateLibraryEntryInput = z
 
 export const LibraryListQuery = z.object({});
 
+export const LibraryStatsSchema = z.object({
+  totalGames: z.number(),
+  totalHours: z.number(),
+  countByStatus: z.record(LibraryStatusEnum, z.number()),
+  topGenres: z.array(z.object({ genre: z.string(), count: z.number() })),
+  topPlatforms: z.array(z.object({ platform: z.string(), count: z.number() })),
+  ratingDistribution: z.array(z.object({ rating: z.number(), count: z.number() })),
+  completedTimeline: z.array(z.object({ month: z.string(), count: z.number() })),
+});
+
+export type LibraryStats = z.infer<typeof LibraryStatsSchema>;
+
 export type CreateLibraryEntryInput = z.infer<typeof CreateLibraryEntryInput>;
 export type UpdateLibraryEntryInput = z.infer<typeof UpdateLibraryEntryInput>;

@@ -32,4 +32,9 @@ export class LibraryController {
     await this.library.remove(req.params.id, req.session.userId as string);
     return reply.code(204).send();
   };
+
+  getStats = async (req: FastifyRequest, reply: FastifyReply) => {
+    const stats = await this.library.getStats(req.session.userId as string);
+    return reply.send(stats);
+  };
 }
