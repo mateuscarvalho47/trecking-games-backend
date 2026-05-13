@@ -10,6 +10,9 @@ const envSchema = z.object({
   SESSION_SECRET: z.string().min(32),
   COOKIE_SECRET: z.string().min(32),
   CORS_ORIGIN: z.url(),
+  IGDB_CLIENT_ID: z.string().min(1),
+  IGDB_CLIENT_SECRET: z.string().min(1),
+  IGDB_TIMEOUT_MS: z.coerce.number().default(5000),
 });
 
 export const env = envSchema.parse(process.env);

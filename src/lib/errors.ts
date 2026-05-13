@@ -39,3 +39,9 @@ export class ConflictError extends AppError {
     super('CONFLICT', 409, message);
   }
 }
+
+export class IgdbError extends AppError {
+  constructor(message: string, statusCode = 502) {
+    super('IGDB_ERROR', statusCode, message);
+  }
+}
