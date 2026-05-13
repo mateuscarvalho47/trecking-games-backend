@@ -1,15 +1,11 @@
-import {
-  ForbiddenError,
-  IgdbError,
-  UnauthorizedError,
-  ValidationError,
-} from '@/lib/errors.js';
-import { igdbGameRawSchema, type IgdbGame } from '@/lib/igdb/schemas.js';
+import { ForbiddenError, IgdbError, UnauthorizedError, ValidationError } from '@/lib/errors.js';
+import { type IgdbGame, igdbGameRawSchema } from '@/lib/igdb/schemas.js';
 
 const TWITCH_TOKEN_URL = 'https://id.twitch.tv/oauth2/token';
 const IGDB_BASE_URL = 'https://api.igdb.com/v4';
 const TOKEN_KEY = 'igdb:token';
-const GAME_FIELDS = 'fields id,name,cover.url,first_release_date,platforms.name,genres.name,summary';
+const GAME_FIELDS =
+  'fields id,name,cover.url,first_release_date,platforms.name,genres.name,summary';
 
 interface RedisLike {
   get(key: string): Promise<string | null>;

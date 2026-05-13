@@ -1,0 +1,11 @@
+meta {
+  name: Remover jogo da biblioteca
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/library/{{id}}
+  body: none
+  auth: none
+}

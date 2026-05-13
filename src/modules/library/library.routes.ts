@@ -1,0 +1,81 @@
+import type { FastifyInstance } from 'fastify';
+import { z } from 'zod';
+import { requireAuth } from '@/lib/requireAuth.js';
+import { GameService } from '@/modules/game/game.service.js';
+import { LibraryController } from './library.controller.js';
+import { LibraryRepository } from './library.repository.js';
+import {
+  CreateLibraryEntryInput,
+  LibraryEntrySchema,
+  UpdateLibraryEntryInput,
+} from './library.schema.js';
+import { LibraryService } from './library.service.js';
+
+const idParam = z.object({ id: z.string().cuid() });
+
+export async function libraryRoutes(app: FastifyInstance) {
+  const repo = new LibraryRepository(app.prisma);
+  const games = new GameService(app.igdb, app.redis);
+  const service = new LibraryService(repo, games);
+  const controller = new LibraryController(service);
+
+  const opts = {
+    preHandler: requireAuth,
+    schema: { tags: ['library'], security: [{ sessionCookie: [] }] },
+  };
+
+  app.post('/library', {
+    ...opts,
+    schema: {
+      ...opts.schema,
+      summary: 'Adicionar jogo à biblioteca',
+      body: CreateLibraryEntryInput,
+      response: { 201: LibraryEntrySchema },
+    },
+    handler: controller.create,
+  });
+
+  app.get('/library', {
+    ...opts,
+    schema: {
+      ...opts.schema,
+      summary: 'Listar biblioteca do usuário',
+      response: { 200: z.array(LibraryEntrySchema) },
+    },
+    handler: controller.list,
+  });
+
+  app.get('/library/:id', {
+    ...opts,
+    schema: {
+      ...opts.schema,
+      summary: 'Buscar entrada da biblioteca',
+      params: idParam,
+      response: { 200: LibraryEntrySchema },
+    },
+    handler: controller.getById,
+  });
+
+  app.patch('/library/:id', {
+    ...opts,
+    schema: {
+      ...opts.schema,
+      summary: 'Atualizar entrada da biblioteca',
+      params: idParam,
+      body: UpdateLibraryEntryInput,
+      response: { 200: LibraryEntrySchema },
+    },
+    handler: controller.update,
+  });
+
+  app.delete('/library/:id', {
+    ...opts,
+    schema: {
+      ...opts.schema,
+      summary: 'Remover jogo da biblioteca',
+      params: idParam,
+      response: { 204: z.null() },
+    },
+    handler: controller.remove,
+  });
+}

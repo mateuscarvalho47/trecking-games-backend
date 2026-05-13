@@ -1,0 +1,25 @@
+meta {
+  name: Atualizar entrada da biblioteca
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{baseUrl}}/library/{{id}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "status": "WISHLIST",
+    "userPlatform": "string",
+    "rating": 8,
+    "hoursPlayed": 12.5,
+    "notes": "Anotação"
+  }
+}

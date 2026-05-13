@@ -13,9 +13,41 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  passwordHash String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id             String         @id @default(cuid())
+  email          String         @unique
+  passwordHash   String
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  libraryEntries LibraryEntry[]
+}
+
+enum LibraryStatus {
+  WISHLIST
+  BACKLOG
+  PLAYING
+  PAUSED
+  COMPLETED
+  DROPPED
+}
+
+model LibraryEntry {
+  id           String        @id @default(cuid())
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  igdbId       Int
+  name         String
+  coverUrl     String?
+  genres       String[]
+  platforms    String[]
+  status       LibraryStatus
+  userPlatform String?
+  rating       Int?
+  hoursPlayed  Decimal?      @db.Decimal(6, 1)
+  notes        String?
+  completedAt  DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@unique([userId, igdbId])
+  @@index([userId, status])
 }

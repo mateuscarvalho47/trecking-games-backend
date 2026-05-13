@@ -17,6 +17,19 @@ export default fp(async (app) => {
       });
     }
 
+    if (
+      err != null &&
+      typeof err === 'object' &&
+      'statusCode' in err &&
+      typeof (err as { statusCode: unknown }).statusCode === 'number' &&
+      (err as { statusCode: number }).statusCode < 500
+    ) {
+      const e = err as { statusCode: number; code?: string; message?: string };
+      return reply.code(e.statusCode).send({
+        error: { code: e.code ?? 'VALIDATION', message: e.message ?? 'Bad request' },
+      });
+    }
+
     req.log.error({ err }, 'unhandled error');
     return reply.code(500).send({
       error: { code: 'INTERNAL', message: 'Erro interno' },

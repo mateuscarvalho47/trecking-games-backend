@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { GameService } from '@/modules/game/game.service.js';
 import { searchQuerySchema } from '@/modules/game/game.schema.js';
+import { GameService } from '@/modules/game/game.service.js';
 
 const GAME = {
   igdbId: 1942,
@@ -48,11 +48,9 @@ describe('GameService.search', () => {
     const result = await service.search('witcher');
 
     expect(igdb.searchGames).toHaveBeenCalledWith('witcher');
-    expect(redis.set).toHaveBeenCalledWith(
-      'igdb:search:witcher',
-      JSON.stringify([GAME]),
-      { EX: 600 },
-    );
+    expect(redis.set).toHaveBeenCalledWith('igdb:search:witcher', JSON.stringify([GAME]), {
+      EX: 600,
+    });
     expect(result).toEqual([GAME]);
   });
 
@@ -92,11 +90,7 @@ describe('GameService.getById', () => {
     const result = await service.getById(1942);
 
     expect(igdb.getGameById).toHaveBeenCalledWith(1942);
-    expect(redis.set).toHaveBeenCalledWith(
-      'igdb:game:1942',
-      JSON.stringify(GAME),
-      { EX: 86400 },
-    );
+    expect(redis.set).toHaveBeenCalledWith('igdb:game:1942', JSON.stringify(GAME), { EX: 86400 });
     expect(result).toEqual(GAME);
   });
 

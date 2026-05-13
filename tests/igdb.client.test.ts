@@ -1,6 +1,6 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { IgdbClient } from '@/lib/igdb/client.js';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ForbiddenError, IgdbError, UnauthorizedError, ValidationError } from '@/lib/errors.js';
+import { IgdbClient } from '@/lib/igdb/client.js';
 
 const CLIENT_ID = 'test-client-id';
 const CLIENT_SECRET = 'test-client-secret';

@@ -10,6 +10,11 @@ declare module 'fastify' {
 }
 
 export default fp(async (app: FastifyInstance) => {
-  const client = new IgdbClient(app.redis, env.IGDB_CLIENT_ID, env.IGDB_CLIENT_SECRET, env.IGDB_TIMEOUT_MS);
+  const client = new IgdbClient(
+    app.redis,
+    env.IGDB_CLIENT_ID,
+    env.IGDB_CLIENT_SECRET,
+    env.IGDB_TIMEOUT_MS,
+  );
   app.decorate('igdb', client);
 });

@@ -17,7 +17,8 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
-    "gen:module": "tsx scripts/create-module.ts"
+    "gen:module": "tsx scripts/create-module.ts",
+    "gen:bruno": "tsx --env-file=.env scripts/gen-bruno.ts"
   },
   "prisma": {
     "seed": "tsx --env-file=.env prisma/seed.ts"

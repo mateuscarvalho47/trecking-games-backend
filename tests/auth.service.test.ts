@@ -1,8 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import {
-  EmailAlreadyTakenError,
-  InvalidCredentialsError,
-} from '@/modules/auth/auth.errors.js';
+import { EmailAlreadyTakenError, InvalidCredentialsError } from '@/modules/auth/auth.errors.js';
 import { AuthService } from '@/modules/auth/auth.service.js';
 
 vi.mock('@/lib/hash.js', () => ({

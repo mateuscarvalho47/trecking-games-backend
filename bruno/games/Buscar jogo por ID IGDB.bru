@@ -1,0 +1,11 @@
+meta {
+  name: Buscar jogo por ID IGDB
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/games/{{igdbId}}
+  body: none
+  auth: none
+}
