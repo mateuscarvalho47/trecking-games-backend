@@ -1,16 +1,22 @@
 import { z } from 'zod';
+import {
+  createLibraryEntryInput,
+  libraryStatsSchema,
+  LibraryStatusEnum,
+  updateLibraryEntryInput,
+} from '@tracking-games/shared';
 
-export const LibraryStatusEnum = z.enum([
-  'WISHLIST',
-  'BACKLOG',
-  'PLAYING',
-  'PAUSED',
-  'COMPLETED',
-  'DROPPED',
-]);
+export { type LibraryStats, type LibraryStatus, LibraryStatusEnum } from '@tracking-games/shared';
 
-export type LibraryStatus = z.infer<typeof LibraryStatusEnum>;
+// PascalCase aliases keep backward compat with routes and tests
+export const CreateLibraryEntryInput = createLibraryEntryInput;
+export const UpdateLibraryEntryInput = updateLibraryEntryInput;
+export const LibraryStatsSchema = libraryStatsSchema;
 
+export type CreateLibraryEntryInput = z.infer<typeof CreateLibraryEntryInput>;
+export type UpdateLibraryEntryInput = z.infer<typeof UpdateLibraryEntryInput>;
+
+// Backend-only: hoursPlayed uses preprocess to coerce Prisma Decimal → number
 export const LibraryEntrySchema = z.object({
   id: z.string(),
   userId: z.string(),
@@ -31,36 +37,4 @@ export const LibraryEntrySchema = z.object({
 
 export type LibraryEntry = z.infer<typeof LibraryEntrySchema>;
 
-export const CreateLibraryEntryInput = z.object({
-  igdbId: z.number().int().positive(),
-  status: LibraryStatusEnum,
-  userPlatform: z.string().optional(),
-});
-
-export const UpdateLibraryEntryInput = z
-  .object({
-    status: LibraryStatusEnum,
-    userPlatform: z.string().nullable(),
-    rating: z.number().int().min(0).max(10).nullable(),
-    hoursPlayed: z.number().min(0).nullable(),
-    notes: z.string().nullable(),
-  })
-  .partial()
-  .refine((data) => Object.keys(data).length > 0, { message: 'At least one field required' });
-
 export const LibraryListQuery = z.object({});
-
-export const LibraryStatsSchema = z.object({
-  totalGames: z.number(),
-  totalHours: z.number(),
-  countByStatus: z.record(LibraryStatusEnum, z.number()),
-  topGenres: z.array(z.object({ genre: z.string(), count: z.number() })),
-  topPlatforms: z.array(z.object({ platform: z.string(), count: z.number() })),
-  ratingDistribution: z.array(z.object({ rating: z.number(), count: z.number() })),
-  completedTimeline: z.array(z.object({ month: z.string(), count: z.number() })),
-});
-
-export type LibraryStats = z.infer<typeof LibraryStatsSchema>;
-
-export type CreateLibraryEntryInput = z.infer<typeof CreateLibraryEntryInput>;
-export type UpdateLibraryEntryInput = z.infer<typeof UpdateLibraryEntryInput>;

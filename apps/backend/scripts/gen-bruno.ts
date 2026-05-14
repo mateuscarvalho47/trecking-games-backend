@@ -18,6 +18,7 @@ interface SpecPath {
   op: Operation;
 }
 
+
 // ── Schema helpers ────────────────────────────────────────────────────────────
 
 function resolveRef(schema: Schema, components: Components): Schema {
