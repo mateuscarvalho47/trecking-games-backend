@@ -19,7 +19,7 @@ export default fp(async (app) => {
     store: new RedisStore({ client: app.redis, prefix: 'sess:' }),
     cookie: {
       httpOnly: true,
-      sameSite: 'lax',
+      sameSite: env.NODE_ENV === 'production' ? 'none' : 'lax',
       secure: env.NODE_ENV === 'production',
       maxAge: 7 * 24 * 60 * 60 * 1000,
     },
