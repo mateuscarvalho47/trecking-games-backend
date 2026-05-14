@@ -20,6 +20,7 @@ export async function authRoutes(app: FastifyInstance) {
   const controller = new AuthController(authService, userService);
 
   app.post('/auth/register', {
+    config: { rateLimit: { max: 5, timeWindow: '1 minute' } },
     schema: {
       tags: ['auth'],
       summary: 'Registrar usuário',
@@ -30,6 +31,7 @@ export async function authRoutes(app: FastifyInstance) {
   });
 
   app.post('/auth/login', {
+    config: { rateLimit: { max: 10, timeWindow: '1 minute' } },
     schema: {
       tags: ['auth'],
       summary: 'Login',

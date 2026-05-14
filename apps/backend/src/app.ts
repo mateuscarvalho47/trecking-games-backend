@@ -13,6 +13,7 @@ import cronPlugin from '@/plugins/cron.js';
 import errorHandlerPlugin from '@/plugins/errorHandler.js';
 import igdbPlugin from '@/plugins/igdb.js';
 import prismaPlugin from '@/plugins/prisma.js';
+import rateLimitPlugin from '@/plugins/rateLimit.js';
 import redisPlugin from '@/plugins/redis.js';
 import sessionPlugin from '@/plugins/session.js';
 import swaggerPlugin from '@/plugins/swagger.js';
@@ -29,6 +30,7 @@ export async function buildApp() {
 
   await app.register(errorHandlerPlugin);
   await app.register(corsPlugin);
+  await app.register(rateLimitPlugin);
   await app.register(prismaPlugin);
   await app.register(redisPlugin);
   await app.register(sessionPlugin);

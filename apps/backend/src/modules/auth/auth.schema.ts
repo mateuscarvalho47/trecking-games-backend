@@ -1,11 +1,6 @@
-import { z } from 'zod';
-
-export const registerSchema = z.object({
-  email: z.email(),
-  password: z.string().min(8).max(100),
-});
-
-export const loginSchema = registerSchema;
-
-export type RegisterInput = z.infer<typeof registerSchema>;
-export type LoginInput = z.infer<typeof loginSchema>;
+export {
+  type LoginInput,
+  loginSchema,
+  type RegisterInput,
+  registerSchema,
+} from '@tracking-games/shared';
