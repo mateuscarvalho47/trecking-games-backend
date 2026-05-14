@@ -55,6 +55,3 @@ export const useAppStore = create<AppStore>()(
   ),
 )
 
-// Convenience selectors
-export const useSearchOpen = () => useAppStore((s) => s.searchOpen)
-export const useSetSearchOpen = () => useAppStore((s) => s.setSearchOpen)

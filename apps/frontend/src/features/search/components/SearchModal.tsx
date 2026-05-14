@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Search } from 'lucide-react'
 import { useNavigate } from '@tanstack/react-router'
 import { useGameSearch } from '../hooks/useGameSearch'
@@ -6,15 +6,7 @@ import { useLibrary } from '@/features/library/hooks/useLibrary'
 import { AddToLibraryModal } from './AddToLibraryModal'
 import { Cover } from '@/shared/components/Cover'
 import type { GameSearchResult } from '@/types/api'
-
-function useDebounce<T>(value: T, delay: number): T {
-  const [debounced, setDebounced] = useState(value)
-  useEffect(() => {
-    const t = setTimeout(() => setDebounced(value), delay)
-    return () => clearTimeout(t)
-  }, [value, delay])
-  return debounced
-}
+import { useDebounce } from '@/shared/hooks/useDebounce'
 
 interface SearchModalProps {
   open: boolean

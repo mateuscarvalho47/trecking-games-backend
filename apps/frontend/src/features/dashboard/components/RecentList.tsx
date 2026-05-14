@@ -2,6 +2,9 @@ import { useNavigate } from '@tanstack/react-router'
 import type { LibraryEntry } from '@/types/api'
 import { Cover } from '@/shared/components/Cover'
 import { StatusBadge } from '@/shared/components/StatusBadge'
+import { STATUS_BY_KEY } from '@/shared/constants/statuses'
+
+const COMPLETED_HUE = STATUS_BY_KEY.COMPLETED.hue
 
 interface RecentListProps {
   games: LibraryEntry[]
@@ -33,7 +36,7 @@ export function RecentList({ games }: RecentListProps) {
                   game={{
                     name: game.name,
                     platforms: game.platforms,
-                    cover: { hue: 145, scheme: 'duotone', glyph: game.name[0] },
+                    cover: { hue: COMPLETED_HUE, scheme: 'duotone' as const, glyph: game.name[0] },
                     coverUrl: game.coverUrl,
                   }}
                   size="md"

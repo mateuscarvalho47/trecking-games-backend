@@ -1,13 +1,11 @@
 import { createRootRouteWithContext, Outlet, useNavigate, useLocation } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import type { QueryClient } from '@tanstack/react-query'
-import { useQuery } from '@tanstack/react-query'
 import { Sidebar } from '@/shared/components/Sidebar'
 import { BottomNav } from '@/shared/components/BottomNav'
 import { SearchModal } from '@/features/search/components/SearchModal'
 import { useMe } from '@/features/auth/hooks/useAuth'
-import { api } from '@/lib/api'
-import type { LibraryEntry } from '@/types/api'
+import { useLibrary } from '@/features/library/hooks/useLibrary'
 import { useAppStore } from '@/store/useAppStore'
 
 const PUBLIC_ROUTES = ['/', '/login', '/register']
@@ -25,11 +23,7 @@ function RootLayout() {
   const { data: me, isLoading } = useMe()
   const navigate = useNavigate()
   const location = useLocation()
-  const { data: library = [] } = useQuery<LibraryEntry[]>({
-    queryKey: ['library'],
-    queryFn: () => api.get('/library'),
-    enabled: !!me,
-  })
+  const { data: library = [] } = useLibrary({ enabled: !!me })
 
   useEffect(() => {
     if (!isLoading && !me && !PUBLIC_ROUTES.includes(location.pathname)) {

@@ -1,4 +1,5 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
+import { useDebounce } from '@/shared/hooks/useDebounce'
 import { useNavigate } from '@tanstack/react-router'
 import type { LibraryEntry, GameStatus } from '@/types/api'
 import { Cover } from '@/shared/components/Cover'
@@ -11,20 +12,10 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 
-function getCoverData(game: LibraryEntry) {
-  const hues: Record<string, number> = {
-    WISHLIST: 75, BACKLOG: 260, PLAYING: 295, PAUSED: 200, COMPLETED: 145, DROPPED: 25,
-  }
-  return { hue: hues[game.status] ?? 280, scheme: 'duotone' as const, glyph: game.name[0] }
-}
+const RATING_TICKS = Array.from({ length: 9 }, (_, i) => i)
 
-function useDebounce<T>(value: T, delay: number): T {
-  const [debounced, setDebounced] = useState(value)
-  useEffect(() => {
-    const t = setTimeout(() => setDebounced(value), delay)
-    return () => clearTimeout(t)
-  }, [value, delay])
-  return debounced
+function getCoverData(game: LibraryEntry) {
+  return { hue: STATUS_BY_KEY[game.status]?.hue ?? 280, scheme: 'duotone' as const, glyph: game.name[0] }
 }
 
 interface DetailScreenProps {
@@ -52,8 +43,11 @@ export function DetailScreen({ game }: DetailScreenProps) {
   const debouncedNotes = useDebounce(notes, 1200)
   const debouncedCompletedAt = useDebounce(completedAt, 800)
 
+  const updateRef = useRef(update)
+  useEffect(() => { updateRef.current = update })
+
   const save = useCallback(async () => {
-    await update.mutateAsync({
+    await updateRef.current.mutateAsync({
       status: debouncedStatus,
       userPlatform: debouncedPlatform || undefined,
       rating: debouncedRating || undefined,
@@ -63,7 +57,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
     })
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
-  }, [debouncedStatus, debouncedPlatform, debouncedRating, debouncedHours, debouncedNotes, debouncedCompletedAt, update])
+  }, [debouncedStatus, debouncedPlatform, debouncedRating, debouncedHours, debouncedNotes, debouncedCompletedAt])
 
   useEffect(() => {
     if (
@@ -76,8 +70,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
     ) {
       save()
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedStatus, debouncedPlatform, debouncedRating, debouncedHours, debouncedNotes, debouncedCompletedAt])
+  }, [debouncedStatus, debouncedPlatform, debouncedRating, debouncedHours, debouncedNotes, debouncedCompletedAt, save])
 
   const coverData = getCoverData(game)
   const statusDef = STATUS_BY_KEY[status]
@@ -266,7 +259,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
                       style={{ width: `${(rating / 10) * 100}%` }}
                     />
                     <div className="absolute inset-0 flex items-center justify-between px-2.5 pointer-events-none">
-                      {Array.from({ length: 9 }).map((_, i) => (
+                      {RATING_TICKS.map(i => (
                         <div key={i} className="w-px h-2 bg-[oklch(0.4_0.01_280)]" />
                       ))}
                     </div>

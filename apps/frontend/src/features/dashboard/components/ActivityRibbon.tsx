@@ -35,8 +35,9 @@ const CELL_COLORS = [
   'oklch(0.72 0.19 295)',
 ]
 
+const WEEKS = 20
+
 export function ActivityRibbon({ library }: ActivityRibbonProps) {
-  const WEEKS = 20
   const cells = useMemo(() => getWeekActivity(library, WEEKS), [library])
 
   return (

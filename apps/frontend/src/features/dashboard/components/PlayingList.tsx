@@ -1,6 +1,9 @@
 import { useNavigate } from '@tanstack/react-router'
 import type { LibraryEntry } from '@/types/api'
 import { Cover } from '@/shared/components/Cover'
+import { STATUS_BY_KEY } from '@/shared/constants/statuses'
+
+const PLAYING_HUE = STATUS_BY_KEY.PLAYING.hue
 import { useSearchModal } from '@/shared/hooks/useSearchModal'
 
 interface PlayingListProps {
@@ -46,7 +49,7 @@ export function PlayingList({ games }: PlayingListProps) {
                     name: game.name,
                     year: undefined,
                     platforms: game.platforms,
-                    cover: { hue: 295, scheme: 'duotone', glyph: game.name[0] },
+                    cover: { hue: PLAYING_HUE, scheme: 'duotone' as const, glyph: game.name[0] },
                     coverUrl: game.coverUrl,
                   }}
                   size="sm"

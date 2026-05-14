@@ -1,6 +1,9 @@
 import { useNavigate } from '@tanstack/react-router'
 import type { LibraryEntry } from '@/types/api'
 import { Cover } from '@/shared/components/Cover'
+import { STATUS_BY_KEY } from '@/shared/constants/statuses'
+
+const BACKLOG_HUE = STATUS_BY_KEY.BACKLOG.hue
 
 interface BacklogListProps {
   games: LibraryEntry[]
@@ -43,7 +46,7 @@ export function BacklogList({ games }: BacklogListProps) {
                   game={{
                     name: game.name,
                     platforms: game.platforms,
-                    cover: { hue: 260, scheme: 'duotone', glyph: game.name[0] },
+                    cover: { hue: BACKLOG_HUE, scheme: 'duotone' as const, glyph: game.name[0] },
                     coverUrl: game.coverUrl,
                   }}
                   size="xs"

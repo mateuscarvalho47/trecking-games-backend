@@ -2,17 +2,17 @@ import { useNavigate } from '@tanstack/react-router'
 import type { LibraryEntry } from '@/types/api'
 import { Cover } from '@/shared/components/Cover'
 import { StatusBadge } from '@/shared/components/StatusBadge'
+import { STATUS_BY_KEY } from '@/shared/constants/statuses'
 
 interface LibraryCardProps {
   game: LibraryEntry
 }
 
-function getCoverData(game: LibraryEntry) {
-  const hues: Record<string, number> = {
-    WISHLIST: 75, BACKLOG: 260, PLAYING: 295, PAUSED: 200, COMPLETED: 145, DROPPED: 25,
-  }
-  return { hue: hues[game.status] ?? 280, scheme: 'duotone' as const, glyph: game.name[0] }
-}
+const getCoverData = (game: LibraryEntry) => ({
+  hue: STATUS_BY_KEY[game.status]?.hue ?? 280,
+  scheme: 'duotone' as const,
+  glyph: game.name[0],
+})
 
 export function LibraryCard({ game }: LibraryCardProps) {
   const navigate = useNavigate()

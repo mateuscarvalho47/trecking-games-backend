@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { api } from '@/lib/api'
 import type { LibraryEntry, LibraryStats, GameStatus } from '@/types/api'
+import { useLibrary } from '@/features/library/hooks/useLibrary'
+import { STATUSES } from '@/shared/constants/statuses'
 import { StatTiles } from './StatTiles'
 import { ActivityRibbon } from './ActivityRibbon'
 import { PlayingList } from './PlayingList'
@@ -12,10 +12,7 @@ import { useSearchModal } from '@/shared/hooks/useSearchModal'
 import { Button } from '@/components/ui/button'
 
 function computeStats(library: LibraryEntry[]): LibraryStats {
-  const countByStatus = {} as Record<GameStatus, number>
-  for (const s of ['WISHLIST', 'BACKLOG', 'PLAYING', 'PAUSED', 'COMPLETED', 'DROPPED'] as GameStatus[]) {
-    countByStatus[s] = library.filter(g => g.status === s).length
-  }
+  const countByStatus = Object.fromEntries(STATUSES.map(s => [s.key, 0])) as Record<GameStatus, number>
 
   const genreMap = new Map<string, number>()
   const platformMap = new Map<string, number>()
@@ -24,6 +21,7 @@ function computeStats(library: LibraryEntry[]): LibraryStats {
 
   let totalHours = 0
   for (const g of library) {
+    countByStatus[g.status] = (countByStatus[g.status] ?? 0) + 1
     if (g.hoursPlayed) totalHours += g.hoursPlayed
     for (const genre of g.genres) genreMap.set(genre, (genreMap.get(genre) ?? 0) + 1)
     const plat = g.userPlatform ?? g.platforms[0]
@@ -52,18 +50,17 @@ function computeStats(library: LibraryEntry[]): LibraryStats {
 export function DashboardScreen() {
   const { setOpen } = useSearchModal()
 
-  const { data: library = [], isLoading } = useQuery<LibraryEntry[]>({
-    queryKey: ['library'],
-    queryFn: () => api.get('/library'),
-  })
+  const { data: library = [], isLoading } = useLibrary()
 
-  const stats = useMemo(() => computeStats(library), [library])
-
-  const playing = library.filter(g => g.status === 'PLAYING')
-  const backlog = library.filter(g => g.status === 'BACKLOG')
-  const recent = library.filter(g => g.status === 'COMPLETED').sort(
-    (a, b) => (b.completedAt ?? '').localeCompare(a.completedAt ?? '')
-  )
+  const { stats, playing, backlog, recent } = useMemo(() => {
+    const stats = computeStats(library)
+    const playing = library.filter(g => g.status === 'PLAYING')
+    const backlog = library.filter(g => g.status === 'BACKLOG')
+    const recent = library
+      .filter(g => g.status === 'COMPLETED')
+      .sort((a, b) => (b.completedAt ?? '').localeCompare(a.completedAt ?? ''))
+    return { stats, playing, backlog, recent }
+  }, [library])
 
   if (isLoading) {
     return (
@@ -108,4 +105,3 @@ export function DashboardScreen() {
   )
 }
 
-export { computeStats }

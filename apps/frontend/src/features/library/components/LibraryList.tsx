@@ -2,6 +2,7 @@ import { useNavigate } from '@tanstack/react-router'
 import type { LibraryEntry } from '@/types/api'
 import { Cover } from '@/shared/components/Cover'
 import { StatusBadge } from '@/shared/components/StatusBadge'
+import { STATUS_BY_KEY } from '@/shared/constants/statuses'
 
 interface LibraryListProps {
   games: LibraryEntry[]
@@ -27,6 +28,7 @@ export function LibraryList({ games }: LibraryListProps) {
 
       {games.map((game, idx) => {
         const borderStyle = idx < games.length - 1 ? '1px solid oklch(0.22 0.008 280)' : undefined
+        const cover = { hue: STATUS_BY_KEY[game.status]?.hue ?? 280, scheme: 'duotone' as const, glyph: game.name[0] }
 
         return (
           <button
@@ -42,7 +44,7 @@ export function LibraryList({ games }: LibraryListProps) {
             >
               <div className="w-10 h-[54px] rounded-[3px] overflow-hidden">
                 <Cover
-                  game={{ name: game.name, platforms: game.platforms, cover: { hue: 280, scheme: 'duotone', glyph: game.name[0] }, coverUrl: game.coverUrl }}
+                  game={{ name: game.name, platforms: game.platforms, cover, coverUrl: game.coverUrl }}
                   size="xs" withTitle={false}
                 />
               </div>
@@ -67,7 +69,7 @@ export function LibraryList({ games }: LibraryListProps) {
             >
               <div className="w-9 h-12 rounded-[3px] overflow-hidden">
                 <Cover
-                  game={{ name: game.name, platforms: game.platforms, cover: { hue: 280, scheme: 'duotone', glyph: game.name[0] }, coverUrl: game.coverUrl }}
+                  game={{ name: game.name, platforms: game.platforms, cover, coverUrl: game.coverUrl }}
                   size="xs" withTitle={false}
                 />
               </div>

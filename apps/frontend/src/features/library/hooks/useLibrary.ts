@@ -2,10 +2,11 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { api } from '@/lib/api'
 import type { LibraryEntry } from '@/types/api'
 
-export function useLibrary() {
+export function useLibrary(opts?: { enabled?: boolean }) {
   return useQuery<LibraryEntry[]>({
     queryKey: ['library'],
     queryFn: () => api.get('/library'),
+    enabled: opts?.enabled,
   })
 }
 

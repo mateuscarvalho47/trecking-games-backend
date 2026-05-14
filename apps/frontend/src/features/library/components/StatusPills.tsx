@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { cn } from '@/lib/utils'
 import type { GameStatus, LibraryEntry } from '@/types/api'
 import { STATUSES } from '@/shared/constants/statuses'
@@ -10,6 +11,11 @@ interface StatusPillsProps {
 
 export function StatusPills({ library, active, onChange }: StatusPillsProps) {
   const total = library.length
+  const countByStatus = useMemo(() => {
+    const counts = {} as Record<GameStatus, number>
+    for (const g of library) counts[g.status] = (counts[g.status] ?? 0) + 1
+    return counts
+  }, [library])
 
   return (
     <div className="flex gap-1 flex-wrap">
@@ -35,7 +41,7 @@ export function StatusPills({ library, active, onChange }: StatusPillsProps) {
       </button>
 
       {STATUSES.map(s => {
-        const count = library.filter(g => g.status === s.key).length
+        const count = countByStatus[s.key] ?? 0
         const isActive = active === s.key
         return (
           <button

@@ -3,14 +3,18 @@ import { api } from '@/lib/api'
 import type { LibraryEntry } from '@/types/api'
 
 export function useLibraryEntry(igdbId: number) {
+  const qc = useQueryClient()
   return useQuery<LibraryEntry>({
     queryKey: ['library', igdbId],
     queryFn: async () => {
-      const library = await api.get<LibraryEntry[]>('/library')
-      const entry = library.find(e => e.igdbId === igdbId)
+      const cached = qc.getQueryData<LibraryEntry[]>(['library'])
+      const list = cached ?? await api.get<LibraryEntry[]>('/library')
+      const entry = list.find(e => e.igdbId === igdbId)
       if (!entry) throw new Error('Jogo não encontrado na biblioteca')
       return entry
     },
+    initialData: () => qc.getQueryData<LibraryEntry[]>(['library'])?.find(e => e.igdbId === igdbId),
+    initialDataUpdatedAt: () => qc.getQueryState(['library'])?.dataUpdatedAt,
   })
 }
 
