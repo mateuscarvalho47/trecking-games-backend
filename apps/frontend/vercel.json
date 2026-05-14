@@ -2,7 +2,7 @@
 	"rewrites": [
 		{
 			"source": "/api/:path*",
-			"destination": "https://SUBSTITUA-PELO-URL-DO-RAILWAY.railway.app/api/:path*"
+			"destination": "https://ludex-production.up.railway.app/api/:path*"
 		},
 		{
 			"source": "/(.*)",
