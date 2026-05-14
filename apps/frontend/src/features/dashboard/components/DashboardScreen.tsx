@@ -1,5 +1,4 @@
 import { useMemo } from 'react'
-import { useNavigate } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/api'
 import type { LibraryEntry, LibraryStats, GameStatus } from '@/types/api'
@@ -51,7 +50,6 @@ function computeStats(library: LibraryEntry[]): LibraryStats {
 }
 
 export function DashboardScreen() {
-  const navigate = useNavigate()
   const { setOpen } = useSearchModal()
 
   const { data: library = [], isLoading } = useQuery<LibraryEntry[]>({
@@ -82,7 +80,7 @@ export function DashboardScreen() {
   return (
     <div className="px-5.5 pt-7 pb-15">
       {/* Topbar */}
-      <div className="flex items-end justify-between gap-6 pb-5.5 mb-5.5 border-b border-border-soft">
+      <div className="flex items-end justify-between gap-3 pb-5.5 mb-5.5 border-b border-border-soft flex-wrap">
         <div>
           <div className="page-overline">Início</div>
           <h1 className="text-[28px] font-semibold tracking-tight m-0 text-text-hi">Dashboard</h1>
@@ -97,11 +95,11 @@ export function DashboardScreen() {
       <div className="flex flex-col gap-4.5">
         <StatTiles stats={stats} />
         <ActivityRibbon library={library} />
-        <div className="grid grid-cols-2 gap-4.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4.5">
           <PlayingList games={playing} />
           <BacklogList games={backlog} />
         </div>
-        <div className="grid grid-cols-[7fr_5fr] gap-4.5">
+        <div className="grid grid-cols-1 md:grid-cols-[7fr_5fr] gap-4.5">
           <RecentList games={recent} />
           <StatusBarsCard stats={stats} />
         </div>

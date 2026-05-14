@@ -62,7 +62,7 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
   return (
     <>
       <div
-        className="fixed inset-0 z-1000 flex items-start justify-center px-5 pt-20"
+        className="fixed inset-0 z-1000 flex items-start justify-center px-4 pt-5 sm:pt-20"
         style={{
           display: addGame ? 'none' : undefined,
           background: 'oklch(0 0 0 / 0.6)',

@@ -27,7 +27,7 @@ export function AddToLibraryModal({ game, onClose, onAdded }: AddToLibraryModalP
   return (
     <Dialog open onOpenChange={open => { if (!open) onClose() }}>
       <DialogContent
-        className="p-0 overflow-hidden gap-0 max-w-180 bg-bg-1 border border-border rounded-xl"
+        className="p-0 gap-0 max-w-180 bg-bg-1 border border-border rounded-xl"
         style={{ boxShadow: '0 1px 0 oklch(1 0 0 / 0.06) inset, 0 24px 60px oklch(0 0 0 / 0.55)' }}
       >
         <DialogHeader className="px-4.5 py-3.5 border-b border-border-soft">
@@ -36,12 +36,9 @@ export function AddToLibraryModal({ game, onClose, onAdded }: AddToLibraryModalP
           </DialogTitle>
         </DialogHeader>
 
-        <div
-          className="grid gap-7 p-6"
-          style={{ gridTemplateColumns: '200px 1fr' }}
-        >
+        <div className="flex flex-col sm:grid sm:gap-7 gap-5 p-5 sm:p-6" style={{ gridTemplateColumns: '200px 1fr' }}>
           {/* Cover */}
-          <div className="aspect-3/4 rounded-md overflow-hidden">
+          <div className="w-[120px] sm:w-auto aspect-3/4 rounded-md overflow-hidden mx-auto sm:mx-0">
             <Cover
               game={{
                 name: game.name,
@@ -71,7 +68,7 @@ export function AddToLibraryModal({ game, onClose, onAdded }: AddToLibraryModalP
             {/* Status picker */}
             <div>
               <Label className="mono-label block mb-2">Status</Label>
-              <div className="grid grid-cols-3 gap-1.5">
+              <div className="grid grid-cols-2 gap-1.5">
                 {STATUSES.map(s => (
                   <button
                     key={s.key}
@@ -94,16 +91,19 @@ export function AddToLibraryModal({ game, onClose, onAdded }: AddToLibraryModalP
             {/* Platform */}
             <div>
               <Label className="mono-label block mb-1.5">Plataforma</Label>
-              <Input
-                value={platform}
-                onChange={e => setPlatform(e.target.value)}
-                placeholder="ex: PC, PS5, Switch..."
-                list="platforms-list"
-                className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
-              />
-              <datalist id="platforms-list">
-                {game.platforms.map(p => <option key={p} value={p} />)}
-              </datalist>
+              <div className="relative">
+                <select
+                  value={platform}
+                  onChange={e => setPlatform(e.target.value)}
+                  className="w-full h-9.5 px-3 pr-8 bg-bg-2 border border-border rounded-[8px] text-text-hi text-[13.5px] appearance-none cursor-pointer outline-none focus:border-accent"
+                  style={{ fontFamily: 'inherit' }}
+                >
+                  {game.platforms.map(p => (
+                    <option key={p} value={p} className="bg-bg-2">{p}</option>
+                  ))}
+                </select>
+                <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-text-lo text-[11px]">▾</div>
+              </div>
             </div>
 
             <div className="flex gap-2.5 justify-end mt-2">

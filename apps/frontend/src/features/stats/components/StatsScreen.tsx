@@ -51,7 +51,7 @@ export function StatsScreen() {
 
       <div className="flex flex-col gap-4.5">
         {/* Big numbers */}
-        <div className="grid grid-cols-4 bg-bg-1 border border-border-soft rounded-lg overflow-hidden">
+        <div className="grid grid-cols-2 md:grid-cols-4 bg-bg-1 border border-border-soft rounded-lg overflow-hidden">
           {[
             { label: 'Total de jogos', value: stats.totalGames, unit: '' },
             { label: 'Horas registradas', value: Math.round(stats.totalHours), unit: 'h' },
@@ -60,22 +60,26 @@ export function StatsScreen() {
           ].map((b, i) => (
             <div
               key={i}
-              className="flex flex-col gap-2.5 p-6.5"
-              style={{ borderRight: i < 3 ? '1px solid oklch(0.22 0.008 280)' : undefined }}
+              className={[
+                'flex flex-col gap-2.5 p-5 md:p-6.5 border-border-soft',
+                i % 2 === 0 ? 'border-r' : '',
+                i < 2 ? 'border-b md:border-b-0' : '',
+                i < 3 ? 'md:border-r' : '',
+              ].join(' ')}
             >
               <div className="mono-label">{b.label}</div>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-[48px] font-bold leading-none text-text-hi" style={{ letterSpacing: '-0.04em' }}>
+                <span className="text-[36px] md:text-[48px] font-bold leading-none text-text-hi" style={{ letterSpacing: '-0.04em' }}>
                   {b.value}
                 </span>
-                {b.unit && <span className="text-[20px] font-medium text-text-lo font-mono">{b.unit}</span>}
+                {b.unit && <span className="text-[18px] md:text-[20px] font-medium text-text-lo font-mono">{b.unit}</span>}
               </div>
             </div>
           ))}
         </div>
 
         {/* Status donut + genre bars */}
-        <div className="grid grid-cols-2 gap-4.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4.5">
           <Card title="Por status"><DonutChart stats={stats} /></Card>
           <Card title="Top gêneros">
             <HBars items={stats.topGenres.map(g => ({ label: g.genre, count: g.count }))} color="oklch(0.72 0.19 295)" />
@@ -83,7 +87,7 @@ export function StatsScreen() {
         </div>
 
         {/* Platform bars + rating histogram */}
-        <div className="grid grid-cols-2 gap-4.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4.5">
           <Card title="Top plataformas">
             <HBars items={stats.topPlatforms.map(p => ({ label: p.platform, count: p.count }))} color="oklch(0.78 0.18 145)" />
           </Card>

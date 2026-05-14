@@ -24,9 +24,10 @@ export function DonutChart({ stats }: DonutChartProps) {
   }).filter(s => s.count > 0)
 
   return (
-    <div className="grid gap-7 items-center" style={{ gridTemplateColumns: '220px 1fr' }}>
+    <div className="flex flex-col items-center gap-6 sm:grid sm:grid-cols-[220px_1fr] sm:items-center sm:gap-7">
       <div className="relative size-[220px]">
         <svg width="220" height="220" viewBox="0 0 220 220">
+          <circle cx={cx} cy={cy} r={r} fill="none" stroke="oklch(0.2 0.008 280)" strokeWidth={20} />
           {segments.map(seg => (
             <circle
               key={seg.key}
@@ -40,7 +41,6 @@ export function DonutChart({ stats }: DonutChartProps) {
               style={{ transition: 'stroke-dasharray 0.6s ease-out' }}
             />
           ))}
-          <circle cx={cx} cy={cy} r={r} fill="none" stroke="oklch(0.2 0.008 280)" strokeWidth={20} />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-[36px] font-bold tracking-tight text-text-hi leading-none">

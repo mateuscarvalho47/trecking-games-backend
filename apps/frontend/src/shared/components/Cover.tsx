@@ -81,6 +81,11 @@ const SIZES = {
   hero: { fs: 48, lh: 48, pad: 28, weight: 800, sub: 13, glyph: 220 },
 }
 
+function resolveIgdbUrl(url: string, size: CoverSize): string {
+  const token = size === 'xl' || size === 'hero' ? 't_1080p' : 't_cover_big_2x'
+  return url.replace(/t_[a-z0-9_]+\//, `${token}/`)
+}
+
 export function Cover({ game, size = 'md', withTitle = true, hover = false, className, style }: CoverProps) {
   if (game.coverUrl) {
     return (
@@ -89,7 +94,7 @@ export function Cover({ game, size = 'md', withTitle = true, hover = false, clas
         data-hover={hover ? '1' : '0'}
         style={style}
       >
-        <img src={game.coverUrl} alt={game.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img src={resolveIgdbUrl(game.coverUrl, size)} alt={game.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
       </div>
     )
   }

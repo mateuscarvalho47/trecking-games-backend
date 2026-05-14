@@ -14,11 +14,11 @@ export function useLibraryEntry(igdbId: number) {
   })
 }
 
-export function useUpdateLibraryEntry(igdbId: number) {
+export function useUpdateLibraryEntry(id: string, igdbId: number) {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (data: Partial<LibraryEntry>) =>
-      api.patch<LibraryEntry>(`/library/${igdbId}`, data),
+      api.patch<LibraryEntry>(`/library/${id}`, data),
     onSuccess: (updated) => {
       qc.setQueryData(['library', igdbId], updated)
       qc.invalidateQueries({ queryKey: ['library'] })
@@ -26,10 +26,10 @@ export function useUpdateLibraryEntry(igdbId: number) {
   })
 }
 
-export function useRemoveLibraryEntry(igdbId: number) {
+export function useRemoveLibraryEntry(id: string) {
   const qc = useQueryClient()
   return useMutation({
-    mutationFn: () => api.delete(`/library/${igdbId}`),
+    mutationFn: () => api.delete(`/library/${id}`),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['library'] })
     },

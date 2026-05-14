@@ -89,7 +89,7 @@ export function LandingScreen() {
 
         {/* Headline */}
         <h1
-          className="text-[44px] font-bold tracking-[-0.03em] leading-[1.1] mb-4 text-text-hi"
+          className="text-[30px] sm:text-[44px] font-bold tracking-[-0.03em] leading-[1.1] mb-4 text-text-hi"
           style={{ textShadow: '0 0 80px oklch(0.7 0.2 295 / 0.3)' }}
         >
           Sua biblioteca de jogos,{' '}
@@ -101,7 +101,7 @@ export function LandingScreen() {
         </p>
 
         {/* CTA buttons */}
-        <div className="flex gap-3 mb-16">
+        <div className="flex flex-col sm:flex-row gap-3 mb-16 w-full sm:w-auto">
           <button
             onClick={() => navigate({ to: '/register' })}
             className="h-11 px-7 rounded-[10px] text-[14px] font-semibold cursor-pointer border-0"
@@ -129,7 +129,7 @@ export function LandingScreen() {
         </div>
 
         {/* Feature grid */}
-        <div className="grid grid-cols-3 gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
           {FEATURES.map((f) => (
             <div
               key={f.label}

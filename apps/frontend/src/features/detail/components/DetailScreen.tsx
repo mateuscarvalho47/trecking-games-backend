@@ -33,8 +33,8 @@ interface DetailScreenProps {
 
 export function DetailScreen({ game }: DetailScreenProps) {
   const navigate = useNavigate()
-  const update = useUpdateLibraryEntry(game.igdbId)
-  const remove = useRemoveLibraryEntry(game.igdbId)
+  const update = useUpdateLibraryEntry(game.id, game.igdbId)
+  const remove = useRemoveLibraryEntry(game.id)
 
   const [status, setStatus] = useState<GameStatus>(game.status)
   const [platform, setPlatform] = useState(game.userPlatform ?? '')
@@ -127,13 +127,9 @@ export function DetailScreen({ game }: DetailScreenProps) {
           </div>
 
           {/* Content */}
-          <div
-            className="relative z-20 grid grid-cols-[260px_1fr] gap-9 py-7 pb-10"
-          >
+          <div className="relative z-20 flex flex-col md:grid md:grid-cols-[260px_1fr] gap-6 md:gap-9 py-7 pb-10 items-center md:items-start">
             {/* Cover */}
-            <div
-              className="aspect-3/4 rounded-md overflow-hidden shadow-[0_28px_60px_oklch(0_0_0/0.6)]"
-            >
+            <div className="w-[140px] md:w-auto aspect-3/4 rounded-md overflow-hidden shadow-[0_28px_60px_oklch(0_0_0/0.6)] shrink-0">
               <Cover
                 game={{ name: game.name, year: undefined, platforms: game.platforms, cover: coverData, coverUrl: game.coverUrl }}
                 size="lg"
@@ -141,22 +137,18 @@ export function DetailScreen({ game }: DetailScreenProps) {
             </div>
 
             {/* Head info */}
-            <div className="flex flex-col gap-3.5 pt-2">
+            <div className="flex flex-col gap-3.5 pt-2 w-full text-center md:text-left">
               <div className="mono-label">{game.genres.join(' · ')}</div>
-              <h1
-                className="text-[42px] font-bold leading-[1.05] m-0 text-text-hi tracking-[-0.035em]"
-              >
+              <h1 className="text-[28px] md:text-[42px] font-bold leading-[1.05] m-0 text-text-hi tracking-[-0.035em]">
                 {game.name}
               </h1>
               <div className="text-text-md text-[13.5px]">{game.platforms.join(' · ')}</div>
-              <div className="flex gap-1.5 flex-wrap">
+              <div className="flex gap-1.5 flex-wrap justify-center md:justify-start">
                 <StatusBadge status={status} />
               </div>
 
               {/* Quick stats */}
-              <div
-                className="grid grid-cols-4 gap-3.5 mt-2 p-4 border border-border-soft rounded-md backdrop-blur-sm bg-bg-1/70"
-              >
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 mt-2 p-4 border border-border-soft rounded-md backdrop-blur-sm bg-bg-1/70 text-left">
                 {[
                   { label: 'Status', val: statusDef.label },
                   { label: 'Plataforma', val: game.userPlatform ?? '—' },
@@ -175,18 +167,18 @@ export function DetailScreen({ game }: DetailScreenProps) {
 
         {/* Body — edit form */}
         <div className="px-5.5 py-6 pb-15">
-          <div className="grid grid-cols-[1fr_320px] gap-4.5">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4.5">
             {/* Edit form */}
             <div className="bg-bg-1 border border-border-soft rounded-lg p-5.5">
               <div className="text-[14.5px] font-semibold tracking-tight text-text-hi mb-5">
                 Editar entrada
               </div>
 
-              <div className="grid grid-cols-2 gap-4.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4.5">
                 {/* Status picker */}
                 <div className="col-span-2">
                   <Label className="mono-label block mb-1.5">Status</Label>
-                  <div className="grid grid-cols-3 gap-1.5">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
                     {STATUSES.map(s => (
                       <button
                         key={s.key}
@@ -209,25 +201,53 @@ export function DetailScreen({ game }: DetailScreenProps) {
                 {/* Platform */}
                 <div>
                   <Label className="mono-label block mb-1.5">Plataforma</Label>
-                  <Input
-                    value={platform}
-                    onChange={e => setPlatform(e.target.value)}
-                    placeholder="ex: PC, PS5..."
-                    className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
-                  />
+                  <div className="relative">
+                    <select
+                      value={platform}
+                      onChange={e => setPlatform(e.target.value)}
+                      className="w-full h-9.5 px-3 pr-8 bg-bg-2 border border-border rounded-[8px] text-text-hi text-[13.5px] appearance-none cursor-pointer outline-none focus:border-accent"
+                      style={{ fontFamily: 'inherit' }}
+                    >
+                      <option value="" className="bg-bg-2">—</option>
+                      {game.platforms.map(p => (
+                        <option key={p} value={p} className="bg-bg-2">{p}</option>
+                      ))}
+                    </select>
+                    <div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-text-lo text-[11px]">▾</div>
+                  </div>
                 </div>
 
                 {/* Hours */}
                 <div>
                   <Label className="mono-label block mb-1.5">Horas jogadas</Label>
-                  <div className="flex items-center bg-bg-2 border border-border rounded-[8px] overflow-hidden h-9.5">
-                    <input
-                      type="number" min={0} step={0.5}
-                      value={hours || ''}
-                      onChange={e => setHours(parseFloat(e.target.value) || 0)}
-                      className="flex-1 h-full px-3 bg-transparent border-0 outline-none text-text-hi text-[13.5px] font-mono"
-                    />
-                    <span className="pr-3 text-text-lo font-mono text-[12px]">h</span>
+                  <div className="flex items-center bg-bg-2 border border-border rounded-[8px] h-9.5 overflow-hidden">
+                    <button
+                      type="button"
+                      onClick={() => setHours(Math.max(0, hours - 0.5))}
+                      className="flex items-center justify-center w-9 shrink-0 h-full text-text-lo hover:text-text-hi hover:bg-bg-3 border-r border-border transition-colors cursor-pointer bg-transparent"
+                    >
+                      <span className="text-[16px] leading-none select-none">−</span>
+                    </button>
+                    <div className="flex-1 flex items-center justify-center gap-0.5">
+                      <input
+                        type="text"
+                        inputMode="decimal"
+                        value={hours || ''}
+                        onChange={e => {
+                          const val = parseFloat(e.target.value.replace(',', '.'))
+                          setHours(isNaN(val) ? 0 : Math.max(0, val))
+                        }}
+                        className="w-14 text-center bg-transparent border-0 outline-none text-text-hi text-[13.5px]"
+                      />
+                      <span className="text-text-lo text-[12px]">h</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setHours(hours + 0.5)}
+                      className="flex items-center justify-center w-9 shrink-0 h-full text-text-lo hover:text-text-hi hover:bg-bg-3 border-l border-border transition-colors cursor-pointer bg-transparent"
+                    >
+                      <span className="text-[16px] leading-none select-none">+</span>
+                    </button>
                   </div>
                 </div>
 
@@ -254,7 +274,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
                       type="range" min={0} max={10} step={0.5}
                       value={rating}
                       onChange={e => setRating(parseFloat(e.target.value))}
-                      className="absolute inset-0 w-full h-full appearance-none bg-transparent cursor-pointer m-0"
+                      className="absolute inset-0 w-full h-full appearance-none bg-transparent cursor-pointer m-0 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[3px] [&::-webkit-slider-thumb]:h-9 [&::-webkit-slider-thumb]:rounded-sm [&::-webkit-slider-thumb]:bg-white/60 [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-[3px] [&::-moz-range-thumb]:h-9 [&::-moz-range-thumb]:rounded-sm [&::-moz-range-thumb]:bg-white/60 [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer"
                     />
                   </div>
                   <div className="flex justify-between text-[10px] text-text-dim px-0.5 mt-1">

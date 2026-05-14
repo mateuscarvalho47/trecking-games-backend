@@ -21,7 +21,7 @@ export function RecentList({ games }: RecentListProps) {
           Nenhum jogo completado ainda
         </div>
       ) : (
-        <div className="grid grid-cols-3 gap-3.5">
+        <div className="grid grid-cols-3 gap-2.5 md:gap-3.5">
           {shown.map(game => (
             <button
               key={game.igdbId}

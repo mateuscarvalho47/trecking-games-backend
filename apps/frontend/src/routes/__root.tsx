@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import type { QueryClient } from '@tanstack/react-query'
 import { useQuery } from '@tanstack/react-query'
 import { Sidebar } from '@/shared/components/Sidebar'
+import { BottomNav } from '@/shared/components/BottomNav'
 import { SearchModal } from '@/features/search/components/SearchModal'
 import { useMe } from '@/features/auth/hooks/useAuth'
 import { api } from '@/lib/api'
@@ -65,11 +66,14 @@ function RootLayout() {
   return (
     <div style={{ minHeight: '100vh', background: 'oklch(0.13 0.005 280)', color: 'oklch(0.96 0.005 280)' }}>
       {me ? (
-        <div style={{ display: 'grid', gridTemplateColumns: '232px 1fr', minHeight: '100vh' }}>
-          <Sidebar libraryCount={library.length} />
-          <main style={{ minWidth: 0, paddingBottom: 60 }}>
+        <div className="flex min-h-screen">
+          <div className="hidden lg:block shrink-0" style={{ width: 232 }}>
+            <Sidebar libraryCount={library.length} />
+          </div>
+          <main className="flex-1 min-w-0 pb-20 lg:pb-15">
             <Outlet />
           </main>
+          <BottomNav libraryCount={library.length} />
         </div>
       ) : (
         <Outlet />

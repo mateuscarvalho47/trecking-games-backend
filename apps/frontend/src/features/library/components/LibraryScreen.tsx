@@ -55,12 +55,16 @@ export function LibraryScreen() {
       </div>
 
       {/* Toolbar */}
-      <div className="flex items-center justify-between gap-4 mb-4.5 flex-wrap">
-        <StatusPills library={library} active={filters.statusFilter} onChange={filters.setStatusFilter} />
+      <div className="flex flex-col gap-3 mb-4.5">
+        <div className="overflow-x-auto -mx-5.5 px-5.5">
+          <div className="flex min-w-max">
+            <StatusPills library={library} active={filters.statusFilter} onChange={filters.setStatusFilter} />
+          </div>
+        </div>
 
         <div className="flex gap-2 items-center">
           {/* Search */}
-          <div className="relative flex items-center gap-2 h-9 px-3 bg-bg-2 border border-border rounded-[8px] w-55 text-text-lo">
+          <div className="relative flex items-center gap-2 h-9 px-3 bg-bg-2 border border-border rounded-[8px] flex-1 sm:w-55 sm:flex-none text-text-lo">
             <Search size={13} className="shrink-0" />
             <Input
               value={filters.search}

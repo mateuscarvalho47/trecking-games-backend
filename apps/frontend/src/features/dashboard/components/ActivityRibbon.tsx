@@ -49,9 +49,10 @@ export function ActivityRibbon({ library }: ActivityRibbonProps) {
       </div>
 
       {/* Grid — dynamic column count stays inline */}
+      <div className="overflow-x-auto">
       <div
         className="grid gap-1 py-1.5"
-        style={{ gridTemplateColumns: `repeat(${WEEKS}, 1fr)` }}
+        style={{ gridTemplateColumns: `repeat(${WEEKS}, minmax(14px, 1fr))` }}
       >
         {cells.map((count, i) => (
           <div
@@ -61,6 +62,7 @@ export function ActivityRibbon({ library }: ActivityRibbonProps) {
             style={{ background: CELL_COLORS[levelFromCount(count)] }}
           />
         ))}
+      </div>
       </div>
 
       <div className="flex items-center gap-1.5 mt-2.5 font-mono text-[10px] text-text-lo">

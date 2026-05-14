@@ -7,6 +7,7 @@ export type GameStatus =
   | 'DROPPED'
 
 export interface LibraryEntry {
+  id: string
   igdbId: number
   name: string
   coverUrl?: string

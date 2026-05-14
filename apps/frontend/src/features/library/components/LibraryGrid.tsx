@@ -9,7 +9,7 @@ export function LibraryGrid({ games }: LibraryGridProps) {
   return (
     <div
       className="gap-4.5"
-      style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))' }}
+      style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(180px, calc(50% - 18px)), 1fr))' }}
     >
       {games.map(game => (
         <LibraryCard key={game.igdbId} game={game} />
