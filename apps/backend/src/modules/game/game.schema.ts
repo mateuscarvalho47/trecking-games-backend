@@ -1,8 +1,8 @@
 export {
   type GameDetail,
   type GameSearchResult,
-  type SearchQuery,
   gameDetailSchema,
   gameSearchResultSchema,
+  type SearchQuery,
   searchQuerySchema,
 } from '@tracking-games/shared';

@@ -1,220 +1,280 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Background layers */
-  --color-bg-0: oklch(0.13 0.005 280);
-  --color-bg-1: oklch(0.16 0.006 280);
-  --color-bg-2: oklch(0.19 0.008 280);
-  --color-bg-3: oklch(0.23 0.010 280);
-  --color-bg-4: oklch(0.27 0.012 280);
+	/* Background layers */
+	--color-bg-0: oklch(0.13 0.005 280);
+	--color-bg-1: oklch(0.16 0.006 280);
+	--color-bg-2: oklch(0.19 0.008 280);
+	--color-bg-3: oklch(0.23 0.01 280);
+	--color-bg-4: oklch(0.27 0.012 280);
 
-  /* Borders */
-  --color-border:        oklch(0.27 0.010 280);
-  --color-border-soft:   oklch(0.22 0.008 280);
-  --color-border-strong: oklch(0.34 0.012 280);
+	/* Borders */
+	--color-border: oklch(0.27 0.01 280);
+	--color-border-soft: oklch(0.22 0.008 280);
+	--color-border-strong: oklch(0.34 0.012 280);
 
-  /* Text */
-  --color-text-hi:  oklch(0.96 0.005 280);
-  --color-text-md:  oklch(0.72 0.010 280);
-  --color-text-lo:  oklch(0.54 0.012 280);
-  --color-text-dim: oklch(0.42 0.010 280);
+	/* Text */
+	--color-text-hi: oklch(0.96 0.005 280);
+	--color-text-md: oklch(0.72 0.01 280);
+	--color-text-lo: oklch(0.54 0.012 280);
+	--color-text-dim: oklch(0.42 0.01 280);
 
-  /* Accent — violet */
-  --color-accent:        oklch(0.72 0.19 295);
-  --color-accent-bright: oklch(0.92 0.19 295);
-  --color-accent-soft:   oklch(0.40 0.10 295 / 0.18);
-  --color-accent-rim:    oklch(0.55 0.18 295 / 0.4);
+	/* Accent — violet */
+	--color-accent: oklch(0.72 0.19 295);
+	--color-accent-bright: oklch(0.92 0.19 295);
+	--color-accent-soft: oklch(0.4 0.1 295 / 0.18);
+	--color-accent-rim: oklch(0.55 0.18 295 / 0.4);
 
-  /* Semantic aliases (shadcn/ui compat) */
-  --color-background:         oklch(0.13 0.005 280);
-  --color-foreground:         oklch(0.96 0.005 280);
-  --color-card:               oklch(0.16 0.006 280);
-  --color-card-foreground:    oklch(0.96 0.005 280);
-  --color-popover:            oklch(0.19 0.008 280);
-  --color-popover-foreground: oklch(0.96 0.005 280);
-  --color-primary:            oklch(0.72 0.19 295);
-  --color-primary-foreground: oklch(0.18 0.06 295);
-  --color-secondary:          oklch(0.23 0.010 280);
-  --color-secondary-foreground: oklch(0.96 0.005 280);
-  --color-muted:              oklch(0.19 0.008 280);
-  --color-muted-foreground:   oklch(0.54 0.012 280);
-  --color-accent:             oklch(0.23 0.010 280);
-  --color-accent-foreground:  oklch(0.96 0.005 280);
-  --color-destructive:        oklch(0.45 0.18 25);
-  --color-border:             oklch(0.27 0.010 280);
-  --color-input:              oklch(0.22 0.008 280);
-  --color-ring:               oklch(0.72 0.19 295);
+	/* Semantic aliases (shadcn/ui compat) */
+	--color-background: oklch(0.13 0.005 280);
+	--color-foreground: oklch(0.96 0.005 280);
+	--color-card: oklch(0.16 0.006 280);
+	--color-card-foreground: oklch(0.96 0.005 280);
+	--color-popover: oklch(0.19 0.008 280);
+	--color-popover-foreground: oklch(0.96 0.005 280);
+	--color-primary: oklch(0.72 0.19 295);
+	--color-primary-foreground: oklch(0.18 0.06 295);
+	--color-secondary: oklch(0.23 0.01 280);
+	--color-secondary-foreground: oklch(0.96 0.005 280);
+	--color-muted: oklch(0.19 0.008 280);
+	--color-muted-foreground: oklch(0.54 0.012 280);
+	--color-accent: oklch(0.23 0.01 280);
+	--color-accent-foreground: oklch(0.96 0.005 280);
+	--color-destructive: oklch(0.45 0.18 25);
+	--color-border: oklch(0.27 0.01 280);
+	--color-input: oklch(0.22 0.008 280);
+	--color-ring: oklch(0.72 0.19 295);
 
-  /* Chart colors */
-  --color-chart-1: oklch(0.78 0.18 75);
-  --color-chart-2: oklch(0.78 0.18 260);
-  --color-chart-3: oklch(0.78 0.18 295);
-  --color-chart-4: oklch(0.78 0.18 145);
-  --color-chart-5: oklch(0.78 0.18 25);
+	/* Chart colors */
+	--color-chart-1: oklch(0.78 0.18 75);
+	--color-chart-2: oklch(0.78 0.18 260);
+	--color-chart-3: oklch(0.78 0.18 295);
+	--color-chart-4: oklch(0.78 0.18 145);
+	--color-chart-5: oklch(0.78 0.18 25);
 
-  /* Typography */
-  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', monospace;
+	/* Typography */
+	--font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+	--font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", monospace;
 
-  /* Radius */
-  --radius:    0.625rem;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 18px;
+	/* Radius */
+	--radius: 0.625rem;
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 14px;
+	--radius-xl: 18px;
 }
 
 @layer base {
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
 
-  * {
-    @apply border-border outline-ring/50;
-  }
+	* {
+		@apply border-border outline-ring/50;
+	}
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: oklch(0.13 0.005 280);
-    color: oklch(0.96 0.005 280);
-  }
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		background: oklch(0.13 0.005 280);
+		color: oklch(0.96 0.005 280);
+	}
 
-  body {
-    font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
-    font-feature-settings: 'cv11', 'ss01';
-    -webkit-font-smoothing: antialiased;
-  }
+	body {
+		font-family: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+		font-feature-settings: "cv11", "ss01";
+		-webkit-font-smoothing: antialiased;
+	}
 
-  ::selection {
-    background: oklch(0.5 0.18 295 / 0.4);
-    color: oklch(0.96 0.005 280);
-  }
+	::selection {
+		background: oklch(0.5 0.18 295 / 0.4);
+		color: oklch(0.96 0.005 280);
+	}
 
-  ::-webkit-scrollbar { width: 12px; height: 12px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb {
-    background: oklch(0.3 0.01 280);
-    border: 3px solid transparent;
-    background-clip: content-box;
-    border-radius: 8px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: oklch(0.4 0.01 280);
-    border: 3px solid transparent;
-    background-clip: content-box;
-  }
+	::-webkit-scrollbar {
+		width: 12px;
+		height: 12px;
+	}
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	::-webkit-scrollbar-thumb {
+		background: oklch(0.3 0.01 280);
+		border: 3px solid transparent;
+		background-clip: content-box;
+		border-radius: 8px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: oklch(0.4 0.01 280);
+		border: 3px solid transparent;
+		background-clip: content-box;
+	}
 }
 
 @layer utilities {
-  /* Accent gradient button — use with shadcn Button variant="accent" or plain buttons */
-  .btn-accent {
-    background: linear-gradient(180deg, oklch(0.92 0.19 295), oklch(0.72 0.19 295));
-    color: oklch(0.18 0.06 295);
-    border: 1px solid oklch(0.55 0.18 295 / 0.5);
-    box-shadow: 0 1px 0 oklch(1 0 0 / 0.2) inset, 0 4px 14px oklch(0.5 0.18 295 / 0.25);
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .btn-accent:hover:not(:disabled) {
-    filter: brightness(1.06);
-  }
-  .btn-accent:disabled {
-    opacity: 0.55;
-    cursor: not-allowed;
-  }
+	/* Accent gradient button — use with shadcn Button variant="accent" or plain buttons */
+	.btn-accent {
+		background: linear-gradient(
+			180deg,
+			oklch(0.92 0.19 295),
+			oklch(0.72 0.19 295)
+		);
+		color: oklch(0.18 0.06 295);
+		border: 1px solid oklch(0.55 0.18 295 / 0.5);
+		box-shadow:
+			0 1px 0 oklch(1 0 0 / 0.2) inset,
+			0 4px 14px oklch(0.5 0.18 295 / 0.25);
+		font-weight: 600;
+		cursor: pointer;
+	}
+	.btn-accent:hover:not(:disabled) {
+		filter: brightness(1.06);
+	}
+	.btn-accent:disabled {
+		opacity: 0.55;
+		cursor: not-allowed;
+	}
 
-  /* Danger button */
-  .btn-danger {
-    background: oklch(0.45 0.18 25);
-    color: oklch(0.98 0.02 25);
-    border: 1px solid oklch(0.55 0.18 25);
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .btn-danger:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
+	/* Danger button */
+	.btn-danger {
+		background: oklch(0.45 0.18 25);
+		color: oklch(0.98 0.02 25);
+		border: 1px solid oklch(0.55 0.18 25);
+		font-weight: 600;
+		cursor: pointer;
+	}
+	.btn-danger:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
 
-  /* Ghost border button */
-  .btn-ghost-border {
-    background: transparent;
-    border: 1px solid oklch(0.27 0.010 280);
-    color: oklch(0.72 0.010 280);
-    cursor: pointer;
-  }
-  .btn-ghost-border:hover {
-    background: oklch(0.19 0.008 280);
-  }
+	/* Ghost border button */
+	.btn-ghost-border {
+		background: transparent;
+		border: 1px solid oklch(0.27 0.01 280);
+		color: oklch(0.72 0.01 280);
+		cursor: pointer;
+	}
+	.btn-ghost-border:hover {
+		background: oklch(0.19 0.008 280);
+	}
 
-  /* Mono overline label — repeated across many components */
-  .mono-label {
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-lo);
-  }
+	/* Mono overline label — repeated across many components */
+	.mono-label {
+		font-family: var(--font-mono);
+		font-size: 10.5px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-text-lo);
+	}
 
-  /* Common panel shadow — auth card, modals */
-  .shadow-panel {
-    box-shadow: 0 1px 0 oklch(1 0 0 / 0.06) inset, 0 24px 60px oklch(0 0 0 / 0.55);
-  }
+	/* Common panel shadow — auth card, modals */
+	.shadow-panel {
+		box-shadow:
+			0 1px 0 oklch(1 0 0 / 0.06) inset,
+			0 24px 60px oklch(0 0 0 / 0.55);
+	}
 
-  /* Accent progress bar fill */
-  .gradient-accent-bar {
-    background: linear-gradient(90deg, oklch(0.72 0.19 295), oklch(0.92 0.19 295));
-  }
+	/* Accent progress bar fill */
+	.gradient-accent-bar {
+		background: linear-gradient(
+			90deg,
+			oklch(0.72 0.19 295),
+			oklch(0.92 0.19 295)
+		);
+	}
 
-  /* Accent rating fill */
-  .gradient-accent-fill {
-    background: linear-gradient(90deg, oklch(0.4 0.1 295 / 0.3), oklch(0.72 0.19 295));
-  }
+	/* Accent rating fill */
+	.gradient-accent-fill {
+		background: linear-gradient(
+			90deg,
+			oklch(0.4 0.1 295 / 0.3),
+			oklch(0.72 0.19 295)
+		);
+	}
 
-  /* Screen page title section */
-  .page-overline {
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-lo);
-    margin-bottom: 8px;
-  }
+	/* Screen page title section */
+	.page-overline {
+		font-family: var(--font-mono);
+		font-size: 10.5px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-text-lo);
+		margin-bottom: 8px;
+	}
 }
 
 /* Cover component CSS */
 .cv {
-  position: relative; width: 100%; height: 100%;
-  overflow: hidden; isolation: isolate;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.04) inset, 0 8px 24px rgba(0,0,0,.35);
-  transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	isolation: isolate;
+	box-shadow:
+		0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+		0 8px 24px rgba(0, 0, 0, 0.35);
+	transition:
+		transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1),
+		box-shadow 0.25s;
 }
 .cv[data-hover="1"]:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset, 0 14px 36px rgba(0,0,0,.5), 0 0 0 1px var(--accent-rim, transparent);
+	transform: translateY(-3px);
+	box-shadow:
+		0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+		0 14px 36px rgba(0, 0, 0, 0.5),
+		0 0 0 1px var(--accent-rim, transparent);
 }
 .cv-stripe {
-  position: absolute; left: -25%; right: -25%; top: 55%; height: 18%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
-  mix-blend-mode: overlay; pointer-events: none;
+	position: absolute;
+	left: -25%;
+	right: -25%;
+	top: 55%;
+	height: 18%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(255, 255, 255, 0.18),
+		transparent
+	);
+	mix-blend-mode: overlay;
+	pointer-events: none;
 }
 .cv-glyph {
-  position: absolute; right: -6%; bottom: -18%;
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  font-weight: 800; letter-spacing: -.04em; line-height: .8; pointer-events: none;
+	position: absolute;
+	right: -6%;
+	bottom: -18%;
+	font-family: "Geist Mono", ui-monospace, monospace;
+	font-weight: 800;
+	letter-spacing: -0.04em;
+	line-height: 0.8;
+	pointer-events: none;
 }
 .cv-title {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  display: flex; flex-direction: column; gap: 6px;
-  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,.55) 100%);
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	background: linear-gradient(
+		180deg,
+		transparent 0%,
+		rgba(0, 0, 0, 0) 30%,
+		rgba(0, 0, 0, 0.55) 100%
+	);
 }
 .cv-sub {
-  font-family: 'Geist Mono', ui-monospace, monospace;
-  letter-spacing: .08em; text-transform: uppercase;
+	font-family: "Geist Mono", ui-monospace, monospace;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
 }
 .cv-name {
-  font-family: 'Geist', ui-sans-serif, system-ui, sans-serif;
-  letter-spacing: -.02em;
-  text-shadow: 0 1px 12px rgba(0,0,0,.5);
+	font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+	letter-spacing: -0.02em;
+	text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
 }
