@@ -6,3 +6,4 @@ export default fp(async (app) => {
     global: false,
   });
 });
+
