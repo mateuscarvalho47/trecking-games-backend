@@ -157,6 +157,21 @@
     color: var(--color-text-lo);
   }
 
+  /* Common panel shadow — auth card, modals */
+  .shadow-panel {
+    box-shadow: 0 1px 0 oklch(1 0 0 / 0.06) inset, 0 24px 60px oklch(0 0 0 / 0.55);
+  }
+
+  /* Accent progress bar fill */
+  .gradient-accent-bar {
+    background: linear-gradient(90deg, oklch(0.72 0.19 295), oklch(0.92 0.19 295));
+  }
+
+  /* Accent rating fill */
+  .gradient-accent-fill {
+    background: linear-gradient(90deg, oklch(0.4 0.1 295 / 0.3), oklch(0.72 0.19 295));
+  }
+
   /* Screen page title section */
   .page-overline {
     font-family: var(--font-mono);

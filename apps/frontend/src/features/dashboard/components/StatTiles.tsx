@@ -17,16 +17,11 @@ export function StatTiles({ stats }: StatTilesProps) {
       {tiles.map((t, i) => (
         <div
           key={i}
-          className="flex flex-col gap-2 p-5 px-5.5 relative"
-          style={{
-            borderRight: i < 3 ? '1px solid oklch(0.22 0.008 280)' : undefined,
-            background: t.accent ? 'linear-gradient(180deg, transparent, oklch(0.4 0.1 295 / 0.08))' : undefined,
-          }}
+          className={`flex flex-col gap-2 p-5 px-5.5 relative${i < 3 ? ' border-r border-border-soft' : ''}${t.accent ? ' bg-[linear-gradient(180deg,transparent,oklch(0.4_0.1_295/0.08))]' : ''}`}
         >
           {t.accent && (
             <div
-              className="absolute top-0 left-0 right-0 h-0.5"
-              style={{ background: 'linear-gradient(90deg, transparent, oklch(0.72 0.19 295), transparent)' }}
+              className="absolute top-0 left-0 right-0 h-0.5 bg-[linear-gradient(90deg,transparent,oklch(0.72_0.19_295),transparent)]"
             />
           )}
           <div className="mono-label">{t.label}</div>

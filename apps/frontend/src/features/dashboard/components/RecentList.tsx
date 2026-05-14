@@ -26,8 +26,7 @@ export function RecentList({ games }: RecentListProps) {
             <button
               key={game.igdbId}
               onClick={() => navigate({ to: '/library/$igdbId', params: { igdbId: String(game.igdbId) } })}
-              className="flex flex-col gap-2.5 p-0 bg-transparent border-0 cursor-pointer text-left"
-              style={{ fontFamily: 'inherit' }}
+              className="flex flex-col gap-2.5 p-0 bg-transparent border-0 cursor-pointer text-left font-[inherit]"
             >
               <div className="aspect-3/4 rounded-sm overflow-hidden">
                 <Cover

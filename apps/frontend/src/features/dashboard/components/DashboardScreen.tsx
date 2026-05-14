@@ -101,7 +101,7 @@ export function DashboardScreen() {
           <PlayingList games={playing} />
           <BacklogList games={backlog} />
         </div>
-        <div className="grid gap-4.5" style={{ gridTemplateColumns: '7fr 5fr' }}>
+        <div className="grid grid-cols-[7fr_5fr] gap-4.5">
           <RecentList games={recent} />
           <StatusBarsCard stats={stats} />
         </div>

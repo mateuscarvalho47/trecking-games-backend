@@ -50,8 +50,8 @@ export function ActivityRibbon({ library }: ActivityRibbonProps) {
 
       {/* Grid — dynamic column count stays inline */}
       <div
-        className="gap-1 py-1.5"
-        style={{ display: 'grid', gridTemplateColumns: `repeat(${WEEKS}, 1fr)` }}
+        className="grid gap-1 py-1.5"
+        style={{ gridTemplateColumns: `repeat(${WEEKS}, 1fr)` }}
       >
         {cells.map((count, i) => (
           <div

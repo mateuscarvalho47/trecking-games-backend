@@ -95,10 +95,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
             />
           </div>
           {/* Overlay */}
-          <div
-            className="absolute inset-0 z-10"
-            style={{ background: 'linear-gradient(180deg, oklch(0.13 0.005 280 / 0.5) 0%, oklch(0.13 0.005 280) 90%)' }}
-          />
+          <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,oklch(0.13_0.005_280/0.5)_0%,oklch(0.13_0.005_280)_90%)]" />
 
           {/* Bar */}
           <div className="relative z-20 flex justify-between items-center py-5">
@@ -113,12 +110,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
             <div className="flex gap-2 items-center">
               {saved && (
                 <span
-                  className="inline-flex items-center gap-1.5 font-mono text-[10.5px] rounded-[5px] py-0.5 px-2"
-                  style={{
-                    color: 'oklch(0.85 0.16 145)',
-                    background: 'oklch(0.3 0.08 145 / 0.3)',
-                    border: '1px solid oklch(0.5 0.15 145 / 0.4)',
-                  }}
+                  className="inline-flex items-center gap-1.5 font-mono text-[10.5px] rounded-[5px] py-0.5 px-2 text-[oklch(0.85_0.16_145)] bg-[oklch(0.3_0.08_145/0.3)] border border-[oklch(0.5_0.15_145/0.4)]"
                 >
                   ✓ Salvo
                 </span>
@@ -127,8 +119,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
                 variant="ghost"
                 size="sm"
                 onClick={() => setConfirmRemove(true)}
-                className="border border-border"
-                style={{ color: 'oklch(0.75 0.14 25)' }}
+                className="border border-border text-[oklch(0.75_0.14_25)]"
               >
                 Remover
               </Button>
@@ -137,13 +128,11 @@ export function DetailScreen({ game }: DetailScreenProps) {
 
           {/* Content */}
           <div
-            className="relative z-20 grid gap-9 py-7 pb-10"
-            style={{ gridTemplateColumns: '260px 1fr' }}
+            className="relative z-20 grid grid-cols-[260px_1fr] gap-9 py-7 pb-10"
           >
             {/* Cover */}
             <div
-              className="aspect-3/4 rounded-md overflow-hidden"
-              style={{ boxShadow: '0 28px 60px oklch(0 0 0 / 0.6)' }}
+              className="aspect-3/4 rounded-md overflow-hidden shadow-[0_28px_60px_oklch(0_0_0/0.6)]"
             >
               <Cover
                 game={{ name: game.name, year: undefined, platforms: game.platforms, cover: coverData, coverUrl: game.coverUrl }}
@@ -155,8 +144,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
             <div className="flex flex-col gap-3.5 pt-2">
               <div className="mono-label">{game.genres.join(' · ')}</div>
               <h1
-                className="text-[42px] font-bold leading-[1.05] m-0 text-text-hi"
-                style={{ letterSpacing: '-0.035em' }}
+                className="text-[42px] font-bold leading-[1.05] m-0 text-text-hi tracking-[-0.035em]"
               >
                 {game.name}
               </h1>
@@ -167,8 +155,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 
               {/* Quick stats */}
               <div
-                className="grid grid-cols-4 gap-3.5 mt-2 p-4 border border-border-soft rounded-md backdrop-blur-sm"
-                style={{ background: 'oklch(0.16 0.006 280 / 0.7)' }}
+                className="grid grid-cols-4 gap-3.5 mt-2 p-4 border border-border-soft rounded-md backdrop-blur-sm bg-bg-1/70"
               >
                 {[
                   { label: 'Status', val: statusDef.label },
@@ -188,7 +175,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 
         {/* Body — edit form */}
         <div className="px-5.5 py-6 pb-15">
-          <div className="grid gap-4.5" style={{ gridTemplateColumns: '1fr 320px' }}>
+          <div className="grid grid-cols-[1fr_320px] gap-4.5">
             {/* Edit form */}
             <div className="bg-bg-1 border border-border-soft rounded-lg p-5.5">
               <div className="text-[14.5px] font-semibold tracking-tight text-text-hi mb-5">
@@ -255,15 +242,12 @@ export function DetailScreen({ game }: DetailScreenProps) {
                   </div>
                   <div className="relative h-9 bg-bg-2 border border-border rounded-[8px] overflow-hidden">
                     <div
-                      className="absolute top-0 bottom-0 left-0 pointer-events-none transition-[width] duration-150"
-                      style={{
-                        width: `${(rating / 10) * 100}%`,
-                        background: 'linear-gradient(90deg, oklch(0.4 0.1 295 / 0.3), oklch(0.72 0.19 295))',
-                      }}
+                      className="absolute top-0 bottom-0 left-0 pointer-events-none transition-[width] duration-150 gradient-accent-fill"
+                      style={{ width: `${(rating / 10) * 100}%` }}
                     />
                     <div className="absolute inset-0 flex items-center justify-between px-2.5 pointer-events-none">
                       {Array.from({ length: 9 }).map((_, i) => (
-                        <div key={i} className="w-px h-2" style={{ background: 'oklch(0.4 0.01 280)' }} />
+                        <div key={i} className="w-px h-2 bg-[oklch(0.4_0.01_280)]" />
                       ))}
                     </div>
                     <input
@@ -319,8 +303,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
                 ].map(({ label, val }) => (
                   <div
                     key={label}
-                    className="grid gap-3 py-2.5 border-b border-border-soft"
-                    style={{ gridTemplateColumns: '110px 1fr' }}
+                    className="grid grid-cols-[110px_1fr] gap-3 py-2.5 border-b border-border-soft"
                   >
                     <dt className="mono-label">{label}</dt>
                     <dd className="text-[13px] text-text-hi m-0">{val}</dd>

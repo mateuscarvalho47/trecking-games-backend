@@ -21,8 +21,7 @@ export function StatusBarsCard({ stats }: StatusBarsCardProps) {
             <button
               key={s.key}
               onClick={() => navigate({ to: '/library' })}
-              className="grid gap-3 items-center py-1.5 bg-transparent border-0 cursor-pointer text-left rounded-[4px] w-full transition-[background] hover:bg-bg-2"
-              style={{ gridTemplateColumns: '120px 1fr 32px', fontFamily: 'inherit' }}
+              className="grid grid-cols-[120px_1fr_32px] gap-3 items-center py-1.5 bg-transparent border-0 cursor-pointer text-left rounded-[4px] w-full transition-[background] hover:bg-bg-2 font-[inherit]"
             >
               <div className="flex items-center gap-2 text-[12.5px] text-text-md">
                 <div className="size-2 rounded-full shrink-0" style={{ background: s.color }} />

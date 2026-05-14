@@ -35,12 +35,7 @@ export function BacklogList({ games }: BacklogListProps) {
             <button
               key={game.igdbId}
               onClick={() => navigate({ to: '/library/$igdbId', params: { igdbId: String(game.igdbId) } })}
-              className="grid gap-3 items-center px-2 py-2.5 bg-transparent border-0 cursor-pointer text-left w-full transition-[background] hover:bg-bg-2"
-              style={{
-                gridTemplateColumns: '32px 36px 1fr 14px',
-                borderBottom: idx < shown.length - 1 ? '1px solid oklch(0.22 0.008 280)' : undefined,
-                fontFamily: 'inherit',
-              }}
+              className={`grid grid-cols-[32px_36px_1fr_14px] gap-3 items-center px-2 py-2.5 bg-transparent border-0 cursor-pointer text-left w-full transition-[background] hover:bg-bg-2 font-[inherit]${idx < shown.length - 1 ? ' border-b border-border-soft' : ''}`}
             >
               <span className="text-[11px] text-text-dim font-medium">#{idx + 1}</span>
               <div className="w-9 h-12 rounded-[4px] overflow-hidden">

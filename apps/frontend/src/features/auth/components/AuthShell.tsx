@@ -66,11 +66,7 @@ export function AuthShell({ mode }: AuthShellProps) {
 
       {/* Auth card */}
       <div
-        className="relative z-10 w-full max-w-105 rounded-xl border border-border p-8 backdrop-blur-xl"
-        style={{
-          background: 'oklch(0.16 0.006 280 / 0.85)',
-          boxShadow: '0 1px 0 oklch(1 0 0 / 0.06) inset, 0 24px 60px oklch(0 0 0 / 0.55)',
-        }}
+        className="relative z-10 w-full max-w-105 rounded-xl border border-border p-8 backdrop-blur-xl bg-bg-1/85 shadow-panel"
       >
         {/* Brand */}
         <div className="flex items-center gap-2.5 mb-7">

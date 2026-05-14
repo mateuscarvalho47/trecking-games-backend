@@ -5,13 +5,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 
-const labelStyle: React.CSSProperties = {
-  fontFamily: "'Geist Mono', monospace",
-  fontSize: 10.5, letterSpacing: '0.06em',
-  textTransform: 'uppercase', color: 'oklch(0.54 0.012 280)',
-  fontWeight: 500,
-}
-
 export function RegisterForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -39,7 +32,7 @@ export function RegisterForm() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <Label style={labelStyle}>E-mail</Label>
+        <Label className="mono-label">E-mail</Label>
         <Input
           type="email" required value={email}
           onChange={e => setEmail(e.target.value)}
@@ -49,7 +42,7 @@ export function RegisterForm() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <Label style={labelStyle}>Senha</Label>
+        <Label className="mono-label">Senha</Label>
         <Input
           type="password" required value={password}
           onChange={e => setPassword(e.target.value)}
@@ -59,7 +52,7 @@ export function RegisterForm() {
       </div>
 
       {register.error && (
-        <p className="text-[11.5px] m-0" style={{ color: 'oklch(0.78 0.18 25)' }}>
+        <p className="text-[11.5px] m-0 text-chart-5">
           {register.error.message}
         </p>
       )}

@@ -38,8 +38,7 @@ export function PlayingList({ games }: PlayingListProps) {
             <button
               key={game.igdbId}
               onClick={() => navigate({ to: '/library/$igdbId', params: { igdbId: String(game.igdbId) } })}
-              className="grid gap-3.5 items-center p-2 bg-transparent border-0 rounded-[8px] cursor-pointer text-left transition-[background] w-full hover:bg-bg-2"
-              style={{ gridTemplateColumns: '48px 1fr auto', fontFamily: 'inherit' }}
+              className="grid grid-cols-[48px_1fr_auto] gap-3.5 items-center p-2 bg-transparent border-0 rounded-[8px] cursor-pointer text-left transition-[background] w-full hover:bg-bg-2 font-[inherit]"
             >
               <div className="w-12 h-16 rounded-sm overflow-hidden">
                 <Cover
@@ -65,11 +64,8 @@ export function PlayingList({ games }: PlayingListProps) {
                 {game.hoursPlayed && (
                   <div className="h-1 bg-border-soft rounded-full overflow-hidden mt-1">
                     <div
-                      className="h-full rounded-full transition-[width] duration-700 ease-out"
-                      style={{
-                        width: `${Math.min((game.hoursPlayed / 100) * 100, 100)}%`,
-                        background: 'linear-gradient(90deg, oklch(0.72 0.19 295), oklch(0.92 0.19 295))',
-                      }}
+                      className="h-full rounded-full transition-[width] duration-700 ease-out gradient-accent-bar"
+                      style={{ width: `${Math.min((game.hoursPlayed / 100) * 100, 100)}%` }}
                     />
                   </div>
                 )}
