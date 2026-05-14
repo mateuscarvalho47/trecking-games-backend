@@ -36,9 +36,9 @@ export async function buildApp() {
   await app.register(igdbPlugin);
   await app.register(swaggerPlugin);
 
-  await app.register(authRoutes);
-  await app.register(gameRoutes);
-  await app.register(libraryRoutes);
+  await app.register(authRoutes, { prefix: '/api' });
+  await app.register(gameRoutes, { prefix: '/api' });
+  await app.register(libraryRoutes, { prefix: '/api' });
 
   app.get('/health', async () => ({ ok: true }));
 

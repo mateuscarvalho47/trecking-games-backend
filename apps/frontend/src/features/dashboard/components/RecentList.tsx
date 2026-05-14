@@ -1,0 +1,61 @@
+import { useNavigate } from '@tanstack/react-router'
+import type { LibraryEntry } from '@/types/api'
+import { Cover } from '@/shared/components/Cover'
+import { StatusBadge } from '@/shared/components/StatusBadge'
+
+interface RecentListProps {
+  games: LibraryEntry[]
+}
+
+export function RecentList({ games }: RecentListProps) {
+  const navigate = useNavigate()
+  const shown = games.slice(0, 3)
+
+  return (
+    <div className="bg-bg-1 border border-border-soft rounded-lg px-5.5 py-4.5">
+      <div className="text-[14.5px] font-semibold text-text-hi tracking-[-0.01em] mb-3.5">
+        Recém-completos
+      </div>
+      {shown.length === 0 ? (
+        <div className="py-6 text-center text-text-lo text-[13px]">
+          Nenhum jogo completado ainda
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 gap-3.5">
+          {shown.map(game => (
+            <button
+              key={game.igdbId}
+              onClick={() => navigate({ to: '/library/$igdbId', params: { igdbId: String(game.igdbId) } })}
+              className="flex flex-col gap-2.5 p-0 bg-transparent border-0 cursor-pointer text-left"
+              style={{ fontFamily: 'inherit' }}
+            >
+              <div className="aspect-3/4 rounded-sm overflow-hidden">
+                <Cover
+                  game={{
+                    name: game.name,
+                    platforms: game.platforms,
+                    cover: { hue: 145, scheme: 'duotone', glyph: game.name[0] },
+                    coverUrl: game.coverUrl,
+                  }}
+                  size="md"
+                  hover
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-[13px] font-medium text-text-hi truncate">{game.name}</span>
+                <div className="flex items-center justify-between">
+                  <StatusBadge status={game.status} size="sm" />
+                  {game.rating != null && (
+                    <span className="font-mono text-[12px] font-semibold text-text-hi">
+                      {game.rating}<span className="text-[9px] text-text-lo">/10</span>
+                    </span>
+                  )}
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}

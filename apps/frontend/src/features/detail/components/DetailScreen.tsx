@@ -1,0 +1,348 @@
+import { useState, useCallback, useEffect } from 'react'
+import { useNavigate } from '@tanstack/react-router'
+import type { LibraryEntry, GameStatus } from '@/types/api'
+import { Cover } from '@/shared/components/Cover'
+import { StatusBadge } from '@/shared/components/StatusBadge'
+import { STATUSES, STATUS_BY_KEY } from '@/shared/constants/statuses'
+import { useUpdateLibraryEntry, useRemoveLibraryEntry } from '../hooks/useLibraryEntry'
+import { ConfirmRemoveModal } from './ConfirmRemoveModal'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+
+function getCoverData(game: LibraryEntry) {
+  const hues: Record<string, number> = {
+    WISHLIST: 75, BACKLOG: 260, PLAYING: 295, PAUSED: 200, COMPLETED: 145, DROPPED: 25,
+  }
+  return { hue: hues[game.status] ?? 280, scheme: 'duotone' as const, glyph: game.name[0] }
+}
+
+function useDebounce<T>(value: T, delay: number): T {
+  const [debounced, setDebounced] = useState(value)
+  useEffect(() => {
+    const t = setTimeout(() => setDebounced(value), delay)
+    return () => clearTimeout(t)
+  }, [value, delay])
+  return debounced
+}
+
+interface DetailScreenProps {
+  game: LibraryEntry
+}
+
+export function DetailScreen({ game }: DetailScreenProps) {
+  const navigate = useNavigate()
+  const update = useUpdateLibraryEntry(game.igdbId)
+  const remove = useRemoveLibraryEntry(game.igdbId)
+
+  const [status, setStatus] = useState<GameStatus>(game.status)
+  const [platform, setPlatform] = useState(game.userPlatform ?? '')
+  const [rating, setRating] = useState(game.rating ?? 0)
+  const [hours, setHours] = useState(game.hoursPlayed ?? 0)
+  const [notes, setNotes] = useState(game.notes ?? '')
+  const [completedAt, setCompletedAt] = useState(game.completedAt ?? '')
+  const [saved, setSaved] = useState(false)
+  const [confirmRemove, setConfirmRemove] = useState(false)
+
+  const debouncedStatus = useDebounce(status, 800)
+  const debouncedPlatform = useDebounce(platform, 800)
+  const debouncedRating = useDebounce(rating, 800)
+  const debouncedHours = useDebounce(hours, 800)
+  const debouncedNotes = useDebounce(notes, 1200)
+  const debouncedCompletedAt = useDebounce(completedAt, 800)
+
+  const save = useCallback(async () => {
+    await update.mutateAsync({
+      status: debouncedStatus,
+      userPlatform: debouncedPlatform || undefined,
+      rating: debouncedRating || undefined,
+      hoursPlayed: debouncedHours || undefined,
+      notes: debouncedNotes,
+      completedAt: debouncedCompletedAt || undefined,
+    })
+    setSaved(true)
+    setTimeout(() => setSaved(false), 2000)
+  }, [debouncedStatus, debouncedPlatform, debouncedRating, debouncedHours, debouncedNotes, debouncedCompletedAt, update])
+
+  useEffect(() => {
+    if (
+      debouncedStatus !== game.status ||
+      debouncedPlatform !== (game.userPlatform ?? '') ||
+      debouncedRating !== (game.rating ?? 0) ||
+      debouncedHours !== (game.hoursPlayed ?? 0) ||
+      debouncedNotes !== (game.notes ?? '') ||
+      debouncedCompletedAt !== (game.completedAt ?? '')
+    ) {
+      save()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedStatus, debouncedPlatform, debouncedRating, debouncedHours, debouncedNotes, debouncedCompletedAt])
+
+  const coverData = getCoverData(game)
+  const statusDef = STATUS_BY_KEY[status]
+
+  return (
+    <>
+      <div>
+        {/* Hero */}
+        <div className="relative overflow-hidden px-5.5">
+          {/* Blurred bg */}
+          <div className="absolute inset-0 z-0 overflow-hidden blur-[60px] saturate-140 opacity-55 scale-[1.2]">
+            <Cover
+              game={{ name: game.name, platforms: game.platforms, cover: coverData, coverUrl: game.coverUrl }}
+              size="hero" withTitle={false}
+            />
+          </div>
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 z-10"
+            style={{ background: 'linear-gradient(180deg, oklch(0.13 0.005 280 / 0.5) 0%, oklch(0.13 0.005 280) 90%)' }}
+          />
+
+          {/* Bar */}
+          <div className="relative z-20 flex justify-between items-center py-5">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate({ to: '/library' })}
+              className="bg-bg-2 border-border text-text-md hover:bg-bg-3"
+            >
+              ← Biblioteca
+            </Button>
+            <div className="flex gap-2 items-center">
+              {saved && (
+                <span
+                  className="inline-flex items-center gap-1.5 font-mono text-[10.5px] rounded-[5px] py-0.5 px-2"
+                  style={{
+                    color: 'oklch(0.85 0.16 145)',
+                    background: 'oklch(0.3 0.08 145 / 0.3)',
+                    border: '1px solid oklch(0.5 0.15 145 / 0.4)',
+                  }}
+                >
+                  ✓ Salvo
+                </span>
+              )}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setConfirmRemove(true)}
+                className="border border-border"
+                style={{ color: 'oklch(0.75 0.14 25)' }}
+              >
+                Remover
+              </Button>
+            </div>
+          </div>
+
+          {/* Content */}
+          <div
+            className="relative z-20 grid gap-9 py-7 pb-10"
+            style={{ gridTemplateColumns: '260px 1fr' }}
+          >
+            {/* Cover */}
+            <div
+              className="aspect-3/4 rounded-md overflow-hidden"
+              style={{ boxShadow: '0 28px 60px oklch(0 0 0 / 0.6)' }}
+            >
+              <Cover
+                game={{ name: game.name, year: undefined, platforms: game.platforms, cover: coverData, coverUrl: game.coverUrl }}
+                size="lg"
+              />
+            </div>
+
+            {/* Head info */}
+            <div className="flex flex-col gap-3.5 pt-2">
+              <div className="mono-label">{game.genres.join(' · ')}</div>
+              <h1
+                className="text-[42px] font-bold leading-[1.05] m-0 text-text-hi"
+                style={{ letterSpacing: '-0.035em' }}
+              >
+                {game.name}
+              </h1>
+              <div className="text-text-md text-[13.5px]">{game.platforms.join(' · ')}</div>
+              <div className="flex gap-1.5 flex-wrap">
+                <StatusBadge status={status} />
+              </div>
+
+              {/* Quick stats */}
+              <div
+                className="grid grid-cols-4 gap-3.5 mt-2 p-4 border border-border-soft rounded-md backdrop-blur-sm"
+                style={{ background: 'oklch(0.16 0.006 280 / 0.7)' }}
+              >
+                {[
+                  { label: 'Status', val: statusDef.label },
+                  { label: 'Plataforma', val: game.userPlatform ?? '—' },
+                  { label: 'Avaliação', val: game.rating != null ? `${game.rating}/10` : '—' },
+                  { label: 'Horas', val: game.hoursPlayed != null ? `${game.hoursPlayed}h` : '—' },
+                ].map(({ label, val }) => (
+                  <div key={label} className="flex flex-col gap-1.5">
+                    <div className="mono-label">{label}</div>
+                    <div className="text-[14px] text-text-hi">{val}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Body — edit form */}
+        <div className="px-5.5 py-6 pb-15">
+          <div className="grid gap-4.5" style={{ gridTemplateColumns: '1fr 320px' }}>
+            {/* Edit form */}
+            <div className="bg-bg-1 border border-border-soft rounded-lg p-5.5">
+              <div className="text-[14.5px] font-semibold tracking-tight text-text-hi mb-5">
+                Editar entrada
+              </div>
+
+              <div className="grid grid-cols-2 gap-4.5">
+                {/* Status picker */}
+                <div className="col-span-2">
+                  <Label className="mono-label block mb-1.5">Status</Label>
+                  <div className="grid grid-cols-3 gap-1.5">
+                    {STATUSES.map(s => (
+                      <button
+                        key={s.key}
+                        onClick={() => setStatus(s.key)}
+                        className="flex items-center gap-2 h-8 px-2.5 rounded-[7px] cursor-pointer text-[12px] font-medium border-0"
+                        style={{
+                          background: status === s.key ? `oklch(0.3 0.06 ${s.hue} / 0.35)` : 'oklch(0.19 0.008 280)',
+                          border: `1px solid ${status === s.key ? `oklch(0.6 0.15 ${s.hue} / 0.5)` : 'oklch(0.22 0.008 280)'}`,
+                          color: status === s.key ? `oklch(0.92 0.05 ${s.hue})` : 'oklch(0.72 0.010 280)',
+                          fontFamily: 'inherit',
+                        }}
+                      >
+                        <div className="size-1.5 rounded-full shrink-0" style={{ background: s.color }} />
+                        {s.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Platform */}
+                <div>
+                  <Label className="mono-label block mb-1.5">Plataforma</Label>
+                  <Input
+                    value={platform}
+                    onChange={e => setPlatform(e.target.value)}
+                    placeholder="ex: PC, PS5..."
+                    className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
+                  />
+                </div>
+
+                {/* Hours */}
+                <div>
+                  <Label className="mono-label block mb-1.5">Horas jogadas</Label>
+                  <div className="flex items-center bg-bg-2 border border-border rounded-[8px] overflow-hidden h-9.5">
+                    <input
+                      type="number" min={0} step={0.5}
+                      value={hours || ''}
+                      onChange={e => setHours(parseFloat(e.target.value) || 0)}
+                      className="flex-1 h-full px-3 bg-transparent border-0 outline-none text-text-hi text-[13.5px] font-mono"
+                    />
+                    <span className="pr-3 text-text-lo font-mono text-[12px]">h</span>
+                  </div>
+                </div>
+
+                {/* Rating slider */}
+                <div className="col-span-2">
+                  <div className="flex items-baseline justify-between mb-1.5">
+                    <Label className="mono-label">Avaliação</Label>
+                    <span className="text-[16px] text-text-hi">
+                      <b className="font-bold">{rating}</b>
+                      <span className="text-[11px] text-text-lo ml-px">/10</span>
+                    </span>
+                  </div>
+                  <div className="relative h-9 bg-bg-2 border border-border rounded-[8px] overflow-hidden">
+                    <div
+                      className="absolute top-0 bottom-0 left-0 pointer-events-none transition-[width] duration-150"
+                      style={{
+                        width: `${(rating / 10) * 100}%`,
+                        background: 'linear-gradient(90deg, oklch(0.4 0.1 295 / 0.3), oklch(0.72 0.19 295))',
+                      }}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-between px-2.5 pointer-events-none">
+                      {Array.from({ length: 9 }).map((_, i) => (
+                        <div key={i} className="w-px h-2" style={{ background: 'oklch(0.4 0.01 280)' }} />
+                      ))}
+                    </div>
+                    <input
+                      type="range" min={0} max={10} step={0.5}
+                      value={rating}
+                      onChange={e => setRating(parseFloat(e.target.value))}
+                      className="absolute inset-0 w-full h-full appearance-none bg-transparent cursor-pointer m-0"
+                    />
+                  </div>
+                  <div className="flex justify-between text-[10px] text-text-dim px-0.5 mt-1">
+                    {[0,1,2,3,4,5,6,7,8,9,10].map(n => <span key={n}>{n}</span>)}
+                  </div>
+                </div>
+
+                {/* Notes */}
+                <div className="col-span-2">
+                  <Label className="mono-label block mb-1.5">Notas</Label>
+                  <Textarea
+                    value={notes}
+                    onChange={e => setNotes(e.target.value)}
+                    placeholder="Suas anotações sobre o jogo..."
+                    rows={4}
+                    className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo resize-y leading-relaxed"
+                  />
+                </div>
+
+                {/* Completed at */}
+                {status === 'COMPLETED' && (
+                  <div>
+                    <Label className="mono-label block mb-1.5">Data de conclusão</Label>
+                    <Input
+                      type="date"
+                      value={completedAt}
+                      onChange={e => setCompletedAt(e.target.value)}
+                      className="bg-bg-2 border-border text-text-hi h-9.5"
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Side panel */}
+            <div className="bg-bg-1 border border-border-soft rounded-lg p-5.5 self-start">
+              <div className="text-[14.5px] font-semibold tracking-tight text-text-hi mb-4">
+                Informações
+              </div>
+              <dl>
+                {[
+                  { label: 'Gêneros', val: game.genres.join(', ') || '—' },
+                  { label: 'Plataformas', val: game.platforms.join(', ') || '—' },
+                  { label: 'Adicionado em', val: new Date(game.createdAt).toLocaleDateString('pt-BR') },
+                  { label: 'Atualizado em', val: new Date(game.updatedAt).toLocaleDateString('pt-BR') },
+                ].map(({ label, val }) => (
+                  <div
+                    key={label}
+                    className="grid gap-3 py-2.5 border-b border-border-soft"
+                    style={{ gridTemplateColumns: '110px 1fr' }}
+                  >
+                    <dt className="mono-label">{label}</dt>
+                    <dd className="text-[13px] text-text-hi m-0">{val}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {confirmRemove && (
+        <ConfirmRemoveModal
+          gameName={game.name}
+          onConfirm={async () => {
+            await remove.mutateAsync()
+            navigate({ to: '/library' })
+          }}
+          onCancel={() => setConfirmRemove(false)}
+          isPending={remove.isPending}
+        />
+      )}
+    </>
+  )
+}

@@ -1,61 +1,94 @@
-# Fastify Boilerplate
+# Ludex
 
-Monolito modular em Node.js com Fastify, Prisma, Redis e sessões persistidas.
+Monorepo para rastreamento de jogos — backend Fastify + frontend React.
 
 ## Stack
+
+### Monorepo
+
+- **pnpm workspaces** — gerenciador de pacotes e workspaces
+- **`packages/shared`** — tipos e schemas Zod compartilhados
+
+### Backend (`apps/backend`)
 
 - **Node 22 LTS** + TypeScript (ESM, `NodeNext`)
 - **Fastify 5** — servidor HTTP
 - **Prisma 7** — ORM com driver adapter `pg`
 - **PostgreSQL 17** — banco principal
-- **Redis 7** — store de sessão + cache
+- **Redis 7** — store de sessão
 - **@fastify/session** + **connect-redis** — sessões server-side
 - **argon2** — hash de senha
 - **zod 4** — validação de schemas
 - **croner** — agendamento de jobs
 - **Swagger / OpenAPI 3.1** — documentação automática
-- **Vitest** — testes unitários e de integração
+- **Biome** — lint e formatação
+- **Vitest** — testes unitários
+- **IGDB API** — busca de jogos
 
-## Arquitetura
+### Frontend (`apps/frontend`)
 
-Padrão **monolito modular** com separação por camadas dentro de cada módulo:
+- **React 19** + TypeScript
+- **Vite 8** — bundler
+- **TanStack Router** — roteamento type-safe
+- **TanStack Query** — data fetching e cache
+- **Tailwind CSS 4** — estilos
+- **shadcn/ui** — componentes (via `class-variance-authority`)
+
+## Estrutura do monorepo
 
 ```
-src/
-├── config/              # env loader (zod)
-├── lib/                 # helpers (hash, errors, validate)
-├── generated/prisma/    # cliente Prisma gerado (gitignored)
-├── plugins/             # Fastify plugins (prisma, redis, session, swagger, cron, errorHandler)
-├── modules/
-│   ├── user/
-│   │   ├── user.repository.ts
-│   │   └── user.service.ts
-│   └── auth/
-│       ├── auth.schema.ts
-│       ├── auth.errors.ts
-│       ├── auth.service.ts
-│       ├── auth.controller.ts
-│       └── auth.routes.ts
-├── shared/              # tipos/schemas cross-cutting
-├── app.ts               # build da instância Fastify
-└── server.ts            # bootstrap
+ludex/
+├── apps/
+│   ├── backend/             # API Fastify
+│   │   ├── prisma/          # schema, migrations, seed
+│   │   ├── scripts/         # create-module, gen-bruno
+│   │   ├── bruno/           # coleção Bruno API
+│   │   └── src/
+│   │       ├── config/      # env loader (zod)
+│   │       ├── lib/         # helpers (hash, errors, validate, igdb, requireAuth)
+│   │       ├── plugins/     # prisma, redis, session, swagger, cron, cors, igdb, errorHandler
+│   │       ├── modules/
+│   │       │   ├── auth/    # register, login, logout, me
+│   │       │   ├── user/    # repositório e service de usuário
+│   │       │   ├── game/    # busca de jogos via IGDB
+│   │       │   └── library/ # biblioteca pessoal de jogos
+│   │       ├── app.ts       # build da instância Fastify
+│   │       └── server.ts    # bootstrap
+│   └── frontend/            # SPA React
+│       └── src/
+│           ├── lib/         # cliente HTTP (api.ts), utilitários
+│           └── routes/      # rotas TanStack Router
+└── packages/
+    └── shared/              # tipos e schemas cross-cutting (@tracking-games/shared)
 ```
 
-### Camadas
+### Camadas (backend)
 
-| Camada | Responsabilidade | Pode tocar |
-|---|---|---|
-| Controller | parse HTTP, validação, response | service |
-| Service | regras de negócio, orquestração | repository, outros services |
-| Repository | queries no banco | Prisma |
+| Camada     | Responsabilidade                | Pode tocar                  |
+| ---------- | ------------------------------- | --------------------------- |
+| Controller | parse HTTP, validação, response | service                     |
+| Service    | regras de negócio, orquestração | repository, outros services |
+| Repository | queries no banco                | Prisma                      |
 
-Cada módulo é uma unidade fechada: schema, erros, lógica e rotas vivem juntos.
+### Modelo de dados
+
+```
+User
+  id, email, passwordHash, createdAt, updatedAt
+  └── LibraryEntry (1:N)
+
+LibraryEntry
+  id, userId, igdbId, name, coverUrl, genres[], platforms[]
+  status (WISHLIST | BACKLOG | PLAYING | PAUSED | COMPLETED | DROPPED)
+  userPlatform?, rating?, hoursPlayed?, notes?, completedAt?
+```
 
 ## Pré-requisitos
 
 - Node 22+
 - pnpm
 - Docker (Postgres + Redis via compose)
+- Conta IGDB (Twitch Developer) — para busca de jogos
 
 ## Setup
 
@@ -64,89 +97,123 @@ Cada módulo é uma unidade fechada: schema, erros, lógica e rotas vivem juntos
 pnpm install
 
 # 2. subir banco e cache
-docker compose up -d
+cd apps/backend && docker compose up -d
 
 # 3. variáveis de ambiente
-cp .env.example .env
+cp apps/backend/.env.exemple apps/backend/.env
+# preencher DATABASE_URL, REDIS_URL, SESSION_SECRET, COOKIE_SECRET, CORS_ORIGIN
+# e credenciais IGDB: IGDB_CLIENT_ID, IGDB_CLIENT_SECRET
 
 # 4. rodar migrations
-pnpm prisma:migrate
+pnpm --filter backend prisma:migrate
 
 # 5. gerar Prisma Client
-pnpm prisma:generate
+pnpm --filter backend prisma:generate
 
-# 6. rodar em dev
-pnpm dev
+# 6. rodar backend em dev
+pnpm --filter backend dev
+
+# 7. rodar frontend em dev
+pnpm --filter frontend dev
 ```
 
-Servidor sobe em `http://localhost:3000`.
+Backend: `http://localhost:3000` | Frontend: `http://localhost:5173`
 
-## Variáveis de ambiente
+## Variáveis de ambiente (backend)
 
 ```
 DATABASE_URL=postgresql://app:app@localhost:5432/app
 REDIS_URL=redis://localhost:6379
 SESSION_SECRET=<min 32 chars>
 COOKIE_SECRET=<min 32 chars>
+CORS_ORIGIN=http://localhost:5173
 NODE_ENV=development
 PORT=3000
+
+# IGDB (Twitch Developer Console)
+IGDB_CLIENT_ID=
+IGDB_CLIENT_SECRET=
 ```
 
-Gerar secrets aleatórios (PowerShell):
+Gerar secrets (PowerShell):
+
 ```powershell
 [Convert]::ToBase64String((1..48 | ForEach-Object { Get-Random -Max 256 }) -as [byte[]])
 ```
 
 ## Scripts
 
-| Comando | Descrição |
-|---|---|
-| `pnpm dev` | servidor em modo watch |
-| `pnpm build` | compila TypeScript pra `dist/` |
-| `pnpm start` | roda build de produção |
-| `pnpm prisma:generate` | gera Prisma Client |
-| `pnpm prisma:migrate` | aplica migrations (dev) |
-| `pnpm test` | roda testes |
-| `pnpm test:watch` | testes em watch |
-| `pnpm test:cov` | testes com coverage |
+### Raiz
+
+| Comando                           | Descrição                |
+| --------------------------------- | ------------------------ |
+| `pnpm --filter backend <script>`  | rodar script no backend  |
+| `pnpm --filter frontend <script>` | rodar script no frontend |
+
+### Backend
+
+| Comando                       | Descrição                      |
+| ----------------------------- | ------------------------------ |
+| `pnpm dev`                    | servidor em modo watch         |
+| `pnpm build`                  | compila TypeScript pra `dist/` |
+| `pnpm start`                  | roda build de produção         |
+| `pnpm prisma:generate`        | gera Prisma Client             |
+| `pnpm prisma:migrate`         | aplica migrations (dev)        |
+| `pnpm db:seed`                | insere usuários de teste       |
+| `pnpm db:clean`               | limpa todas as tabelas         |
+| `pnpm db:reset`               | recria banco do zero           |
+| `pnpm test`                   | roda testes                    |
+| `pnpm test:watch`             | testes em watch                |
+| `pnpm test:cov`               | testes com coverage            |
+| `pnpm lint` / `pnpm lint:fix` | Biome lint                     |
+| `pnpm gen:module <name>`      | scaffold de novo módulo        |
+| `pnpm gen:bruno`              | gera coleção Bruno             |
+
+### Frontend
+
+| Comando        | Descrição            |
+| -------------- | -------------------- |
+| `pnpm dev`     | servidor Vite em dev |
+| `pnpm build`   | build de produção    |
+| `pnpm preview` | preview do build     |
 
 ## Endpoints
 
-| Método | Rota | Descrição | Auth |
-|---|---|---|---|
-| POST | `/auth/register` | cria usuário | não |
-| POST | `/auth/login` | autentica e cria sessão | não |
-| POST | `/auth/logout` | encerra sessão | sim |
-| GET | `/auth/me` | retorna usuário atual | sim |
-| GET | `/health` | healthcheck | não |
-| GET | `/docs` | Swagger UI (apenas dev) | não |
+### Auth
 
-### Exemplo — registrar
+| Método | Rota             | Descrição               | Auth |
+| ------ | ---------------- | ----------------------- | ---- |
+| POST   | `/auth/register` | cria usuário            | não  |
+| POST   | `/auth/login`    | autentica e cria sessão | não  |
+| POST   | `/auth/logout`   | encerra sessão          | sim  |
+| GET    | `/auth/me`       | retorna usuário atual   | sim  |
 
-```bash
-curl -X POST http://localhost:3000/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"senha12345"}'
-```
+### Games (IGDB)
 
-### Exemplo — login (salva cookie)
+| Método | Rota                     | Descrição              | Auth |
+| ------ | ------------------------ | ---------------------- | ---- |
+| GET    | `/games/search?q=<nome>` | busca jogos por nome   | sim  |
+| GET    | `/games/:igdbId`         | busca jogo por ID IGDB | sim  |
 
-```bash
-curl -X POST http://localhost:3000/auth/login \
-  -H "Content-Type: application/json" \
-  -c cookies.txt \
-  -d '{"email":"user@example.com","password":"senha12345"}'
-```
+### Library
 
-### Exemplo — me (envia cookie)
+| Método | Rota               | Descrição                   | Auth |
+| ------ | ------------------ | --------------------------- | ---- |
+| GET    | `/library`         | lista biblioteca do usuário | sim  |
+| POST   | `/library`         | adiciona jogo à biblioteca  | sim  |
+| GET    | `/library/stats`   | estatísticas da biblioteca  | sim  |
+| GET    | `/library/:igdbId` | busca entrada por igdbId    | sim  |
+| PATCH  | `/library/:igdbId` | atualiza entrada            | sim  |
+| DELETE | `/library/:igdbId` | remove jogo da biblioteca   | sim  |
 
-```bash
-curl http://localhost:3000/auth/me -b cookies.txt
-```
+### Utilitários
+
+| Método | Rota      | Descrição               | Auth |
+| ------ | --------- | ----------------------- | ---- |
+| GET    | `/health` | healthcheck             | não  |
+| GET    | `/docs`   | Swagger UI (apenas dev) | não  |
 
 ## Tratamento de erros
-
-Todos os erros respondem com formato padronizado:
 
 ```json
 {
@@ -158,84 +225,52 @@ Todos os erros respondem com formato padronizado:
 }
 ```
 
-Erros de domínio estendem `AppError` (`src/lib/errors.ts`). O handler global em `plugins/errorHandler.ts` traduz para status HTTP e padroniza payload.
-
-Códigos comuns:
-
-| Code | Status |
-|---|---|
-| `VALIDATION_ERROR` | 400 |
-| `UNAUTHORIZED` | 401 |
-| `FORBIDDEN` | 403 |
-| `NOT_FOUND` | 404 |
-| `CONFLICT` | 409 |
-| `INTERNAL` | 500 |
+| Code               | Status |
+| ------------------ | ------ |
+| `VALIDATION_ERROR` | 400    |
+| `UNAUTHORIZED`     | 401    |
+| `FORBIDDEN`        | 403    |
+| `NOT_FOUND`        | 404    |
+| `CONFLICT`         | 409    |
+| `INTERNAL`         | 500    |
 
 ## Sessões
 
 - Persistidas no Redis (prefix `sess:`)
-- TTL padrão: 7 dias
+- TTL padrão: 7 dias, rolling
 - Cookie `httpOnly`, `sameSite: lax`, `secure` em produção
-- Inspecionar:
-  ```bash
-  docker exec -it <redis-container> redis-cli KEYS "sess:*"
-  ```
 
 ## Testes
 
-Vitest com `app.inject()` (sem porta TCP).
+Vitest com mocks de repositório (`vi.fn()`), sem dependências externas.
 
 ```bash
-# rodar tudo
-pnpm test
-
-# watch
-pnpm test:watch
-
-# coverage
-pnpm test:cov
+pnpm test          # tudo
+pnpm test:watch    # watch
+pnpm test:cov      # coverage
 ```
 
-Banco de teste isolado via `.env.test` (`app_test` + Redis DB index 1).
-
-Estrutura:
 ```
 tests/
-├── setup.ts
-├── helpers/
-│   ├── build.ts        # cria instância Fastify
-│   └── db.ts           # cliente Prisma + clearDb
-├── auth.test.ts        # integração (HTTP)
-└── auth.service.test.ts # unit (mock repo)
+├── auth.service.test.ts
+├── game.service.test.ts
+├── igdb.client.test.ts
+├── library.service.test.ts
+├── library.stats.service.test.ts
+└── user.service.test.ts
 ```
 
-## Documentação da API
+## Adicionando um módulo (backend)
 
-Em desenvolvimento, Swagger UI fica em `http://localhost:3000/docs`.
+```bash
+pnpm gen:module <name>   # ex: pnpm gen:module product
+```
 
-Schemas Zod das rotas são convertidos automaticamente em OpenAPI 3.1 via `fastify-type-provider-zod`.
+Gera `src/modules/<name>/` com todos os arquivos. Depois:
 
-## Adicionando um módulo novo
-
-1. Criar pasta `src/modules/<nome>/`
-2. Arquivos:
-   - `<nome>.schema.ts` — Zod schemas + types
-   - `<nome>.repository.ts` — queries Prisma
-   - `<nome>.service.ts` — regras de negócio
-   - `<nome>.errors.ts` — erros de domínio (opcional)
-   - `<nome>.controller.ts` — handlers HTTP
-   - `<nome>.routes.ts` — registro de rotas + DI
+1. Adicionar modelo em `prisma/schema.prisma`
+2. `pnpm prisma:migrate && pnpm prisma:generate`
 3. Registrar rotas em `src/app.ts`
-
-## Roadmap
-
-- [ ] Rate limit no login (`@fastify/rate-limit`)
-- [ ] CORS configurável (`@fastify/cors`)
-- [ ] Refresh de sessão (rolling cookies)
-- [ ] Email verification
-- [ ] Reset de senha
-- [ ] Audit log
-- [ ] Métricas Prometheus
 
 ## Licença
 

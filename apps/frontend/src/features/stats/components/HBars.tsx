@@ -1,0 +1,28 @@
+interface HBarsProps {
+  items: { label: string; count: number }[]
+  color?: string
+}
+
+export function HBars({ items, color = 'oklch(0.72 0.19 295)' }: HBarsProps) {
+  const max = Math.max(...items.map(i => i.count), 1)
+  return (
+    <div className="flex flex-col gap-1.5">
+      {items.map(item => (
+        <div
+          key={item.label}
+          className="grid gap-3 items-center text-[12.5px]"
+          style={{ gridTemplateColumns: '130px 1fr 32px' }}
+        >
+          <span className="text-text-md truncate">{item.label}</span>
+          <div className="h-2.5 bg-bg-2 rounded-full overflow-hidden">
+            <div
+              className="h-full rounded-full transition-[width] duration-700 ease-out"
+              style={{ width: `${(item.count / max) * 100}%`, background: color }}
+            />
+          </div>
+          <span className="text-text-hi text-right font-medium">{item.count}</span>
+        </div>
+      ))}
+    </div>
+  )
+}

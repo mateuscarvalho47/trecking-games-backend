@@ -206,7 +206,7 @@ async function main() {
 
   const envFile = join(BRUNO_DIR, 'environments', 'local.bru');
   if (!existsSync(envFile)) {
-    writeFileSync(envFile, 'vars {\n  baseUrl: http://localhost:3000\n}\n');
+    writeFileSync(envFile, 'vars {\n  baseUrl: http://localhost:3000/api\n}\n');
   }
 
   const existingFiles = collectRequestFiles(BRUNO_DIR);
