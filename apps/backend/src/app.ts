@@ -23,6 +23,7 @@ export async function buildApp() {
     logger: {
       transport: env.NODE_ENV === 'development' ? { target: 'pino-pretty' } : undefined,
     },
+    trustProxy: true,
   }).withTypeProvider<ZodTypeProvider>();
 
   app.setValidatorCompiler(validatorCompiler);
