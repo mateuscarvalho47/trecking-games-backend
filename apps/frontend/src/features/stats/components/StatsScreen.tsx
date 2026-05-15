@@ -124,7 +124,7 @@ export function StatsScreen() {
 								label: g.genre,
 								count: g.count,
 							}))}
-							color="oklch(0.72 0.19 295)"
+							color="oklch(0.72 0.15 145)"
 						/>
 					</Card>
 				</div>

@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useRegister } from "../hooks/useAuth";
+import { useRegister, useResendVerification } from "../hooks/useAuth";
 
 export function RegisterForm() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const register = useRegister();
+	const resend = useResendVerification();
 
 	const submit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -32,6 +33,26 @@ export function RegisterForm() {
 					<p className="text-[12px] text-text-lo leading-normal">
 						Não recebeu? Verifique a pasta de spam.
 					</p>
+				</div>
+				<div className="flex flex-col gap-2">
+					<Button
+						variant="outline"
+						disabled={resend.isPending || resend.isSuccess}
+						onClick={() => resend.mutate(email)}
+						className="w-full h-10 rounded-[8px]"
+					>
+						{resend.isPending ? "Enviando..." : "Reenviar email"}
+					</Button>
+					{resend.isSuccess && (
+						<p className="text-[11.5px] m-0 text-text-md text-center">
+							Novo link enviado para {email}.
+						</p>
+					)}
+					{resend.error && (
+						<p className="text-[11.5px] m-0 text-chart-5 text-center">
+							{resend.error.message}
+						</p>
+					)}
 				</div>
 				<p className="text-center text-[12.5px] text-text-lo mt-2">
 					<a

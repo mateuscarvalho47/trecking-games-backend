@@ -1,4 +1,4 @@
-# Ludex
+# Cartucheira
 
 Monorepo para rastreamento de jogos — backend Fastify + frontend React.
 
@@ -37,7 +37,7 @@ Monorepo para rastreamento de jogos — backend Fastify + frontend React.
 ## Estrutura do monorepo
 
 ```
-ludex/
+cartucheira/
 ├── apps/
 │   ├── backend/             # API Fastify
 │   │   ├── prisma/          # schema, migrations, seed

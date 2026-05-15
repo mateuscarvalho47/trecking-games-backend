@@ -3,13 +3,18 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useLogin } from "../hooks/useAuth";
+import { ApiError } from "@/lib/api";
+import { useLogin, useResendVerification } from "../hooks/useAuth";
 
 export function LoginForm() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
 	const login = useLogin();
+	const resend = useResendVerification();
+
+	const emailNotVerified =
+		login.error instanceof ApiError && login.error.status === 403;
 
 	const submit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -57,6 +62,30 @@ export function LoginForm() {
 
 			{login.error && (
 				<p className="text-[11.5px] m-0 text-chart-5">{login.error.message}</p>
+			)}
+
+			{emailNotVerified && (
+				<div className="flex flex-col gap-1.5">
+					<Button
+						type="button"
+						variant="outline"
+						disabled={resend.isPending || resend.isSuccess}
+						onClick={() => resend.mutate(email)}
+						className="w-full h-10 rounded-[8px]"
+					>
+						{resend.isPending ? "Enviando..." : "Reenviar email de verificação"}
+					</Button>
+					{resend.isSuccess && (
+						<p className="text-[11.5px] m-0 text-text-md text-center">
+							Novo link enviado para {email}.
+						</p>
+					)}
+					{resend.error && (
+						<p className="text-[11.5px] m-0 text-chart-5 text-center">
+							{resend.error.message}
+						</p>
+					)}
+				</div>
 			)}
 
 			<Button

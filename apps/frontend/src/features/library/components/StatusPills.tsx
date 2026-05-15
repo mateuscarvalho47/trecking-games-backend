@@ -53,13 +53,11 @@ export function StatusPills({ library, active, onChange }: StatusPillsProps) {
 						style={{
 							background: isActive
 								? `oklch(0.25 0.06 ${s.hue} / 0.5)`
-								: "oklch(0.16 0.006 280)",
+								: "oklch(0.16 0.007 28)",
 							borderColor: isActive
 								? `oklch(0.5 0.15 ${s.hue} / 0.55)`
-								: "oklch(0.22 0.008 280)",
-							color: isActive
-								? "oklch(0.96 0.005 280)"
-								: "oklch(0.72 0.010 280)",
+								: "oklch(0.22 0.009 28)",
+							color: isActive ? "oklch(0.96 0.006 75)" : "oklch(0.72 0.012 75)",
 							fontFamily: "inherit",
 						}}
 					>

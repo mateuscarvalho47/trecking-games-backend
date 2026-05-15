@@ -103,12 +103,12 @@ export function AddToLibraryModal({
 											background:
 												status === s.key
 													? `oklch(0.3 0.06 ${s.hue} / 0.35)`
-													: "oklch(0.19 0.008 280)",
-											border: `1px solid ${status === s.key ? `oklch(0.6 0.15 ${s.hue} / 0.5)` : "oklch(0.22 0.008 280)"}`,
+													: "oklch(0.19 0.009 28)",
+											border: `1px solid ${status === s.key ? `oklch(0.6 0.15 ${s.hue} / 0.5)` : "oklch(0.22 0.009 28)"}`,
 											color:
 												status === s.key
 													? `oklch(0.92 0.05 ${s.hue})`
-													: "oklch(0.72 0.010 280)",
+													: "oklch(0.72 0.012 75)",
 											fontFamily: "inherit",
 										}}
 									>

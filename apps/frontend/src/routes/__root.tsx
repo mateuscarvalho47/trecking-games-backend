@@ -56,12 +56,12 @@ function RootLayout() {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					background: "oklch(0.13 0.005 280)",
+					background: "oklch(0.13 0.006 28)",
 				}}
 			>
 				<span
 					style={{
-						color: "oklch(0.54 0.012 280)",
+						color: "oklch(0.54 0.014 75)",
 						fontFamily: "'Geist Mono', monospace",
 						fontSize: 12,
 					}}
@@ -76,8 +76,8 @@ function RootLayout() {
 		<div
 			style={{
 				minHeight: "100vh",
-				background: "oklch(0.13 0.005 280)",
-				color: "oklch(0.96 0.005 280)",
+				background: "oklch(0.13 0.006 28)",
+				color: "oklch(0.96 0.006 75)",
 			}}
 		>
 			{me ? (

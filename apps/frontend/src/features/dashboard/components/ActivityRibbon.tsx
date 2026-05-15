@@ -32,10 +32,10 @@ function levelFromCount(n: number): 0 | 1 | 2 | 3 {
 }
 
 const CELL_COLORS = [
-	"oklch(0.22 0.008 280)",
-	"oklch(0.4 0.1 295 / 0.4)",
-	"oklch(0.55 0.15 295 / 0.7)",
-	"oklch(0.72 0.19 295)",
+	"oklch(0.22 0.009 28)",
+	"oklch(0.4 0.08 145 / 0.4)",
+	"oklch(0.55 0.12 145 / 0.7)",
+	"oklch(0.72 0.15 145)",
 ];
 
 const WEEKS = 20;

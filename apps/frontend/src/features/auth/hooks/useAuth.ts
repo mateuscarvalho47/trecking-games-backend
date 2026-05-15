@@ -46,6 +46,13 @@ export function useVerifyEmail() {
 	});
 }
 
+export function useResendVerification() {
+	return useMutation({
+		mutationFn: (email: string) =>
+			api.post<{ message: string }>("/auth/resend-verification", { email }),
+	});
+}
+
 export function useLogout() {
 	const qc = useQueryClient();
 	return useMutation({

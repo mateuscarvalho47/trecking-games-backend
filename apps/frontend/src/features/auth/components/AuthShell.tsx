@@ -22,8 +22,8 @@ export function AuthShell({ mode }: AuthShellProps) {
 				className="absolute inset-0 pointer-events-none opacity-40"
 				style={{
 					backgroundImage: `
-            linear-gradient(90deg, oklch(0.2 0.005 280) 1px, transparent 1px),
-            linear-gradient(0deg,  oklch(0.2 0.005 280) 1px, transparent 1px)
+            linear-gradient(90deg, oklch(0.2 0.006 28) 1px, transparent 1px),
+            linear-gradient(0deg,  oklch(0.2 0.006 28) 1px, transparent 1px)
           `,
 					backgroundSize: "48px 48px",
 					maskImage:
@@ -41,7 +41,7 @@ export function AuthShell({ mode }: AuthShellProps) {
 					height: "80vw",
 					transform: "translate(-50%, -50%)",
 					background:
-						"radial-gradient(circle, oklch(0.5 0.18 295 / 0.3) 0%, transparent 50%)",
+						"radial-gradient(circle, oklch(0.5 0.14 145 / 0.3) 0%, transparent 50%)",
 				}}
 			/>
 
@@ -78,7 +78,7 @@ export function AuthShell({ mode }: AuthShellProps) {
 				<div className="flex items-center gap-2.5 mb-7">
 					<svg
 						role="img"
-						aria-label="Ludex"
+						aria-label="Cartucheira"
 						width="22"
 						height="22"
 						viewBox="0 0 22 22"
@@ -123,14 +123,14 @@ export function AuthShell({ mode }: AuthShellProps) {
 						/>
 					</svg>
 					<span className="text-[18px] font-bold tracking-[-0.02em] text-text-hi">
-						Ludex
+						Cartucheira
 					</span>
 				</div>
 
 				{mode === "login" ? <LoginForm /> : <RegisterForm />}
 
 				<div className="mt-5 pt-4 border-t border-border-soft font-mono text-[10.5px] text-text-dim text-center tracking-[0.04em]">
-					LUDEX · RASTREADOR DE JOGOS
+					CARTUCHEIRA · RASTREADOR DE JOGOS
 				</div>
 			</div>
 		</div>

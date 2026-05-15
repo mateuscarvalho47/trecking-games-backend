@@ -45,7 +45,7 @@ export const useAppStore = create<AppStore>()(
 			setLibrarySearch: (q) => set({ librarySearch: q }),
 		}),
 		{
-			name: "ludex-ui",
+			name: "cartucheira-ui",
 			// Only persist non-transient UI state
 			partialize: (state) => ({
 				libraryView: state.libraryView,

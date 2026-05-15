@@ -43,11 +43,11 @@ export function TimelineChart({ timeline }: TimelineChartProps) {
 				viewBox={`0 0 ${W} ${H}`}
 				preserveAspectRatio="xMidYMid meet"
 			>
-				<path d={areaD} fill="oklch(0.72 0.19 295 / 0.12)" />
+				<path d={areaD} fill="oklch(0.72 0.15 145 / 0.12)" />
 				<path
 					d={pathD}
 					fill="none"
-					stroke="oklch(0.72 0.19 295)"
+					stroke="oklch(0.72 0.15 145)"
 					strokeWidth={2}
 					strokeLinecap="round"
 					strokeLinejoin="round"
@@ -58,7 +58,7 @@ export function TimelineChart({ timeline }: TimelineChartProps) {
 						cx={p.x}
 						cy={p.y}
 						r={4}
-						fill="oklch(0.92 0.19 295)"
+						fill="oklch(0.88 0.14 145)"
 					/>
 				))}
 				{points
@@ -70,7 +70,7 @@ export function TimelineChart({ timeline }: TimelineChartProps) {
 							y={H - 8}
 							textAnchor="middle"
 							fontSize={9}
-							fill="oklch(0.54 0.012 280)"
+							fill="oklch(0.54 0.014 75)"
 							fontFamily="'Geist Mono', monospace"
 						>
 							{p.month.slice(5)}
@@ -83,7 +83,7 @@ export function TimelineChart({ timeline }: TimelineChartProps) {
 						y={PAD.top + innerH - (v / maxCount) * innerH + 4}
 						textAnchor="end"
 						fontSize={9}
-						fill="oklch(0.54 0.012 280)"
+						fill="oklch(0.54 0.014 75)"
 						fontFamily="'Geist Mono', monospace"
 					>
 						{v}
@@ -96,7 +96,7 @@ export function TimelineChart({ timeline }: TimelineChartProps) {
 						y1={PAD.top + innerH * (1 - frac)}
 						x2={W - PAD.right}
 						y2={PAD.top + innerH * (1 - frac)}
-						stroke="oklch(0.22 0.008 280)"
+						stroke="oklch(0.22 0.009 28)"
 						strokeWidth={1}
 					/>
 				))}

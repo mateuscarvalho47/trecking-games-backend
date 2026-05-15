@@ -1,56 +1,56 @@
 @import "tailwindcss";
 
 @theme inline {
-	/* Background layers */
-	--color-bg-0: oklch(0.13 0.005 280);
-	--color-bg-1: oklch(0.16 0.006 280);
-	--color-bg-2: oklch(0.19 0.008 280);
-	--color-bg-3: oklch(0.23 0.01 280);
-	--color-bg-4: oklch(0.27 0.012 280);
+	/* Background layers — carvão quente */
+	--color-bg-0: oklch(0.13 0.006 28);
+	--color-bg-1: oklch(0.16 0.007 28);
+	--color-bg-2: oklch(0.19 0.009 28);
+	--color-bg-3: oklch(0.23 0.011 28);
+	--color-bg-4: oklch(0.27 0.013 28);
 
 	/* Borders */
-	--color-border: oklch(0.27 0.01 280);
-	--color-border-soft: oklch(0.22 0.008 280);
-	--color-border-strong: oklch(0.34 0.012 280);
+	--color-border: oklch(0.27 0.011 28);
+	--color-border-soft: oklch(0.22 0.009 28);
+	--color-border-strong: oklch(0.34 0.013 28);
 
-	/* Text */
-	--color-text-hi: oklch(0.96 0.005 280);
-	--color-text-md: oklch(0.72 0.01 280);
-	--color-text-lo: oklch(0.54 0.012 280);
-	--color-text-dim: oklch(0.42 0.01 280);
+	/* Text — warmth âmbar */
+	--color-text-hi: oklch(0.96 0.006 75);
+	--color-text-md: oklch(0.72 0.012 75);
+	--color-text-lo: oklch(0.54 0.014 75);
+	--color-text-dim: oklch(0.42 0.01 75);
 
-	/* Accent — violet */
-	--color-accent: oklch(0.72 0.19 295);
-	--color-accent-bright: oklch(0.92 0.19 295);
-	--color-accent-soft: oklch(0.4 0.1 295 / 0.18);
-	--color-accent-rim: oklch(0.55 0.18 295 / 0.4);
+	/* Accent — verde sage pastel */
+	--color-accent: oklch(0.72 0.15 145);
+	--color-accent-bright: oklch(0.88 0.14 145);
+	--color-accent-soft: oklch(0.4 0.08 145 / 0.18);
+	--color-accent-rim: oklch(0.55 0.12 145 / 0.4);
 
 	/* Semantic aliases (shadcn/ui compat) */
-	--color-background: oklch(0.13 0.005 280);
-	--color-foreground: oklch(0.96 0.005 280);
-	--color-card: oklch(0.16 0.006 280);
-	--color-card-foreground: oklch(0.96 0.005 280);
-	--color-popover: oklch(0.19 0.008 280);
-	--color-popover-foreground: oklch(0.96 0.005 280);
-	--color-primary: oklch(0.72 0.19 295);
-	--color-primary-foreground: oklch(0.18 0.06 295);
-	--color-secondary: oklch(0.23 0.01 280);
-	--color-secondary-foreground: oklch(0.96 0.005 280);
-	--color-muted: oklch(0.19 0.008 280);
-	--color-muted-foreground: oklch(0.54 0.012 280);
-	--color-accent: oklch(0.23 0.01 280);
-	--color-accent-foreground: oklch(0.96 0.005 280);
+	--color-background: oklch(0.13 0.006 28);
+	--color-foreground: oklch(0.96 0.006 75);
+	--color-card: oklch(0.16 0.007 28);
+	--color-card-foreground: oklch(0.96 0.006 75);
+	--color-popover: oklch(0.19 0.009 28);
+	--color-popover-foreground: oklch(0.96 0.006 75);
+	--color-primary: oklch(0.72 0.15 145);
+	--color-primary-foreground: oklch(0.12 0.04 145);
+	--color-secondary: oklch(0.23 0.011 28);
+	--color-secondary-foreground: oklch(0.96 0.006 75);
+	--color-muted: oklch(0.19 0.009 28);
+	--color-muted-foreground: oklch(0.54 0.014 75);
+	--color-accent: oklch(0.23 0.011 28);
+	--color-accent-foreground: oklch(0.96 0.006 75);
 	--color-destructive: oklch(0.45 0.18 25);
-	--color-border: oklch(0.27 0.01 280);
-	--color-input: oklch(0.22 0.008 280);
-	--color-ring: oklch(0.72 0.19 295);
+	--color-border: oklch(0.27 0.011 28);
+	--color-input: oklch(0.22 0.009 28);
+	--color-ring: oklch(0.72 0.15 145);
 
-	/* Chart colors */
+	/* Chart colors — paleta bandeira */
 	--color-chart-1: oklch(0.78 0.18 75);
-	--color-chart-2: oklch(0.78 0.18 260);
-	--color-chart-3: oklch(0.78 0.18 295);
-	--color-chart-4: oklch(0.78 0.18 145);
-	--color-chart-5: oklch(0.78 0.18 25);
+	--color-chart-2: oklch(0.78 0.18 240);
+	--color-chart-3: oklch(0.78 0.18 145);
+	--color-chart-4: oklch(0.78 0.18 25);
+	--color-chart-5: oklch(0.78 0.18 185);
 
 	/* Typography */
 	--font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -79,8 +79,8 @@
 	body {
 		margin: 0;
 		padding: 0;
-		background: oklch(0.13 0.005 280);
-		color: oklch(0.96 0.005 280);
+		background: oklch(0.13 0.006 28);
+		color: oklch(0.96 0.006 75);
 	}
 
 	body {
@@ -90,8 +90,8 @@
 	}
 
 	::selection {
-		background: oklch(0.5 0.18 295 / 0.4);
-		color: oklch(0.96 0.005 280);
+		background: oklch(0.5 0.14 145 / 0.4);
+		color: oklch(0.96 0.006 75);
 	}
 
 	::-webkit-scrollbar {
@@ -102,13 +102,13 @@
 		background: transparent;
 	}
 	::-webkit-scrollbar-thumb {
-		background: oklch(0.3 0.01 280);
+		background: oklch(0.3 0.01 28);
 		border: 3px solid transparent;
 		background-clip: content-box;
 		border-radius: 8px;
 	}
 	::-webkit-scrollbar-thumb:hover {
-		background: oklch(0.4 0.01 280);
+		background: oklch(0.4 0.01 28);
 		border: 3px solid transparent;
 		background-clip: content-box;
 	}
@@ -119,14 +119,14 @@
 	.btn-accent {
 		background: linear-gradient(
 			180deg,
-			oklch(0.92 0.19 295),
-			oklch(0.72 0.19 295)
+			oklch(0.88 0.14 145),
+			oklch(0.72 0.15 145)
 		);
-		color: oklch(0.18 0.06 295);
-		border: 1px solid oklch(0.55 0.18 295 / 0.5);
+		color: oklch(0.12 0.04 145);
+		border: 1px solid oklch(0.55 0.12 145 / 0.5);
 		box-shadow:
 			0 1px 0 oklch(1 0 0 / 0.2) inset,
-			0 4px 14px oklch(0.5 0.18 295 / 0.25);
+			0 4px 14px oklch(0.5 0.14 145 / 0.25);
 		font-weight: 600;
 		cursor: pointer;
 	}
@@ -154,12 +154,12 @@
 	/* Ghost border button */
 	.btn-ghost-border {
 		background: transparent;
-		border: 1px solid oklch(0.27 0.01 280);
-		color: oklch(0.72 0.01 280);
+		border: 1px solid oklch(0.27 0.011 28);
+		color: oklch(0.72 0.012 75);
 		cursor: pointer;
 	}
 	.btn-ghost-border:hover {
-		background: oklch(0.19 0.008 280);
+		background: oklch(0.19 0.009 28);
 	}
 
 	/* Mono overline label — repeated across many components */
@@ -182,8 +182,8 @@
 	.gradient-accent-bar {
 		background: linear-gradient(
 			90deg,
-			oklch(0.72 0.19 295),
-			oklch(0.92 0.19 295)
+			oklch(0.72 0.15 145),
+			oklch(0.88 0.14 145)
 		);
 	}
 
@@ -191,8 +191,8 @@
 	.gradient-accent-fill {
 		background: linear-gradient(
 			90deg,
-			oklch(0.4 0.1 295 / 0.3),
-			oklch(0.72 0.19 295)
+			oklch(0.4 0.08 145 / 0.3),
+			oklch(0.72 0.15 145)
 		);
 	}
 

@@ -43,6 +43,8 @@ export class AuthController {
   resendVerification = async (req: FastifyRequest, reply: FastifyReply) => {
     const input = parse(resendVerificationSchema, req.body);
     await this.auth.resendVerification(input);
-    return reply.send({ message: 'Se o email existir e não estiver verificado, um novo link foi enviado.' });
+    return reply.send({
+      message: 'Se o email existir e não estiver verificado, um novo link foi enviado.',
+    });
   };
 }

@@ -50,8 +50,8 @@ export function LandingScreen() {
 				className="absolute inset-0 pointer-events-none opacity-30"
 				style={{
 					backgroundImage: `
-            linear-gradient(90deg, oklch(0.2 0.005 280) 1px, transparent 1px),
-            linear-gradient(0deg, oklch(0.2 0.005 280) 1px, transparent 1px)
+            linear-gradient(90deg, oklch(0.2 0.006 28) 1px, transparent 1px),
+            linear-gradient(0deg, oklch(0.2 0.006 28) 1px, transparent 1px)
           `,
 					backgroundSize: "48px 48px",
 					maskImage:
@@ -69,7 +69,7 @@ export function LandingScreen() {
 					height: "90vw",
 					transform: "translate(-50%, -50%)",
 					background:
-						"radial-gradient(circle, oklch(0.5 0.18 295 / 0.2) 0%, transparent 50%)",
+						"radial-gradient(circle, oklch(0.5 0.14 145 / 0.2) 0%, transparent 50%)",
 				}}
 			/>
 
@@ -101,64 +101,25 @@ export function LandingScreen() {
 			>
 				{/* Logo */}
 				<div className="flex items-center gap-3 mb-10">
-					<svg
-						role="img"
-						aria-label="Ludex"
-						width="32"
-						height="32"
-						viewBox="0 0 22 22"
-						fill="none"
-						className="text-accent-bright"
-					>
-						<rect
-							x="2"
-							y="2"
-							width="8"
-							height="8"
-							rx="2"
-							fill="currentColor"
-							opacity="0.9"
-						/>
-						<rect
-							x="12"
-							y="2"
-							width="8"
-							height="8"
-							rx="2"
-							fill="currentColor"
-							opacity="0.5"
-						/>
-						<rect
-							x="2"
-							y="12"
-							width="8"
-							height="8"
-							rx="2"
-							fill="currentColor"
-							opacity="0.5"
-						/>
-						<rect
-							x="12"
-							y="12"
-							width="8"
-							height="8"
-							rx="2"
-							fill="currentColor"
-							opacity="0.7"
-						/>
-					</svg>
+					<img
+						src="/logo.svg"
+						alt="Cartucheira"
+						width="36"
+						height="36"
+						className="rounded-[10px]"
+					/>
 					<span className="text-[28px] font-bold tracking-[-0.03em] text-text-hi">
-						Ludex
+						Cartucheira
 					</span>
 				</div>
 
 				{/* Headline */}
 				<h1
 					className="text-[30px] sm:text-[44px] font-bold tracking-[-0.03em] leading-[1.1] mb-4 text-text-hi"
-					style={{ textShadow: "0 0 80px oklch(0.7 0.2 295 / 0.3)" }}
+					style={{ textShadow: "0 0 80px oklch(0.7 0.15 145 / 0.3)" }}
 				>
 					Sua biblioteca de jogos,{" "}
-					<span style={{ color: "oklch(0.75 0.2 295)" }}>organizada.</span>
+					<span style={{ color: "oklch(0.75 0.15 145)" }}>organizada.</span>
 				</h1>
 
 				<p className="text-[17px] text-text-md leading-relaxed mb-10 max-w-lg">
@@ -173,9 +134,9 @@ export function LandingScreen() {
 						onClick={() => navigate({ to: "/register" })}
 						className="h-11 px-7 rounded-[10px] text-[14px] font-semibold cursor-pointer border-0"
 						style={{
-							background: "oklch(0.65 0.2 295)",
-							color: "oklch(0.98 0.005 280)",
-							boxShadow: "0 0 24px oklch(0.65 0.2 295 / 0.4)",
+							background: "oklch(0.65 0.16 145)",
+							color: "oklch(0.98 0.006 75)",
+							boxShadow: "0 0 24px oklch(0.65 0.16 145 / 0.4)",
 							fontFamily: "inherit",
 						}}
 					>
@@ -186,9 +147,9 @@ export function LandingScreen() {
 						onClick={() => navigate({ to: "/login" })}
 						className="h-11 px-7 rounded-[10px] text-[14px] font-medium cursor-pointer"
 						style={{
-							background: "oklch(0.19 0.008 280)",
-							border: "1px solid oklch(0.28 0.01 280)",
-							color: "oklch(0.75 0.01 280)",
+							background: "oklch(0.19 0.009 28)",
+							border: "1px solid oklch(0.28 0.011 28)",
+							color: "oklch(0.75 0.012 75)",
 							fontFamily: "inherit",
 						}}
 					>
@@ -203,8 +164,8 @@ export function LandingScreen() {
 							key={f.label}
 							className="rounded-xl p-5 text-left"
 							style={{
-								background: "oklch(0.16 0.006 280 / 0.8)",
-								border: "1px solid oklch(0.22 0.008 280)",
+								background: "oklch(0.16 0.007 28 / 0.8)",
+								border: "1px solid oklch(0.22 0.009 28)",
 								backdropFilter: "blur(8px)",
 							}}
 						>
@@ -220,7 +181,7 @@ export function LandingScreen() {
 				</div>
 
 				<div className="mt-12 font-mono text-[10.5px] text-text-dim tracking-[0.08em]">
-					LUDEX · RASTREADOR DE JOGOS
+					CARTUCHEIRA · RASTREADOR DE JOGOS
 				</div>
 			</div>
 		</div>

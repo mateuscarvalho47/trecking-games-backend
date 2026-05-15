@@ -3,7 +3,7 @@ interface HBarsProps {
 	color?: string;
 }
 
-export function HBars({ items, color = "oklch(0.72 0.19 295)" }: HBarsProps) {
+export function HBars({ items, color = "oklch(0.72 0.15 145)" }: HBarsProps) {
 	const max = Math.max(...items.map((i) => i.count), 1);
 	return (
 		<div className="flex flex-col gap-1.5">

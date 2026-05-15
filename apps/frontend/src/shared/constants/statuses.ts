@@ -29,10 +29,10 @@ export const STATUSES: StatusDef[] = [
 	{
 		key: "PLAYING",
 		label: "Jogando",
-		hue: 295,
-		color: "oklch(0.88 0.18 295)",
-		bgColor: "oklch(0.3 0.08 295 / 0.3)",
-		borderColor: "oklch(0.5 0.15 295 / 0.5)",
+		hue: 195,
+		color: "oklch(0.88 0.18 195)",
+		bgColor: "oklch(0.3 0.08 195 / 0.3)",
+		borderColor: "oklch(0.5 0.15 195 / 0.5)",
 	},
 	{
 		key: "PAUSED",

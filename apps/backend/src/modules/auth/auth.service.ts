@@ -30,7 +30,10 @@ export class AuthService {
     try {
       await sendVerificationEmail(input.email, emailVerificationToken);
     } catch {
-      console.error('[auth] verification email failed for %s — account created, user must resend', input.email);
+      console.error(
+        '[auth] verification email failed for %s — account created, user must resend',
+        input.email,
+      );
     }
 
     return user;

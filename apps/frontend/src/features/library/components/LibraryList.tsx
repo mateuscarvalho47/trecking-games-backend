@@ -37,9 +37,7 @@ export function LibraryList({ games }: LibraryListProps) {
 
 			{games.map((game, idx) => {
 				const borderStyle =
-					idx < games.length - 1
-						? "1px solid oklch(0.22 0.008 280)"
-						: undefined;
+					idx < games.length - 1 ? "1px solid oklch(0.22 0.009 28)" : undefined;
 				const cover = {
 					hue: STATUS_BY_KEY[game.status]?.hue ?? 280,
 					scheme: "duotone" as const,

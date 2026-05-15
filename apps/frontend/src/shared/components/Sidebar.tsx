@@ -1,12 +1,5 @@
 import { useNavigate, useRouterState } from "@tanstack/react-router";
-import {
-	BarChart3,
-	BookMarked,
-	Grid2x2,
-	Home,
-	LogOut,
-	Search,
-} from "lucide-react";
+import { BarChart3, BookMarked, Home, LogOut, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useLogout, useMe } from "@/features/auth/hooks/useAuth";
@@ -37,15 +30,21 @@ export function Sidebar({ libraryCount }: { libraryCount?: number }) {
 			className="sticky top-0 self-start h-screen flex flex-col gap-3 p-[18px_14px]"
 			style={{
 				width: 232,
-				background: "oklch(0.16 0.006 280)",
-				borderRight: "1px solid oklch(0.22 0.008 280)",
+				background: "oklch(0.16 0.007 28)",
+				borderRight: "1px solid oklch(0.22 0.009 28)",
 			}}
 		>
 			{/* Brand */}
 			<div className="flex items-center gap-2 px-1.5 pb-1">
-				<Grid2x2 size={20} className="text-accent-bright" />
+				<img
+					src="/logo.svg"
+					alt=""
+					width="22"
+					height="22"
+					className="rounded-md"
+				/>
 				<span className="text-[17px] font-bold tracking-[-0.02em] text-text-hi">
-					Ludex
+					Cartucheira
 				</span>
 				<span className="ml-auto text-[10px] font-medium px-1.5 py-0.5 rounded font-mono text-text-lo border border-border-soft">
 					β
@@ -90,11 +89,9 @@ export function Sidebar({ libraryCount }: { libraryCount?: number }) {
 							)}
 							style={{
 								background: active
-									? "oklch(0.40 0.10 295 / 0.18)"
+									? "oklch(0.40 0.08 145 / 0.18)"
 									: "transparent",
-								color: active
-									? "oklch(0.92 0.19 295)"
-									: "oklch(0.72 0.010 280)",
+								color: active ? "oklch(0.88 0.14 145)" : "oklch(0.72 0.012 75)",
 								fontFamily: "inherit",
 							}}
 						>
@@ -107,11 +104,11 @@ export function Sidebar({ libraryCount }: { libraryCount?: number }) {
 									className="text-[10.5px] px-1.5 py-px rounded font-mono"
 									style={{
 										color: active
-											? "oklch(0.92 0.19 295)"
-											: "oklch(0.54 0.012 280)",
+											? "oklch(0.88 0.14 145)"
+											: "oklch(0.54 0.014 75)",
 										background: active
-											? "oklch(0.4 0.1 295 / 0.3)"
-											: "oklch(0.23 0.010 280)",
+											? "oklch(0.4 0.08 145 / 0.3)"
+											: "oklch(0.23 0.011 28)",
 									}}
 								>
 									{libraryCount}
@@ -133,7 +130,7 @@ export function Sidebar({ libraryCount }: { libraryCount?: number }) {
 							width: 28,
 							height: 28,
 							background:
-								"linear-gradient(135deg, oklch(0.5 0.18 295), oklch(0.7 0.18 320))",
+								"linear-gradient(135deg, oklch(0.5 0.15 145), oklch(0.7 0.15 185))",
 							letterSpacing: "0.02em",
 						}}
 					>

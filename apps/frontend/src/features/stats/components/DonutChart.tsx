@@ -46,7 +46,7 @@ export function DonutChart({ stats }: DonutChartProps) {
 						cy={cy}
 						r={r}
 						fill="none"
-						stroke="oklch(0.2 0.008 280)"
+						stroke="oklch(0.2 0.009 28)"
 						strokeWidth={20}
 					/>
 					{segments.map((seg) => (

@@ -2,7 +2,7 @@ export {
   type LoginInput,
   loginSchema,
   type RegisterInput,
-  registerSchema,
   type ResendVerificationInput,
+  registerSchema,
   resendVerificationSchema,
 } from '@tracking-games/shared';
