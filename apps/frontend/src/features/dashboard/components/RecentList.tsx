@@ -35,7 +35,7 @@ export function RecentList({ games }: RecentListProps) {
 									params: { igdbId: String(game.igdbId) },
 								})
 							}
-							className="flex flex-col gap-2.5 p-0 bg-transparent border-0 cursor-pointer text-left font-[inherit]"
+							className="flex flex-col gap-2.5 p-0 bg-transparent border-0 cursor-pointer text-left font-[inherit] min-w-0"
 						>
 							<div className="aspect-3/4 rounded-sm overflow-hidden">
 								<Cover
@@ -57,7 +57,7 @@ export function RecentList({ games }: RecentListProps) {
 								<span className="text-[13px] font-medium text-text-hi truncate">
 									{game.name}
 								</span>
-								<div className="flex items-center justify-between">
+								<div className="flex items-center justify-between gap-1 flex-wrap">
 									<StatusBadge status={game.status} size="sm" />
 									{game.rating != null && (
 										<span className="font-mono text-[12px] font-semibold text-text-hi">

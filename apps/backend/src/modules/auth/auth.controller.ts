@@ -13,6 +13,8 @@ export class AuthController {
   register = async (req: FastifyRequest, reply: FastifyReply) => {
     const input = parse(registerSchema, req.body);
     const user = await this.auth.register(input);
+    await req.session.regenerate();
+    req.session.userId = user.id;
     return reply.code(201).send(user);
   };
 
