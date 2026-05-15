@@ -1,17 +1,28 @@
 import { useNavigate, useSearch } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useVerifyEmail } from "../hooks/useAuth";
+
+const VERIFIED_KEY = "cartucheira_email_verified";
 
 export function VerifyEmailScreen() {
 	const search = useSearch({ strict: false });
 	const token = (search as Record<string, string>).token ?? "";
 	const navigate = useNavigate();
 	const verify = useVerifyEmail();
+	const [alreadyVerified] = useState(
+		() => localStorage.getItem(VERIFIED_KEY) === "true",
+	);
 
 	useEffect(() => {
-		if (token) verify.mutate(token);
-	}, [token, verify.mutate]);
+		if (token && !alreadyVerified) verify.mutate(token);
+	}, [token, verify.mutate, alreadyVerified]);
+
+	useEffect(() => {
+		if (verify.isSuccess) {
+			localStorage.setItem(VERIFIED_KEY, "true");
+		}
+	}, [verify.isSuccess]);
 
 	return (
 		<div className="relative min-h-screen flex items-center justify-center px-5 py-10 bg-bg-0 overflow-hidden">
@@ -112,30 +123,67 @@ export function VerifyEmailScreen() {
 					</div>
 				)}
 
-				{verify.isSuccess && (
-					<div className="flex flex-col gap-4">
-						<div>
-							<span className="font-mono text-[10.5px] tracking-widest uppercase text-accent-bright block mb-2">
-								Email confirmado
-							</span>
-							<h1 className="text-2xl font-semibold tracking-tight text-text-hi m-0 mb-2">
-								Conta ativada!
+				{(verify.isSuccess || alreadyVerified) && (
+					<div className="flex flex-col gap-5">
+						<div className="flex flex-col gap-2">
+							<div className="flex items-center gap-2 mb-1">
+								<svg
+									aria-hidden="true"
+									width="16"
+									height="16"
+									viewBox="0 0 16 16"
+									fill="none"
+									className="text-accent-bright shrink-0"
+								>
+									<circle
+										cx="8"
+										cy="8"
+										r="7"
+										stroke="currentColor"
+										strokeWidth="1.5"
+									/>
+									<path
+										d="M5 8l2 2 4-4"
+										stroke="currentColor"
+										strokeWidth="1.5"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									/>
+								</svg>
+								<span className="font-mono text-[10.5px] tracking-widest uppercase text-accent-bright">
+									Email confirmado
+								</span>
+							</div>
+							<h1 className="text-2xl font-semibold tracking-tight text-text-hi m-0">
+								Tudo certo!
 							</h1>
-							<p className="text-[13px] text-text-md leading-[1.55] m-0 max-w-[36ch]">
-								Seu email foi verificado com sucesso. Agora você já pode entrar.
+							<p className="text-[13px] text-text-md leading-[1.55] m-0 max-w-[38ch]">
+								Seu email foi verificado com sucesso. Sua conta está ativa e
+								pronta para uso.
 							</p>
 						</div>
+
+						<div className="rounded-lg border border-accent-bright/20 bg-accent-bright/5 px-4 py-3">
+							<p className="text-[12.5px] text-accent-bright font-medium m-0 leading-[1.5]">
+								Você já pode entrar na sua conta com o email e senha
+								cadastrados.
+							</p>
+						</div>
+
 						<Button
 							variant="accent"
-							className="w-full h-10 rounded-[8px] mt-1"
-							onClick={() => navigate({ to: "/login" })}
+							className="w-full h-10 rounded-[8px]"
+							onClick={() => {
+								localStorage.removeItem(VERIFIED_KEY);
+								navigate({ to: "/login" });
+							}}
 						>
 							Entrar na conta
 						</Button>
 					</div>
 				)}
 
-				{verify.isError && (
+				{verify.isError && !alreadyVerified && (
 					<div className="flex flex-col gap-4">
 						<div>
 							<span className="font-mono text-[10.5px] tracking-widest uppercase text-chart-5 block mb-2">
@@ -159,7 +207,7 @@ export function VerifyEmailScreen() {
 					</div>
 				)}
 
-				{!token && !verify.isPending && (
+				{!token && !verify.isPending && !alreadyVerified && (
 					<div className="flex flex-col gap-4">
 						<div>
 							<span className="font-mono text-[10.5px] tracking-widest uppercase text-chart-5 block mb-2">

@@ -1,4 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
+import { usePageTitle } from "@/shared/hooks/usePageTitle";
 
 const TILES = [
 	{ w: 80, h: 108, top: "6%", left: "4%", hue: 295, r: -8, delay: 0 },
@@ -30,6 +31,7 @@ const FEATURES = [
 ];
 
 export function LandingScreen() {
+	usePageTitle();
 	const navigate = useNavigate();
 
 	return (
