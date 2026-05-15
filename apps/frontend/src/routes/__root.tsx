@@ -14,6 +14,7 @@ import { Sidebar } from "@/shared/components/Sidebar";
 import { useAppStore } from "@/store/useAppStore";
 
 const PUBLIC_ROUTES = ["/", "/login", "/register"];
+const NO_SHELL_ROUTES = ["/login", "/register", "/verify-email"];
 
 interface RouterContext {
 	queryClient: QueryClient;
@@ -80,10 +81,10 @@ function RootLayout() {
 				color: "oklch(0.96 0.006 75)",
 			}}
 		>
-			{me ? (
+			{me && !NO_SHELL_ROUTES.includes(location.pathname) ? (
 				<div className="flex min-h-screen">
 					<div className="hidden lg:block shrink-0" style={{ width: 232 }}>
-						<Sidebar libraryCount={library.length} />
+						<Sidebar me={me} libraryCount={library.length} />
 					</div>
 					<main className="flex-1 min-w-0 pb-20 lg:pb-15">
 						<Outlet />
@@ -93,7 +94,7 @@ function RootLayout() {
 			) : (
 				<Outlet />
 			)}
-			{me && (
+			{me && !NO_SHELL_ROUTES.includes(location.pathname) && (
 				<SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
 			)}
 		</div>

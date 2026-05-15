@@ -41,6 +41,7 @@ export const updateLibraryEntryInput = z
     rating: z.preprocess((v) => (v != null ? Math.round(Number(v)) : null), z.number().int().min(0).max(10).nullable()),
     hoursPlayed: z.number().min(0).nullable(),
     notes: z.string().nullable(),
+    completedAt: z.string().nullable(),
   })
   .partial()
   .refine((data) => Object.keys(data).length > 0, { message: 'At least one field required' });

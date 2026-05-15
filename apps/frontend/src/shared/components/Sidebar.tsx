@@ -2,9 +2,10 @@ import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { BarChart3, BookMarked, Home, LogOut, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { useLogout, useMe } from "@/features/auth/hooks/useAuth";
+import { useLogout } from "@/features/auth/hooks/useAuth";
 import { cn } from "@/lib/utils";
 import { useAppStore } from "@/store/useAppStore";
+import type { User } from "@/types/api";
 
 const NAV_ITEMS = [
 	{ to: "/", label: "Home", icon: Home },
@@ -12,12 +13,17 @@ const NAV_ITEMS = [
 	{ to: "/stats", label: "Estatísticas", icon: BarChart3 },
 ] as const;
 
-export function Sidebar({ libraryCount }: { libraryCount?: number }) {
+export function Sidebar({
+	me,
+	libraryCount,
+}: {
+	me: User;
+	libraryCount?: number;
+}) {
 	const navigate = useNavigate();
 	const routerState = useRouterState();
 	const currentPath = routerState.location.pathname;
 	const setSearchOpen = useAppStore((s) => s.setSearchOpen);
-	const { data: me } = useMe();
 	const logout = useLogout();
 
 	const isActive = (to: string) =>

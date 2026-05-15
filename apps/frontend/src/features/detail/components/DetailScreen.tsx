@@ -39,7 +39,9 @@ export function DetailScreen({ game }: DetailScreenProps) {
 	const [rating, setRating] = useState(game.rating ?? 0);
 	const [hours, setHours] = useState(game.hoursPlayed ?? 0);
 	const [notes, setNotes] = useState(game.notes ?? "");
-	const [completedAt, setCompletedAt] = useState(game.completedAt ?? "");
+	const [completedAt, setCompletedAt] = useState(
+		game.completedAt ? game.completedAt.slice(0, 10) : "",
+	);
 	const [saved, setSaved] = useState(false);
 	const [confirmRemove, setConfirmRemove] = useState(false);
 
@@ -82,7 +84,8 @@ export function DetailScreen({ game }: DetailScreenProps) {
 			debouncedRating !== (game.rating ?? 0) ||
 			debouncedHours !== (game.hoursPlayed ?? 0) ||
 			debouncedNotes !== (game.notes ?? "") ||
-			debouncedCompletedAt !== (game.completedAt ?? "")
+			debouncedCompletedAt !==
+				(game.completedAt ? game.completedAt.slice(0, 10) : "")
 		) {
 			save();
 		}

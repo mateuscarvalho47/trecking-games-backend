@@ -51,10 +51,16 @@ export class LibraryService {
     const entry = await this.repo.findByIdAndUser(id, userId);
     if (!entry) throw new LibraryEntryNotFoundError();
 
-    const completedAt =
-      input.status === 'COMPLETED' && entry.completedAt === null ? new Date() : undefined;
+    const { completedAt: inputCompletedAt, ...restInput } = input;
 
-    return this.repo.update(id, { ...input, completedAt });
+    let completedAt: Date | null | undefined;
+    if (inputCompletedAt !== undefined) {
+      completedAt = inputCompletedAt ? new Date(inputCompletedAt) : null;
+    } else if (input.status === 'COMPLETED' && entry.completedAt === null) {
+      completedAt = new Date();
+    }
+
+    return this.repo.update(id, { ...restInput, completedAt });
   }
 
   async remove(id: string, userId: string) {
