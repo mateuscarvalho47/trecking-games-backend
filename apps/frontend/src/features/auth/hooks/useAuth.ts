@@ -33,13 +33,16 @@ export function useLogin() {
 }
 
 export function useRegister() {
-	const qc = useQueryClient();
 	return useMutation({
 		mutationFn: (data: { email: string; password: string }) =>
-			api.post<User>("/auth/register", data),
-		onSuccess: (user) => {
-			qc.setQueryData(["me"], user);
-		},
+			api.post<{ message: string }>("/auth/register", data),
+	});
+}
+
+export function useVerifyEmail() {
+	return useMutation({
+		mutationFn: (token: string) =>
+			api.get<{ message: string }>(`/auth/verify-email?token=${token}`),
 	});
 }
 

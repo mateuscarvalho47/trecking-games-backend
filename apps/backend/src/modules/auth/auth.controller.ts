@@ -12,10 +12,8 @@ export class AuthController {
 
   register = async (req: FastifyRequest, reply: FastifyReply) => {
     const input = parse(registerSchema, req.body);
-    const user = await this.auth.register(input);
-    await req.session.regenerate();
-    req.session.userId = user.id;
-    return reply.code(201).send(user);
+    await this.auth.register(input);
+    return reply.code(201).send({ message: 'Conta criada. Verifique seu email para ativar.' });
   };
 
   login = async (req: FastifyRequest, reply: FastifyReply) => {
@@ -34,5 +32,11 @@ export class AuthController {
   me = async (req: FastifyRequest, _reply: FastifyReply) => {
     const user = await this.userService.getById(req.session.userId as string);
     return user;
+  };
+
+  verifyEmail = async (req: FastifyRequest, reply: FastifyReply) => {
+    const { token } = req.query as { token: string };
+    await this.auth.verifyEmail(token);
+    return reply.send({ message: 'Email verificado com sucesso.' });
   };
 }

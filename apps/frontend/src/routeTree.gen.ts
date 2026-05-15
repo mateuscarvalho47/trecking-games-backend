@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VerifyEmailRouteImport } from './routes/verify-email'
 import { Route as StatsRouteImport } from './routes/stats'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
@@ -16,6 +17,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as LibraryIndexRouteImport } from './routes/library/index'
 import { Route as LibraryIgdbIdRouteImport } from './routes/library/$igdbId'
 
+const VerifyEmailRoute = VerifyEmailRouteImport.update({
+  id: '/verify-email',
+  path: '/verify-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StatsRoute = StatsRouteImport.update({
   id: '/stats',
   path: '/stats',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/stats': typeof StatsRoute
+  '/verify-email': typeof VerifyEmailRoute
   '/library/$igdbId': typeof LibraryIgdbIdRoute
   '/library/': typeof LibraryIndexRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/stats': typeof StatsRoute
+  '/verify-email': typeof VerifyEmailRoute
   '/library/$igdbId': typeof LibraryIgdbIdRoute
   '/library': typeof LibraryIndexRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/stats': typeof StatsRoute
+  '/verify-email': typeof VerifyEmailRoute
   '/library/$igdbId': typeof LibraryIgdbIdRoute
   '/library/': typeof LibraryIndexRoute
 }
@@ -79,16 +88,25 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/stats'
+    | '/verify-email'
     | '/library/$igdbId'
     | '/library/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register' | '/stats' | '/library/$igdbId' | '/library'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/stats'
+    | '/verify-email'
+    | '/library/$igdbId'
+    | '/library'
   id:
     | '__root__'
     | '/'
     | '/login'
     | '/register'
     | '/stats'
+    | '/verify-email'
     | '/library/$igdbId'
     | '/library/'
   fileRoutesById: FileRoutesById
@@ -98,12 +116,20 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
   StatsRoute: typeof StatsRoute
+  VerifyEmailRoute: typeof VerifyEmailRoute
   LibraryIgdbIdRoute: typeof LibraryIgdbIdRoute
   LibraryIndexRoute: typeof LibraryIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/verify-email': {
+      id: '/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof VerifyEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/stats': {
       id: '/stats'
       path: '/stats'
@@ -154,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
   StatsRoute: StatsRoute,
+  VerifyEmailRoute: VerifyEmailRoute,
   LibraryIgdbIdRoute: LibraryIgdbIdRoute,
   LibraryIndexRoute: LibraryIndexRoute,
 }

@@ -1,4 +1,3 @@
-import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,14 +7,43 @@ import { useRegister } from "../hooks/useAuth";
 export function RegisterForm() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const navigate = useNavigate();
 	const register = useRegister();
 
 	const submit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		await register.mutateAsync({ email, password });
-		navigate({ to: "/" });
 	};
+
+	if (register.isSuccess) {
+		return (
+			<div className="flex flex-col gap-4">
+				<div>
+					<span className="font-mono text-[10.5px] tracking-widest uppercase text-accent-bright block mb-2">
+						Verifique seu email
+					</span>
+					<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
+						Quase lá!
+					</h1>
+					<p className="text-[13px] text-text-md leading-[1.55] mt-0 mb-2 max-w-[36ch]">
+						Enviamos um link de confirmação para{" "}
+						<span className="text-text-hi font-medium">{email}</span>. Clique no
+						link para ativar sua conta.
+					</p>
+					<p className="text-[12px] text-text-lo leading-normal">
+						Não recebeu? Verifique a pasta de spam.
+					</p>
+				</div>
+				<p className="text-center text-[12.5px] text-text-lo mt-2">
+					<a
+						href="/login"
+						className="text-accent-bright font-semibold no-underline"
+					>
+						Voltar ao login
+					</a>
+				</p>
+			</div>
+		);
+	}
 
 	return (
 		<form onSubmit={submit} className="flex flex-col gap-3.5">

@@ -33,7 +33,7 @@ export const updateLibraryEntryInput = z
   .object({
     status: LibraryStatusEnum,
     userPlatform: z.string().nullable(),
-    rating: z.number().int().min(0).max(10).nullable(),
+    rating: z.preprocess((v) => (v != null ? Math.round(Number(v)) : null), z.number().int().min(0).max(10).nullable()),
     hoursPlayed: z.number().min(0).nullable(),
     notes: z.string().nullable(),
   })

@@ -13,6 +13,8 @@ const userResponse = z.object({
   createdAt: z.date(),
 });
 
+const messageResponse = z.object({ message: z.string() });
+
 export async function authRoutes(app: FastifyInstance) {
   const userRepo = new UserRepository(app.prisma);
   const userService = new UserService(userRepo);
@@ -25,9 +27,19 @@ export async function authRoutes(app: FastifyInstance) {
       tags: ['auth'],
       summary: 'Registrar usuário',
       body: registerSchema,
-      response: { 201: userResponse },
+      response: { 201: messageResponse },
     },
     handler: controller.register,
+  });
+
+  app.get('/auth/verify-email', {
+    schema: {
+      tags: ['auth'],
+      summary: 'Verificar email',
+      querystring: z.object({ token: z.string().min(1) }),
+      response: { 200: messageResponse },
+    },
+    handler: controller.verifyEmail,
   });
 
   app.post('/auth/login', {

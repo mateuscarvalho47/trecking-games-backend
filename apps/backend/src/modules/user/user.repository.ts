@@ -13,7 +13,7 @@ export class UserRepository {
   findByEmailWithHash(email: string) {
     return this.prisma.user.findUnique({
       where: { email },
-      select: { id: true, email: true, passwordHash: true },
+      select: { id: true, email: true, passwordHash: true, emailVerified: true },
     });
   }
 
@@ -24,10 +24,25 @@ export class UserRepository {
     });
   }
 
-  create(data: { email: string; passwordHash: string }) {
+  create(data: { email: string; passwordHash: string; emailVerificationToken: string }) {
     return this.prisma.user.create({
       data,
       select: { id: true, email: true, createdAt: true },
+    });
+  }
+
+  findByVerificationToken(token: string) {
+    return this.prisma.user.findUnique({
+      where: { emailVerificationToken: token },
+      select: { id: true, email: true },
+    });
+  }
+
+  verifyEmail(userId: string) {
+    return this.prisma.user.update({
+      where: { id: userId },
+      data: { emailVerified: true, emailVerificationToken: null },
+      select: { id: true, email: true },
     });
   }
 }
