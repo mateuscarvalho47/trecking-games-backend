@@ -1,13 +1,19 @@
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import { env } from '@/config/env.js';
 
-const resend = new Resend(env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: env.SMTP_USER,
+    pass: env.SMTP_PASS,
+  },
+});
 
 export async function sendVerificationEmail(to: string, token: string) {
   const url = `${env.APP_URL}/verify-email?token=${token}`;
 
-  await resend.emails.send({
-    from: 'Ludex <noreply@ludex.app>',
+  await transporter.sendMail({
+    from: 'Ludex <noreply@ludex.com>',
     to,
     subject: 'Confirme seu email — Ludex',
     html: `
