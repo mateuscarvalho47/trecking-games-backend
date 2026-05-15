@@ -1,6 +1,7 @@
 {
   "name": "tracking-games",
   "private": true,
+  "packageManager": "pnpm@11.1.2",
   "scripts": {
     "dev:backend": "pnpm --filter backend dev",
     "dev:frontend": "pnpm --filter frontend dev",
