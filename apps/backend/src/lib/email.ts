@@ -13,7 +13,7 @@ export async function sendVerificationEmail(to: string, token: string) {
   const url = `${env.APP_URL}/verify-email?token=${token}`;
 
   await transporter.sendMail({
-    from: 'Ludex <noreply@ludex.com>',
+    from: `Ludex <${env.SMTP_USER}>`,
     to,
     subject: 'Confirme seu email — Ludex',
     html: `
