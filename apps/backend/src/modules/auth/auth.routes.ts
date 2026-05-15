@@ -4,7 +4,7 @@ import { requireAuth } from '@/lib/requireAuth.js';
 import { UserRepository } from '@/modules/user/user.repository.js';
 import { UserService } from '@/modules/user/user.service.js';
 import { AuthController } from './auth.controller.js';
-import { loginSchema, registerSchema } from './auth.schema.js';
+import { loginSchema, registerSchema, resendVerificationSchema } from './auth.schema.js';
 import { AuthService } from './auth.service.js';
 
 const userResponse = z.object({
@@ -40,6 +40,17 @@ export async function authRoutes(app: FastifyInstance) {
       response: { 200: messageResponse },
     },
     handler: controller.verifyEmail,
+  });
+
+  app.post('/auth/resend-verification', {
+    config: { rateLimit: { max: 3, timeWindow: '5 minutes' } },
+    schema: {
+      tags: ['auth'],
+      summary: 'Reenviar email de verificação',
+      body: resendVerificationSchema,
+      response: { 200: messageResponse },
+    },
+    handler: controller.resendVerification,
   });
 
   app.post('/auth/login', {

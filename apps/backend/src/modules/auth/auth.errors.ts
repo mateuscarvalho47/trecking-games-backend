@@ -23,3 +23,9 @@ export class InvalidVerificationTokenError extends NotFoundError {
     super('Token de verificação inválido ou expirado');
   }
 }
+
+export class EmailAlreadyVerifiedError extends ConflictError {
+  constructor() {
+    super('Email já verificado');
+  }
+}

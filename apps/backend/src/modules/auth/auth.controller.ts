@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { parse } from '@/lib/validate.js';
 import type { UserService } from '@/modules/user/user.service.js';
-import { loginSchema, registerSchema } from './auth.schema.js';
+import { loginSchema, registerSchema, resendVerificationSchema } from './auth.schema.js';
 import type { AuthService } from './auth.service.js';
 
 export class AuthController {
@@ -38,5 +38,11 @@ export class AuthController {
     const { token } = req.query as { token: string };
     await this.auth.verifyEmail(token);
     return reply.send({ message: 'Email verificado com sucesso.' });
+  };
+
+  resendVerification = async (req: FastifyRequest, reply: FastifyReply) => {
+    const input = parse(resendVerificationSchema, req.body);
+    await this.auth.resendVerification(input);
+    return reply.send({ message: 'Se o email existir e não estiver verificado, um novo link foi enviado.' });
   };
 }

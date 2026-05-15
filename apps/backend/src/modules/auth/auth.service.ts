@@ -4,11 +4,12 @@ import { hashPassword, verifyPassword } from '@/lib/hash.js';
 import type { UserRepository } from '@/modules/user/user.repository.js';
 import {
   EmailAlreadyTakenError,
+  EmailAlreadyVerifiedError,
   EmailNotVerifiedError,
   InvalidCredentialsError,
   InvalidVerificationTokenError,
 } from './auth.errors.js';
-import type { LoginInput, RegisterInput } from './auth.schema.js';
+import type { LoginInput, RegisterInput, ResendVerificationInput } from './auth.schema.js';
 
 export class AuthService {
   constructor(private users: UserRepository) {}
@@ -26,7 +27,11 @@ export class AuthService {
       emailVerificationToken,
     });
 
-    await sendVerificationEmail(input.email, emailVerificationToken);
+    try {
+      await sendVerificationEmail(input.email, emailVerificationToken);
+    } catch {
+      console.error('[auth] verification email failed for %s — account created, user must resend', input.email);
+    }
 
     return user;
   }
@@ -48,5 +53,22 @@ export class AuthService {
     if (!user) throw new InvalidVerificationTokenError();
 
     return this.users.verifyEmail(user.id);
+  }
+
+  async resendVerification(input: ResendVerificationInput) {
+    const user = await this.users.findByEmailForResend(input.email);
+
+    // Always return success to avoid user enumeration
+    if (!user) return;
+    if (user.emailVerified) throw new EmailAlreadyVerifiedError();
+
+    const token = randomBytes(32).toString('hex');
+    await this.users.updateVerificationToken(user.id, token);
+
+    try {
+      await sendVerificationEmail(user.email, token);
+    } catch {
+      console.error('[auth] resend verification email failed for %s', user.email);
+    }
   }
 }

@@ -31,6 +31,21 @@ export class UserRepository {
     });
   }
 
+  findByEmailForResend(email: string) {
+    return this.prisma.user.findUnique({
+      where: { email },
+      select: { id: true, email: true, emailVerified: true },
+    });
+  }
+
+  updateVerificationToken(userId: string, token: string) {
+    return this.prisma.user.update({
+      where: { id: userId },
+      data: { emailVerificationToken: token },
+      select: { id: true },
+    });
+  }
+
   findByVerificationToken(token: string) {
     return this.prisma.user.findUnique({
       where: { emailVerificationToken: token },

@@ -8,8 +8,13 @@ export const registerSchema = z.object({
 
 export const loginSchema = registerSchema;
 
+export const resendVerificationSchema = z.object({
+  email: z.email(),
+});
+
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
+export type ResendVerificationInput = z.infer<typeof resendVerificationSchema>;
 
 // Library
 export const LibraryStatusEnum = z.enum([

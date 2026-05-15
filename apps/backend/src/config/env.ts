@@ -11,8 +11,8 @@ const envSchema = z.object({
   IGDB_CLIENT_ID: z.string().min(1),
   IGDB_CLIENT_SECRET: z.string().min(1),
   IGDB_TIMEOUT_MS: z.coerce.number().default(5000),
-  SMTP_USER: z.email(),
-  SMTP_PASS: z.string().min(1),
+  RESEND_API_KEY: z.string().min(1),
+  EMAIL_FROM: z.string().default('onboarding@resend.dev'),
   APP_URL: z.string().default('http://localhost:5173'),
 });
 
