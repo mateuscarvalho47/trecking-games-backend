@@ -89,12 +89,6 @@ export function PlayingList({ games }: PlayingListProps) {
 									</div>
 								)}
 							</div>
-							{game.rating != null && (
-								<span className="font-mono text-[13px] font-semibold text-text-hi px-1.5">
-									{game.rating}
-									<span className="text-[10px] text-text-lo">/10</span>
-								</span>
-							)}
 						</button>
 					))}
 				</div>

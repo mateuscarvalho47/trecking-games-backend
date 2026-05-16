@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { GameStatus } from "@/types/api";
 import type { LibrarySortField, LibraryView } from "@/store/useAppStore";
+import type { GameStatus } from "@/types/api";
 import { useLibraryFilters } from "./useLibraryFilters";
 
 type MockStoreState = {
@@ -58,9 +58,31 @@ const makeEntry = (
 });
 
 const LIBRARY = [
-	makeEntry({ id: "1", igdbId: 1, name: "Zelda", status: "PLAYING", rating: 5, hoursPlayed: 30, createdAt: "2024-03-01T00:00:00Z" }),
-	makeEntry({ id: "2", igdbId: 2, name: "Elden Ring", status: "COMPLETED", rating: 4, hoursPlayed: 80, createdAt: "2024-01-01T00:00:00Z" }),
-	makeEntry({ id: "3", igdbId: 3, name: "Hollow Knight", status: "BACKLOG", createdAt: "2024-02-01T00:00:00Z" }),
+	makeEntry({
+		id: "1",
+		igdbId: 1,
+		name: "Zelda",
+		status: "PLAYING",
+		rating: 5,
+		hoursPlayed: 30,
+		createdAt: "2024-03-01T00:00:00Z",
+	}),
+	makeEntry({
+		id: "2",
+		igdbId: 2,
+		name: "Elden Ring",
+		status: "COMPLETED",
+		rating: 4,
+		hoursPlayed: 80,
+		createdAt: "2024-01-01T00:00:00Z",
+	}),
+	makeEntry({
+		id: "3",
+		igdbId: 3,
+		name: "Hollow Knight",
+		status: "BACKLOG",
+		createdAt: "2024-02-01T00:00:00Z",
+	}),
 ];
 
 beforeEach(() => {

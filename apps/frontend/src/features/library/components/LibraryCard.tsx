@@ -14,6 +14,14 @@ const getCoverData = (game: LibraryEntry) => ({
 	glyph: game.name[0],
 });
 
+const STATUSES_WITH_HOURS = new Set([
+	"PLAYING",
+	"PAUSED",
+	"COMPLETED",
+	"DROPPED",
+]);
+const STATUSES_WITH_RATING = new Set(["PAUSED", "COMPLETED", "DROPPED"]);
+
 export function LibraryCard({ game }: LibraryCardProps) {
 	const navigate = useNavigate();
 
@@ -52,14 +60,14 @@ export function LibraryCard({ game }: LibraryCardProps) {
 					<span className="text-[11.5px] text-text-md">
 						{game.userPlatform ?? game.platforms[0] ?? "—"}
 					</span>
-					{game.rating != null && (
+					{STATUSES_WITH_RATING.has(game.status) && game.rating != null && (
 						<span className="font-mono text-[12px] font-semibold text-text-hi">
 							{game.rating}
 							<span className="text-[9px] text-text-lo">/10</span>
 						</span>
 					)}
 				</div>
-				{game.hoursPlayed != null && (
+				{STATUSES_WITH_HOURS.has(game.status) && game.hoursPlayed != null && (
 					<span className="text-[11px] text-text-lo">
 						{game.hoursPlayed}h jogadas
 					</span>
