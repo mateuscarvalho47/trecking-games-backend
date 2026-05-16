@@ -202,3 +202,25 @@ describe('LibraryService.remove', () => {
     await expect(service.remove('entry-1', 'user-1')).rejects.toThrow(LibraryEntryNotFoundError);
   });
 });
+
+describe('LibraryService.list', () => {
+  it('returns all entries for the given user', async () => {
+    const entries = [ENTRY, { ...ENTRY, id: 'entry-2', igdbId: 2, name: 'Hollow Knight' }];
+    const repo = makeRepo({ findAllByUser: vi.fn().mockResolvedValue(entries) });
+    const service = new LibraryService(repo as never, makeGames() as never);
+
+    const result = await service.list('user-1');
+
+    expect(result).toEqual(entries);
+    expect(repo.findAllByUser).toHaveBeenCalledWith('user-1');
+  });
+
+  it('returns empty array when user has no entries', async () => {
+    const repo = makeRepo({ findAllByUser: vi.fn().mockResolvedValue([]) });
+    const service = new LibraryService(repo as never, makeGames() as never);
+
+    const result = await service.list('user-1');
+
+    expect(result).toEqual([]);
+  });
+});
