@@ -33,6 +33,7 @@ export function useUpdateLibraryEntry(id: string, igdbId: number) {
 		onSuccess: (updated) => {
 			qc.setQueryData(["library", igdbId], updated);
 			qc.invalidateQueries({ queryKey: ["library"] });
+			qc.invalidateQueries({ queryKey: ["stats"] });
 		},
 	});
 }
@@ -43,6 +44,7 @@ export function useRemoveLibraryEntry(id: string) {
 		mutationFn: () => removeLibraryEntry(id),
 		onSuccess: () => {
 			qc.invalidateQueries({ queryKey: ["library"] });
+			qc.invalidateQueries({ queryKey: ["stats"] });
 		},
 	});
 }

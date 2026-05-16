@@ -16,6 +16,7 @@ export function useAddToLibrary() {
 		mutationFn: addToLibrary,
 		onSuccess: () => {
 			qc.invalidateQueries({ queryKey: ["library"] });
+			qc.invalidateQueries({ queryKey: ["stats"] });
 		},
 	});
 }
