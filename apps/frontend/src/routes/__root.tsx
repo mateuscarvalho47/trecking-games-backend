@@ -26,9 +26,10 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 
 function RootLayout() {
 	const { searchOpen, setSearchOpen } = useAppStore();
-	const { data: me, isLoading } = useMe();
 	const navigate = useNavigate();
 	const location = useLocation();
+	const isAuthRoute = ["/login", "/register"].includes(location.pathname);
+	const { data: me, isLoading } = useMe({ enabled: !isAuthRoute });
 	const { data: library = [] } = useLibrary({ enabled: !!me });
 
 	useEffect(() => {

@@ -1,8 +1,13 @@
-import { api } from "@/lib/api";
+import { ApiError, api } from "@/lib/api";
 import type { User } from "@/types/api";
 
-export function fetchMe() {
-	return api.get<User>("/auth/me");
+export async function fetchMe(): Promise<User | null> {
+	try {
+		return await api.get<User>("/auth/me");
+	} catch (e) {
+		if (e instanceof ApiError && e.status === 401) return null;
+		throw e;
+	}
 }
 
 export function login(data: { email: string; password: string }) {

@@ -1,4 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,6 +15,7 @@ export function LoginForm() {
 		mutation: login,
 	} = useLoginForm(() => navigate({ to: "/" }));
 	const resend = useResendVerification();
+	const [showPassword, setShowPassword] = useState(false);
 
 	const {
 		register,
@@ -55,12 +58,22 @@ export function LoginForm() {
 
 			<div className="flex flex-col gap-1.5">
 				<Label className="mono-label">Senha</Label>
-				<Input
-					type="password"
-					{...register("password")}
-					placeholder="••••••••"
-					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
-				/>
+				<div className="relative">
+					<Input
+						type={showPassword ? "text" : "password"}
+						{...register("password")}
+						placeholder="••••••••"
+						className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5 pr-9"
+					/>
+					<button
+						type="button"
+						onClick={() => setShowPassword((v) => !v)}
+						className="absolute right-2.5 top-1/2 -translate-y-1/2 text-text-lo hover:text-text-md transition-colors"
+						tabIndex={-1}
+					>
+						{showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+					</button>
+				</div>
 				{errors.password && (
 					<p className="text-[11.5px] m-0 text-chart-5">
 						{errors.password.message}

@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { ApiError } from "@/lib/api";
 import type { User } from "@/types/api";
 import {
 	type LoginFormValues,
@@ -18,21 +17,15 @@ import {
 	verifyEmail,
 } from "../service/authService";
 
-export function useMe() {
+export function useMe(opts?: { enabled?: boolean }) {
 	return useQuery<User | null>({
 		queryKey: ["me"],
-		queryFn: async () => {
-			try {
-				return await fetchMe();
-			} catch (e) {
-				if (e instanceof ApiError && e.status === 401) return null;
-				throw e;
-			}
-		},
+		queryFn: fetchMe,
 		staleTime: 1000 * 60 * 5,
 		retry: false,
 		retryOnMount: false,
 		refetchOnWindowFocus: false,
+		enabled: opts?.enabled !== false,
 	});
 }
 
