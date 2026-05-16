@@ -52,6 +52,10 @@ export function DetailScreen({ game }: DetailScreenProps) {
 	const debouncedNotes = useDebounce(notes, 1200);
 	const debouncedCompletedAt = useDebounce(completedAt, 800);
 
+	useEffect(() => {
+		setCompletedAt(game.completedAt ? game.completedAt.slice(0, 10) : "");
+	}, [game.completedAt]);
+
 	const updateRef = useRef(update);
 	useEffect(() => {
 		updateRef.current = update;

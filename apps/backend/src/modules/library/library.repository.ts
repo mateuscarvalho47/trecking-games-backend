@@ -23,7 +23,10 @@ export class LibraryRepository {
     return this.db.libraryEntry.create({ data });
   }
 
-  update(id: string, data: UpdateLibraryEntryInput & { completedAt?: Date | null }) {
+  update(
+    id: string,
+    data: Omit<UpdateLibraryEntryInput, 'completedAt'> & { completedAt?: Date | null },
+  ) {
     return this.db.libraryEntry.update({ where: { id }, data });
   }
 
