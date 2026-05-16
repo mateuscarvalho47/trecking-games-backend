@@ -1,5 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+	useMutation,
+	useQuery,
+	useQueryClient,
+} from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { ApiError } from "@/lib/api";
 import type { User } from "@/types/api";
@@ -51,8 +55,15 @@ export function useRegister() {
 	return useMutation({ mutationFn: register });
 }
 
-export function useVerifyEmail() {
-	return useMutation({ mutationFn: verifyEmail });
+export function useVerifyEmail(token: string, enabled: boolean) {
+	return useQuery({
+		queryKey: ["verify-email", token],
+		queryFn: () => verifyEmail(token),
+		enabled: !!token && enabled,
+		retry: false,
+		staleTime: Number.POSITIVE_INFINITY,
+		gcTime: Number.POSITIVE_INFINITY,
+	});
 }
 
 export function useResendVerification() {

@@ -60,9 +60,7 @@ export async function authRoutes(app: FastifyInstance) {
       summary: 'Login',
       body: loginSchema,
       response: {
-        200: z.object({
-          user: z.object({ id: z.string(), email: z.string() }),
-        }),
+        200: z.object({ id: z.string(), email: z.string() }),
       },
     },
     handler: controller.login,

@@ -9,14 +9,10 @@ export function VerifyEmailScreen() {
 	const search = useSearch({ strict: false });
 	const token = (search as Record<string, string>).token ?? "";
 	const navigate = useNavigate();
-	const verify = useVerifyEmail();
 	const [alreadyVerified] = useState(
 		() => localStorage.getItem(VERIFIED_KEY) === "true",
 	);
-
-	useEffect(() => {
-		if (token && !alreadyVerified) verify.mutate(token);
-	}, [token, verify.mutate, alreadyVerified]);
+	const verify = useVerifyEmail(token, !alreadyVerified);
 
 	useEffect(() => {
 		if (verify.isSuccess) {
@@ -109,7 +105,7 @@ export function VerifyEmailScreen() {
 					</span>
 				</div>
 
-				{verify.isPending && (
+				{verify.isLoading && (
 					<div className="flex flex-col gap-3">
 						<span className="font-mono text-[10.5px] tracking-widest uppercase text-accent-bright block">
 							Verificando
@@ -193,7 +189,7 @@ export function VerifyEmailScreen() {
 								Link inválido
 							</h1>
 							<p className="text-[13px] text-text-md leading-[1.55] m-0 max-w-[36ch]">
-								{verify.error.message ??
+								{(verify.error as Error)?.message ??
 									"Token de verificação inválido ou expirado."}
 							</p>
 						</div>
@@ -207,7 +203,7 @@ export function VerifyEmailScreen() {
 					</div>
 				)}
 
-				{!token && !verify.isPending && !alreadyVerified && (
+				{!token && !verify.isLoading && !alreadyVerified && (
 					<div className="flex flex-col gap-4">
 						<div>
 							<span className="font-mono text-[10.5px] tracking-widest uppercase text-chart-5 block mb-2">
