@@ -1,29 +1,31 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ApiError } from "@/lib/api";
-import { useLogin, useResendVerification } from "../hooks/useAuth";
+import { useLoginForm, useResendVerification } from "../hooks/useAuth";
 
 export function LoginForm() {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
-	const login = useLogin();
+	const {
+		form,
+		onSubmit,
+		mutation: login,
+	} = useLoginForm(() => navigate({ to: "/" }));
 	const resend = useResendVerification();
+
+	const {
+		register,
+		watch,
+		formState: { errors },
+	} = form;
+	const email = watch("email");
 
 	const emailNotVerified =
 		login.error instanceof ApiError && login.error.status === 403;
 
-	const submit = async (e: React.FormEvent) => {
-		e.preventDefault();
-		await login.mutateAsync({ email, password });
-		navigate({ to: "/" });
-	};
-
 	return (
-		<form onSubmit={submit} className="flex flex-col gap-3.5">
+		<form onSubmit={onSubmit} className="flex flex-col gap-3.5">
 			<div>
 				<span className="font-mono text-[10.5px] tracking-widest uppercase text-accent-bright block mb-2">
 					Bem-vindo de volta
@@ -40,27 +42,33 @@ export function LoginForm() {
 				<Label className="mono-label">E-mail</Label>
 				<Input
 					type="email"
-					required
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
+					{...register("email")}
 					placeholder="seu@email.com"
 					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 				/>
+				{errors.email && (
+					<p className="text-[11.5px] m-0 text-chart-5">
+						{errors.email.message}
+					</p>
+				)}
 			</div>
 
 			<div className="flex flex-col gap-1.5">
 				<Label className="mono-label">Senha</Label>
 				<Input
 					type="password"
-					required
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
+					{...register("password")}
 					placeholder="••••••••"
 					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 				/>
+				{errors.password && (
+					<p className="text-[11.5px] m-0 text-chart-5">
+						{errors.password.message}
+					</p>
+				)}
 			</div>
 
-			{login.error && (
+			{login.error && !emailNotVerified && (
 				<p className="text-[11.5px] m-0 text-chart-5">{login.error.message}</p>
 			)}
 

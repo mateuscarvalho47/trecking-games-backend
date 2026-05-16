@@ -1,6 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { api } from "@/lib/api";
 import type { LibraryEntry } from "@/types/api";
+import {
+	fetchLibraryEntry,
+	removeLibraryEntry,
+	updateLibraryEntry,
+} from "../service/detailService";
 
 export function useLibraryEntry(igdbId: number) {
 	const qc = useQueryClient();
@@ -8,10 +12,11 @@ export function useLibraryEntry(igdbId: number) {
 		queryKey: ["library", igdbId],
 		queryFn: async () => {
 			const cached = qc.getQueryData<LibraryEntry[]>(["library"]);
-			const list = cached ?? (await api.get<LibraryEntry[]>("/library"));
-			const entry = list.find((e) => e.igdbId === igdbId);
-			if (!entry) throw new Error("Jogo não encontrado na biblioteca");
-			return entry;
+			if (cached) {
+				const entry = cached.find((e) => e.igdbId === igdbId);
+				if (entry) return entry;
+			}
+			return fetchLibraryEntry(igdbId);
 		},
 		initialData: () =>
 			qc
@@ -24,8 +29,7 @@ export function useLibraryEntry(igdbId: number) {
 export function useUpdateLibraryEntry(id: string, igdbId: number) {
 	const qc = useQueryClient();
 	return useMutation({
-		mutationFn: (data: Partial<LibraryEntry>) =>
-			api.patch<LibraryEntry>(`/library/${id}`, data),
+		mutationFn: (data: Partial<LibraryEntry>) => updateLibraryEntry(id, data),
 		onSuccess: (updated) => {
 			qc.setQueryData(["library", igdbId], updated);
 			qc.invalidateQueries({ queryKey: ["library"] });
@@ -36,7 +40,7 @@ export function useUpdateLibraryEntry(id: string, igdbId: number) {
 export function useRemoveLibraryEntry(id: string) {
 	const qc = useQueryClient();
 	return useMutation({
-		mutationFn: () => api.delete(`/library/${id}`),
+		mutationFn: () => removeLibraryEntry(id),
 		onSuccess: () => {
 			qc.invalidateQueries({ queryKey: ["library"] });
 		},
