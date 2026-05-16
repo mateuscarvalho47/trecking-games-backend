@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+@font-face {
+	font-family: "Geist";
+	src: url("/fonts/Geist-Variable.woff2") format("woff2-variations");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Geist Mono";
+	src: url("/fonts/GeistMono-Variable.woff2") format("woff2-variations");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
 @theme inline {
 	/* Background layers — carvão quente */
 	--color-bg-0: oklch(0.13 0.006 28);
@@ -16,7 +32,7 @@
 	/* Text — warmth âmbar */
 	--color-text-hi: oklch(0.96 0.006 75);
 	--color-text-md: oklch(0.72 0.012 75);
-	--color-text-lo: oklch(0.54 0.014 75);
+	--color-text-lo: oklch(0.62 0.014 75);
 	--color-text-dim: oklch(0.42 0.01 75);
 
 	/* Accent — verde sage pastel */

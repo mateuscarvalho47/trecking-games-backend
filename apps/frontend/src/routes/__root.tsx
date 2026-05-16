@@ -50,7 +50,7 @@ function RootLayout() {
 		return () => window.removeEventListener("keydown", onKey);
 	}, [setSearchOpen]);
 
-	if (isLoading) {
+	if (isLoading && !PUBLIC_ROUTES.includes(location.pathname)) {
 		return (
 			<div
 				style={{
@@ -63,7 +63,7 @@ function RootLayout() {
 			>
 				<span
 					style={{
-						color: "oklch(0.54 0.014 75)",
+						color: "oklch(0.62 0.014 75)",
 						fontFamily: "'Geist Mono', monospace",
 						fontSize: 12,
 					}}

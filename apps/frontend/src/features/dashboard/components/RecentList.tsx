@@ -62,7 +62,7 @@ export function RecentList({ games }: RecentListProps) {
 									{game.rating != null && (
 										<span className="font-mono text-[12px] font-semibold text-text-hi">
 											{game.rating}
-											<span className="text-[9px] text-text-lo">/10</span>
+											<span className="text-[11px] text-text-lo">/10</span>
 										</span>
 									)}
 								</div>

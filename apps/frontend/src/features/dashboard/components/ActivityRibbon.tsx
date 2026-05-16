@@ -74,7 +74,7 @@ export function ActivityRibbon({ library }: ActivityRibbonProps) {
 				</div>
 			</div>
 
-			<div className="flex items-center gap-1.5 mt-2.5 font-mono text-[10px] text-text-lo">
+			<div className="flex items-center gap-1.5 mt-2.5 font-mono text-[11px] text-text-lo">
 				<span>Menos</span>
 				{([0, 1, 2, 3] as const).map((l) => (
 					<div

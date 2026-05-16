@@ -109,6 +109,7 @@ export function LandingScreen() {
 						width="36"
 						height="36"
 						className="rounded-[10px]"
+						fetchPriority="high"
 					/>
 					<span className="text-[28px] font-bold tracking-[-0.03em] text-text-hi">
 						Cartucheira

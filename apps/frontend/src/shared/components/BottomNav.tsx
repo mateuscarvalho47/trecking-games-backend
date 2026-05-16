@@ -37,12 +37,12 @@ export function BottomNav({
 						onClick={() => navigate({ to })}
 						className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
 						style={{
-							color: active ? "oklch(0.88 0.14 145)" : "oklch(0.54 0.014 75)",
+							color: active ? "oklch(0.88 0.14 145)" : "oklch(0.62 0.014 75)",
 							fontFamily: "inherit",
 						}}
 					>
 						<Icon size={20} />
-						<span style={{ fontSize: 10 }}>{label}</span>
+						<span style={{ fontSize: 11 }}>{label}</span>
 					</button>
 				);
 			})}
@@ -50,19 +50,19 @@ export function BottomNav({
 				type="button"
 				onClick={() => setSearchOpen(true)}
 				className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
-				style={{ color: "oklch(0.54 0.014 75)", fontFamily: "inherit" }}
+				style={{ color: "oklch(0.62 0.014 75)", fontFamily: "inherit" }}
 			>
 				<Search size={20} />
-				<span style={{ fontSize: 10 }}>Buscar</span>
+				<span style={{ fontSize: 11 }}>Buscar</span>
 			</button>
 			<button
 				type="button"
 				onClick={() => logout.mutate()}
 				className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
-				style={{ color: "oklch(0.54 0.014 75)", fontFamily: "inherit" }}
+				style={{ color: "oklch(0.62 0.014 75)", fontFamily: "inherit" }}
 			>
 				<LogOut size={20} />
-				<span style={{ fontSize: 10 }}>Sair</span>
+				<span style={{ fontSize: 11 }}>Sair</span>
 			</button>
 		</nav>
 	);
