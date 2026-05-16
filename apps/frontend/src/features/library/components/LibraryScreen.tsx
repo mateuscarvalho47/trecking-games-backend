@@ -121,8 +121,8 @@ export function LibraryScreen() {
 										style={{
 											color:
 												filters.sort === opt.value
-													? "oklch(0.88 0.14 145)"
-													: "oklch(0.72 0.012 75)",
+													? "var(--color-accent-bright)"
+													: "var(--color-text-md)",
 											fontFamily: "inherit",
 										}}
 									>

@@ -1,5 +1,13 @@
 import { useNavigate, useRouterState } from "@tanstack/react-router";
-import { BarChart3, BookMarked, Home, LogOut, Search } from "lucide-react";
+import {
+	BarChart3,
+	BookMarked,
+	Home,
+	LogOut,
+	Moon,
+	Search,
+	Sun,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useLogout } from "@/features/auth/hooks/useAuth";
@@ -24,6 +32,7 @@ export function Sidebar({
 	const routerState = useRouterState();
 	const currentPath = routerState.location.pathname;
 	const setSearchOpen = useAppStore((s) => s.setSearchOpen);
+	const { theme, toggleTheme } = useAppStore();
 	const logout = useLogout();
 
 	const isActive = (to: string) =>
@@ -36,8 +45,8 @@ export function Sidebar({
 			className="sticky top-0 self-start h-screen flex flex-col gap-3 p-[18px_14px]"
 			style={{
 				width: 232,
-				background: "oklch(0.16 0.007 28)",
-				borderRight: "1px solid oklch(0.22 0.009 28)",
+				background: "var(--color-bg-1)",
+				borderRight: "1px solid var(--color-border-soft)",
 			}}
 		>
 			{/* Brand */}
@@ -94,10 +103,10 @@ export function Sidebar({
 								"border-0",
 							)}
 							style={{
-								background: active
-									? "oklch(0.40 0.08 145 / 0.18)"
-									: "transparent",
-								color: active ? "oklch(0.88 0.14 145)" : "oklch(0.72 0.012 75)",
+								background: active ? "var(--color-accent-soft)" : "transparent",
+								color: active
+									? "var(--color-accent-bright)"
+									: "var(--color-text-md)",
 								fontFamily: "inherit",
 							}}
 						>
@@ -110,11 +119,11 @@ export function Sidebar({
 									className="text-[10.5px] px-1.5 py-px rounded font-mono"
 									style={{
 										color: active
-											? "oklch(0.88 0.14 145)"
-											: "oklch(0.54 0.014 75)",
+											? "var(--color-accent-bright)"
+											: "var(--color-text-lo)",
 										background: active
-											? "oklch(0.4 0.08 145 / 0.3)"
-											: "oklch(0.23 0.011 28)",
+											? "var(--color-accent-soft)"
+											: "var(--color-bg-3)",
 									}}
 								>
 									{libraryCount}
@@ -128,7 +137,23 @@ export function Sidebar({
 			<Separator className="bg-border-soft" />
 
 			{/* Footer user */}
-			<div className="mt-auto">
+			<div className="mt-auto flex flex-col gap-2">
+				{/* Theme toggle */}
+				<div className="flex items-center justify-between px-1">
+					<span className="text-[11px] font-mono text-text-dim uppercase tracking-widest">
+						Tema
+					</span>
+					<Button
+						variant="ghost"
+						size="icon-sm"
+						onClick={toggleTheme}
+						title={theme === "dark" ? "Mudar para claro" : "Mudar para escuro"}
+						className="text-text-md"
+					>
+						{theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+					</Button>
+				</div>
+
 				<div className="flex items-center gap-2.5 p-2 rounded-md bg-bg-2 border border-border-soft">
 					<div
 						className="flex items-center justify-center shrink-0 text-white text-[11px] font-bold rounded-sm"

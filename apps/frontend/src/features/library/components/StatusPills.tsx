@@ -49,17 +49,22 @@ export function StatusPills({ library, active, onChange }: StatusPillsProps) {
 						type="button"
 						key={s.key}
 						onClick={() => onChange(isActive ? null : s.key)}
-						className="inline-flex items-center gap-1.5 h-7.5 px-3 rounded-full text-[12.5px] font-medium cursor-pointer transition-all border"
-						style={{
-							background: isActive
-								? `oklch(0.25 0.06 ${s.hue} / 0.5)`
-								: "oklch(0.16 0.007 28)",
-							borderColor: isActive
-								? `oklch(0.5 0.15 ${s.hue} / 0.55)`
-								: "oklch(0.22 0.009 28)",
-							color: isActive ? "oklch(0.96 0.006 75)" : "oklch(0.72 0.012 75)",
-							fontFamily: "inherit",
-						}}
+						className={cn(
+							"inline-flex items-center gap-1.5 h-7.5 px-3 rounded-full text-[12.5px] font-medium cursor-pointer transition-all border",
+							isActive
+								? "border-transparent"
+								: "text-text-md border-border-soft bg-bg-1",
+						)}
+						style={
+							isActive
+								? {
+										background: `oklch(0.25 0.06 ${s.hue} / 0.5)`,
+										borderColor: `oklch(0.5 0.15 ${s.hue} / 0.55)`,
+										color: "oklch(0.96 0.006 75)",
+										fontFamily: "inherit",
+									}
+								: { fontFamily: "inherit" }
+						}
 					>
 						{s.label}
 						<span className="text-[10.5px] pl-1.5 ml-0.5 border-l border-border-soft text-text-lo">

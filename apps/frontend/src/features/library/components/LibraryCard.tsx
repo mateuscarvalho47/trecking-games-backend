@@ -63,7 +63,7 @@ export function LibraryCard({ game }: LibraryCardProps) {
 					{STATUSES_WITH_RATING.has(game.status) && game.rating != null && (
 						<span className="font-mono text-[12px] font-semibold text-text-hi">
 							{game.rating}
-							<span className="text-[9px] text-text-lo">/10</span>
+							<span className="text-[10px] text-text-lo">/10</span>
 						</span>
 					)}
 				</div>

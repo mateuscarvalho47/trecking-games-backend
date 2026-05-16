@@ -59,7 +59,13 @@ export function DetailScreen({ game }: DetailScreenProps) {
 						/>
 					</div>
 					{/* Overlay */}
-					<div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,oklch(0.13_0.005_280/0.5)_0%,oklch(0.13_0.005_280)_90%)]" />
+					<div
+						className="absolute inset-0 z-10"
+						style={{
+							background:
+								"linear-gradient(180deg, var(--color-hero-overlay-start) 0%, var(--color-hero-overlay-end) 90%)",
+						}}
+					/>
 
 					{/* Bar */}
 					<div className="relative z-20 flex justify-between items-center py-5">
@@ -73,7 +79,14 @@ export function DetailScreen({ game }: DetailScreenProps) {
 						</Button>
 						<div className="flex gap-2 items-center">
 							{saved && (
-								<span className="inline-flex items-center gap-1.5 font-mono text-[10.5px] rounded-[5px] py-0.5 px-2 text-[oklch(0.85_0.16_145)] bg-[oklch(0.3_0.08_145/0.3)] border border-[oklch(0.5_0.15_145/0.4)]">
+								<span
+									className="inline-flex items-center gap-1.5 font-mono text-[10.5px] rounded-[5px] py-0.5 px-2"
+									style={{
+										color: "var(--color-accent-bright)",
+										background: "var(--color-accent-soft)",
+										border: "1px solid var(--color-accent-rim)",
+									}}
+								>
 									✓ Salvo
 								</span>
 							)}
@@ -81,7 +94,8 @@ export function DetailScreen({ game }: DetailScreenProps) {
 								variant="ghost"
 								size="sm"
 								onClick={() => setConfirmRemove(true)}
-								className="border border-border text-[oklch(0.75_0.14_25)]"
+								className="border border-border"
+								style={{ color: "oklch(0.75 0.14 25)" }}
 							>
 								Remover
 							</Button>
@@ -170,12 +184,12 @@ export function DetailScreen({ game }: DetailScreenProps) {
 															background:
 																field.value === s.key
 																	? `oklch(0.3 0.06 ${s.hue} / 0.35)`
-																	: "oklch(0.19 0.009 28)",
-															border: `1px solid ${field.value === s.key ? `oklch(0.6 0.15 ${s.hue} / 0.5)` : "oklch(0.22 0.009 28)"}`,
+																	: "var(--color-bg-2)",
+															border: `1px solid ${field.value === s.key ? `oklch(0.6 0.15 ${s.hue} / 0.5)` : "var(--color-border-soft)"}`,
 															color:
 																field.value === s.key
 																	? `oklch(0.92 0.05 ${s.hue})`
-																	: "oklch(0.72 0.012 75)",
+																	: "var(--color-text-md)",
 															fontFamily: "inherit",
 														}}
 													>
@@ -222,7 +236,9 @@ export function DetailScreen({ game }: DetailScreenProps) {
 								</div>
 
 								{/* Hours */}
-								{["PLAYING", "PAUSED", "COMPLETED", "DROPPED"].includes(status) && (
+								{["PLAYING", "PAUSED", "COMPLETED", "DROPPED"].includes(
+									status,
+								) && (
 									<div>
 										<Label className="mono-label block mb-1.5">
 											Horas jogadas
@@ -237,7 +253,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 														onClick={() =>
 															field.onChange(Math.max(0, field.value - 0.5))
 														}
-														className="flex items-center justify-center w-9 shrink-0 h-full text-text-lo hover:text-text-hi hover:bg-bg-3 border-r border-border transition-colors cursor-pointer bg-transparent"
+														className="flex items-center justify-center w-9 shrink-0 h-full text-text-dim hover:text-text-hi hover:bg-bg-3 border-r border-border transition-colors cursor-pointer bg-transparent"
 													>
 														<span className="text-[16px] leading-none select-none">
 															−
@@ -258,12 +274,12 @@ export function DetailScreen({ game }: DetailScreenProps) {
 															}}
 															className="w-14 text-center bg-transparent border-0 outline-none text-text-hi text-[13.5px]"
 														/>
-														<span className="text-text-lo text-[12px]">h</span>
+														<span className="text-text-dim text-[12px]">h</span>
 													</div>
 													<button
 														type="button"
 														onClick={() => field.onChange(field.value + 0.5)}
-														className="flex items-center justify-center w-9 shrink-0 h-full text-text-lo hover:text-text-hi hover:bg-bg-3 border-l border-border transition-colors cursor-pointer bg-transparent"
+														className="flex items-center justify-center w-9 shrink-0 h-full text-text-dim hover:text-text-hi hover:bg-bg-3 border-l border-border transition-colors cursor-pointer bg-transparent"
 													>
 														<span className="text-[16px] leading-none select-none">
 															+
@@ -277,53 +293,50 @@ export function DetailScreen({ game }: DetailScreenProps) {
 
 								{/* Rating slider */}
 								{["PAUSED", "COMPLETED", "DROPPED"].includes(status) && (
-								<div className="col-span-2">
-									<div className="flex items-baseline justify-between mb-1.5">
-										<Label className="mono-label">Avaliação</Label>
-										<span className="text-[16px] text-text-hi">
-											<b className="font-bold">{rating}</b>
-											<span className="text-[11px] text-text-lo ml-px">
-												/10
+									<div className="col-span-2">
+										<div className="flex items-baseline justify-between mb-1.5">
+											<Label className="mono-label">Avaliação</Label>
+											<span className="text-[16px] text-text-hi">
+												<b className="font-bold">{rating}</b>
+												<span className="text-[11px] text-text-lo ml-px">
+													/10
+												</span>
 											</span>
-										</span>
-									</div>
-									<div className="relative h-9 bg-bg-2 border border-border rounded-[8px] overflow-hidden">
-										<div
-											className="absolute top-0 bottom-0 left-0 pointer-events-none transition-[width] duration-150 gradient-accent-fill"
-											style={{ width: `${(rating / 10) * 100}%` }}
-										/>
-										<div className="absolute inset-0 flex items-center justify-between px-2.5 pointer-events-none">
-											{RATING_TICKS.map((i) => (
-												<div
-													key={i}
-													className="w-px h-2 bg-[oklch(0.4_0.01_280)]"
-												/>
+										</div>
+										<div className="relative h-9 bg-bg-2 border border-border rounded-[8px] overflow-hidden">
+											<div
+												className="absolute top-0 bottom-0 left-0 pointer-events-none transition-[width] duration-150 gradient-accent-fill"
+												style={{ width: `${(rating / 10) * 100}%` }}
+											/>
+											<div className="absolute inset-0 flex items-center justify-between px-2.5 pointer-events-none">
+												{RATING_TICKS.map((i) => (
+													<div key={i} className="w-px h-2 bg-border-strong" />
+												))}
+											</div>
+											<Controller
+												control={control}
+												name="rating"
+												render={({ field }) => (
+													<input
+														type="range"
+														min={0}
+														max={10}
+														step={0.5}
+														value={field.value}
+														onChange={(e) =>
+															field.onChange(parseFloat(e.target.value))
+														}
+														className="absolute inset-0 w-full h-full appearance-none bg-transparent cursor-pointer m-0 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[3px] [&::-webkit-slider-thumb]:h-9 [&::-webkit-slider-thumb]:rounded-sm [&::-webkit-slider-thumb]:bg-white/60 [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-[3px] [&::-moz-range-thumb]:h-9 [&::-moz-range-thumb]:rounded-sm [&::-moz-range-thumb]:bg-white/60 [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer"
+													/>
+												)}
+											/>
+										</div>
+										<div className="flex justify-between text-[11px] text-text-dim px-0.5 mt-1">
+											{[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+												<span key={n}>{n}</span>
 											))}
 										</div>
-										<Controller
-											control={control}
-											name="rating"
-											render={({ field }) => (
-												<input
-													type="range"
-													min={0}
-													max={10}
-													step={0.5}
-													value={field.value}
-													onChange={(e) =>
-														field.onChange(parseFloat(e.target.value))
-													}
-													className="absolute inset-0 w-full h-full appearance-none bg-transparent cursor-pointer m-0 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[3px] [&::-webkit-slider-thumb]:h-9 [&::-webkit-slider-thumb]:rounded-sm [&::-webkit-slider-thumb]:bg-white/60 [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-[3px] [&::-moz-range-thumb]:h-9 [&::-moz-range-thumb]:rounded-sm [&::-moz-range-thumb]:bg-white/60 [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer"
-												/>
-											)}
-										/>
 									</div>
-									<div className="flex justify-between text-[10px] text-text-dim px-0.5 mt-1">
-										{[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
-											<span key={n}>{n}</span>
-										))}
-									</div>
-								</div>
 								)}
 
 								{/* Notes */}

@@ -13,6 +13,13 @@ import { BottomNav } from "@/shared/components/BottomNav";
 import { Sidebar } from "@/shared/components/Sidebar";
 import { useAppStore } from "@/store/useAppStore";
 
+function useApplyTheme() {
+	const theme = useAppStore((s) => s.theme);
+	useEffect(() => {
+		document.documentElement.setAttribute("data-theme", theme);
+	}, [theme]);
+}
+
 const PUBLIC_ROUTES = ["/", "/login", "/register", "/verify-email"];
 const NO_SHELL_ROUTES = ["/login", "/register", "/verify-email"];
 
@@ -25,6 +32,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 });
 
 function RootLayout() {
+	useApplyTheme();
 	const { searchOpen, setSearchOpen } = useAppStore();
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -58,12 +66,12 @@ function RootLayout() {
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					background: "oklch(0.13 0.006 28)",
+					background: "var(--color-background)",
 				}}
 			>
 				<span
 					style={{
-						color: "oklch(0.62 0.014 75)",
+						color: "var(--color-text-lo)",
 						fontFamily: "'Geist Mono', monospace",
 						fontSize: 12,
 					}}
@@ -78,8 +86,8 @@ function RootLayout() {
 		<div
 			style={{
 				minHeight: "100vh",
-				background: "oklch(0.13 0.006 28)",
-				color: "oklch(0.96 0.006 75)",
+				background: "var(--color-background)",
+				color: "var(--color-foreground)",
 			}}
 		>
 			{me && !NO_SHELL_ROUTES.includes(location.pathname) ? (

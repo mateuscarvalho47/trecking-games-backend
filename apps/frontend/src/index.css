@@ -16,7 +16,7 @@
 	font-display: swap;
 }
 
-@theme inline {
+@theme {
 	/* Background layers — carvão quente */
 	--color-bg-0: oklch(0.13 0.006 28);
 	--color-bg-1: oklch(0.16 0.007 28);
@@ -33,7 +33,7 @@
 	--color-text-hi: oklch(0.96 0.006 75);
 	--color-text-md: oklch(0.72 0.012 75);
 	--color-text-lo: oklch(0.62 0.014 75);
-	--color-text-dim: oklch(0.42 0.01 75);
+	--color-text-dim: oklch(0.5 0.01 75);
 
 	/* Accent — verde sage pastel */
 	--color-accent: oklch(0.72 0.15 145);
@@ -53,7 +53,7 @@
 	--color-secondary: oklch(0.23 0.011 28);
 	--color-secondary-foreground: oklch(0.96 0.006 75);
 	--color-muted: oklch(0.19 0.009 28);
-	--color-muted-foreground: oklch(0.54 0.014 75);
+	--color-muted-foreground: oklch(0.6 0.014 75);
 	--color-accent: oklch(0.23 0.011 28);
 	--color-accent-foreground: oklch(0.96 0.006 75);
 	--color-destructive: oklch(0.45 0.18 25);
@@ -78,6 +78,68 @@
 	--radius-md: 10px;
 	--radius-lg: 14px;
 	--radius-xl: 18px;
+
+	/* Extra vars for inline styles (themed via :root overrides below) */
+	--color-grid-line: oklch(0.2 0.006 28);
+	--color-glow-accent: oklch(0.5 0.14 145 / 0.3);
+	--color-scrollbar-thumb: oklch(0.3 0.01 28);
+	--color-scrollbar-thumb-hover: oklch(0.4 0.01 28);
+	--color-shadow-base: oklch(0 0 0 / 0.55);
+	--color-hero-overlay-start: oklch(0.13 0.005 280 / 0);
+	--color-hero-overlay-end: oklch(0.13 0.005 280);
+}
+
+/* Light theme overrides */
+:root[data-theme="light"] {
+	/* Backgrounds — marfim quente */
+	--color-bg-0: oklch(0.97 0.004 80);
+	--color-bg-1: oklch(0.94 0.005 80);
+	--color-bg-2: oklch(0.9 0.006 80);
+	--color-bg-3: oklch(0.85 0.007 80);
+	--color-bg-4: oklch(0.8 0.009 80);
+
+	/* Borders */
+	--color-border: oklch(0.8 0.009 80);
+	--color-border-soft: oklch(0.87 0.007 80);
+	--color-border-strong: oklch(0.7 0.012 80);
+
+	/* Text — carvão quente */
+	--color-text-hi: oklch(0.16 0.006 50);
+	--color-text-md: oklch(0.36 0.01 60);
+	--color-text-lo: oklch(0.55 0.012 65);
+	--color-text-dim: oklch(0.62 0.01 70);
+
+	/* Accent — sage mais escuro p/ contraste em fundo claro */
+	--color-accent: oklch(0.5 0.18 145);
+	--color-accent-bright: oklch(0.38 0.18 145);
+	--color-accent-soft: oklch(0.88 0.07 145 / 0.25);
+	--color-accent-rim: oklch(0.6 0.14 145 / 0.5);
+
+	/* Shadcn aliases */
+	--color-background: oklch(0.97 0.004 80);
+	--color-foreground: oklch(0.16 0.006 50);
+	--color-card: oklch(0.94 0.005 80);
+	--color-card-foreground: oklch(0.16 0.006 50);
+	--color-popover: oklch(0.91 0.006 80);
+	--color-popover-foreground: oklch(0.16 0.006 50);
+	--color-primary: oklch(0.5 0.18 145);
+	--color-primary-foreground: oklch(0.97 0.004 80);
+	--color-secondary: oklch(0.87 0.007 80);
+	--color-secondary-foreground: oklch(0.16 0.006 50);
+	--color-muted: oklch(0.9 0.006 80);
+	--color-muted-foreground: oklch(0.5 0.012 65);
+	--color-destructive: oklch(0.5 0.2 25);
+	--color-input: oklch(0.88 0.007 80);
+	--color-ring: oklch(0.5 0.18 145);
+
+	/* Inline style vars */
+	--color-grid-line: oklch(0.84 0.005 80);
+	--color-glow-accent: oklch(0.5 0.14 145 / 0.12);
+	--color-scrollbar-thumb: oklch(0.75 0.007 80);
+	--color-scrollbar-thumb-hover: oklch(0.65 0.009 80);
+	--color-shadow-base: oklch(0 0 0 / 0.15);
+	--color-hero-overlay-start: oklch(0.94 0.005 80 / 0);
+	--color-hero-overlay-end: oklch(0.94 0.005 80);
 }
 
 @layer base {
@@ -95,8 +157,8 @@
 	body {
 		margin: 0;
 		padding: 0;
-		background: oklch(0.13 0.006 28);
-		color: oklch(0.96 0.006 75);
+		background: var(--color-background);
+		color: var(--color-foreground);
 	}
 
 	body {
@@ -107,7 +169,7 @@
 
 	::selection {
 		background: oklch(0.5 0.14 145 / 0.4);
-		color: oklch(0.96 0.006 75);
+		color: var(--color-foreground);
 	}
 
 	::-webkit-scrollbar {
@@ -118,13 +180,13 @@
 		background: transparent;
 	}
 	::-webkit-scrollbar-thumb {
-		background: oklch(0.3 0.01 28);
+		background: var(--color-scrollbar-thumb);
 		border: 3px solid transparent;
 		background-clip: content-box;
 		border-radius: 8px;
 	}
 	::-webkit-scrollbar-thumb:hover {
-		background: oklch(0.4 0.01 28);
+		background: var(--color-scrollbar-thumb-hover);
 		border: 3px solid transparent;
 		background-clip: content-box;
 	}
@@ -170,18 +232,18 @@
 	/* Ghost border button */
 	.btn-ghost-border {
 		background: transparent;
-		border: 1px solid oklch(0.27 0.011 28);
-		color: oklch(0.72 0.012 75);
+		border: 1px solid var(--color-border);
+		color: var(--color-text-md);
 		cursor: pointer;
 	}
 	.btn-ghost-border:hover {
-		background: oklch(0.19 0.009 28);
+		background: var(--color-bg-2);
 	}
 
 	/* Mono overline label — repeated across many components */
 	.mono-label {
 		font-family: var(--font-mono);
-		font-size: 10.5px;
+		font-size: 11.5px;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		color: var(--color-text-lo);
@@ -191,7 +253,7 @@
 	.shadow-panel {
 		box-shadow:
 			0 1px 0 oklch(1 0 0 / 0.06) inset,
-			0 24px 60px oklch(0 0 0 / 0.55);
+			0 24px 60px var(--color-shadow-base);
 	}
 
 	/* Accent progress bar fill */
@@ -215,7 +277,7 @@
 	/* Screen page title section */
 	.page-overline {
 		font-family: var(--font-mono);
-		font-size: 10.5px;
+		font-size: 11.5px;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		color: var(--color-text-lo);

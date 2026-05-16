@@ -52,8 +52,8 @@ export function LandingScreen() {
 				className="absolute inset-0 pointer-events-none opacity-30"
 				style={{
 					backgroundImage: `
-            linear-gradient(90deg, oklch(0.2 0.006 28) 1px, transparent 1px),
-            linear-gradient(0deg, oklch(0.2 0.006 28) 1px, transparent 1px)
+            linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px),
+            linear-gradient(0deg, var(--color-grid-line) 1px, transparent 1px)
           `,
 					backgroundSize: "48px 48px",
 					maskImage:
@@ -71,7 +71,7 @@ export function LandingScreen() {
 					height: "90vw",
 					transform: "translate(-50%, -50%)",
 					background:
-						"radial-gradient(circle, oklch(0.5 0.14 145 / 0.2) 0%, transparent 50%)",
+						"radial-gradient(circle, var(--color-glow-accent) 0%, transparent 50%)",
 				}}
 			/>
 
@@ -122,7 +122,9 @@ export function LandingScreen() {
 					style={{ textShadow: "0 0 80px oklch(0.7 0.15 145 / 0.3)" }}
 				>
 					Sua biblioteca de jogos,{" "}
-					<span style={{ color: "oklch(0.75 0.15 145)" }}>organizada.</span>
+					<span style={{ color: "var(--color-accent-bright)" }}>
+						organizada.
+					</span>
 				</h1>
 
 				<p className="text-[17px] text-text-md leading-relaxed mb-10 max-w-lg">
@@ -137,8 +139,8 @@ export function LandingScreen() {
 						onClick={() => navigate({ to: "/register" })}
 						className="h-11 px-7 rounded-[10px] text-[14px] font-semibold cursor-pointer border-0"
 						style={{
-							background: "oklch(0.65 0.16 145)",
-							color: "oklch(0.98 0.006 75)",
+							background: "var(--color-primary)",
+							color: "var(--color-primary-foreground)",
 							boxShadow: "0 0 24px oklch(0.65 0.16 145 / 0.4)",
 							fontFamily: "inherit",
 						}}
@@ -150,9 +152,9 @@ export function LandingScreen() {
 						onClick={() => navigate({ to: "/login" })}
 						className="h-11 px-7 rounded-[10px] text-[14px] font-medium cursor-pointer"
 						style={{
-							background: "oklch(0.19 0.009 28)",
-							border: "1px solid oklch(0.28 0.011 28)",
-							color: "oklch(0.75 0.012 75)",
+							background: "var(--color-bg-2)",
+							border: "1px solid var(--color-border)",
+							color: "var(--color-text-md)",
 							fontFamily: "inherit",
 						}}
 					>
@@ -167,8 +169,8 @@ export function LandingScreen() {
 							key={f.label}
 							className="rounded-xl p-5 text-left"
 							style={{
-								background: "oklch(0.16 0.007 28 / 0.8)",
-								border: "1px solid oklch(0.22 0.009 28)",
+								background: "var(--color-card)",
+								border: "1px solid var(--color-border-soft)",
 								backdropFilter: "blur(8px)",
 							}}
 						>

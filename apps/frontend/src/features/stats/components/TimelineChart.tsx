@@ -69,8 +69,8 @@ export function TimelineChart({ timeline }: TimelineChartProps) {
 							x={p.x}
 							y={H - 8}
 							textAnchor="middle"
-							fontSize={9}
-							fill="oklch(0.54 0.014 75)"
+							fontSize={10}
+							fill="var(--color-text-dim)"
 							fontFamily="'Geist Mono', monospace"
 						>
 							{p.month.slice(5)}
@@ -82,8 +82,8 @@ export function TimelineChart({ timeline }: TimelineChartProps) {
 						x={PAD.left - 6}
 						y={PAD.top + innerH - (v / maxCount) * innerH + 4}
 						textAnchor="end"
-						fontSize={9}
-						fill="oklch(0.54 0.014 75)"
+						fontSize={10}
+						fill="var(--color-text-dim)"
 						fontFamily="'Geist Mono', monospace"
 					>
 						{v}
@@ -96,7 +96,7 @@ export function TimelineChart({ timeline }: TimelineChartProps) {
 						y1={PAD.top + innerH * (1 - frac)}
 						x2={W - PAD.right}
 						y2={PAD.top + innerH * (1 - frac)}
-						stroke="oklch(0.22 0.009 28)"
+						stroke="var(--color-grid-line)"
 						strokeWidth={1}
 					/>
 				))}

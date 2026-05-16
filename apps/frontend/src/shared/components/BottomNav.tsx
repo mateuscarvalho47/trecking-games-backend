@@ -1,5 +1,13 @@
 import { useNavigate, useRouterState } from "@tanstack/react-router";
-import { BarChart3, BookMarked, Home, LogOut, Search } from "lucide-react";
+import {
+	BarChart3,
+	BookMarked,
+	Home,
+	LogOut,
+	Moon,
+	Search,
+	Sun,
+} from "lucide-react";
 import { useLogout } from "@/features/auth/hooks/useAuth";
 import { useAppStore } from "@/store/useAppStore";
 
@@ -18,6 +26,7 @@ export function BottomNav({
 	const routerState = useRouterState();
 	const currentPath = routerState.location.pathname;
 	const setSearchOpen = useAppStore((s) => s.setSearchOpen);
+	const { theme, toggleTheme } = useAppStore();
 	const logout = useLogout();
 
 	const isActive = (to: string) =>
@@ -26,7 +35,7 @@ export function BottomNav({
 	return (
 		<nav
 			className="lg:hidden fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t border-border-soft"
-			style={{ background: "oklch(0.16 0.007 28)", height: 56 }}
+			style={{ background: "var(--color-bg-1)", height: 56 }}
 		>
 			{NAV_ITEMS.map(({ to, label, icon: Icon }) => {
 				const active = isActive(to);
@@ -37,7 +46,9 @@ export function BottomNav({
 						onClick={() => navigate({ to })}
 						className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
 						style={{
-							color: active ? "oklch(0.88 0.14 145)" : "oklch(0.62 0.014 75)",
+							color: active
+								? "var(--color-accent-bright)"
+								: "var(--color-text-lo)",
 							fontFamily: "inherit",
 						}}
 					>
@@ -50,16 +61,25 @@ export function BottomNav({
 				type="button"
 				onClick={() => setSearchOpen(true)}
 				className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
-				style={{ color: "oklch(0.62 0.014 75)", fontFamily: "inherit" }}
+				style={{ color: "var(--color-text-lo)", fontFamily: "inherit" }}
 			>
 				<Search size={20} />
 				<span style={{ fontSize: 11 }}>Buscar</span>
 			</button>
 			<button
 				type="button"
+				onClick={toggleTheme}
+				className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
+				style={{ color: "var(--color-text-lo)", fontFamily: "inherit" }}
+			>
+				{theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+				<span style={{ fontSize: 11 }}>Tema</span>
+			</button>
+			<button
+				type="button"
 				onClick={() => logout.mutate()}
 				className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
-				style={{ color: "oklch(0.62 0.014 75)", fontFamily: "inherit" }}
+				style={{ color: "var(--color-text-lo)", fontFamily: "inherit" }}
 			>
 				<LogOut size={20} />
 				<span style={{ fontSize: 11 }}>Sair</span>

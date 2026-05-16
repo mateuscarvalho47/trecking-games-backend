@@ -27,8 +27,8 @@ export function VerifyEmailScreen() {
 				className="absolute inset-0 pointer-events-none opacity-40"
 				style={{
 					backgroundImage: `
-            linear-gradient(90deg, oklch(0.2 0.006 28) 1px, transparent 1px),
-            linear-gradient(0deg,  oklch(0.2 0.006 28) 1px, transparent 1px)
+            linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px),
+            linear-gradient(0deg,  var(--color-grid-line) 1px, transparent 1px)
           `,
 					backgroundSize: "48px 48px",
 					maskImage:
@@ -46,7 +46,7 @@ export function VerifyEmailScreen() {
 					height: "80vw",
 					transform: "translate(-50%, -50%)",
 					background:
-						"radial-gradient(circle, oklch(0.5 0.14 145 / 0.3) 0%, transparent 50%)",
+						"radial-gradient(circle, var(--color-glow-accent) 0%, transparent 50%)",
 				}}
 			/>
 
