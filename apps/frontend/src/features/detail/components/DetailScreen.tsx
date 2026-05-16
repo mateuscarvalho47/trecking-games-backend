@@ -222,58 +222,61 @@ export function DetailScreen({ game }: DetailScreenProps) {
 								</div>
 
 								{/* Hours */}
-								<div>
-									<Label className="mono-label block mb-1.5">
-										Horas jogadas
-									</Label>
-									<Controller
-										control={control}
-										name="hoursPlayed"
-										render={({ field }) => (
-											<div className="flex items-center bg-bg-2 border border-border rounded-[8px] h-9.5 overflow-hidden">
-												<button
-													type="button"
-													onClick={() =>
-														field.onChange(Math.max(0, field.value - 0.5))
-													}
-													className="flex items-center justify-center w-9 shrink-0 h-full text-text-lo hover:text-text-hi hover:bg-bg-3 border-r border-border transition-colors cursor-pointer bg-transparent"
-												>
-													<span className="text-[16px] leading-none select-none">
-														−
-													</span>
-												</button>
-												<div className="flex-1 flex items-center justify-center gap-0.5">
-													<input
-														type="text"
-														inputMode="decimal"
-														value={field.value || ""}
-														onChange={(e) => {
-															const val = parseFloat(
-																e.target.value.replace(",", "."),
-															);
-															field.onChange(
-																Number.isNaN(val) ? 0 : Math.max(0, val),
-															);
-														}}
-														className="w-14 text-center bg-transparent border-0 outline-none text-text-hi text-[13.5px]"
-													/>
-													<span className="text-text-lo text-[12px]">h</span>
+								{["PLAYING", "PAUSED", "COMPLETED", "DROPPED"].includes(status) && (
+									<div>
+										<Label className="mono-label block mb-1.5">
+											Horas jogadas
+										</Label>
+										<Controller
+											control={control}
+											name="hoursPlayed"
+											render={({ field }) => (
+												<div className="flex items-center bg-bg-2 border border-border rounded-[8px] h-9.5 overflow-hidden">
+													<button
+														type="button"
+														onClick={() =>
+															field.onChange(Math.max(0, field.value - 0.5))
+														}
+														className="flex items-center justify-center w-9 shrink-0 h-full text-text-lo hover:text-text-hi hover:bg-bg-3 border-r border-border transition-colors cursor-pointer bg-transparent"
+													>
+														<span className="text-[16px] leading-none select-none">
+															−
+														</span>
+													</button>
+													<div className="flex-1 flex items-center justify-center gap-0.5">
+														<input
+															type="text"
+															inputMode="decimal"
+															value={field.value || ""}
+															onChange={(e) => {
+																const val = parseFloat(
+																	e.target.value.replace(",", "."),
+																);
+																field.onChange(
+																	Number.isNaN(val) ? 0 : Math.max(0, val),
+																);
+															}}
+															className="w-14 text-center bg-transparent border-0 outline-none text-text-hi text-[13.5px]"
+														/>
+														<span className="text-text-lo text-[12px]">h</span>
+													</div>
+													<button
+														type="button"
+														onClick={() => field.onChange(field.value + 0.5)}
+														className="flex items-center justify-center w-9 shrink-0 h-full text-text-lo hover:text-text-hi hover:bg-bg-3 border-l border-border transition-colors cursor-pointer bg-transparent"
+													>
+														<span className="text-[16px] leading-none select-none">
+															+
+														</span>
+													</button>
 												</div>
-												<button
-													type="button"
-													onClick={() => field.onChange(field.value + 0.5)}
-													className="flex items-center justify-center w-9 shrink-0 h-full text-text-lo hover:text-text-hi hover:bg-bg-3 border-l border-border transition-colors cursor-pointer bg-transparent"
-												>
-													<span className="text-[16px] leading-none select-none">
-														+
-													</span>
-												</button>
-											</div>
-										)}
-									/>
-								</div>
+											)}
+										/>
+									</div>
+								)}
 
 								{/* Rating slider */}
+								{["PAUSED", "COMPLETED", "DROPPED"].includes(status) && (
 								<div className="col-span-2">
 									<div className="flex items-baseline justify-between mb-1.5">
 										<Label className="mono-label">Avaliação</Label>
@@ -321,6 +324,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 										))}
 									</div>
 								</div>
+								)}
 
 								{/* Notes */}
 								<div className="col-span-2">
