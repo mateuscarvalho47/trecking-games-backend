@@ -1,13 +1,29 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ApiError, api } from "@/lib/api";
+import { useForm } from "react-hook-form";
+import { ApiError } from "@/lib/api";
 import type { User } from "@/types/api";
+import {
+	type LoginFormValues,
+	loginSchema,
+	type RegisterFormValues,
+	registerSchema,
+} from "../schema/authSchema";
+import {
+	fetchMe,
+	login,
+	logout,
+	register,
+	resendVerification,
+	verifyEmail,
+} from "../service/authService";
 
 export function useMe() {
 	return useQuery<User | null>({
 		queryKey: ["me"],
 		queryFn: async () => {
 			try {
-				return await api.get<User>("/auth/me");
+				return await fetchMe();
 			} catch (e) {
 				if (e instanceof ApiError && e.status === 401) return null;
 				throw e;
@@ -23,8 +39,7 @@ export function useMe() {
 export function useLogin() {
 	const qc = useQueryClient();
 	return useMutation({
-		mutationFn: (data: { email: string; password: string }) =>
-			api.post<User>("/auth/login", data),
+		mutationFn: login,
 		onSuccess: (user) => {
 			qc.setQueryData(["me"], user);
 			qc.invalidateQueries({ queryKey: ["library"] });
@@ -33,33 +48,60 @@ export function useLogin() {
 }
 
 export function useRegister() {
-	return useMutation({
-		mutationFn: (data: { email: string; password: string }) =>
-			api.post<{ message: string }>("/auth/register", data),
-	});
+	return useMutation({ mutationFn: register });
 }
 
-export function useVerifyEmail() {
-	return useMutation({
-		mutationFn: (token: string) =>
-			api.get<{ message: string }>(`/auth/verify-email?token=${token}`),
+export function useVerifyEmail(token: string, enabled: boolean) {
+	return useQuery({
+		queryKey: ["verify-email", token],
+		queryFn: () => verifyEmail(token),
+		enabled: !!token && enabled,
+		retry: false,
+		staleTime: Number.POSITIVE_INFINITY,
+		gcTime: Number.POSITIVE_INFINITY,
 	});
 }
 
 export function useResendVerification() {
-	return useMutation({
-		mutationFn: (email: string) =>
-			api.post<{ message: string }>("/auth/resend-verification", { email }),
-	});
+	return useMutation({ mutationFn: resendVerification });
 }
 
 export function useLogout() {
 	const qc = useQueryClient();
 	return useMutation({
-		mutationFn: () => api.post("/auth/logout"),
+		mutationFn: logout,
 		onSuccess: () => {
 			qc.setQueryData(["me"], null);
 			qc.clear();
 		},
 	});
+}
+
+export function useLoginForm(onSuccess: () => void) {
+	const mutation = useLogin();
+
+	const form = useForm<LoginFormValues>({
+		resolver: zodResolver(loginSchema),
+		defaultValues: { email: "", password: "" },
+	});
+
+	const onSubmit = form.handleSubmit(async (values) => {
+		await mutation.mutateAsync(values);
+		onSuccess();
+	});
+
+	return { form, onSubmit, mutation };
+}
+
+export function useRegisterForm() {
+	const mutation = useRegister();
+
+	const form = useForm<RegisterFormValues>({
+		resolver: zodResolver(registerSchema),
+		defaultValues: { email: "", password: "" },
+	});
+
+	const onSubmit = form.handleSubmit((values) => mutation.mutateAsync(values));
+
+	return { form, onSubmit, mutation };
 }

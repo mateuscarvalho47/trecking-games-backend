@@ -1,11 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { api } from "@/lib/api";
 import type { LibraryEntry } from "@/types/api";
+import { addToLibrary, fetchLibrary } from "../service/libraryService";
 
 export function useLibrary(opts?: { enabled?: boolean }) {
 	return useQuery<LibraryEntry[]>({
 		queryKey: ["library"],
-		queryFn: () => api.get("/library"),
+		queryFn: fetchLibrary,
 		enabled: opts?.enabled,
 	});
 }
@@ -13,11 +13,7 @@ export function useLibrary(opts?: { enabled?: boolean }) {
 export function useAddToLibrary() {
 	const qc = useQueryClient();
 	return useMutation({
-		mutationFn: (data: {
-			igdbId: number;
-			status: string;
-			userPlatform?: string;
-		}) => api.post<LibraryEntry>("/library", data),
+		mutationFn: addToLibrary,
 		onSuccess: () => {
 			qc.invalidateQueries({ queryKey: ["library"] });
 		},

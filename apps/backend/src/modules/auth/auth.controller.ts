@@ -21,7 +21,7 @@ export class AuthController {
     const user = await this.auth.login(input);
     await req.session.regenerate();
     req.session.userId = user.id;
-    return reply.send({ user });
+    return reply.send(user);
   };
 
   logout = async (req: FastifyRequest, reply: FastifyReply) => {

@@ -1,5 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,12 +8,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Cover } from "@/shared/components/Cover";
 import { StatusBadge } from "@/shared/components/StatusBadge";
 import { STATUS_BY_KEY, STATUSES } from "@/shared/constants/statuses";
-import { useDebounce } from "@/shared/hooks/useDebounce";
-import type { GameStatus, LibraryEntry } from "@/types/api";
-import {
-	useRemoveLibraryEntry,
-	useUpdateLibraryEntry,
-} from "../hooks/useLibraryEntry";
+import type { LibraryEntry } from "@/types/api";
+import { useDetailForm } from "../hooks/useDetailForm";
+import { useRemoveLibraryEntry } from "../hooks/useLibraryEntry";
 import { ConfirmRemoveModal } from "./ConfirmRemoveModal";
 
 const RATING_TICKS = Array.from({ length: 9 }, (_, i) => i);
@@ -31,85 +29,15 @@ interface DetailScreenProps {
 
 export function DetailScreen({ game }: DetailScreenProps) {
 	const navigate = useNavigate();
-	const update = useUpdateLibraryEntry(game.id, game.igdbId);
 	const remove = useRemoveLibraryEntry(game.id);
-
-	const [status, setStatus] = useState<GameStatus>(game.status);
-	const [platform, setPlatform] = useState(game.userPlatform ?? "");
-	const [rating, setRating] = useState(game.rating ?? 0);
-	const [hours, setHours] = useState(game.hoursPlayed ?? 0);
-	const [notes, setNotes] = useState(game.notes ?? "");
-	const [completedAt, setCompletedAt] = useState(
-		game.completedAt ? game.completedAt.slice(0, 10) : "",
-	);
-	const [saved, setSaved] = useState(false);
 	const [confirmRemove, setConfirmRemove] = useState(false);
 
-	const debouncedStatus = useDebounce(status, 800);
-	const debouncedPlatform = useDebounce(platform, 800);
-	const debouncedRating = useDebounce(rating, 800);
-	const debouncedHours = useDebounce(hours, 800);
-	const debouncedNotes = useDebounce(notes, 1200);
-	const debouncedCompletedAt = useDebounce(completedAt, 800);
+	const { form, saved } = useDetailForm(game);
+	const { control, register, watch } = form;
 
-	useEffect(() => {
-		setCompletedAt(game.completedAt ? game.completedAt.slice(0, 10) : "");
-	}, [game.completedAt]);
-
-	const updateRef = useRef(update);
-	useEffect(() => {
-		updateRef.current = update;
-	});
-
-	const save = useCallback(async () => {
-		await updateRef.current.mutateAsync({
-			status: debouncedStatus,
-			userPlatform: debouncedPlatform || undefined,
-			rating: debouncedRating || undefined,
-			hoursPlayed: debouncedHours || undefined,
-			notes: debouncedNotes,
-			completedAt: debouncedCompletedAt || undefined,
-		});
-		setSaved(true);
-		setTimeout(() => setSaved(false), 2000);
-	}, [
-		debouncedStatus,
-		debouncedPlatform,
-		debouncedRating,
-		debouncedHours,
-		debouncedNotes,
-		debouncedCompletedAt,
-	]);
-
-	useEffect(() => {
-		if (
-			debouncedStatus !== game.status ||
-			debouncedPlatform !== (game.userPlatform ?? "") ||
-			debouncedRating !== (game.rating ?? 0) ||
-			debouncedHours !== (game.hoursPlayed ?? 0) ||
-			debouncedNotes !== (game.notes ?? "") ||
-			debouncedCompletedAt !==
-				(game.completedAt ? game.completedAt.slice(0, 10) : "")
-		) {
-			save();
-		}
-	}, [
-		debouncedStatus,
-		debouncedPlatform,
-		debouncedRating,
-		debouncedHours,
-		debouncedNotes,
-		debouncedCompletedAt,
-		save,
-		game.status,
-		game.hoursPlayed,
-		game.userPlatform,
-		game.rating,
-		game.notes,
-		game.completedAt,
-	]);
-
-	const coverData = getCoverData(game);
+	const status = watch("status");
+	const rating = watch("rating");
+	const coverData = getCoverData({ ...game, status });
 	const statusDef = STATUS_BY_KEY[status];
 
 	return (
@@ -227,55 +155,66 @@ export function DetailScreen({ game }: DetailScreenProps) {
 								{/* Status picker */}
 								<div className="col-span-2">
 									<Label className="mono-label block mb-1.5">Status</Label>
-									<div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
-										{STATUSES.map((s) => (
-											<button
-												type="button"
-												key={s.key}
-												onClick={() => setStatus(s.key)}
-												className="flex items-center gap-2 h-8 px-2.5 rounded-[7px] cursor-pointer text-[12px] font-medium border-0"
-												style={{
-													background:
-														status === s.key
-															? `oklch(0.3 0.06 ${s.hue} / 0.35)`
-															: "oklch(0.19 0.009 28)",
-													border: `1px solid ${status === s.key ? `oklch(0.6 0.15 ${s.hue} / 0.5)` : "oklch(0.22 0.009 28)"}`,
-													color:
-														status === s.key
-															? `oklch(0.92 0.05 ${s.hue})`
-															: "oklch(0.72 0.012 75)",
-													fontFamily: "inherit",
-												}}
-											>
-												<div
-													className="size-1.5 rounded-full shrink-0"
-													style={{ background: s.color }}
-												/>
-												{s.label}
-											</button>
-										))}
-									</div>
+									<Controller
+										control={control}
+										name="status"
+										render={({ field }) => (
+											<div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+												{STATUSES.map((s) => (
+													<button
+														type="button"
+														key={s.key}
+														onClick={() => field.onChange(s.key)}
+														className="flex items-center gap-2 h-8 px-2.5 rounded-[7px] cursor-pointer text-[12px] font-medium border-0"
+														style={{
+															background:
+																field.value === s.key
+																	? `oklch(0.3 0.06 ${s.hue} / 0.35)`
+																	: "oklch(0.19 0.009 28)",
+															border: `1px solid ${field.value === s.key ? `oklch(0.6 0.15 ${s.hue} / 0.5)` : "oklch(0.22 0.009 28)"}`,
+															color:
+																field.value === s.key
+																	? `oklch(0.92 0.05 ${s.hue})`
+																	: "oklch(0.72 0.012 75)",
+															fontFamily: "inherit",
+														}}
+													>
+														<div
+															className="size-1.5 rounded-full shrink-0"
+															style={{ background: s.color }}
+														/>
+														{s.label}
+													</button>
+												))}
+											</div>
+										)}
+									/>
 								</div>
 
 								{/* Platform */}
 								<div>
 									<Label className="mono-label block mb-1.5">Plataforma</Label>
 									<div className="relative">
-										<select
-											value={platform}
-											onChange={(e) => setPlatform(e.target.value)}
-											className="w-full h-9.5 px-3 pr-8 bg-bg-2 border border-border rounded-[8px] text-text-hi text-[13.5px] appearance-none cursor-pointer outline-none focus:border-accent"
-											style={{ fontFamily: "inherit" }}
-										>
-											<option value="" className="bg-bg-2">
-												—
-											</option>
-											{game.platforms.map((p) => (
-												<option key={p} value={p} className="bg-bg-2">
-													{p}
-												</option>
-											))}
-										</select>
+										<Controller
+											control={control}
+											name="userPlatform"
+											render={({ field }) => (
+												<select
+													{...field}
+													className="w-full h-9.5 px-3 pr-8 bg-bg-2 border border-border rounded-[8px] text-text-hi text-[13.5px] appearance-none cursor-pointer outline-none focus:border-accent"
+													style={{ fontFamily: "inherit" }}
+												>
+													<option value="" className="bg-bg-2">
+														—
+													</option>
+													{game.platforms.map((p) => (
+														<option key={p} value={p} className="bg-bg-2">
+															{p}
+														</option>
+													))}
+												</select>
+											)}
+										/>
 										<div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-text-lo text-[11px]">
 											▾
 										</div>
@@ -287,41 +226,51 @@ export function DetailScreen({ game }: DetailScreenProps) {
 									<Label className="mono-label block mb-1.5">
 										Horas jogadas
 									</Label>
-									<div className="flex items-center bg-bg-2 border border-border rounded-[8px] h-9.5 overflow-hidden">
-										<button
-											type="button"
-											onClick={() => setHours(Math.max(0, hours - 0.5))}
-											className="flex items-center justify-center w-9 shrink-0 h-full text-text-lo hover:text-text-hi hover:bg-bg-3 border-r border-border transition-colors cursor-pointer bg-transparent"
-										>
-											<span className="text-[16px] leading-none select-none">
-												−
-											</span>
-										</button>
-										<div className="flex-1 flex items-center justify-center gap-0.5">
-											<input
-												type="text"
-												inputMode="decimal"
-												value={hours || ""}
-												onChange={(e) => {
-													const val = parseFloat(
-														e.target.value.replace(",", "."),
-													);
-													setHours(Number.isNaN(val) ? 0 : Math.max(0, val));
-												}}
-												className="w-14 text-center bg-transparent border-0 outline-none text-text-hi text-[13.5px]"
-											/>
-											<span className="text-text-lo text-[12px]">h</span>
-										</div>
-										<button
-											type="button"
-											onClick={() => setHours(hours + 0.5)}
-											className="flex items-center justify-center w-9 shrink-0 h-full text-text-lo hover:text-text-hi hover:bg-bg-3 border-l border-border transition-colors cursor-pointer bg-transparent"
-										>
-											<span className="text-[16px] leading-none select-none">
-												+
-											</span>
-										</button>
-									</div>
+									<Controller
+										control={control}
+										name="hoursPlayed"
+										render={({ field }) => (
+											<div className="flex items-center bg-bg-2 border border-border rounded-[8px] h-9.5 overflow-hidden">
+												<button
+													type="button"
+													onClick={() =>
+														field.onChange(Math.max(0, field.value - 0.5))
+													}
+													className="flex items-center justify-center w-9 shrink-0 h-full text-text-lo hover:text-text-hi hover:bg-bg-3 border-r border-border transition-colors cursor-pointer bg-transparent"
+												>
+													<span className="text-[16px] leading-none select-none">
+														−
+													</span>
+												</button>
+												<div className="flex-1 flex items-center justify-center gap-0.5">
+													<input
+														type="text"
+														inputMode="decimal"
+														value={field.value || ""}
+														onChange={(e) => {
+															const val = parseFloat(
+																e.target.value.replace(",", "."),
+															);
+															field.onChange(
+																Number.isNaN(val) ? 0 : Math.max(0, val),
+															);
+														}}
+														className="w-14 text-center bg-transparent border-0 outline-none text-text-hi text-[13.5px]"
+													/>
+													<span className="text-text-lo text-[12px]">h</span>
+												</div>
+												<button
+													type="button"
+													onClick={() => field.onChange(field.value + 0.5)}
+													className="flex items-center justify-center w-9 shrink-0 h-full text-text-lo hover:text-text-hi hover:bg-bg-3 border-l border-border transition-colors cursor-pointer bg-transparent"
+												>
+													<span className="text-[16px] leading-none select-none">
+														+
+													</span>
+												</button>
+											</div>
+										)}
+									/>
 								</div>
 
 								{/* Rating slider */}
@@ -348,14 +297,22 @@ export function DetailScreen({ game }: DetailScreenProps) {
 												/>
 											))}
 										</div>
-										<input
-											type="range"
-											min={0}
-											max={10}
-											step={0.5}
-											value={rating}
-											onChange={(e) => setRating(parseFloat(e.target.value))}
-											className="absolute inset-0 w-full h-full appearance-none bg-transparent cursor-pointer m-0 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[3px] [&::-webkit-slider-thumb]:h-9 [&::-webkit-slider-thumb]:rounded-sm [&::-webkit-slider-thumb]:bg-white/60 [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-[3px] [&::-moz-range-thumb]:h-9 [&::-moz-range-thumb]:rounded-sm [&::-moz-range-thumb]:bg-white/60 [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer"
+										<Controller
+											control={control}
+											name="rating"
+											render={({ field }) => (
+												<input
+													type="range"
+													min={0}
+													max={10}
+													step={0.5}
+													value={field.value}
+													onChange={(e) =>
+														field.onChange(parseFloat(e.target.value))
+													}
+													className="absolute inset-0 w-full h-full appearance-none bg-transparent cursor-pointer m-0 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[3px] [&::-webkit-slider-thumb]:h-9 [&::-webkit-slider-thumb]:rounded-sm [&::-webkit-slider-thumb]:bg-white/60 [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-[3px] [&::-moz-range-thumb]:h-9 [&::-moz-range-thumb]:rounded-sm [&::-moz-range-thumb]:bg-white/60 [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer"
+												/>
+											)}
 										/>
 									</div>
 									<div className="flex justify-between text-[10px] text-text-dim px-0.5 mt-1">
@@ -369,8 +326,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 								<div className="col-span-2">
 									<Label className="mono-label block mb-1.5">Notas</Label>
 									<Textarea
-										value={notes}
-										onChange={(e) => setNotes(e.target.value)}
+										{...register("notes")}
 										placeholder="Suas anotações sobre o jogo..."
 										rows={4}
 										className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo resize-y leading-relaxed"
@@ -385,8 +341,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 										</Label>
 										<Input
 											type="date"
-											value={completedAt}
-											onChange={(e) => setCompletedAt(e.target.value)}
+											{...register("completedAt")}
 											className="bg-bg-2 border-border text-text-hi h-9.5"
 										/>
 									</div>

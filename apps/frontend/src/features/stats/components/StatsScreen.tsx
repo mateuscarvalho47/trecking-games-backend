@@ -1,6 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
-import { api } from "@/lib/api";
-import type { LibraryStats } from "@/types/api";
+import { useStats } from "../hooks/useStats";
 import { DonutChart } from "./DonutChart";
 import { HBars } from "./HBars";
 import { Histogram } from "./Histogram";
@@ -33,10 +31,7 @@ function Card({
 }
 
 export function StatsScreen() {
-	const { data: stats, isLoading } = useQuery<LibraryStats>({
-		queryKey: ["stats"],
-		queryFn: () => api.get("/library/stats"),
-	});
+	const { data: stats, isLoading } = useStats();
 
 	if (isLoading || !stats) {
 		return (

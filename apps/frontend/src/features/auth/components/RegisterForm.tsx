@@ -1,19 +1,18 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useRegister, useResendVerification } from "../hooks/useAuth";
+import { useRegisterForm, useResendVerification } from "../hooks/useAuth";
 
 export function RegisterForm() {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const register = useRegister();
+	const { form, onSubmit, mutation: register } = useRegisterForm();
 	const resend = useResendVerification();
 
-	const submit = async (e: React.FormEvent) => {
-		e.preventDefault();
-		await register.mutateAsync({ email, password });
-	};
+	const {
+		register: registerField,
+		watch,
+		formState: { errors },
+	} = form;
+	const email = watch("email");
 
 	if (register.isSuccess) {
 		return (
@@ -67,7 +66,7 @@ export function RegisterForm() {
 	}
 
 	return (
-		<form onSubmit={submit} className="flex flex-col gap-3.5">
+		<form onSubmit={onSubmit} className="flex flex-col gap-3.5">
 			<div>
 				<span className="font-mono text-[10.5px] tracking-widest uppercase text-accent-bright block mb-2">
 					Crie sua conta
@@ -84,24 +83,30 @@ export function RegisterForm() {
 				<Label className="mono-label">E-mail</Label>
 				<Input
 					type="email"
-					required
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
+					{...registerField("email")}
 					placeholder="seu@email.com"
 					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 				/>
+				{errors.email && (
+					<p className="text-[11.5px] m-0 text-chart-5">
+						{errors.email.message}
+					</p>
+				)}
 			</div>
 
 			<div className="flex flex-col gap-1.5">
 				<Label className="mono-label">Senha</Label>
 				<Input
 					type="password"
-					required
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
+					{...registerField("password")}
 					placeholder="mínimo 8 caracteres"
 					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 				/>
+				{errors.password && (
+					<p className="text-[11.5px] m-0 text-chart-5">
+						{errors.password.message}
+					</p>
+				)}
 			</div>
 
 			{register.error && (

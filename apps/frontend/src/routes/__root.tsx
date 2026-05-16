@@ -13,7 +13,7 @@ import { BottomNav } from "@/shared/components/BottomNav";
 import { Sidebar } from "@/shared/components/Sidebar";
 import { useAppStore } from "@/store/useAppStore";
 
-const PUBLIC_ROUTES = ["/", "/login", "/register"];
+const PUBLIC_ROUTES = ["/", "/login", "/register", "/verify-email"];
 const NO_SHELL_ROUTES = ["/login", "/register", "/verify-email"];
 
 interface RouterContext {
