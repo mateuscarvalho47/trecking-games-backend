@@ -16,6 +16,7 @@ import { AuthService } from './auth.service.js';
 const userResponse = z.object({
   id: z.string(),
   email: z.email(),
+  consentedAt: z.date().nullable(),
   createdAt: z.date(),
 });
 
@@ -112,6 +113,17 @@ export async function authRoutes(app: FastifyInstance) {
     },
     preHandler: requireAuth,
     handler: controller.deleteAccount,
+  });
+
+  app.post('/auth/consent', {
+    schema: {
+      tags: ['auth'],
+      summary: 'Registrar consentimento LGPD',
+      security: [{ sessionCookie: [] }],
+      response: { 204: z.null() },
+    },
+    preHandler: requireAuth,
+    handler: controller.consent,
   });
 
   app.get('/auth/export', {

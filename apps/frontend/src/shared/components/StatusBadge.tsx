@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { STATUS_BY_KEY } from "@/shared/constants/statuses";
+import { useAppStore } from "@/store/useAppStore";
 import type { GameStatus } from "@/types/api";
 
 interface StatusBadgeProps {
@@ -9,6 +10,11 @@ interface StatusBadgeProps {
 
 export function StatusBadge({ status, size = "md" }: StatusBadgeProps) {
 	const def = STATUS_BY_KEY[status];
+	const theme = useAppStore((s) => s.theme);
+	const color = theme === "light" ? def.colorLight : def.color;
+	const bgColor = theme === "light" ? def.bgColorLight : def.bgColor;
+	const borderColor =
+		theme === "light" ? def.borderColorLight : def.borderColor;
 	return (
 		<span
 			className={cn(
@@ -16,9 +22,9 @@ export function StatusBadge({ status, size = "md" }: StatusBadgeProps) {
 				size === "sm" ? "h-5 text-[10px]" : "h-[22px] text-[11px]",
 			)}
 			style={{
-				border: `1px solid ${def.borderColor}`,
-				color: def.color,
-				background: def.bgColor,
+				border: `1px solid ${borderColor}`,
+				color,
+				background: bgColor,
 			}}
 		>
 			{def.label}

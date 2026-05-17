@@ -45,5 +45,6 @@ export interface LibraryStats {
 export interface User {
 	id: string;
 	email: string;
+	consentedAt: string | null;
 	createdAt: string;
 }

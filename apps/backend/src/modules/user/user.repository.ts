@@ -20,7 +20,15 @@ export class UserRepository {
   findById(id: string) {
     return this.prisma.user.findUnique({
       where: { id },
-      select: { id: true, email: true, createdAt: true },
+      select: { id: true, email: true, consentedAt: true, createdAt: true },
+    });
+  }
+
+  recordConsent(userId: string) {
+    return this.prisma.user.update({
+      where: { id: userId },
+      data: { consentedAt: new Date() },
+      select: { id: true },
     });
   }
 

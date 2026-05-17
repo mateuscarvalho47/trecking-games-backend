@@ -9,4 +9,8 @@ export class UserService {
     if (!user) throw new NotFoundError('Usuário');
     return user;
   }
+
+  async consent(userId: string) {
+    return this.users.recordConsent(userId);
+  }
 }

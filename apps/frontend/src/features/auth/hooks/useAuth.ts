@@ -13,6 +13,7 @@ import {
 	updateAccountSchema,
 } from "../schema/authSchema";
 import {
+	consent,
 	deleteAccount,
 	exportData,
 	fetchMe,
@@ -96,6 +97,18 @@ export function useDeleteAccount() {
 		onSuccess: () => {
 			qc.setQueryData(["me"], null);
 			qc.clear();
+		},
+	});
+}
+
+export function useConsent() {
+	const qc = useQueryClient();
+	return useMutation({
+		mutationFn: consent,
+		onSuccess: () => {
+			qc.setQueryData(["me"], (prev: User | null) =>
+				prev ? { ...prev, consentedAt: new Date().toISOString() } : prev,
+			);
 		},
 	});
 }

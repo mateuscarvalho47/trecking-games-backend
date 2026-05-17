@@ -67,6 +67,11 @@ export class AuthController {
     return reply.code(204).send();
   };
 
+  consent = async (req: FastifyRequest, reply: FastifyReply) => {
+    await this.userService.consent(req.session.userId as string);
+    return reply.code(204).send();
+  };
+
   exportData = async (req: FastifyRequest, reply: FastifyReply) => {
     const data = await this.auth.exportData(req.session.userId as string);
     return reply

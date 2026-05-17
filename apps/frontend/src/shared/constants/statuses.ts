@@ -7,6 +7,9 @@ export interface StatusDef {
 	color: string;
 	bgColor: string;
 	borderColor: string;
+	colorLight: string;
+	bgColorLight: string;
+	borderColorLight: string;
 }
 
 export const STATUSES: StatusDef[] = [
@@ -17,6 +20,9 @@ export const STATUSES: StatusDef[] = [
 		color: "oklch(0.88 0.18 75)",
 		bgColor: "oklch(0.3 0.08 75 / 0.3)",
 		borderColor: "oklch(0.5 0.15 75 / 0.5)",
+		colorLight: "oklch(0.28 0.18 75)",
+		bgColorLight: "oklch(0.88 0.05 75 / 0.35)",
+		borderColorLight: "oklch(0.65 0.12 75 / 0.5)",
 	},
 	{
 		key: "BACKLOG",
@@ -25,6 +31,9 @@ export const STATUSES: StatusDef[] = [
 		color: "oklch(0.88 0.18 260)",
 		bgColor: "oklch(0.3 0.08 260 / 0.3)",
 		borderColor: "oklch(0.5 0.15 260 / 0.5)",
+		colorLight: "oklch(0.28 0.18 260)",
+		bgColorLight: "oklch(0.88 0.05 260 / 0.35)",
+		borderColorLight: "oklch(0.65 0.12 260 / 0.5)",
 	},
 	{
 		key: "PLAYING",
@@ -33,6 +42,9 @@ export const STATUSES: StatusDef[] = [
 		color: "oklch(0.88 0.18 195)",
 		bgColor: "oklch(0.3 0.08 195 / 0.3)",
 		borderColor: "oklch(0.5 0.15 195 / 0.5)",
+		colorLight: "oklch(0.28 0.18 195)",
+		bgColorLight: "oklch(0.88 0.05 195 / 0.35)",
+		borderColorLight: "oklch(0.65 0.12 195 / 0.5)",
 	},
 	{
 		key: "PAUSED",
@@ -41,6 +53,9 @@ export const STATUSES: StatusDef[] = [
 		color: "oklch(0.88 0.18 200)",
 		bgColor: "oklch(0.3 0.08 200 / 0.3)",
 		borderColor: "oklch(0.5 0.15 200 / 0.5)",
+		colorLight: "oklch(0.28 0.18 200)",
+		bgColorLight: "oklch(0.88 0.05 200 / 0.35)",
+		borderColorLight: "oklch(0.65 0.12 200 / 0.5)",
 	},
 	{
 		key: "COMPLETED",
@@ -49,6 +64,9 @@ export const STATUSES: StatusDef[] = [
 		color: "oklch(0.88 0.18 145)",
 		bgColor: "oklch(0.3 0.08 145 / 0.3)",
 		borderColor: "oklch(0.5 0.15 145 / 0.5)",
+		colorLight: "oklch(0.28 0.18 145)",
+		bgColorLight: "oklch(0.88 0.05 145 / 0.35)",
+		borderColorLight: "oklch(0.65 0.12 145 / 0.5)",
 	},
 	{
 		key: "DROPPED",
@@ -57,6 +75,9 @@ export const STATUSES: StatusDef[] = [
 		color: "oklch(0.88 0.18 25)",
 		bgColor: "oklch(0.3 0.08 25 / 0.3)",
 		borderColor: "oklch(0.5 0.15 25 / 0.5)",
+		colorLight: "oklch(0.28 0.18 25)",
+		bgColorLight: "oklch(0.88 0.05 25 / 0.35)",
+		borderColorLight: "oklch(0.65 0.12 25 / 0.5)",
 	},
 ];
 

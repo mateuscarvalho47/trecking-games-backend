@@ -54,6 +54,10 @@ export function deleteAccount(data: { password: string }) {
 	return api.delete("/auth/account", data);
 }
 
+export function consent() {
+	return api.post("/auth/consent");
+}
+
 export function exportData() {
 	return api.get<unknown>("/auth/export");
 }

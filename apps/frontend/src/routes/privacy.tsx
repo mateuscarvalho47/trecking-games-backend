@@ -30,10 +30,10 @@ function PrivacyPage() {
 						controlador dos seus dados é o desenvolvedor responsável pelo
 						serviço (contato:{" "}
 						<a
-							href="mailto:mcvlh0905@hotmail.com"
+							href="mailto:sac@carvalholabs.com.br"
 							className="text-accent-bright no-underline hover:underline"
 						>
-							mcvlh0905@hotmail.com
+							sac@carvalholabs.com.br
 						</a>
 						).
 					</p>
@@ -179,10 +179,10 @@ function PrivacyPage() {
 						</a>{" "}
 						ou entre em contato pelo e-mail{" "}
 						<a
-							href="mailto:mcvlh0905@hotmail.com"
+							href="mailto:sac@carvalholabs.com.br"
 							className="text-accent-bright no-underline hover:underline"
 						>
-							mcvlh0905@hotmail.com
+							sac@carvalholabs.com.br
 						</a>
 						.
 					</p>
@@ -218,10 +218,10 @@ function PrivacyPage() {
 					<p>
 						Dúvidas sobre privacidade? Entre em contato:{" "}
 						<a
-							href="mailto:mcvlh0905@hotmail.com"
+							href="mailto:sac@carvalholabs.com.br"
 							className="text-accent-bright no-underline hover:underline"
 						>
-							mcvlh0905@hotmail.com
+							sac@carvalholabs.com.br
 						</a>
 					</p>
 				</section>

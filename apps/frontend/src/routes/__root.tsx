@@ -6,6 +6,7 @@ import {
 	useNavigate,
 } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { ConsentModal } from "@/features/auth/components/ConsentModal";
 import { useMe } from "@/features/auth/hooks/useAuth";
 import { useLibrary } from "@/features/library/hooks/useLibrary";
 import { SearchModal } from "@/features/search/components/SearchModal";
@@ -119,6 +120,9 @@ function RootLayout() {
 			{me && !NO_SHELL_ROUTES.includes(location.pathname) && (
 				<SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
 			)}
+			{me &&
+				me.consentedAt === null &&
+				!NO_SHELL_ROUTES.includes(location.pathname) && <ConsentModal />}
 		</div>
 	);
 }

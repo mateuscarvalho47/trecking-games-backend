@@ -9,6 +9,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Cover } from "@/shared/components/Cover";
 import { STATUSES } from "@/shared/constants/statuses";
+import { useAppStore } from "@/store/useAppStore";
 import type { GameSearchResult } from "@/types/api";
 import { useAddToLibraryForm } from "../hooks/useAddToLibraryForm";
 
@@ -25,6 +26,7 @@ export function AddToLibraryModal({
 }: AddToLibraryModalProps) {
 	const { form, onSubmit, isPending } = useAddToLibraryForm(game, onAdded);
 	const { control } = form;
+	const theme = useAppStore((s) => s.theme);
 
 	return (
 		<Dialog
@@ -97,13 +99,13 @@ export function AddToLibraryModal({
 												style={{
 													background:
 														field.value === s.key
-															? `oklch(0.3 0.06 ${s.hue} / 0.35)`
-															: "oklch(0.19 0.009 28)",
-													border: `1px solid ${field.value === s.key ? `oklch(0.6 0.15 ${s.hue} / 0.5)` : "oklch(0.22 0.009 28)"}`,
+															? `oklch(${theme === "dark" ? "0.3" : "0.82"} 0.06 ${s.hue} / 0.35)`
+															: "var(--color-bg-2)",
+													border: `1px solid ${field.value === s.key ? `oklch(0.6 0.15 ${s.hue} / 0.5)` : "var(--color-border-soft)"}`,
 													color:
 														field.value === s.key
-															? `oklch(0.92 0.05 ${s.hue})`
-															: "oklch(0.72 0.012 75)",
+															? `oklch(${theme === "dark" ? "0.92" : "0.25"} 0.05 ${s.hue})`
+															: "var(--color-text-md)",
 													fontFamily: "inherit",
 												}}
 											>
