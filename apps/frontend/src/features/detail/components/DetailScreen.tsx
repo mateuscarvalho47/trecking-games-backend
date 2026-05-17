@@ -203,7 +203,8 @@ export function DetailScreen({ game }: DetailScreenProps) {
 																	}
 																: {
 																		background: "var(--color-bg-2)",
-																		border: "1px solid var(--color-border-soft)",
+																		border:
+																			"1px solid var(--color-border-soft)",
 																		color: "var(--color-text-md)",
 																		fontFamily: "inherit",
 																	}
@@ -213,7 +214,9 @@ export function DetailScreen({ game }: DetailScreenProps) {
 															className="size-1.5 rounded-full shrink-0"
 															style={{
 																background:
-																	theme === "light" ? s.borderColorLight : s.color,
+																	theme === "light"
+																		? s.borderColorLight
+																		: s.color,
 															}}
 														/>
 														{s.label}
