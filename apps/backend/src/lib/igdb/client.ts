@@ -1,4 +1,4 @@
-import { ForbiddenError, IgdbError, UnauthorizedError, ValidationError } from '@/lib/errors.js';
+import { ForbiddenError, IgdbError, ValidationError } from '@/lib/errors.js';
 import { type IgdbGame, igdbGameRawSchema } from '@/lib/igdb/schemas.js';
 
 const TWITCH_TOKEN_URL = 'https://id.twitch.tv/oauth2/token';
@@ -10,6 +10,7 @@ const GAME_FIELDS =
 interface RedisLike {
   get(key: string): Promise<string | null>;
   set(key: string, value: string, options?: { EX?: number }): Promise<unknown>;
+  del(key: string): Promise<unknown>;
 }
 
 export class IgdbClient {
@@ -31,7 +32,7 @@ export class IgdbClient {
     return transformGame(raw[0]);
   }
 
-  private async query(body: string): Promise<unknown[]> {
+  private async query(body: string, isRetry = false): Promise<unknown[]> {
     const token = await this.getToken();
     const res = await this.fetchWithTimeout(`${IGDB_BASE_URL}/games`, {
       method: 'POST',
@@ -42,6 +43,11 @@ export class IgdbClient {
       },
       body,
     });
+
+    if (res.status === 401 && !isRetry) {
+      await this.redis.del(TOKEN_KEY);
+      return this.query(body, true);
+    }
 
     if (!res.ok) this.mapHttpError(res.status);
 
@@ -83,7 +89,7 @@ export class IgdbClient {
 
   private mapHttpError(status: number): never {
     if (status === 400) throw new ValidationError('Invalid IGDB query');
-    if (status === 401) throw new UnauthorizedError('Invalid IGDB credentials');
+    if (status === 401) throw new IgdbError('Invalid IGDB credentials', 502);
     if (status === 403) throw new ForbiddenError('IGDB access forbidden');
     if (status >= 500) throw new IgdbError('IGDB service unavailable', 502);
     throw new IgdbError(`Unexpected IGDB response: ${status}`, 502);
