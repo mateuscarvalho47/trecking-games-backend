@@ -20,8 +20,21 @@ function useApplyTheme() {
 	}, [theme]);
 }
 
-const PUBLIC_ROUTES = ["/", "/login", "/register", "/verify-email"];
-const NO_SHELL_ROUTES = ["/login", "/register", "/verify-email"];
+const PUBLIC_ROUTES = [
+	"/",
+	"/login",
+	"/register",
+	"/verify-email",
+	"/privacy",
+	"/terms",
+];
+const NO_SHELL_ROUTES = [
+	"/login",
+	"/register",
+	"/verify-email",
+	"/privacy",
+	"/terms",
+];
 
 interface RouterContext {
 	queryClient: QueryClient;

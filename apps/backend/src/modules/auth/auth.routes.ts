@@ -4,7 +4,13 @@ import { requireAuth } from '@/lib/requireAuth.js';
 import { UserRepository } from '@/modules/user/user.repository.js';
 import { UserService } from '@/modules/user/user.service.js';
 import { AuthController } from './auth.controller.js';
-import { loginSchema, registerSchema, resendVerificationSchema } from './auth.schema.js';
+import {
+  deleteAccountSchema,
+  loginSchema,
+  registerSchema,
+  resendVerificationSchema,
+  updateAccountSchema,
+} from './auth.schema.js';
 import { AuthService } from './auth.service.js';
 
 const userResponse = z.object({
@@ -80,5 +86,41 @@ export async function authRoutes(app: FastifyInstance) {
     },
     preHandler: requireAuth,
     handler: controller.me,
+  });
+
+  app.patch('/auth/account', {
+    schema: {
+      tags: ['auth'],
+      summary: 'Atualizar email ou senha',
+      security: [{ sessionCookie: [] }],
+      body: updateAccountSchema,
+      response: {
+        200: z.object({ id: z.string(), email: z.string(), emailVerified: z.boolean() }),
+      },
+    },
+    preHandler: requireAuth,
+    handler: controller.updateAccount,
+  });
+
+  app.delete('/auth/account', {
+    schema: {
+      tags: ['auth'],
+      summary: 'Excluir conta',
+      security: [{ sessionCookie: [] }],
+      body: deleteAccountSchema,
+      response: { 204: z.null() },
+    },
+    preHandler: requireAuth,
+    handler: controller.deleteAccount,
+  });
+
+  app.get('/auth/export', {
+    schema: {
+      tags: ['auth'],
+      summary: 'Exportar dados pessoais',
+      security: [{ sessionCookie: [] }],
+    },
+    preHandler: requireAuth,
+    handler: controller.exportData,
   });
 }

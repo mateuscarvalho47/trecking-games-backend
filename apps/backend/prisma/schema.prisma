@@ -18,6 +18,7 @@ model User {
   passwordHash           String
   emailVerified          Boolean        @default(false)
   emailVerificationToken String?        @unique
+  consentedAt            DateTime?
   createdAt              DateTime       @default(now())
   updatedAt              DateTime       @updatedAt
   libraryEntries         LibraryEntry[]

@@ -122,6 +122,53 @@ export function RegisterForm() {
 				)}
 			</div>
 
+			<div className="flex items-start gap-2.5 mt-1">
+				<input
+					id="consent"
+					type="checkbox"
+					{...registerField("consent")}
+					value={undefined}
+					onChange={(e) =>
+						form.setValue(
+							"consent",
+							e.target.checked ? true : (undefined as unknown as true),
+							{
+								shouldValidate: true,
+							},
+						)
+					}
+					className="mt-0.5 shrink-0 accent-[var(--color-accent-bright)] w-3.5 h-3.5 cursor-pointer"
+				/>
+				<label
+					htmlFor="consent"
+					className="text-[12px] text-text-lo leading-relaxed cursor-pointer"
+				>
+					Li e concordo com a{" "}
+					<a
+						href="/privacy"
+						className="text-accent-bright no-underline hover:underline"
+						target="_blank"
+						rel="noreferrer"
+					>
+						Política de Privacidade
+					</a>{" "}
+					e os{" "}
+					<a
+						href="/terms"
+						className="text-accent-bright no-underline hover:underline"
+						target="_blank"
+						rel="noreferrer"
+					>
+						Termos de Uso
+					</a>
+				</label>
+			</div>
+			{errors.consent && (
+				<p className="text-[11.5px] m-0 text-chart-5">
+					{errors.consent.message}
+				</p>
+			)}
+
 			{register.error && (
 				<p className="text-[11.5px] m-0 text-chart-5">
 					{register.error.message}

@@ -1,5 +1,18 @@
+# Dependencies
 node_modules
+
+# Build output
 dist
+dist-ssr
+
+# Environment variables
 .env
-/src/generated
+.env.*
+!.env.example
+
+# Tools
 .claude
+
+# OS
+.DS_Store
+Thumbs.db

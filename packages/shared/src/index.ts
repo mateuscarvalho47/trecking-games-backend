@@ -4,17 +4,35 @@ import { z } from 'zod';
 export const registerSchema = z.object({
   email: z.email(),
   password: z.string().min(8).max(100),
+  consent: z.literal(true, { error: 'Você precisa aceitar os termos para continuar' }),
 });
 
-export const loginSchema = registerSchema;
+export const loginSchema = z.object({
+  email: z.email(),
+  password: z.string().min(8).max(100),
+});
 
 export const resendVerificationSchema = z.object({
   email: z.email(),
 });
 
+export const updateAccountSchema = z.object({
+  currentPassword: z.string().min(1, 'Senha atual obrigatória'),
+  email: z.email().optional(),
+  newPassword: z.string().min(8).max(100).optional(),
+}).refine((d) => d.email !== undefined || d.newPassword !== undefined, {
+  message: 'Informe pelo menos um campo para atualizar',
+});
+
+export const deleteAccountSchema = z.object({
+  password: z.string().min(1, 'Senha obrigatória para confirmar a exclusão'),
+});
+
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
 export type ResendVerificationInput = z.infer<typeof resendVerificationSchema>;
+export type UpdateAccountInput = z.infer<typeof updateAccountSchema>;
+export type DeleteAccountInput = z.infer<typeof deleteAccountSchema>;
 
 // Library
 export const LibraryStatusEnum = z.enum([

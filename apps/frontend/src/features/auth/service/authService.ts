@@ -14,7 +14,11 @@ export function login(data: { email: string; password: string }) {
 	return api.post<User>("/auth/login", data);
 }
 
-export function register(data: { email: string; password: string }) {
+export function register(data: {
+	email: string;
+	password: string;
+	consent: true;
+}) {
 	return api.post<{ message: string }>("/auth/register", data);
 }
 
@@ -28,4 +32,28 @@ export function resendVerification(email: string) {
 
 export function logout() {
 	return api.post("/auth/logout");
+}
+
+export function updateAccount(data: {
+	currentPassword: string;
+	email?: string;
+	newPassword?: string;
+}) {
+	const payload: Record<string, string> = {
+		currentPassword: data.currentPassword,
+	};
+	if (data.email) payload.email = data.email;
+	if (data.newPassword) payload.newPassword = data.newPassword;
+	return api.patch<{ id: string; email: string; emailVerified: boolean }>(
+		"/auth/account",
+		payload,
+	);
+}
+
+export function deleteAccount(data: { password: string }) {
+	return api.delete("/auth/account", data);
+}
+
+export function exportData() {
+	return api.get<unknown>("/auth/export");
 }

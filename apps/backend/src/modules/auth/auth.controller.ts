@@ -1,7 +1,13 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { parse } from '@/lib/validate.js';
 import type { UserService } from '@/modules/user/user.service.js';
-import { loginSchema, registerSchema, resendVerificationSchema } from './auth.schema.js';
+import {
+  deleteAccountSchema,
+  loginSchema,
+  registerSchema,
+  resendVerificationSchema,
+  updateAccountSchema,
+} from './auth.schema.js';
 import type { AuthService } from './auth.service.js';
 
 export class AuthController {
@@ -46,5 +52,25 @@ export class AuthController {
     return reply.send({
       message: 'Se o email existir e não estiver verificado, um novo link foi enviado.',
     });
+  };
+
+  updateAccount = async (req: FastifyRequest, reply: FastifyReply) => {
+    const input = parse(updateAccountSchema, req.body);
+    const result = await this.auth.updateAccount(req.session.userId as string, input);
+    return reply.send(result);
+  };
+
+  deleteAccount = async (req: FastifyRequest, reply: FastifyReply) => {
+    const input = parse(deleteAccountSchema, req.body);
+    await this.auth.deleteAccount(req.session.userId as string, input);
+    await req.session.destroy();
+    return reply.code(204).send();
+  };
+
+  exportData = async (req: FastifyRequest, reply: FastifyReply) => {
+    const data = await this.auth.exportData(req.session.userId as string);
+    return reply
+      .header('Content-Disposition', 'attachment; filename="cartucheira-dados.json"')
+      .send(data);
   };
 }

@@ -8,7 +8,35 @@ export const loginSchema = z.object({
 export const registerSchema = z.object({
 	email: z.string().email("E-mail inválido"),
 	password: z.string().min(8, "Mínimo 8 caracteres"),
+	consent: z.literal(true, {
+		error: "Você precisa aceitar os termos para continuar",
+	}),
+});
+
+export const updateAccountSchema = z
+	.object({
+		currentPassword: z.string().min(1, "Senha atual obrigatória"),
+		email: z.string().email("E-mail inválido").optional().or(z.literal("")),
+		newPassword: z
+			.string()
+			.min(8, "Mínimo 8 caracteres")
+			.optional()
+			.or(z.literal("")),
+	})
+	.refine(
+		(d) =>
+			(d.email && d.email !== "") || (d.newPassword && d.newPassword !== ""),
+		{
+			message: "Informe pelo menos um campo para atualizar",
+			path: ["currentPassword"],
+		},
+	);
+
+export const deleteAccountSchema = z.object({
+	password: z.string().min(1, "Senha obrigatória para confirmar a exclusão"),
 });
 
 export type LoginFormValues = z.infer<typeof loginSchema>;
 export type RegisterFormValues = z.infer<typeof registerSchema>;
+export type UpdateAccountFormValues = z.infer<typeof updateAccountSchema>;
+export type DeleteAccountFormValues = z.infer<typeof deleteAccountSchema>;

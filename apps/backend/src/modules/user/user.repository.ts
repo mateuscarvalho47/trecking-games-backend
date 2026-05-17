@@ -24,10 +24,70 @@ export class UserRepository {
     });
   }
 
-  create(data: { email: string; passwordHash: string; emailVerificationToken: string }) {
+  create(data: {
+    email: string;
+    passwordHash: string;
+    emailVerificationToken: string;
+    consentedAt: Date;
+  }) {
     return this.prisma.user.create({
       data,
       select: { id: true, email: true, createdAt: true },
+    });
+  }
+
+  updateAccount(
+    userId: string,
+    data: {
+      email?: string;
+      passwordHash?: string;
+      emailVerificationToken?: string | null;
+      emailVerified?: boolean;
+    },
+  ) {
+    return this.prisma.user.update({
+      where: { id: userId },
+      data,
+      select: { id: true, email: true, emailVerified: true },
+    });
+  }
+
+  findByIdWithHash(id: string) {
+    return this.prisma.user.findUnique({
+      where: { id },
+      select: { id: true, email: true, passwordHash: true, emailVerified: true },
+    });
+  }
+
+  deleteById(id: string) {
+    return this.prisma.user.delete({ where: { id } });
+  }
+
+  findByIdWithLibrary(id: string) {
+    return this.prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        email: true,
+        emailVerified: true,
+        consentedAt: true,
+        createdAt: true,
+        libraryEntries: {
+          select: {
+            igdbId: true,
+            name: true,
+            status: true,
+            userPlatform: true,
+            rating: true,
+            hoursPlayed: true,
+            notes: true,
+            completedAt: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+          orderBy: { createdAt: 'asc' },
+        },
+      },
     });
   }
 

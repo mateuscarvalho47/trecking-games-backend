@@ -1,5 +1,6 @@
 import { randomBytes } from 'node:crypto';
 import { sendVerificationEmail } from '@/lib/email.js';
+import { UnauthorizedError } from '@/lib/errors.js';
 import { hashPassword, verifyPassword } from '@/lib/hash.js';
 import type { UserRepository } from '@/modules/user/user.repository.js';
 import {
@@ -9,7 +10,13 @@ import {
   InvalidCredentialsError,
   InvalidVerificationTokenError,
 } from './auth.errors.js';
-import type { LoginInput, RegisterInput, ResendVerificationInput } from './auth.schema.js';
+import type {
+  DeleteAccountInput,
+  LoginInput,
+  RegisterInput,
+  ResendVerificationInput,
+  UpdateAccountInput,
+} from './auth.schema.js';
 
 export class AuthService {
   constructor(private users: UserRepository) {}
@@ -25,6 +32,7 @@ export class AuthService {
       email: input.email,
       passwordHash,
       emailVerificationToken,
+      consentedAt: new Date(),
     });
 
     try {
@@ -73,5 +81,51 @@ export class AuthService {
     } catch {
       console.error('[auth] resend verification email failed for %s', user.email);
     }
+  }
+
+  async updateAccount(userId: string, input: UpdateAccountInput) {
+    const user = await this.users.findByIdWithHash(userId);
+    if (!user) throw new UnauthorizedError('Sessão inválida');
+
+    const ok = await verifyPassword(user.passwordHash, input.currentPassword);
+    if (!ok) throw new UnauthorizedError('Senha atual incorreta');
+
+    const updates: Parameters<UserRepository['updateAccount']>[1] = {};
+
+    if (input.email && input.email !== user.email) {
+      const taken = await this.users.findByEmail(input.email);
+      if (taken) throw new EmailAlreadyTakenError();
+      const token = randomBytes(32).toString('hex');
+      updates.email = input.email;
+      updates.emailVerified = false;
+      updates.emailVerificationToken = token;
+      try {
+        await sendVerificationEmail(input.email, token);
+      } catch {
+        console.error('[auth] verification email failed after email change for %s', input.email);
+      }
+    }
+
+    if (input.newPassword) {
+      updates.passwordHash = await hashPassword(input.newPassword);
+    }
+
+    return this.users.updateAccount(userId, updates);
+  }
+
+  async deleteAccount(userId: string, input: DeleteAccountInput) {
+    const user = await this.users.findByIdWithHash(userId);
+    if (!user) throw new UnauthorizedError('Sessão inválida');
+
+    const ok = await verifyPassword(user.passwordHash, input.password);
+    if (!ok) throw new UnauthorizedError('Senha incorreta');
+
+    await this.users.deleteById(userId);
+  }
+
+  async exportData(userId: string) {
+    const data = await this.users.findByIdWithLibrary(userId);
+    if (!data) throw new UnauthorizedError('Sessão inválida');
+    return data;
   }
 }

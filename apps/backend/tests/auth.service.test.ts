@@ -72,7 +72,12 @@ describe('AuthService.login', () => {
   });
 
   it('returns user data on valid credentials', async () => {
-    const user = { id: '1', email: 'a@b.com', passwordHash: 'hashed-password', emailVerified: true };
+    const user = {
+      id: '1',
+      email: 'a@b.com',
+      passwordHash: 'hashed-password',
+      emailVerified: true,
+    };
     const repo = makeRepo({ findByEmailWithHash: vi.fn().mockResolvedValue(user) });
     vi.mocked(verifyPassword).mockResolvedValue(true);
     const service = new AuthService(repo as never);
@@ -92,7 +97,12 @@ describe('AuthService.login', () => {
   });
 
   it('throws InvalidCredentialsError when password is wrong', async () => {
-    const user = { id: '1', email: 'a@b.com', passwordHash: 'hashed-password', emailVerified: true };
+    const user = {
+      id: '1',
+      email: 'a@b.com',
+      passwordHash: 'hashed-password',
+      emailVerified: true,
+    };
     const repo = makeRepo({ findByEmailWithHash: vi.fn().mockResolvedValue(user) });
     vi.mocked(verifyPassword).mockResolvedValue(false);
     const service = new AuthService(repo as never);
@@ -103,7 +113,12 @@ describe('AuthService.login', () => {
   });
 
   it('throws EmailNotVerifiedError when email is not verified', async () => {
-    const user = { id: '1', email: 'a@b.com', passwordHash: 'hashed-password', emailVerified: false };
+    const user = {
+      id: '1',
+      email: 'a@b.com',
+      passwordHash: 'hashed-password',
+      emailVerified: false,
+    };
     const repo = makeRepo({ findByEmailWithHash: vi.fn().mockResolvedValue(user) });
     vi.mocked(verifyPassword).mockResolvedValue(true);
     const service = new AuthService(repo as never);
@@ -137,9 +152,7 @@ describe('AuthService.verifyEmail', () => {
     });
     const service = new AuthService(repo as never);
 
-    await expect(service.verifyEmail('bad-token')).rejects.toThrow(
-      InvalidVerificationTokenError,
-    );
+    await expect(service.verifyEmail('bad-token')).rejects.toThrow(InvalidVerificationTokenError);
   });
 });
 
@@ -162,7 +175,9 @@ describe('AuthService.resendVerification', () => {
 
   it('throws EmailAlreadyVerifiedError when email is already verified', async () => {
     const repo = makeRepo({
-      findByEmailForResend: vi.fn().mockResolvedValue({ id: '1', email: 'a@b.com', emailVerified: true }),
+      findByEmailForResend: vi
+        .fn()
+        .mockResolvedValue({ id: '1', email: 'a@b.com', emailVerified: true }),
     });
     const service = new AuthService(repo as never);
 
@@ -173,7 +188,9 @@ describe('AuthService.resendVerification', () => {
 
   it('sends a new verification email for unverified user', async () => {
     const repo = makeRepo({
-      findByEmailForResend: vi.fn().mockResolvedValue({ id: '1', email: 'a@b.com', emailVerified: false }),
+      findByEmailForResend: vi
+        .fn()
+        .mockResolvedValue({ id: '1', email: 'a@b.com', emailVerified: false }),
       updateVerificationToken: vi.fn().mockResolvedValue(undefined),
     });
     const service = new AuthService(repo as never);

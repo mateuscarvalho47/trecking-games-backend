@@ -6,6 +6,7 @@ import {
 	LogOut,
 	Moon,
 	Search,
+	Settings,
 	Sun,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -175,6 +176,15 @@ export function Sidebar({
 							{me?.email ?? "—"}
 						</div>
 					</div>
+					<Button
+						variant="ghost"
+						size="icon-sm"
+						onClick={() => navigate({ to: "/account" })}
+						title="Configurações"
+						className="shrink-0 text-text-md"
+					>
+						<Settings size={14} />
+					</Button>
 					<Button
 						variant="ghost"
 						size="icon-sm"
