@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Cover } from "@/shared/components/Cover";
 import { StatusBadge } from "@/shared/components/StatusBadge";
 import { STATUS_BY_KEY, STATUSES } from "@/shared/constants/statuses";
+import { useAppStore } from "@/store/useAppStore";
 import type { LibraryEntry } from "@/types/api";
 import { useDetailForm } from "../hooks/useDetailForm";
 import { useRemoveLibraryEntry } from "../hooks/useLibraryEntry";
@@ -35,6 +36,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 	const { form, saved } = useDetailForm(game);
 	const { control, register, watch } = form;
 
+	const theme = useAppStore((s) => s.theme);
 	const status = watch("status");
 	const rating = watch("rating");
 	const coverData = getCoverData({ ...game, status });
@@ -73,7 +75,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 							variant="outline"
 							size="sm"
 							onClick={() => navigate({ to: "/library" })}
-							className="bg-bg-2 border-border text-text-md hover:bg-bg-3"
+							className="backdrop-blur-sm bg-bg-1/90 border-border-strong text-text-hi hover:bg-bg-1"
 						>
 							← Biblioteca
 						</Button>
@@ -94,8 +96,13 @@ export function DetailScreen({ game }: DetailScreenProps) {
 								variant="ghost"
 								size="sm"
 								onClick={() => setConfirmRemove(true)}
-								className="border border-border"
-								style={{ color: "oklch(0.75 0.14 25)" }}
+								className="backdrop-blur-sm bg-bg-1/90 border border-border-strong hover:bg-bg-1"
+								style={{
+									color:
+										theme === "light"
+											? "oklch(0.48 0.18 25)"
+											: "oklch(0.75 0.14 25)",
+								}}
 							>
 								Remover
 							</Button>
@@ -180,22 +187,34 @@ export function DetailScreen({ game }: DetailScreenProps) {
 														key={s.key}
 														onClick={() => field.onChange(s.key)}
 														className="flex items-center gap-2 h-8 px-2.5 rounded-[7px] cursor-pointer text-[12px] font-medium border-0"
-														style={{
-															background:
-																field.value === s.key
-																	? `oklch(0.3 0.06 ${s.hue} / 0.35)`
-																	: "var(--color-bg-2)",
-															border: `1px solid ${field.value === s.key ? `oklch(0.6 0.15 ${s.hue} / 0.5)` : "var(--color-border-soft)"}`,
-															color:
-																field.value === s.key
-																	? `oklch(0.92 0.05 ${s.hue})`
-																	: "var(--color-text-md)",
-															fontFamily: "inherit",
-														}}
+														style={
+															field.value === s.key
+																? {
+																		background:
+																			theme === "light"
+																				? s.bgColorLight
+																				: `oklch(0.3 0.06 ${s.hue} / 0.35)`,
+																		border: `1px solid ${theme === "light" ? s.borderColorLight : `oklch(0.6 0.15 ${s.hue} / 0.5)`}`,
+																		color:
+																			theme === "light"
+																				? s.colorLight
+																				: `oklch(0.92 0.05 ${s.hue})`,
+																		fontFamily: "inherit",
+																	}
+																: {
+																		background: "var(--color-bg-2)",
+																		border: "1px solid var(--color-border-soft)",
+																		color: "var(--color-text-md)",
+																		fontFamily: "inherit",
+																	}
+														}
 													>
 														<div
 															className="size-1.5 rounded-full shrink-0"
-															style={{ background: s.color }}
+															style={{
+																background:
+																	theme === "light" ? s.borderColorLight : s.color,
+															}}
 														/>
 														{s.label}
 													</button>

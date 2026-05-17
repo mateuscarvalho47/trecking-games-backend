@@ -5,4 +5,4 @@ export {
   gameSearchResultSchema,
   type SearchQuery,
   searchQuerySchema,
-} from '@tracking-games/shared';
+} from '@cartucheira/shared';

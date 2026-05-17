@@ -161,7 +161,7 @@ export function LibraryScreen() {
 				<EmptyState
 					icon={<BookMarked size={28} />}
 					title="Biblioteca vazia"
-					body="Adicione seu primeiro jogo usando o botão acima ou pressione ⌘K."
+					body="Adicione seu primeiro jogo usando o botão acima ou pressione Ctrl+K."
 					action={
 						<Button
 							variant="accent"

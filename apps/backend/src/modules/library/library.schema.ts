@@ -3,10 +3,10 @@ import {
   LibraryStatusEnum,
   libraryStatsSchema,
   updateLibraryEntryInput,
-} from '@tracking-games/shared';
+} from '@cartucheira/shared';
 import { z } from 'zod';
 
-export { type LibraryStats, type LibraryStatus, LibraryStatusEnum } from '@tracking-games/shared';
+export { type LibraryStats, type LibraryStatus, LibraryStatusEnum } from '@cartucheira/shared';
 
 // PascalCase aliases keep backward compat with routes and tests
 export const CreateLibraryEntryInput = createLibraryEntryInput;

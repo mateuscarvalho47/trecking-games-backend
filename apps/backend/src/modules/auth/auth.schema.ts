@@ -9,4 +9,4 @@ export {
   resendVerificationSchema,
   type UpdateAccountInput,
   updateAccountSchema,
-} from '@tracking-games/shared';
+} from '@cartucheira/shared';

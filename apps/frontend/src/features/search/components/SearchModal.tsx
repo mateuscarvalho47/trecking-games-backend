@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useLibrary } from "@/features/library/hooks/useLibrary";
 import { Cover } from "@/shared/components/Cover";
@@ -102,12 +102,13 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 							className="flex-1 h-7 bg-transparent border-0 outline-none text-text-hi text-[15.5px]"
 							style={{ fontFamily: "inherit" }}
 						/>
-						<kbd
-							className="font-mono text-[10px] font-medium h-4 px-1 text-text-md bg-bg-2 border border-border rounded-[4px] inline-flex items-center"
-							style={{ boxShadow: "0 1px 0 oklch(0 0 0 / 0.5)" }}
+						<button
+							type="button"
+							onClick={onClose}
+							className="flex items-center justify-center size-6 rounded-md text-text-lo hover:text-text-hi hover:bg-bg-2 transition-colors cursor-pointer"
 						>
-							Esc
-						</kbd>
+							<X size={14} />
+						</button>
 					</div>
 
 					{/* Results */}
@@ -189,7 +190,6 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 					{/* Footer */}
 					<div className="flex items-center gap-4 px-4 py-2.5 border-t border-border-soft font-mono text-[11px] text-text-lo bg-bg-2">
 						<span>↵ selecionar</span>
-						<span>Esc fechar</span>
 					</div>
 				</div>
 			</div>

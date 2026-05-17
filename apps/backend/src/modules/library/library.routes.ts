@@ -12,7 +12,7 @@ import {
 } from './library.schema.js';
 import { LibraryService } from './library.service.js';
 
-const idParam = z.object({ id: z.string().cuid() });
+const idParam = z.object({ id: z.cuid2() });
 
 export async function libraryRoutes(app: FastifyInstance) {
   const repo = new LibraryRepository(app.prisma);

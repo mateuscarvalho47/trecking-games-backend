@@ -62,9 +62,6 @@ export function Sidebar({
 				<span className="text-[17px] font-bold tracking-[-0.02em] text-text-hi">
 					Cartucheira
 				</span>
-				<span className="ml-auto text-[10px] font-medium px-1.5 py-0.5 rounded font-mono text-text-lo border border-border-soft">
-					β
-				</span>
 			</div>
 
 			{/* Search button */}
@@ -77,7 +74,7 @@ export function Sidebar({
 				<Search size={13} />
 				<span className="flex-1 text-left">Buscar jogos</span>
 				<div className="flex gap-0.5">
-					{["⌘", "K"].map((k) => (
+					{["Ctrl", "K"].map((k) => (
 						<kbd
 							key={k}
 							className="inline-flex items-center justify-center h-4 min-w-4 px-1 rounded text-[10px] font-medium font-mono text-text-md bg-bg-3 border border-border"
