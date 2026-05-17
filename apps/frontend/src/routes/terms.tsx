@@ -142,10 +142,10 @@ function TermsPage() {
 					<p>
 						Dúvidas sobre estes termos? Entre em contato:{" "}
 						<a
-							href="mailto:mcvlh0905@hotmail.com"
+							href="mailto:sac@carvalholabs.com.br"
 							className="text-accent-bright no-underline hover:underline"
 						>
-							mcvlh0905@hotmail.com
+							sac@carvalholabs.com.br
 						</a>
 					</p>
 				</section>
