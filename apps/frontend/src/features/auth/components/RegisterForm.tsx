@@ -51,7 +51,7 @@ export function RegisterForm() {
 						</p>
 					)}
 					{resend.error && (
-						<p className="text-[11.5px] m-0 text-chart-5 text-center">
+						<p className="text-[13px] m-0 text-error text-center">
 							{resend.error.message}
 						</p>
 					)}
@@ -91,9 +91,7 @@ export function RegisterForm() {
 					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 				/>
 				{errors.email && (
-					<p className="text-[11.5px] m-0 text-chart-5">
-						{errors.email.message}
-					</p>
+					<p className="text-[13px] m-0 text-error">{errors.email.message}</p>
 				)}
 			</div>
 
@@ -116,7 +114,7 @@ export function RegisterForm() {
 					</button>
 				</div>
 				{errors.password && (
-					<p className="text-[11.5px] m-0 text-chart-5">
+					<p className="text-[13px] m-0 text-error">
 						{errors.password.message}
 					</p>
 				)}
@@ -164,15 +162,11 @@ export function RegisterForm() {
 				</label>
 			</div>
 			{errors.consent && (
-				<p className="text-[11.5px] m-0 text-chart-5">
-					{errors.consent.message}
-				</p>
+				<p className="text-[13px] m-0 text-error">{errors.consent.message}</p>
 			)}
 
 			{register.error && (
-				<p className="text-[11.5px] m-0 text-chart-5">
-					{register.error.message}
-				</p>
+				<p className="text-[13px] m-0 text-error">{register.error.message}</p>
 			)}
 
 			<Button

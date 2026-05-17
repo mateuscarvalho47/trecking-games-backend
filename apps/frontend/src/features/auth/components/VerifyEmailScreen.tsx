@@ -182,7 +182,7 @@ export function VerifyEmailScreen() {
 				{verify.isError && !alreadyVerified && (
 					<div className="flex flex-col gap-4">
 						<div>
-							<span className="font-mono text-[10.5px] tracking-widest uppercase text-chart-5 block mb-2">
+							<span className="font-mono text-[10.5px] tracking-widest uppercase text-error block mb-2">
 								Erro
 							</span>
 							<h1 className="text-2xl font-semibold tracking-tight text-text-hi m-0 mb-2">
@@ -206,7 +206,7 @@ export function VerifyEmailScreen() {
 				{!token && !verify.isLoading && !alreadyVerified && (
 					<div className="flex flex-col gap-4">
 						<div>
-							<span className="font-mono text-[10.5px] tracking-widest uppercase text-chart-5 block mb-2">
+							<span className="font-mono text-[10.5px] tracking-widest uppercase text-error block mb-2">
 								Erro
 							</span>
 							<h1 className="text-2xl font-semibold tracking-tight text-text-hi m-0 mb-2">

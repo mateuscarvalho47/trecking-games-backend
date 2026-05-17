@@ -96,7 +96,7 @@ function AccountPage() {
 							className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 						/>
 						{updateErrors.currentPassword && (
-							<p className="text-[11.5px] m-0 text-chart-5">
+							<p className="text-[13px] m-0 text-error">
 								{updateErrors.currentPassword.message}
 							</p>
 						)}
@@ -113,7 +113,7 @@ function AccountPage() {
 							className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 						/>
 						{updateErrors.email && (
-							<p className="text-[11.5px] m-0 text-chart-5">
+							<p className="text-[13px] m-0 text-error">
 								{updateErrors.email.message}
 							</p>
 						)}
@@ -130,14 +130,14 @@ function AccountPage() {
 							className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 						/>
 						{updateErrors.newPassword && (
-							<p className="text-[11.5px] m-0 text-chart-5">
+							<p className="text-[13px] m-0 text-error">
 								{updateErrors.newPassword.message}
 							</p>
 						)}
 					</div>
 
 					{updateMutation.error && (
-						<p className="text-[11.5px] m-0 text-chart-5">
+						<p className="text-[13px] m-0 text-error">
 							{updateMutation.error.message}
 						</p>
 					)}
@@ -181,7 +181,7 @@ function AccountPage() {
 					{exportMutation.isPending ? "Preparando..." : "Baixar dados (.json)"}
 				</Button>
 				{exportMutation.error && (
-					<p className="text-[11.5px] m-0 text-chart-5">
+					<p className="text-[13px] m-0 text-error">
 						{exportMutation.error.message}
 					</p>
 				)}
@@ -192,7 +192,7 @@ function AccountPage() {
 			{/* Delete account */}
 			<section className="flex flex-col gap-3">
 				<h2 className="text-[13px] font-semibold text-text-hi flex items-center gap-2">
-					<Trash2 size={14} className="text-chart-5" />
+					<Trash2 size={14} className="text-error" />
 					Excluir conta
 				</h2>
 				<p className="text-[12.5px] text-text-lo">
@@ -204,7 +204,7 @@ function AccountPage() {
 					<Button
 						variant="outline"
 						onClick={() => setDeleteOpen(true)}
-						className="w-fit h-9 rounded-[8px] text-[12.5px] text-chart-5 border-chart-5/30 hover:bg-chart-5/10"
+						className="w-fit h-9 rounded-[8px] text-[12.5px] text-error border-error/30 hover:bg-error/10"
 					>
 						<Trash2 size={12} />
 						Excluir minha conta
@@ -212,7 +212,7 @@ function AccountPage() {
 				) : (
 					<form
 						onSubmit={onDeleteSubmit}
-						className="flex flex-col gap-3 p-4 rounded-lg border border-chart-5/30 bg-chart-5/5"
+						className="flex flex-col gap-3 p-4 rounded-lg border border-error/30 bg-error/5"
 					>
 						<p className="text-[12.5px] text-text-md">
 							Para confirmar, insira sua senha abaixo:
@@ -226,13 +226,13 @@ function AccountPage() {
 								autoFocus
 							/>
 							{deleteErrors.password && (
-								<p className="text-[11.5px] m-0 text-chart-5">
+								<p className="text-[13px] m-0 text-error">
 									{deleteErrors.password.message}
 								</p>
 							)}
 						</div>
 						{deleteMutation.error && (
-							<p className="text-[11.5px] m-0 text-chart-5">
+							<p className="text-[13px] m-0 text-error">
 								{deleteMutation.error.message}
 							</p>
 						)}
@@ -241,7 +241,7 @@ function AccountPage() {
 								variant="outline"
 								type="submit"
 								disabled={deleteMutation.isPending}
-								className="h-9 rounded-[8px] text-[12.5px] text-chart-5 border-chart-5/40 hover:bg-chart-5/10"
+								className="h-9 rounded-[8px] text-[12.5px] text-error border-error/40 hover:bg-error/10"
 							>
 								{deleteMutation.isPending
 									? "Excluindo..."

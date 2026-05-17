@@ -50,9 +50,7 @@ export function LoginForm() {
 					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 				/>
 				{errors.email && (
-					<p className="text-[11.5px] m-0 text-chart-5">
-						{errors.email.message}
-					</p>
+					<p className="text-[13px] m-0 text-error">{errors.email.message}</p>
 				)}
 			</div>
 
@@ -75,14 +73,14 @@ export function LoginForm() {
 					</button>
 				</div>
 				{errors.password && (
-					<p className="text-[11.5px] m-0 text-chart-5">
+					<p className="text-[13px] m-0 text-error">
 						{errors.password.message}
 					</p>
 				)}
 			</div>
 
 			{login.error && !emailNotVerified && (
-				<p className="text-[11.5px] m-0 text-chart-5">{login.error.message}</p>
+				<p className="text-[13px] m-0 text-error">{login.error.message}</p>
 			)}
 
 			{emailNotVerified && (
@@ -102,7 +100,7 @@ export function LoginForm() {
 						</p>
 					)}
 					{resend.error && (
-						<p className="text-[11.5px] m-0 text-chart-5 text-center">
+						<p className="text-[13px] m-0 text-error text-center">
 							{resend.error.message}
 						</p>
 					)}
