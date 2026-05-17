@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useVerifyEmail } from "../hooks/useAuth";
 
-const VERIFIED_KEY = "cartucheira_email_verified";
+const VERIFIED_KEY = "zerado_email_verified";
 
 export function VerifyEmailScreen() {
 	const search = useSearch({ strict: false });
@@ -56,7 +56,7 @@ export function VerifyEmailScreen() {
 				<div className="flex items-center gap-2.5 mb-7">
 					<svg
 						role="img"
-						aria-label="Cartucheira"
+						aria-label="Zerado"
 						width="22"
 						height="22"
 						viewBox="0 0 22 22"
@@ -101,7 +101,7 @@ export function VerifyEmailScreen() {
 						/>
 					</svg>
 					<span className="text-[18px] font-bold tracking-[-0.02em] text-text-hi">
-						Cartucheira
+						Zerado
 					</span>
 				</div>
 
@@ -227,7 +227,7 @@ export function VerifyEmailScreen() {
 				)}
 
 				<div className="mt-5 pt-4 border-t border-border-soft font-mono text-[10.5px] text-text-dim text-center tracking-[0.04em]">
-					CARTUCHEIRA · RASTREADOR DE JOGOS
+					ZERADO · RASTREADOR DE JOGOS
 				</div>
 			</div>
 		</div>

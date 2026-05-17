@@ -44,8 +44,8 @@ export function ConsentModal() {
 						>
 							Termos de Uso
 						</Link>
-						. Para continuar usando a Cartucheira, confirme que você leu e
-						concorda com esses documentos.
+						. Para continuar usando o Zerado, confirme que você leu e concorda
+						com esses documentos.
 					</p>
 					<p className="text-[12px] text-text-lo">
 						Seus dados são armazenados com segurança e nunca serão

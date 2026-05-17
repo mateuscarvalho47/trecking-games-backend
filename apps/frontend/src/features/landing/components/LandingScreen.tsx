@@ -105,14 +105,14 @@ export function LandingScreen() {
 				<div className="flex items-center gap-3 mb-10">
 					<img
 						src="/logo.svg"
-						alt="Cartucheira"
+						alt="Zerado"
 						width="36"
 						height="36"
 						className="rounded-[10px]"
 						fetchPriority="high"
 					/>
 					<span className="text-[28px] font-bold tracking-[-0.03em] text-text-hi">
-						Cartucheira
+						Zerado
 					</span>
 				</div>
 
@@ -186,7 +186,7 @@ export function LandingScreen() {
 				</div>
 
 				<div className="mt-12 font-mono text-[10.5px] text-text-dim tracking-[0.08em]">
-					CARTUCHEIRA · RASTREADOR DE JOGOS
+					ZERADO · RASTREADOR DE JOGOS
 				</div>
 			</div>
 		</div>

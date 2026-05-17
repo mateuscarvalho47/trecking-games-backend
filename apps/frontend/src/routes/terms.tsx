@@ -26,8 +26,8 @@ function TermsPage() {
 					</h2>
 					<p>
 						Ao criar uma conta na{" "}
-						<strong className="text-text-hi">Cartucheira</strong>, você declara
-						ter lido e concordado com estes Termos de Uso e com nossa{" "}
+						<strong className="text-text-hi">Zerado</strong>, você declara ter
+						lido e concordado com estes Termos de Uso e com nossa{" "}
 						<a
 							href="/privacy"
 							className="text-accent-bright no-underline hover:underline"
@@ -43,8 +43,8 @@ function TermsPage() {
 						2. O serviço
 					</h2>
 					<p>
-						A Cartucheira é um aplicativo gratuito de rastreamento de biblioteca
-						de jogos pessoal. Oferecemos funcionalidades para catalogar jogos,
+						A Zerado é um aplicativo gratuito de rastreamento de biblioteca de
+						jogos pessoal. Oferecemos funcionalidades para catalogar jogos,
 						registrar status de progresso, notas e estatísticas de jogo. O
 						serviço é fornecido "no estado em que se encontra" e pode ser
 						alterado ou descontinuado a qualquer momento.
@@ -73,7 +73,7 @@ function TermsPage() {
 					<h2 className="text-[14px] font-semibold text-text-hi mb-2">
 						4. Uso aceitável
 					</h2>
-					<p className="mb-2">É proibido usar a Cartucheira para:</p>
+					<p className="mb-2">É proibido usar a Zerado para:</p>
 					<ul className="list-disc list-inside flex flex-col gap-1.5 pl-1">
 						<li>Qualquer atividade ilegal ou fraudulenta.</li>
 						<li>Tentar acessar dados de outros usuários.</li>

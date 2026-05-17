@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import type { LibraryEntry } from "@/types/api";
 import {
 	fetchLibraryEntry,
@@ -45,6 +46,9 @@ export function useRemoveLibraryEntry(id: string) {
 		onSuccess: () => {
 			qc.invalidateQueries({ queryKey: ["library"] });
 			qc.invalidateQueries({ queryKey: ["stats"] });
+		},
+		onError: (err) => {
+			toast.error((err as Error).message ?? "Erro ao remover jogo");
 		},
 	});
 }

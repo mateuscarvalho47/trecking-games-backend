@@ -3,10 +3,10 @@ import {
   LibraryStatusEnum,
   libraryStatsSchema,
   updateLibraryEntryInput,
-} from '@cartucheira/shared';
+} from '@zerado/shared';
 import { z } from 'zod';
 
-export { type LibraryStats, type LibraryStatus, LibraryStatusEnum } from '@cartucheira/shared';
+export { type LibraryStats, type LibraryStatus, LibraryStatusEnum } from '@zerado/shared';
 
 // PascalCase aliases keep backward compat with routes and tests
 export const CreateLibraryEntryInput = createLibraryEntryInput;

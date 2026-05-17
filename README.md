@@ -1,4 +1,4 @@
-# Cartucheira
+# Zerado
 
 Monorepo para rastreamento de jogos — backend Fastify + frontend React.
 
@@ -37,7 +37,7 @@ Monorepo para rastreamento de jogos — backend Fastify + frontend React.
 ## Estrutura do monorepo
 
 ```
-cartucheira/
+zerado/
 ├── apps/
 │   ├── backend/             # API Fastify
 │   │   ├── prisma/          # schema, migrations, seed

@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Download, Lock, Mail, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,7 +20,6 @@ function AccountPage() {
 	usePageTitle("Configurações da Conta");
 	const navigate = useNavigate();
 	const [deleteOpen, setDeleteOpen] = useState(false);
-	const [updateSuccess, setUpdateSuccess] = useState(false);
 
 	const exportMutation = useExportData();
 
@@ -28,8 +28,7 @@ function AccountPage() {
 		onSubmit: onUpdateSubmit,
 		mutation: updateMutation,
 	} = useUpdateAccountForm(() => {
-		setUpdateSuccess(true);
-		setTimeout(() => setUpdateSuccess(false), 4000);
+		toast.success("Conta atualizada com sucesso!");
 	});
 
 	const {
@@ -59,9 +58,13 @@ function AccountPage() {
 				const url = URL.createObjectURL(blob);
 				const a = document.createElement("a");
 				a.href = url;
-				a.download = "cartucheira-dados.json";
+				a.download = "zerado-dados.json";
 				a.click();
 				URL.revokeObjectURL(url);
+				toast.success("Dados exportados!");
+			},
+			onError: (err) => {
+				toast.error((err as Error).message ?? "Erro ao exportar dados");
 			},
 		});
 	}
@@ -141,11 +144,6 @@ function AccountPage() {
 							{updateMutation.error.message}
 						</p>
 					)}
-					{updateSuccess && (
-						<p className="text-[11.5px] m-0 text-accent-bright">
-							Dados atualizados com sucesso.
-						</p>
-					)}
 
 					<Button
 						variant="outline"
@@ -180,11 +178,6 @@ function AccountPage() {
 					<Download size={12} />
 					{exportMutation.isPending ? "Preparando..." : "Baixar dados (.json)"}
 				</Button>
-				{exportMutation.error && (
-					<p className="text-[13px] m-0 text-error">
-						{exportMutation.error.message}
-					</p>
-				)}
 			</section>
 
 			<div className="border-t border-border-soft" />

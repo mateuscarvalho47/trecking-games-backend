@@ -6,6 +6,7 @@ import {
 	useNavigate,
 } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { Toaster } from "@/components/ui/sonner";
 import { ConsentModal } from "@/features/auth/components/ConsentModal";
 import { useMe } from "@/features/auth/hooks/useAuth";
 import { useLibrary } from "@/features/library/hooks/useLibrary";
@@ -123,6 +124,7 @@ function RootLayout() {
 			{me &&
 				me.consentedAt === null &&
 				!NO_SHELL_ROUTES.includes(location.pathname) && <ConsentModal />}
+			<Toaster position="bottom-right" richColors />
 		</div>
 	);
 }

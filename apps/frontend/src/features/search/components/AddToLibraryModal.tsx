@@ -7,6 +7,13 @@ import {
 	DialogTitle,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { Cover } from "@/shared/components/Cover";
 import { STATUSES } from "@/shared/constants/statuses";
 import { useAppStore } from "@/store/useAppStore";
@@ -128,22 +135,18 @@ export function AddToLibraryModal({
 								control={control}
 								name="userPlatform"
 								render={({ field }) => (
-									<div className="relative">
-										<select
-											{...field}
-											className="w-full h-9.5 px-3 pr-8 bg-bg-2 border border-border rounded-[8px] text-text-hi text-[13.5px] appearance-none cursor-pointer outline-none focus:border-accent"
-											style={{ fontFamily: "inherit" }}
-										>
+									<Select value={field.value} onValueChange={field.onChange}>
+										<SelectTrigger className="w-full h-9.5 bg-bg-2 border-border text-text-hi text-[13.5px] rounded-[8px]">
+											<SelectValue />
+										</SelectTrigger>
+										<SelectContent>
 											{game.platforms.map((p) => (
-												<option key={p} value={p} className="bg-bg-2">
+												<SelectItem key={p} value={p}>
 													{p}
-												</option>
+												</SelectItem>
 											))}
-										</select>
-										<div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-text-lo text-[11px]">
-											▾
-										</div>
-									</div>
+										</SelectContent>
+									</Select>
 								)}
 							/>
 						</div>

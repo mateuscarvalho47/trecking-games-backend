@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { useAddToLibrary } from "@/features/library/hooks/useLibrary";
 import type { GameSearchResult } from "@/types/api";
 import {
@@ -22,12 +23,17 @@ export function useAddToLibraryForm(
 	});
 
 	const onSubmit = form.handleSubmit(async (values) => {
-		await mutation.mutateAsync({
-			igdbId: game.igdbId,
-			status: values.status,
-			userPlatform: values.userPlatform,
-		});
-		onAdded(game.igdbId);
+		try {
+			await mutation.mutateAsync({
+				igdbId: game.igdbId,
+				status: values.status,
+				userPlatform: values.userPlatform,
+			});
+			toast.success("Adicionado à biblioteca!");
+			onAdded(game.igdbId);
+		} catch (err) {
+			toast.error((err as Error).message ?? "Erro ao adicionar jogo");
+		}
 	});
 
 	return { form, onSubmit, isPending: mutation.isPending };

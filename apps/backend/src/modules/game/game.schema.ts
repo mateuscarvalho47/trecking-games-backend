@@ -5,4 +5,4 @@ export {
   gameSearchResultSchema,
   type SearchQuery,
   searchQuerySchema,
-} from '@cartucheira/shared';
+} from '@zerado/shared';

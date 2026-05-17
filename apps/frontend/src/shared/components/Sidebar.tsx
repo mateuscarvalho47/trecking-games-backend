@@ -60,7 +60,7 @@ export function Sidebar({
 					className="rounded-md"
 				/>
 				<span className="text-[17px] font-bold tracking-[-0.02em] text-text-hi">
-					Cartucheira
+					Zerado
 				</span>
 			</div>
 
