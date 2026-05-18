@@ -410,7 +410,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 										<Input
 											type="date"
 											{...register("completedAt")}
-											className="bg-bg-2 border-border text-text-hi h-9.5"
+											className="bg-bg-2 border-border text-text-hi h-11 text-base md:h-9.5 md:text-sm"
 										/>
 									</div>
 								)}
