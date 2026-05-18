@@ -1,4 +1,4 @@
-import { Eye, EyeOff } from "lucide-react";
+﻿import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,18 +21,18 @@ export function RegisterForm() {
 		return (
 			<div className="flex flex-col gap-4">
 				<div>
-					<span className="font-mono text-[10.5px] tracking-widest uppercase text-accent-bright block mb-2">
+					<span className="font-mono text-[11.5px] tracking-widest uppercase text-accent-bright block mb-2">
 						Verifique seu email
 					</span>
 					<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 						Quase lá!
 					</h1>
-					<p className="text-[13px] text-text-md leading-[1.55] mt-0 mb-2 max-w-[36ch]">
+					<p className="text-[14px] text-text-md leading-[1.55] mt-0 mb-2 max-w-[36ch]">
 						Enviamos um link de confirmação para{" "}
 						<span className="text-text-hi font-medium">{email}</span>. Clique no
 						link para ativar sua conta.
 					</p>
-					<p className="text-[12px] text-text-lo leading-normal">
+					<p className="text-[13px] text-text-lo leading-normal">
 						Não recebeu? Verifique a pasta de spam.
 					</p>
 				</div>
@@ -46,17 +46,17 @@ export function RegisterForm() {
 						{resend.isPending ? "Enviando..." : "Reenviar email"}
 					</Button>
 					{resend.isSuccess && (
-						<p className="text-[11.5px] m-0 text-text-md text-center">
+						<p className="text-[12.5px] m-0 text-text-md text-center">
 							Novo link enviado para {email}.
 						</p>
 					)}
 					{resend.error && (
-						<p className="text-[13px] m-0 text-error text-center">
+						<p className="text-[14px] m-0 text-error text-center">
 							{resend.error.message}
 						</p>
 					)}
 				</div>
-				<p className="text-center text-[12.5px] text-text-lo mt-2">
+				<p className="text-center text-[13.5px] text-text-lo mt-2">
 					<a
 						href="/login"
 						className="text-accent-bright font-semibold no-underline"
@@ -71,13 +71,13 @@ export function RegisterForm() {
 	return (
 		<form onSubmit={onSubmit} className="flex flex-col gap-3.5">
 			<div>
-				<span className="font-mono text-[10.5px] tracking-widest uppercase text-accent-bright block mb-2">
+				<span className="font-mono text-[11.5px] tracking-widest uppercase text-accent-bright block mb-2">
 					Crie sua conta
 				</span>
 				<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 					Começar a rastrear
 				</h1>
-				<p className="text-[13px] text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
+				<p className="text-[14px] text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
 					Monte sua biblioteca de jogos pessoal.
 				</p>
 			</div>
@@ -91,7 +91,7 @@ export function RegisterForm() {
 					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 				/>
 				{errors.email && (
-					<p className="text-[13px] m-0 text-error">{errors.email.message}</p>
+					<p className="text-[14px] m-0 text-error">{errors.email.message}</p>
 				)}
 			</div>
 
@@ -114,7 +114,7 @@ export function RegisterForm() {
 					</button>
 				</div>
 				{errors.password && (
-					<p className="text-[13px] m-0 text-error">
+					<p className="text-[14px] m-0 text-error">
 						{errors.password.message}
 					</p>
 				)}
@@ -139,7 +139,7 @@ export function RegisterForm() {
 				/>
 				<label
 					htmlFor="consent"
-					className="text-[12px] text-text-lo leading-relaxed cursor-pointer"
+					className="text-[13px] text-text-lo leading-relaxed cursor-pointer"
 				>
 					Li e concordo com a{" "}
 					<a
@@ -162,11 +162,11 @@ export function RegisterForm() {
 				</label>
 			</div>
 			{errors.consent && (
-				<p className="text-[13px] m-0 text-error">{errors.consent.message}</p>
+				<p className="text-[14px] m-0 text-error">{errors.consent.message}</p>
 			)}
 
 			{register.error && (
-				<p className="text-[13px] m-0 text-error">{register.error.message}</p>
+				<p className="text-[14px] m-0 text-error">{register.error.message}</p>
 			)}
 
 			<Button
@@ -178,7 +178,7 @@ export function RegisterForm() {
 				{register.isPending ? "Criando..." : "Criar conta"}
 			</Button>
 
-			<p className="text-center text-[12.5px] text-text-lo mt-1">
+			<p className="text-center text-[13.5px] text-text-lo mt-1">
 				Já tem conta?{" "}
 				<a
 					href="/login"

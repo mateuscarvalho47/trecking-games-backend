@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+﻿import type { ReactNode } from "react";
 
 interface EmptyStateProps {
 	icon: ReactNode;
@@ -13,8 +13,8 @@ export function EmptyState({ icon, title, body, action }: EmptyStateProps) {
 			<div className="size-14 flex items-center justify-center bg-accent-soft rounded-full text-accent-bright">
 				{icon}
 			</div>
-			<p className="text-[17px] font-semibold text-text-hi m-0">{title}</p>
-			<p className="text-text-md text-[13.5px] max-w-[42ch] m-0">{body}</p>
+			<p className="text-[18px] font-semibold text-text-hi m-0">{title}</p>
+			<p className="text-text-md text-[14.5px] max-w-[42ch] m-0">{body}</p>
 			{action}
 		</div>
 	);

@@ -1,11 +1,13 @@
-import type { QueryClient } from "@tanstack/react-query";
+﻿import type { QueryClient } from "@tanstack/react-query";
 import {
 	createRootRouteWithContext,
 	Outlet,
 	useLocation,
 	useNavigate,
 } from "@tanstack/react-router";
+import { Menu } from "lucide-react";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import { ConsentModal } from "@/features/auth/components/ConsentModal";
 import { useMe } from "@/features/auth/hooks/useAuth";
 import { useLibrary } from "@/features/library/hooks/useLibrary";
@@ -52,7 +54,8 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 
 function RootLayout() {
 	useApplyTheme();
-	const { searchOpen, setSearchOpen } = useAppStore();
+	const { searchOpen, setSearchOpen, sidebarOpen, toggleSidebar } =
+		useAppStore();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const isAuthRoute = ["/login", "/register"].includes(location.pathname);
@@ -92,7 +95,7 @@ function RootLayout() {
 					style={{
 						color: "var(--color-text-lo)",
 						fontFamily: "'Geist Mono', monospace",
-						fontSize: 12,
+						fontSize: 13,
 					}}
 				>
 					carregando...
@@ -111,10 +114,30 @@ function RootLayout() {
 		>
 			{me && !NO_SHELL_ROUTES.includes(location.pathname) ? (
 				<div className="flex min-h-screen">
-					<div className="hidden lg:block shrink-0" style={{ width: 232 }}>
+					<div
+						className="hidden lg:block shrink-0 overflow-hidden"
+						style={{
+							width: sidebarOpen ? 232 : 0,
+							transition: "width 220ms ease",
+						}}
+					>
 						<Sidebar me={me} libraryCount={library.length} />
 					</div>
-					<main className="flex-1 min-w-0 pb-20 lg:pb-15">
+					<main className="flex-1 min-w-0 pb-20 lg:pb-0">
+						<div
+							className="hidden lg:flex items-center h-10 px-3 sticky top-0 z-30"
+							style={{ background: "var(--color-background)" }}
+						>
+							<Button
+								variant="ghost"
+								size="icon-sm"
+								onClick={toggleSidebar}
+								aria-label={sidebarOpen ? "Fechar menu" : "Abrir menu"}
+								className="text-text-lo hover:text-text-hi"
+							>
+								<Menu size={16} />
+							</Button>
+						</div>
 						<Outlet />
 					</main>
 					<BottomNav libraryCount={library.length} />

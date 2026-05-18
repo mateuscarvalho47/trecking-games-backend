@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+﻿import { Button } from "@/components/ui/button";
 import {
 	Dialog,
 	DialogContent,
@@ -29,13 +29,13 @@ export function ConfirmRemoveModal({
 		>
 			<DialogContent className="max-w-sm text-center bg-bg-1 border border-border rounded-xl shadow-panel">
 				<div className="flex flex-col items-center gap-3">
-					<div className="size-12 flex items-center justify-center rounded-full text-[22px] bg-[oklch(0.3_0.1_25/0.3)] text-error">
+					<div className="size-12 flex items-center justify-center rounded-full text-[23px] bg-[oklch(0.3_0.1_25/0.3)] text-error">
 						⚠
 					</div>
-					<DialogTitle className="text-[18px] text-text-hi">
+					<DialogTitle className="text-[19px] text-text-hi">
 						Remover jogo?
 					</DialogTitle>
-					<DialogDescription className="text-text-md text-[13.5px] leading-relaxed max-w-[34ch]">
+					<DialogDescription className="text-text-md text-[14.5px] leading-relaxed max-w-[34ch]">
 						<strong className="text-text-hi">{gameName}</strong> será removido
 						permanentemente da sua biblioteca.
 					</DialogDescription>

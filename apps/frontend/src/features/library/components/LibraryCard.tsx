@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+﻿import { useNavigate } from "@tanstack/react-router";
 import { Cover } from "@/shared/components/Cover";
 import { StatusBadge } from "@/shared/components/StatusBadge";
 import { STATUS_BY_KEY } from "@/shared/constants/statuses";
@@ -53,22 +53,22 @@ export function LibraryCard({ game }: LibraryCardProps) {
 				</div>
 			</div>
 			<div className="flex flex-col gap-1 px-0.5">
-				<span className="text-[13.5px] font-medium text-text-hi leading-[1.3] line-clamp-2">
+				<span className="text-[14.5px] font-medium text-text-hi leading-[1.3] line-clamp-2">
 					{game.name}
 				</span>
 				<div className="flex items-center justify-between">
-					<span className="text-[11.5px] text-text-md">
+					<span className="text-[12.5px] text-text-md">
 						{game.userPlatform ?? game.platforms[0] ?? "—"}
 					</span>
 					{STATUSES_WITH_RATING.has(game.status) && game.rating != null && (
-						<span className="font-mono text-[12px] font-semibold text-text-hi">
+						<span className="font-mono text-[13px] font-semibold text-text-hi">
 							{game.rating}
-							<span className="text-[10px] text-text-lo">/10</span>
+							<span className="text-[11px] text-text-lo">/10</span>
 						</span>
 					)}
 				</div>
 				{STATUSES_WITH_HOURS.has(game.status) && game.hoursPlayed != null && (
-					<span className="text-[11px] text-text-lo">
+					<span className="text-[12px] text-text-lo">
 						{game.hoursPlayed}h jogadas
 					</span>
 				)}

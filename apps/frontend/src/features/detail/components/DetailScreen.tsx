@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+﻿import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -82,7 +82,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 						<div className="flex gap-2 items-center">
 							{saved && (
 								<span
-									className="inline-flex items-center gap-1.5 font-mono text-[10.5px] rounded-[5px] py-0.5 px-2"
+									className="inline-flex items-center gap-1.5 font-mono text-[11.5px] rounded-[5px] py-0.5 px-2"
 									style={{
 										color: "var(--color-accent-bright)",
 										background: "var(--color-accent-soft)",
@@ -128,10 +128,10 @@ export function DetailScreen({ game }: DetailScreenProps) {
 						{/* Head info */}
 						<div className="flex flex-col gap-3.5 pt-2 w-full text-center md:text-left">
 							<div className="mono-label">{game.genres.join(" · ")}</div>
-							<h1 className="text-[28px] md:text-[42px] font-bold leading-[1.05] m-0 text-text-hi tracking-[-0.035em]">
+							<h1 className="text-[29px] md:text-[43px] font-bold leading-[1.05] m-0 text-text-hi tracking-[-0.035em]">
 								{game.name}
 							</h1>
-							<div className="text-text-md text-[13.5px]">
+							<div className="text-text-md text-[14.5px]">
 								{game.platforms.join(" · ")}
 							</div>
 							<div className="flex gap-1.5 flex-wrap justify-center md:justify-start">
@@ -155,7 +155,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 								].map(({ label, val }) => (
 									<div key={label} className="flex flex-col gap-1.5">
 										<div className="mono-label">{label}</div>
-										<div className="text-[14px] text-text-hi">{val}</div>
+										<div className="text-[15px] text-text-hi">{val}</div>
 									</div>
 								))}
 							</div>
@@ -168,7 +168,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 					<div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4.5">
 						{/* Edit form */}
 						<div className="bg-bg-1 border border-border-soft rounded-lg p-5.5">
-							<div className="text-[14.5px] font-semibold tracking-tight text-text-hi mb-5">
+							<div className="text-[15.5px] font-semibold tracking-tight text-text-hi mb-5">
 								Editar entrada
 							</div>
 
@@ -186,7 +186,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 														type="button"
 														key={s.key}
 														onClick={() => field.onChange(s.key)}
-														className="flex items-center gap-2 h-8 px-2.5 rounded-[7px] cursor-pointer text-[12px] font-medium border-0"
+														className="flex items-center gap-2 h-8 px-2.5 rounded-[7px] cursor-pointer text-[13px] font-medium border-0"
 														style={
 															field.value === s.key
 																? {
@@ -237,7 +237,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 											render={({ field }) => (
 												<select
 													{...field}
-													className="w-full h-9.5 px-3 pr-8 bg-bg-2 border border-border rounded-[8px] text-text-hi text-[13.5px] appearance-none cursor-pointer outline-none focus:border-accent"
+													className="w-full h-9.5 px-3 pr-8 bg-bg-2 border border-border rounded-[8px] text-text-hi text-[14.5px] appearance-none cursor-pointer outline-none focus:border-accent"
 													style={{ fontFamily: "inherit" }}
 												>
 													<option value="" className="bg-bg-2">
@@ -251,7 +251,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 												</select>
 											)}
 										/>
-										<div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-text-lo text-[11px]">
+										<div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-text-lo text-[12px]">
 											▾
 										</div>
 									</div>
@@ -277,7 +277,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 														}
 														className="flex items-center justify-center w-9 shrink-0 h-full text-text-dim hover:text-text-hi hover:bg-bg-3 border-r border-border transition-colors cursor-pointer bg-transparent"
 													>
-														<span className="text-[16px] leading-none select-none">
+														<span className="text-[17px] leading-none select-none">
 															−
 														</span>
 													</button>
@@ -294,16 +294,16 @@ export function DetailScreen({ game }: DetailScreenProps) {
 																	Number.isNaN(val) ? 0 : Math.max(0, val),
 																);
 															}}
-															className="w-14 text-center bg-transparent border-0 outline-none text-text-hi text-[13.5px]"
+															className="w-14 text-center bg-transparent border-0 outline-none text-text-hi text-[14.5px]"
 														/>
-														<span className="text-text-dim text-[12px]">h</span>
+														<span className="text-text-dim text-[13px]">h</span>
 													</div>
 													<button
 														type="button"
 														onClick={() => field.onChange(field.value + 0.5)}
 														className="flex items-center justify-center w-9 shrink-0 h-full text-text-dim hover:text-text-hi hover:bg-bg-3 border-l border-border transition-colors cursor-pointer bg-transparent"
 													>
-														<span className="text-[16px] leading-none select-none">
+														<span className="text-[17px] leading-none select-none">
 															+
 														</span>
 													</button>
@@ -318,9 +318,9 @@ export function DetailScreen({ game }: DetailScreenProps) {
 									<div className="col-span-2">
 										<div className="flex items-baseline justify-between mb-1.5">
 											<Label className="mono-label">Avaliação</Label>
-											<span className="text-[16px] text-text-hi">
+											<span className="text-[17px] text-text-hi">
 												<b className="font-bold">{rating}</b>
-												<span className="text-[11px] text-text-lo ml-px">
+												<span className="text-[12px] text-text-lo ml-px">
 													/10
 												</span>
 											</span>
@@ -353,7 +353,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 												)}
 											/>
 										</div>
-										<div className="flex justify-between text-[11px] text-text-dim px-0.5 mt-1">
+										<div className="flex justify-between text-[12px] text-text-dim px-0.5 mt-1">
 											{[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
 												<span key={n}>{n}</span>
 											))}
@@ -390,7 +390,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 
 						{/* Side panel */}
 						<div className="bg-bg-1 border border-border-soft rounded-lg p-5.5 self-start">
-							<div className="text-[14.5px] font-semibold tracking-tight text-text-hi mb-4">
+							<div className="text-[15.5px] font-semibold tracking-tight text-text-hi mb-4">
 								Informações
 							</div>
 							<dl>
@@ -414,7 +414,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 										className="grid grid-cols-[110px_1fr] gap-3 py-2.5 border-b border-border-soft"
 									>
 										<dt className="mono-label">{label}</dt>
-										<dd className="text-[13px] text-text-hi m-0">{val}</dd>
+										<dd className="text-[14px] text-text-hi m-0">{val}</dd>
 									</div>
 								))}
 							</dl>

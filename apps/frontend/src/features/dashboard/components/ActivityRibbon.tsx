@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+﻿import { useMemo } from "react";
 
 import type { LibraryEntry } from "@/types/api";
 
@@ -47,10 +47,10 @@ export function ActivityRibbon({ library }: ActivityRibbonProps) {
 	return (
 		<div className="bg-bg-1 border border-border-soft rounded-lg px-5.5 py-4.5">
 			<div className="flex items-center justify-between mb-3">
-				<span className="text-[14.5px] font-semibold text-text-hi tracking-[-0.01em]">
+				<span className="text-[15.5px] font-semibold text-text-hi tracking-[-0.01em]">
 					Atividade recente
 				</span>
-				<span className="font-mono text-[10.5px] text-text-lo">
+				<span className="font-mono text-[11.5px] text-text-lo">
 					{WEEKS} semanas
 				</span>
 			</div>
@@ -74,7 +74,7 @@ export function ActivityRibbon({ library }: ActivityRibbonProps) {
 				</div>
 			</div>
 
-			<div className="flex items-center gap-1.5 mt-2.5 font-mono text-[11px] text-text-lo">
+			<div className="flex items-center gap-1.5 mt-2.5 font-mono text-[12px] text-text-lo">
 				<span>Menos</span>
 				{([0, 1, 2, 3] as const).map((l) => (
 					<div

@@ -1,4 +1,4 @@
-import type { LibraryStats } from "@/types/api";
+﻿import type { LibraryStats } from "@/types/api";
 
 interface StatTilesProps {
 	stats: LibraryStats;
@@ -58,16 +58,16 @@ export function StatTiles({ stats }: StatTilesProps) {
 					)}
 					<div className="mono-label">{t.label}</div>
 					<div className="flex items-baseline gap-1">
-						<span className="text-[28px] md:text-[32px] font-bold tracking-[-0.03em] text-text-hi">
+						<span className="text-[29px] md:text-[33px] font-bold tracking-[-0.03em] text-text-hi">
 							{t.value}
 						</span>
 						{t.unit && (
-							<span className="text-[14px] md:text-[16px] font-medium text-text-lo font-mono">
+							<span className="text-[15px] md:text-[17px] font-medium text-text-lo font-mono">
 								{t.unit}
 							</span>
 						)}
 					</div>
-					<div className="text-[11.5px] text-text-md font-mono">{t.sub}</div>
+					<div className="text-[12.5px] text-text-md font-mono">{t.sub}</div>
 				</div>
 			))}
 		</div>

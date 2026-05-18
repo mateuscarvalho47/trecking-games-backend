@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+﻿import { useNavigate } from "@tanstack/react-router";
 import { usePageTitle } from "@/shared/hooks/usePageTitle";
 
 const TILES = [
@@ -111,14 +111,14 @@ export function LandingScreen() {
 						className="rounded-[10px]"
 						fetchPriority="high"
 					/>
-					<span className="text-[28px] font-bold tracking-[-0.03em] text-text-hi">
+					<span className="text-[29px] font-bold tracking-[-0.03em] text-text-hi">
 						Detonado
 					</span>
 				</div>
 
 				{/* Headline */}
 				<h1
-					className="text-[30px] sm:text-[44px] font-bold tracking-[-0.03em] leading-[1.1] mb-4 text-text-hi"
+					className="text-[31px] sm:text-[45px] font-bold tracking-[-0.03em] leading-[1.1] mb-4 text-text-hi"
 					style={{ textShadow: "0 0 80px oklch(0.5 0.18 17 / 0.3)" }}
 				>
 					Sua biblioteca de jogos,{" "}
@@ -127,7 +127,7 @@ export function LandingScreen() {
 					</span>
 				</h1>
 
-				<p className="text-[17px] text-text-md leading-relaxed mb-10 max-w-lg">
+				<p className="text-[18px] text-text-md leading-relaxed mb-10 max-w-lg">
 					Rastreie o que está jogando, o que zerou e o backlog que nunca para de
 					crescer. Tudo num lugar só.
 				</p>
@@ -137,7 +137,7 @@ export function LandingScreen() {
 					<button
 						type="button"
 						onClick={() => navigate({ to: "/register" })}
-						className="h-11 px-7 rounded-[10px] text-[14px] font-semibold cursor-pointer border-0"
+						className="h-11 px-7 rounded-[10px] text-[15px] font-semibold cursor-pointer border-0"
 						style={{
 							background: "var(--color-primary)",
 							color: "var(--color-primary-foreground)",
@@ -150,7 +150,7 @@ export function LandingScreen() {
 					<button
 						type="button"
 						onClick={() => navigate({ to: "/login" })}
-						className="h-11 px-7 rounded-[10px] text-[14px] font-medium cursor-pointer"
+						className="h-11 px-7 rounded-[10px] text-[15px] font-medium cursor-pointer"
 						style={{
 							background: "var(--color-bg-2)",
 							border: "1px solid var(--color-border)",
@@ -175,17 +175,17 @@ export function LandingScreen() {
 							}}
 						>
 							<div className="text-2xl mb-3">{f.icon}</div>
-							<div className="text-[13.5px] font-semibold text-text-hi mb-1.5">
+							<div className="text-[14.5px] font-semibold text-text-hi mb-1.5">
 								{f.label}
 							</div>
-							<div className="text-[12px] text-text-lo leading-relaxed">
+							<div className="text-[13px] text-text-lo leading-relaxed">
 								{f.desc}
 							</div>
 						</div>
 					))}
 				</div>
 
-				<div className="mt-12 font-mono text-[10.5px] text-text-dim tracking-[0.08em]">
+				<div className="mt-12 font-mono text-[11.5px] text-text-dim tracking-[0.08em]">
 					DETONADO · RASTREADOR DE JOGOS
 				</div>
 			</div>

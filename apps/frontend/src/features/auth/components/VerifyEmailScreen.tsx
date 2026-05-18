@@ -1,4 +1,4 @@
-import { useNavigate, useSearch } from "@tanstack/react-router";
+﻿import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useVerifyEmail } from "../hooks/useAuth";
@@ -100,20 +100,20 @@ export function VerifyEmailScreen() {
 							opacity="0.7"
 						/>
 					</svg>
-					<span className="text-[18px] font-bold tracking-[-0.02em] text-text-hi">
+					<span className="text-[19px] font-bold tracking-[-0.02em] text-text-hi">
 						Detonado
 					</span>
 				</div>
 
 				{verify.isLoading && (
 					<div className="flex flex-col gap-3">
-						<span className="font-mono text-[10.5px] tracking-widest uppercase text-accent-bright block">
+						<span className="font-mono text-[11.5px] tracking-widest uppercase text-accent-bright block">
 							Verificando
 						</span>
 						<h1 className="text-2xl font-semibold tracking-tight text-text-hi m-0">
 							Confirmando email...
 						</h1>
-						<p className="text-[13px] text-text-md leading-[1.55] m-0">
+						<p className="text-[14px] text-text-md leading-[1.55] m-0">
 							Aguarde um momento.
 						</p>
 					</div>
@@ -146,21 +146,21 @@ export function VerifyEmailScreen() {
 										strokeLinejoin="round"
 									/>
 								</svg>
-								<span className="font-mono text-[10.5px] tracking-widest uppercase text-accent-bright">
+								<span className="font-mono text-[11.5px] tracking-widest uppercase text-accent-bright">
 									Email confirmado
 								</span>
 							</div>
 							<h1 className="text-2xl font-semibold tracking-tight text-text-hi m-0">
 								Tudo certo!
 							</h1>
-							<p className="text-[13px] text-text-md leading-[1.55] m-0 max-w-[38ch]">
+							<p className="text-[14px] text-text-md leading-[1.55] m-0 max-w-[38ch]">
 								Seu email foi verificado com sucesso. Sua conta está ativa e
 								pronta para uso.
 							</p>
 						</div>
 
 						<div className="rounded-lg border border-accent-bright/20 bg-accent-bright/5 px-4 py-3">
-							<p className="text-[12.5px] text-accent-bright font-medium m-0 leading-[1.5]">
+							<p className="text-[13.5px] text-accent-bright font-medium m-0 leading-[1.5]">
 								Você já pode entrar na sua conta com o email e senha
 								cadastrados.
 							</p>
@@ -182,13 +182,13 @@ export function VerifyEmailScreen() {
 				{verify.isError && !alreadyVerified && (
 					<div className="flex flex-col gap-4">
 						<div>
-							<span className="font-mono text-[10.5px] tracking-widest uppercase text-error block mb-2">
+							<span className="font-mono text-[11.5px] tracking-widest uppercase text-error block mb-2">
 								Erro
 							</span>
 							<h1 className="text-2xl font-semibold tracking-tight text-text-hi m-0 mb-2">
 								Link inválido
 							</h1>
-							<p className="text-[13px] text-text-md leading-[1.55] m-0 max-w-[36ch]">
+							<p className="text-[14px] text-text-md leading-[1.55] m-0 max-w-[36ch]">
 								{(verify.error as Error)?.message ??
 									"Token de verificação inválido ou expirado."}
 							</p>
@@ -206,13 +206,13 @@ export function VerifyEmailScreen() {
 				{!token && !verify.isLoading && !alreadyVerified && (
 					<div className="flex flex-col gap-4">
 						<div>
-							<span className="font-mono text-[10.5px] tracking-widest uppercase text-error block mb-2">
+							<span className="font-mono text-[11.5px] tracking-widest uppercase text-error block mb-2">
 								Erro
 							</span>
 							<h1 className="text-2xl font-semibold tracking-tight text-text-hi m-0 mb-2">
 								Token ausente
 							</h1>
-							<p className="text-[13px] text-text-md leading-[1.55] m-0 max-w-[36ch]">
+							<p className="text-[14px] text-text-md leading-[1.55] m-0 max-w-[36ch]">
 								Use o link enviado para o seu email.
 							</p>
 						</div>
@@ -226,7 +226,7 @@ export function VerifyEmailScreen() {
 					</div>
 				)}
 
-				<div className="mt-5 pt-4 border-t border-border-soft font-mono text-[10.5px] text-text-dim text-center tracking-[0.04em]">
+				<div className="mt-5 pt-4 border-t border-border-soft font-mono text-[11.5px] text-text-dim text-center tracking-[0.04em]">
 					DETONADO · RASTREADOR DE JOGOS
 				</div>
 			</div>

@@ -1,4 +1,4 @@
-import { BookMarked, LayoutGrid, List, Search } from "lucide-react";
+﻿import { BookMarked, LayoutGrid, List, Search } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -53,10 +53,10 @@ export function LibraryScreen() {
 			<div className="flex items-end justify-between gap-6 pb-5.5 mb-5.5 border-b border-border-soft">
 				<div>
 					<div className="page-overline">Coleção</div>
-					<h1 className="text-[28px] font-semibold tracking-tight m-0 text-text-hi">
+					<h1 className="text-[29px] font-semibold tracking-tight m-0 text-text-hi">
 						Biblioteca
 					</h1>
-					<p className="text-text-md text-[13.5px] mt-1.5 mb-0">
+					<p className="text-text-md text-[14.5px] mt-1.5 mb-0">
 						{library.length} jogo{library.length !== 1 ? "s" : ""} na coleção
 					</p>
 				</div>
@@ -90,7 +90,7 @@ export function LibraryScreen() {
 							value={filters.search}
 							onChange={(e) => filters.setSearch(e.target.value)}
 							placeholder="Filtrar..."
-							className="flex-1 h-full p-0 min-w-0 bg-transparent border-0 shadow-none text-text-hi text-[13px] placeholder:text-text-lo focus-visible:ring-0"
+							className="flex-1 h-full p-0 min-w-0 bg-transparent border-0 shadow-none text-text-hi text-[14px] placeholder:text-text-lo focus-visible:ring-0"
 						/>
 					</div>
 
@@ -99,7 +99,7 @@ export function LibraryScreen() {
 						<button
 							type="button"
 							onClick={() => setSortMenuOpen((o) => !o)}
-							className="inline-flex items-center gap-1.5 h-8 px-2.5 bg-bg-2 border border-border rounded-[7px] text-text-md cursor-pointer text-[12.5px] font-medium"
+							className="inline-flex items-center gap-1.5 h-8 px-2.5 bg-bg-2 border border-border rounded-[7px] text-text-md cursor-pointer text-[13.5px] font-medium"
 							style={{ fontFamily: "inherit" }}
 						>
 							{currentSortLabel} ↕
@@ -117,7 +117,7 @@ export function LibraryScreen() {
 											filters.setSort(opt.value as typeof filters.sort);
 											setSortMenuOpen(false);
 										}}
-										className="flex items-center justify-between w-full px-2.5 py-1.5 bg-transparent border-0 text-[12.5px] cursor-pointer rounded-[5px] text-left"
+										className="flex items-center justify-between w-full px-2.5 py-1.5 bg-transparent border-0 text-[13.5px] cursor-pointer rounded-[5px] text-left"
 										style={{
 											color:
 												filters.sort === opt.value

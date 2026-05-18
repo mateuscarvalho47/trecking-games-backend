@@ -1,4 +1,4 @@
-import { XIcon } from "lucide-react";
+﻿import { XIcon } from "lucide-react";
 import { Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -46,7 +46,7 @@ export function AddToLibraryModal({
 				}}
 			>
 				<DialogHeader className="flex flex-row items-center justify-between px-4.5 py-3.5 border-b border-border-soft">
-					<DialogTitle className="text-[14px] text-text-hi">
+					<DialogTitle className="text-[15px] text-text-hi">
 						Adicionar à biblioteca
 					</DialogTitle>
 					<DialogClose asChild>
@@ -83,10 +83,10 @@ export function AddToLibraryModal({
 								<div className="mono-label text-accent-bright">
 									{game.genres.slice(0, 2).join(" · ")}
 								</div>
-								<h2 className="text-[22px] font-semibold tracking-tight mt-1 mb-0 text-text-hi">
+								<h2 className="text-[23px] font-semibold tracking-tight mt-1 mb-0 text-text-hi">
 									{game.name}
 								</h2>
-								<div className="text-[12.5px] text-text-md font-mono mt-0.5">
+								<div className="text-[13.5px] text-text-md font-mono mt-0.5">
 									{game.releaseYear ?? "TBA"} ·{" "}
 									{game.platforms.slice(0, 3).join(", ")}
 								</div>
@@ -105,7 +105,7 @@ export function AddToLibraryModal({
 													type="button"
 													key={s.key}
 													onClick={() => field.onChange(s.key)}
-													className="flex items-center gap-2 h-8 px-2.5 rounded-[7px] cursor-pointer text-[12px] font-medium border-0"
+													className="flex items-center gap-2 h-8 px-2.5 rounded-[7px] cursor-pointer text-[13px] font-medium border-0"
 													style={{
 														background:
 															field.value === s.key
@@ -141,7 +141,7 @@ export function AddToLibraryModal({
 										<div className="relative">
 											<select
 												{...field}
-												className="w-full h-9.5 px-3 pr-8 bg-bg-2 border border-border rounded-[8px] text-text-hi text-[13.5px] appearance-none cursor-pointer outline-none focus:border-accent"
+												className="w-full h-9.5 px-3 pr-8 bg-bg-2 border border-border rounded-[8px] text-text-hi text-[14.5px] appearance-none cursor-pointer outline-none focus:border-accent"
 												style={{ fontFamily: "inherit" }}
 											>
 												{game.platforms.map((p) => (
@@ -150,7 +150,7 @@ export function AddToLibraryModal({
 													</option>
 												))}
 											</select>
-											<div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-text-lo text-[11px]">
+											<div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-text-lo text-[12px]">
 												▾
 											</div>
 										</div>

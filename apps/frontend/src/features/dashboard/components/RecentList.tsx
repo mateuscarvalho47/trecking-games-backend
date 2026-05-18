@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+﻿import { useNavigate } from "@tanstack/react-router";
 import { Cover } from "@/shared/components/Cover";
 import { StatusBadge } from "@/shared/components/StatusBadge";
 import { STATUS_BY_KEY } from "@/shared/constants/statuses";
@@ -16,11 +16,11 @@ export function RecentList({ games }: RecentListProps) {
 
 	return (
 		<div className="bg-bg-1 border border-border-soft rounded-lg px-5.5 py-4.5">
-			<div className="text-[14.5px] font-semibold text-text-hi tracking-[-0.01em] mb-3.5">
+			<div className="text-[15.5px] font-semibold text-text-hi tracking-[-0.01em] mb-3.5">
 				Recém-completos
 			</div>
 			{shown.length === 0 ? (
-				<div className="py-6 text-center text-text-lo text-[13px]">
+				<div className="py-6 text-center text-text-lo text-[14px]">
 					Nenhum jogo completado ainda
 				</div>
 			) : (
@@ -54,15 +54,15 @@ export function RecentList({ games }: RecentListProps) {
 								/>
 							</div>
 							<div className="flex flex-col gap-1">
-								<span className="text-[13px] font-medium text-text-hi truncate">
+								<span className="text-[14px] font-medium text-text-hi truncate">
 									{game.name}
 								</span>
 								<div className="flex items-center justify-between gap-1 flex-wrap">
 									<StatusBadge status={game.status} size="sm" />
 									{game.rating != null && (
-										<span className="font-mono text-[12px] font-semibold text-text-hi">
+										<span className="font-mono text-[13px] font-semibold text-text-hi">
 											{game.rating}
-											<span className="text-[11px] text-text-lo">/10</span>
+											<span className="text-[12px] text-text-lo">/10</span>
 										</span>
 									)}
 								</div>

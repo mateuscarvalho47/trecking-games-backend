@@ -1,4 +1,4 @@
-import { useStats } from "../hooks/useStats";
+﻿import { useStats } from "../hooks/useStats";
 import { DonutChart } from "./DonutChart";
 import { HBars } from "./HBars";
 import { Histogram } from "./Histogram";
@@ -18,7 +18,7 @@ function Card({
 			{(title || sub) && (
 				<div className="flex items-start justify-between gap-4 mb-4.5">
 					{title && (
-						<div className="text-[14.5px] font-semibold tracking-tight text-text-hi">
+						<div className="text-[15.5px] font-semibold tracking-tight text-text-hi">
 							{title}
 						</div>
 					)}
@@ -51,10 +51,10 @@ export function StatsScreen() {
 			<div className="flex items-end justify-between gap-6 pb-5.5 mb-5.5 border-b border-border-soft">
 				<div>
 					<div className="page-overline">Análise</div>
-					<h1 className="text-[28px] font-semibold tracking-tight m-0 text-text-hi">
+					<h1 className="text-[29px] font-semibold tracking-tight m-0 text-text-hi">
 						Estatísticas
 					</h1>
-					<p className="text-text-md text-[13.5px] mt-1.5 mb-0">
+					<p className="text-text-md text-[14.5px] mt-1.5 mb-0">
 						Insights da sua biblioteca
 					</p>
 				</div>
@@ -93,13 +93,13 @@ export function StatsScreen() {
 							<div className="mono-label">{b.label}</div>
 							<div className="flex items-baseline gap-1.5">
 								<span
-									className="text-[36px] md:text-[48px] font-bold leading-none text-text-hi"
+									className="text-[37px] md:text-[49px] font-bold leading-none text-text-hi"
 									style={{ letterSpacing: "-0.04em" }}
 								>
 									{b.value}
 								</span>
 								{b.unit && (
-									<span className="text-[18px] md:text-[20px] font-medium text-text-lo font-mono">
+									<span className="text-[19px] md:text-[21px] font-medium text-text-lo font-mono">
 										{b.unit}
 									</span>
 								)}

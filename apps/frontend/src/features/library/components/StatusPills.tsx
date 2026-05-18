@@ -1,6 +1,7 @@
-import { useMemo } from "react";
+﻿import { useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { STATUSES } from "@/shared/constants/statuses";
+import { useAppStore } from "@/store/useAppStore";
 import type { GameStatus, LibraryEntry } from "@/types/api";
 
 interface StatusPillsProps {
@@ -10,6 +11,7 @@ interface StatusPillsProps {
 }
 
 export function StatusPills({ library, active, onChange }: StatusPillsProps) {
+	const theme = useAppStore((s) => s.theme);
 	const total = library.length;
 	const countByStatus = useMemo(() => {
 		const counts = {} as Record<GameStatus, number>;
@@ -23,7 +25,7 @@ export function StatusPills({ library, active, onChange }: StatusPillsProps) {
 				type="button"
 				onClick={() => onChange(null)}
 				className={cn(
-					"inline-flex items-center gap-1.5 h-7.5 px-3 rounded-full text-[12.5px] font-medium cursor-pointer transition-all border",
+					"inline-flex items-center gap-1.5 h-7.5 px-3 rounded-full text-[13.5px] font-medium cursor-pointer transition-all border",
 					active === null
 						? "text-text-hi border-border-strong bg-bg-3/50"
 						: "text-text-md border-border-soft bg-bg-1",
@@ -33,7 +35,7 @@ export function StatusPills({ library, active, onChange }: StatusPillsProps) {
 				Todos
 				<span
 					className={cn(
-						"text-[10.5px] pl-1.5 ml-0.5 border-l border-border-soft",
+						"text-[11.5px] pl-1.5 ml-0.5 border-l border-border-soft",
 						active === null ? "text-text-md" : "text-text-lo",
 					)}
 				>
@@ -50,24 +52,31 @@ export function StatusPills({ library, active, onChange }: StatusPillsProps) {
 						key={s.key}
 						onClick={() => onChange(isActive ? null : s.key)}
 						className={cn(
-							"inline-flex items-center gap-1.5 h-7.5 px-3 rounded-full text-[12.5px] font-medium cursor-pointer transition-all border",
+							"inline-flex items-center gap-1.5 h-7.5 px-3 rounded-full text-[13.5px] font-medium cursor-pointer transition-all border",
 							isActive
 								? "border-transparent"
 								: "text-text-md border-border-soft bg-bg-1",
 						)}
 						style={
 							isActive
-								? {
-										background: `oklch(0.25 0.06 ${s.hue} / 0.5)`,
-										borderColor: `oklch(0.5 0.15 ${s.hue} / 0.55)`,
-										color: "oklch(0.96 0.006 75)",
-										fontFamily: "inherit",
-									}
+								? theme === "light"
+									? {
+											background: s.bgColorLight,
+											borderColor: s.borderColorLight,
+											color: s.colorLight,
+											fontFamily: "inherit",
+										}
+									: {
+											background: `oklch(0.25 0.06 ${s.hue} / 0.5)`,
+											borderColor: `oklch(0.5 0.15 ${s.hue} / 0.55)`,
+											color: "oklch(0.96 0.006 75)",
+											fontFamily: "inherit",
+										}
 								: { fontFamily: "inherit" }
 						}
 					>
 						{s.label}
-						<span className="text-[10.5px] pl-1.5 ml-0.5 border-l border-border-soft text-text-lo">
+						<span className="text-[11.5px] pl-1.5 ml-0.5 border-l border-border-soft text-text-lo">
 							{count}
 						</span>
 					</button>

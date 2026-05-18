@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+﻿import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Download, Lock, Mail, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -69,7 +69,7 @@ function AccountPage() {
 	return (
 		<div className="max-w-xl mx-auto px-6 py-12 flex flex-col gap-10">
 			<div>
-				<p className="font-mono text-[10.5px] tracking-widest uppercase text-accent-bright mb-2">
+				<p className="font-mono text-[11.5px] tracking-widest uppercase text-accent-bright mb-2">
 					Conta
 				</p>
 				<h1 className="text-2xl font-semibold tracking-tight text-text-hi">
@@ -79,11 +79,11 @@ function AccountPage() {
 
 			{/* Edit account */}
 			<section className="flex flex-col gap-4">
-				<h2 className="text-[13px] font-semibold text-text-hi flex items-center gap-2">
+				<h2 className="text-[14px] font-semibold text-text-hi flex items-center gap-2">
 					<Mail size={14} className="text-accent-bright" />
 					Editar conta
 				</h2>
-				<p className="text-[12.5px] text-text-lo -mt-2">
+				<p className="text-[13.5px] text-text-lo -mt-2">
 					Informe a senha atual e altere o e-mail, a senha, ou ambos.
 				</p>
 				<form onSubmit={onUpdateSubmit} className="flex flex-col gap-3">
@@ -96,7 +96,7 @@ function AccountPage() {
 							className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 						/>
 						{updateErrors.currentPassword && (
-							<p className="text-[13px] m-0 text-error">
+							<p className="text-[14px] m-0 text-error">
 								{updateErrors.currentPassword.message}
 							</p>
 						)}
@@ -113,7 +113,7 @@ function AccountPage() {
 							className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 						/>
 						{updateErrors.email && (
-							<p className="text-[13px] m-0 text-error">
+							<p className="text-[14px] m-0 text-error">
 								{updateErrors.email.message}
 							</p>
 						)}
@@ -130,19 +130,19 @@ function AccountPage() {
 							className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 						/>
 						{updateErrors.newPassword && (
-							<p className="text-[13px] m-0 text-error">
+							<p className="text-[14px] m-0 text-error">
 								{updateErrors.newPassword.message}
 							</p>
 						)}
 					</div>
 
 					{updateMutation.error && (
-						<p className="text-[13px] m-0 text-error">
+						<p className="text-[14px] m-0 text-error">
 							{updateMutation.error.message}
 						</p>
 					)}
 					{updateSuccess && (
-						<p className="text-[11.5px] m-0 text-accent-bright">
+						<p className="text-[12.5px] m-0 text-accent-bright">
 							Dados atualizados com sucesso.
 						</p>
 					)}
@@ -151,7 +151,7 @@ function AccountPage() {
 						variant="outline"
 						type="submit"
 						disabled={updateMutation.isPending}
-						className="w-fit h-9 rounded-[8px] mt-1 text-[12.5px]"
+						className="w-fit h-9 rounded-[8px] mt-1 text-[13.5px]"
 					>
 						<Lock size={12} />
 						{updateMutation.isPending ? "Salvando..." : "Salvar alterações"}
@@ -163,11 +163,11 @@ function AccountPage() {
 
 			{/* Export data */}
 			<section className="flex flex-col gap-3">
-				<h2 className="text-[13px] font-semibold text-text-hi flex items-center gap-2">
+				<h2 className="text-[14px] font-semibold text-text-hi flex items-center gap-2">
 					<Download size={14} className="text-accent-bright" />
 					Exportar meus dados
 				</h2>
-				<p className="text-[12.5px] text-text-lo">
+				<p className="text-[13.5px] text-text-lo">
 					Baixe um arquivo JSON com todos os seus dados — perfil e biblioteca
 					completa. Seu direito de portabilidade pela LGPD (Art. 19).
 				</p>
@@ -175,13 +175,13 @@ function AccountPage() {
 					variant="outline"
 					onClick={handleExport}
 					disabled={exportMutation.isPending}
-					className="w-fit h-9 rounded-[8px] text-[12.5px]"
+					className="w-fit h-9 rounded-[8px] text-[13.5px]"
 				>
 					<Download size={12} />
 					{exportMutation.isPending ? "Preparando..." : "Baixar dados (.json)"}
 				</Button>
 				{exportMutation.error && (
-					<p className="text-[13px] m-0 text-error">
+					<p className="text-[14px] m-0 text-error">
 						{exportMutation.error.message}
 					</p>
 				)}
@@ -191,11 +191,11 @@ function AccountPage() {
 
 			{/* Delete account */}
 			<section className="flex flex-col gap-3">
-				<h2 className="text-[13px] font-semibold text-text-hi flex items-center gap-2">
+				<h2 className="text-[14px] font-semibold text-text-hi flex items-center gap-2">
 					<Trash2 size={14} className="text-error" />
 					Excluir conta
 				</h2>
-				<p className="text-[12.5px] text-text-lo">
+				<p className="text-[13.5px] text-text-lo">
 					Esta ação remove permanentemente sua conta e toda a sua biblioteca.
 					Não há como desfazer. Seu direito de exclusão pela LGPD (Art. 18).
 				</p>
@@ -204,7 +204,7 @@ function AccountPage() {
 					<Button
 						variant="outline"
 						onClick={() => setDeleteOpen(true)}
-						className="w-fit h-9 rounded-[8px] text-[12.5px] text-error border-error/30 hover:bg-error/10"
+						className="w-fit h-9 rounded-[8px] text-[13.5px] text-error border-error/30 hover:bg-error/10"
 					>
 						<Trash2 size={12} />
 						Excluir minha conta
@@ -214,7 +214,7 @@ function AccountPage() {
 						onSubmit={onDeleteSubmit}
 						className="flex flex-col gap-3 p-4 rounded-lg border border-error/30 bg-error/5"
 					>
-						<p className="text-[12.5px] text-text-md">
+						<p className="text-[13.5px] text-text-md">
 							Para confirmar, insira sua senha abaixo:
 						</p>
 						<div className="flex flex-col gap-1.5">
@@ -226,13 +226,13 @@ function AccountPage() {
 								autoFocus
 							/>
 							{deleteErrors.password && (
-								<p className="text-[13px] m-0 text-error">
+								<p className="text-[14px] m-0 text-error">
 									{deleteErrors.password.message}
 								</p>
 							)}
 						</div>
 						{deleteMutation.error && (
-							<p className="text-[13px] m-0 text-error">
+							<p className="text-[14px] m-0 text-error">
 								{deleteMutation.error.message}
 							</p>
 						)}
@@ -241,7 +241,7 @@ function AccountPage() {
 								variant="outline"
 								type="submit"
 								disabled={deleteMutation.isPending}
-								className="h-9 rounded-[8px] text-[12.5px] text-error border-error/40 hover:bg-error/10"
+								className="h-9 rounded-[8px] text-[13.5px] text-error border-error/40 hover:bg-error/10"
 							>
 								{deleteMutation.isPending
 									? "Excluindo..."
@@ -251,7 +251,7 @@ function AccountPage() {
 								variant="ghost"
 								type="button"
 								onClick={() => setDeleteOpen(false)}
-								className="h-9 rounded-[8px] text-[12.5px] text-text-lo"
+								className="h-9 rounded-[8px] text-[13.5px] text-text-lo"
 							>
 								Cancelar
 							</Button>
@@ -260,7 +260,7 @@ function AccountPage() {
 				)}
 			</section>
 
-			<div className="pt-2 border-t border-border-soft flex gap-4 text-[11.5px] text-text-lo">
+			<div className="pt-2 border-t border-border-soft flex gap-4 text-[12.5px] text-text-lo">
 				<a
 					href="/privacy"
 					className="text-accent-bright no-underline hover:underline"

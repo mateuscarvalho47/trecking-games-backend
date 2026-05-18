@@ -11,6 +11,10 @@ interface AppStore {
 	searchOpen: boolean;
 	setSearchOpen: (open: boolean) => void;
 
+	// Sidebar visibility — desktop only
+	sidebarOpen: boolean;
+	toggleSidebar: () => void;
+
 	// Library UI state — persisted so survives navigation
 	libraryView: LibraryView;
 	setLibraryView: (view: LibraryView) => void;
@@ -36,6 +40,10 @@ export const useAppStore = create<AppStore>()(
 			// Search modal — not persisted, but in same store for convenience
 			searchOpen: false,
 			setSearchOpen: (open) => set({ searchOpen: open }),
+
+			// Sidebar
+			sidebarOpen: true,
+			toggleSidebar: () => set((s) => ({ sidebarOpen: !s.sidebarOpen })),
 
 			// Library state — persisted
 			libraryView: "grid",
@@ -63,6 +71,7 @@ export const useAppStore = create<AppStore>()(
 				libraryView: state.libraryView,
 				librarySortField: state.librarySortField,
 				theme: state.theme,
+				sidebarOpen: state.sidebarOpen,
 			}),
 		},
 	),

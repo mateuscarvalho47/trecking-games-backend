@@ -1,4 +1,4 @@
-import type { LibraryStats } from "@/types/api";
+﻿import type { LibraryStats } from "@/types/api";
 
 interface HistogramProps {
 	distribution: LibraryStats["ratingDistribution"];
@@ -33,13 +33,13 @@ export function Histogram({ distribution }: HistogramProps) {
 								}}
 							>
 								{count > 0 && (
-									<span className="text-[10px] text-text-hi font-semibold">
+									<span className="text-[11px] text-text-hi font-semibold">
 										{count}
 									</span>
 								)}
 							</div>
 						</div>
-						<div className="text-center text-[10.5px] text-text-lo">
+						<div className="text-center text-[11.5px] text-text-lo">
 							{rating}
 						</div>
 					</div>

@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+﻿import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { useLibrary } from "@/features/library/hooks/useLibrary";
 import { STATUSES } from "@/shared/constants/statuses";
@@ -93,10 +93,10 @@ export function DashboardScreen() {
 			<div className="flex items-end justify-between gap-3 pb-5.5 mb-5.5 border-b border-border-soft flex-wrap">
 				<div>
 					<div className="page-overline">Início</div>
-					<h1 className="text-[28px] font-semibold tracking-tight m-0 text-text-hi">
+					<h1 className="text-[29px] font-semibold tracking-tight m-0 text-text-hi">
 						Dashboard
 					</h1>
-					<p className="text-text-md text-[13.5px] mt-1.5 mb-0">
+					<p className="text-text-md text-[14.5px] mt-1.5 mb-0">
 						Visão geral da sua biblioteca
 					</p>
 				</div>

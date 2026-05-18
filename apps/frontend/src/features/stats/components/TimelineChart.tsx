@@ -1,4 +1,4 @@
-import type { LibraryStats } from "@/types/api";
+﻿import type { LibraryStats } from "@/types/api";
 
 interface TimelineChartProps {
 	timeline: LibraryStats["completedTimeline"];
@@ -7,7 +7,7 @@ interface TimelineChartProps {
 export function TimelineChart({ timeline }: TimelineChartProps) {
 	if (timeline.length < 2) {
 		return (
-			<div className="h-45 flex items-center justify-center text-text-lo text-[13px]">
+			<div className="h-45 flex items-center justify-center text-text-lo text-[14px]">
 				Dados insuficientes para o gráfico
 			</div>
 		);

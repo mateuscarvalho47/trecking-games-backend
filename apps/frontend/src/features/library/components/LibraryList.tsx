@@ -1,8 +1,16 @@
-import { useNavigate } from "@tanstack/react-router";
+﻿import { useNavigate } from "@tanstack/react-router";
 import { Cover } from "@/shared/components/Cover";
 import { StatusBadge } from "@/shared/components/StatusBadge";
 import { STATUS_BY_KEY } from "@/shared/constants/statuses";
 import type { LibraryEntry } from "@/types/api";
+
+function fmtDate(iso: string) {
+	return new Date(iso).toLocaleDateString("pt-BR", {
+		day: "2-digit",
+		month: "short",
+		year: "2-digit",
+	});
+}
 
 interface LibraryListProps {
 	games: LibraryEntry[];
@@ -16,7 +24,7 @@ const COLS = [
 	"Horas",
 	"Adicionado",
 ];
-const DESKTOP_GRID = "48px 2.2fr 1.1fr 1fr 0.9fr 0.7fr";
+const DESKTOP_GRID = "48px 2.2fr 1.1fr 1fr 0.9fr 0.7fr 0.85fr";
 const MOBILE_GRID = "40px 1fr auto";
 
 export function LibraryList({ games }: LibraryListProps) {
@@ -26,7 +34,7 @@ export function LibraryList({ games }: LibraryListProps) {
 		<div className="flex flex-col bg-bg-1 border border-border-soft rounded-lg overflow-hidden">
 			{/* Header — desktop only */}
 			<div
-				className="hidden md:grid gap-3.5 items-center px-4 py-3 font-mono text-[10.5px] uppercase tracking-[0.06em] text-text-lo border-b border-border-soft bg-bg-2"
+				className="hidden md:grid gap-3.5 items-center px-4 py-3 font-mono text-[11.5px] uppercase tracking-[0.06em] text-text-lo border-b border-border-soft bg-bg-2"
 				style={{ gridTemplateColumns: DESKTOP_GRID }}
 			>
 				<div />
@@ -56,7 +64,7 @@ export function LibraryList({ games }: LibraryListProps) {
 								params: { igdbId: String(game.igdbId) },
 							})
 						}
-						className="bg-transparent border-0 cursor-pointer text-left text-[13px] transition-[background] w-full hover:bg-bg-2"
+						className="bg-transparent border-0 cursor-pointer text-left text-[14px] transition-[background] w-full hover:bg-bg-2"
 						style={{ borderBottom: borderStyle, fontFamily: "inherit" }}
 					>
 						{/* Mobile row */}
@@ -80,16 +88,16 @@ export function LibraryList({ games }: LibraryListProps) {
 								<span className="text-text-hi font-medium truncate">
 									{game.name}
 								</span>
-								<span className="text-[11px] font-mono text-text-lo">
+								<span className="text-[12px] font-mono text-text-lo">
 									{game.userPlatform ?? game.platforms[0] ?? "—"}
 								</span>
 							</div>
 							<div className="flex flex-col items-end gap-1">
 								<StatusBadge status={game.status} size="sm" />
 								{game.rating != null && (
-									<span className="font-mono text-[12px] font-semibold text-text-hi">
+									<span className="font-mono text-[13px] font-semibold text-text-hi">
 										{game.rating}
-										<span className="text-[10px] text-text-lo">/10</span>
+										<span className="text-[11px] text-text-lo">/10</span>
 									</span>
 								)}
 							</div>
@@ -117,7 +125,7 @@ export function LibraryList({ games }: LibraryListProps) {
 									{game.name}
 								</span>
 								{game.genres.length > 0 && (
-									<span className="text-[11px] font-mono text-text-lo truncate">
+									<span className="text-[12px] font-mono text-text-lo truncate">
 										{game.genres.slice(0, 2).join(" · ")}
 									</span>
 								)}
@@ -125,21 +133,24 @@ export function LibraryList({ games }: LibraryListProps) {
 							<div>
 								<StatusBadge status={game.status} size="sm" />
 							</div>
-							<div className="text-text-md text-[12px]">
+							<div className="text-text-md text-[13px]">
 								{game.userPlatform ?? game.platforms[0] ?? "—"}
 							</div>
 							<div className="font-mono font-semibold text-text-hi">
 								{game.rating != null ? (
 									<>
 										{game.rating}
-										<span className="text-[10px] text-text-lo">/10</span>
+										<span className="text-[11px] text-text-lo">/10</span>
 									</>
 								) : (
 									<span className="text-text-dim">—</span>
 								)}
 							</div>
-							<div className="font-mono text-text-md text-[12px]">
+							<div className="font-mono text-text-md text-[13px]">
 								{game.hoursPlayed != null ? `${game.hoursPlayed}h` : "—"}
+							</div>
+							<div className="font-mono text-text-lo text-[13px]">
+								{fmtDate(game.createdAt)}
 							</div>
 						</div>
 					</button>

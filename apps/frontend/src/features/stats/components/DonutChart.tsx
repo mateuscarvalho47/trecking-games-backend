@@ -1,4 +1,4 @@
-import { STATUSES } from "@/shared/constants/statuses";
+﻿import { STATUSES } from "@/shared/constants/statuses";
 import type { LibraryStats } from "@/types/api";
 
 interface DonutChartProps {
@@ -66,7 +66,7 @@ export function DonutChart({ stats }: DonutChartProps) {
 					))}
 				</svg>
 				<div className="absolute inset-0 flex flex-col items-center justify-center">
-					<span className="text-[36px] font-bold tracking-tight text-text-hi leading-none">
+					<span className="text-[37px] font-bold tracking-tight text-text-hi leading-none">
 						{stats.totalGames}
 					</span>
 					<span className="mono-label mt-1">jogos</span>
@@ -80,7 +80,7 @@ export function DonutChart({ stats }: DonutChartProps) {
 					return (
 						<li
 							key={s.key}
-							className="grid gap-2.5 items-center text-[12.5px]"
+							className="grid gap-2.5 items-center text-[13.5px]"
 							style={{ gridTemplateColumns: "12px 80px 1fr 28px" }}
 						>
 							<div

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+﻿import { cn } from "@/lib/utils";
 import { STATUS_BY_KEY } from "@/shared/constants/statuses";
 import { useAppStore } from "@/store/useAppStore";
 import type { GameStatus } from "@/types/api";
@@ -19,7 +19,7 @@ export function StatusBadge({ status, size = "md" }: StatusBadgeProps) {
 		<span
 			className={cn(
 				"inline-flex items-center px-2 font-semibold tracking-[0.01em] rounded-[5px] whitespace-nowrap",
-				size === "sm" ? "h-5 text-[10px]" : "h-[22px] text-[11px]",
+				size === "sm" ? "h-5 text-[11px]" : "h-[22px] text-[12px]",
 			)}
 			style={{
 				border: `1px solid ${borderColor}`,

@@ -1,4 +1,4 @@
-import { LoginForm } from "./LoginForm";
+﻿import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 
 interface AuthShellProps {
@@ -122,14 +122,14 @@ export function AuthShell({ mode }: AuthShellProps) {
 							opacity="0.7"
 						/>
 					</svg>
-					<span className="text-[18px] font-bold tracking-[-0.02em] text-text-hi">
+					<span className="text-[19px] font-bold tracking-[-0.02em] text-text-hi">
 						Detonado
 					</span>
 				</div>
 
 				{mode === "login" ? <LoginForm /> : <RegisterForm />}
 
-				<div className="mt-5 pt-4 border-t border-border-soft font-mono text-[10.5px] text-text-dim text-center tracking-[0.04em]">
+				<div className="mt-5 pt-4 border-t border-border-soft font-mono text-[11.5px] text-text-dim text-center tracking-[0.04em]">
 					DETONADO · RASTREADOR DE JOGOS
 				</div>
 			</div>
