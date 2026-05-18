@@ -8,7 +8,7 @@ import { GameService } from './game.service.js';
 const igdbIdParam = z.object({ igdbId: z.coerce.number().int().positive() });
 
 export async function gameRoutes(app: FastifyInstance) {
-  const service = new GameService(app.igdb, app.redis);
+  const service = new GameService(app.igdb, app.redis, app.hltb);
   const controller = new GameController(service);
 
   app.get('/games/search', {

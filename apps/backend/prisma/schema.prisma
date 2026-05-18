@@ -48,6 +48,9 @@ model LibraryEntry {
   hoursPlayed  Decimal?      @db.Decimal(6, 1)
   notes        String?
   completedAt  DateTime?
+  hltbMain          Float?
+  hltbMainExtra     Float?
+  hltbCompletionist Float?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 

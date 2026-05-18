@@ -20,4 +20,9 @@ export type IgdbGame = {
   platforms: string[];
   genres: string[];
   summary?: string;
+  hltb?: {
+    mainHours: number | null;
+    mainExtraHours: number | null;
+    completionistHours: number | null;
+  } | null;
 };

@@ -11,6 +11,7 @@ import { libraryRoutes } from '@/modules/library/library.routes.js';
 import corsPlugin from '@/plugins/cors.js';
 import cronPlugin from '@/plugins/cron.js';
 import errorHandlerPlugin from '@/plugins/errorHandler.js';
+import hltbPlugin from '@/plugins/hltb.js';
 import igdbPlugin from '@/plugins/igdb.js';
 import prismaPlugin from '@/plugins/prisma.js';
 import rateLimitPlugin from '@/plugins/rateLimit.js';
@@ -37,6 +38,7 @@ export async function buildApp() {
   await app.register(sessionPlugin);
   await app.register(cronPlugin);
   await app.register(igdbPlugin);
+  await app.register(hltbPlugin);
   await app.register(swaggerPlugin);
 
   await app.register(authRoutes, { prefix: '/api' });

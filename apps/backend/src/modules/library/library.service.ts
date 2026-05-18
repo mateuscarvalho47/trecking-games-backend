@@ -44,6 +44,9 @@ export class LibraryService {
       status: input.status,
       userPlatform: input.userPlatform ?? null,
       completedAt,
+      hltbMain: game.hltb?.mainHours ?? null,
+      hltbMainExtra: game.hltb?.mainExtraHours ?? null,
+      hltbCompletionist: game.hltb?.completionistHours ?? null,
     });
   }
 

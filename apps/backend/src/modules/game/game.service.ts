@@ -1,3 +1,4 @@
+import type { HltbClient } from '@/lib/hltb/client.js';
 import type { IgdbClient } from '@/lib/igdb/client.js';
 import type { IgdbGame } from '@/lib/igdb/schemas.js';
 
@@ -13,6 +14,7 @@ export class GameService {
   constructor(
     private readonly igdb: IgdbClient,
     private readonly redis: RedisLike,
+    private readonly hltb: HltbClient,
   ) {}
 
   async search(q: string): Promise<IgdbGame[]> {
@@ -28,10 +30,21 @@ export class GameService {
   async getById(igdbId: number): Promise<IgdbGame | null> {
     const key = `igdb:game:${igdbId}`;
     const cached = await this.redis.get(key);
-    if (cached) return JSON.parse(cached) as IgdbGame;
+    if (cached) {
+      const cachedGame = JSON.parse(cached) as IgdbGame;
+      if (cachedGame.hltb !== undefined) return cachedGame;
+      const hltb = await this.hltb.findByName(cachedGame.name);
+      const merged = { ...cachedGame, hltb };
+      await this.redis.set(key, JSON.stringify(merged), { EX: GAME_TTL });
+      return merged;
+    }
 
     const game = await this.igdb.getGameById(igdbId);
-    if (game) await this.redis.set(key, JSON.stringify(game), { EX: GAME_TTL });
-    return game;
+    if (!game) return null;
+
+    const hltb = await this.hltb.findByName(game.name);
+    const merged = { ...game, hltb };
+    await this.redis.set(key, JSON.stringify(merged), { EX: GAME_TTL });
+    return merged;
   }
 }

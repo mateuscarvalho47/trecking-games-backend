@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Cover } from "@/shared/components/Cover";
+import { HltbStat } from "@/shared/components/HltbStat";
 import { StatusBadge } from "@/shared/components/StatusBadge";
 import { STATUS_BY_KEY, STATUSES } from "@/shared/constants/statuses";
 import { useAppStore } from "@/store/useAppStore";
@@ -159,6 +160,22 @@ export function DetailScreen({ game }: DetailScreenProps) {
 									</div>
 								))}
 							</div>
+
+							{(game.hltbMain != null ||
+								game.hltbMainExtra != null ||
+								game.hltbCompletionist != null) && (
+								<div className="mt-2">
+									<div className="mono-label mb-1.5">Tempo para zerar</div>
+									<div className="grid grid-cols-3 gap-2">
+										<HltbStat label="Main" hours={game.hltbMain} />
+										<HltbStat label="Main + Extra" hours={game.hltbMainExtra} />
+										<HltbStat
+											label="Completista"
+											hours={game.hltbCompletionist}
+										/>
+									</div>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>

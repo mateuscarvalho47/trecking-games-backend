@@ -84,6 +84,16 @@ export const searchQuerySchema = z.object({
   q: z.string().min(2),
 });
 
+export const hltbInfoSchema = z
+  .object({
+    mainHours: z.number().nullable(),
+    mainExtraHours: z.number().nullable(),
+    completionistHours: z.number().nullable(),
+  })
+  .nullable();
+
+export type HltbInfo = z.infer<typeof hltbInfoSchema>;
+
 export const gameSearchResultSchema = z.object({
   igdbId: z.number(),
   name: z.string(),
@@ -95,6 +105,7 @@ export const gameSearchResultSchema = z.object({
 
 export const gameDetailSchema = gameSearchResultSchema.extend({
   summary: z.string().optional(),
+  hltb: hltbInfoSchema.optional(),
 });
 
 export type SearchQuery = z.infer<typeof searchQuerySchema>;

@@ -16,7 +16,7 @@ const idParam = z.object({ id: z.cuid2() });
 
 export async function libraryRoutes(app: FastifyInstance) {
   const repo = new LibraryRepository(app.prisma);
-  const games = new GameService(app.igdb, app.redis);
+  const games = new GameService(app.igdb, app.redis, app.hltb);
   const service = new LibraryService(repo, games);
   const controller = new LibraryController(service);
 

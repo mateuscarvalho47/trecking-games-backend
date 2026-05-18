@@ -31,6 +31,9 @@ export const LibraryEntrySchema = z.object({
   hoursPlayed: z.preprocess((v) => (v != null ? Number(v) : null), z.number().nullable()),
   notes: z.string().nullable(),
   completedAt: z.date().nullable(),
+  hltbMain: z.number().nullable(),
+  hltbMainExtra: z.number().nullable(),
+  hltbCompletionist: z.number().nullable(),
   createdAt: z.date(),
   updatedAt: z.date(),
 });

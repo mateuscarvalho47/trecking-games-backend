@@ -6,6 +6,12 @@ export type GameStatus =
 	| "COMPLETED"
 	| "DROPPED";
 
+export interface HltbInfo {
+	mainHours: number | null;
+	mainExtraHours: number | null;
+	completionistHours: number | null;
+}
+
 export interface LibraryEntry {
 	id: string;
 	igdbId: number;
@@ -19,6 +25,9 @@ export interface LibraryEntry {
 	hoursPlayed?: number;
 	notes?: string;
 	completedAt?: string;
+	hltbMain: number | null;
+	hltbMainExtra: number | null;
+	hltbCompletionist: number | null;
 	createdAt: string;
 	updatedAt: string;
 }
@@ -30,6 +39,11 @@ export interface GameSearchResult {
 	releaseYear?: number;
 	platforms: string[];
 	genres: string[];
+}
+
+export interface GameDetail extends GameSearchResult {
+	summary?: string;
+	hltb?: HltbInfo | null;
 }
 
 export interface LibraryStats {
