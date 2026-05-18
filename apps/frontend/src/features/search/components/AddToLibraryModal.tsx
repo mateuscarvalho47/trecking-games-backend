@@ -65,10 +65,10 @@ export function AddToLibraryModal({
           {/* Grid: cover + fields (sem botões) */}
           <div
             className="flex flex-col sm:grid sm:gap-7 gap-5"
-            style={{ gridTemplateColumns: "240px 1fr" }}
+            style={{ gridTemplateColumns: "320px 1fr" }}
           >
             {/* Cover */}
-            <div className="w-[120px] sm:w-auto self-stretch rounded-md overflow-hidden mx-auto sm:mx-0">
+            <div className="w-[160px] sm:w-auto self-stretch rounded-md overflow-hidden mx-auto sm:mx-0">
               <Cover
                 game={{
                   name: game.name,
