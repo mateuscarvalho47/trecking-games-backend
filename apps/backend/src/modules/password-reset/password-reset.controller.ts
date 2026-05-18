@@ -1,6 +1,10 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { parse } from '@/lib/validate.js';
-import { requestPasswordResetSchema, verifyPasswordResetSchema } from './password-reset.schema.js';
+import {
+  checkPasswordResetSchema,
+  requestPasswordResetSchema,
+  verifyPasswordResetSchema,
+} from './password-reset.schema.js';
 import type { PasswordResetService } from './password-reset.service.js';
 
 export class PasswordResetController {
@@ -12,6 +16,12 @@ export class PasswordResetController {
     return reply.send({
       message: 'Se o e-mail estiver cadastrado, você receberá o código em breve.',
     });
+  };
+
+  check = async (req: FastifyRequest, reply: FastifyReply) => {
+    const input = parse(checkPasswordResetSchema, req.body);
+    await this.service.check(input);
+    return reply.send({ message: 'Código válido.' });
   };
 
   verify = async (req: FastifyRequest, reply: FastifyReply) => {

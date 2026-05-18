@@ -3,7 +3,11 @@ import { z } from 'zod';
 import { UserRepository } from '@/modules/user/user.repository.js';
 import { PasswordResetController } from './password-reset.controller.js';
 import { PasswordResetRepository } from './password-reset.repository.js';
-import { requestPasswordResetSchema, verifyPasswordResetSchema } from './password-reset.schema.js';
+import {
+  checkPasswordResetSchema,
+  requestPasswordResetSchema,
+  verifyPasswordResetSchema,
+} from './password-reset.schema.js';
 import { PasswordResetService } from './password-reset.service.js';
 
 const messageResponse = z.object({ message: z.string() });
@@ -23,6 +27,17 @@ export async function passwordResetRoutes(app: FastifyInstance) {
       response: { 200: messageResponse },
     },
     handler: controller.request,
+  });
+
+  app.post('/password-reset/check', {
+    config: { rateLimit: { max: 10, timeWindow: '5 minutes' } },
+    schema: {
+      tags: ['password-reset'],
+      summary: 'Validar código de recuperação (sem consumir)',
+      body: checkPasswordResetSchema,
+      response: { 200: messageResponse },
+    },
+    handler: controller.check,
   });
 
   app.post('/password-reset/verify', {

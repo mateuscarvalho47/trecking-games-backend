@@ -5,6 +5,7 @@ import type { UserRepository } from '@/modules/user/user.repository.js';
 import { InvalidOrExpiredResetTokenError } from './password-reset.errors.js';
 import type { PasswordResetRepository } from './password-reset.repository.js';
 import type {
+  CheckPasswordResetInput,
   RequestPasswordResetInput,
   VerifyPasswordResetInput,
 } from './password-reset.schema.js';
@@ -34,6 +35,17 @@ export class PasswordResetService {
     } catch {
       console.error('[password-reset] email failed for %s', user.email);
     }
+  }
+
+  async check(input: CheckPasswordResetInput) {
+    const user = await this.users.findByEmail(input.email);
+    if (!user) throw new InvalidOrExpiredResetTokenError();
+
+    const active = await this.tokens.findActiveTokensByUserId(user.id);
+    for (const t of active) {
+      if (await verifyPassword(t.codeHash, input.code)) return;
+    }
+    throw new InvalidOrExpiredResetTokenError();
   }
 
   async verify(input: VerifyPasswordResetInput) {

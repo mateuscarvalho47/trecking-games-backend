@@ -66,6 +66,10 @@ export function requestPasswordReset(data: { email: string }) {
 	return api.post<{ message: string }>("/password-reset/request", data);
 }
 
+export function checkPasswordReset(data: { email: string; code: string }) {
+	return api.post<{ message: string }>("/password-reset/check", data);
+}
+
 export function verifyPasswordReset(data: {
 	email: string;
 	code: string;

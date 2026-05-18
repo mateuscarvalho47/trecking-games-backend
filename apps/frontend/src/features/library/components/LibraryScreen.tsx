@@ -1,5 +1,5 @@
 ﻿import { BookMarked, LayoutGrid, List, Search } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -23,6 +23,20 @@ export function LibraryScreen() {
 	const filters = useLibraryFilters(library);
 	const { setOpen } = useSearchModal();
 	const [sortMenuOpen, setSortMenuOpen] = useState(false);
+
+	useEffect(() => {
+		if (!sortMenuOpen) return;
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key === "Escape") setSortMenuOpen(false);
+		};
+		const onClick = () => setSortMenuOpen(false);
+		window.addEventListener("keydown", onKey);
+		window.addEventListener("click", onClick);
+		return () => {
+			window.removeEventListener("keydown", onKey);
+			window.removeEventListener("click", onClick);
+		};
+	}, [sortMenuOpen]);
 
 	const currentSortLabel =
 		SORT_OPTIONS.find((o) => o.value === filters.sort)?.label ?? "Ordenar";
@@ -90,7 +104,7 @@ export function LibraryScreen() {
 							value={filters.search}
 							onChange={(e) => filters.setSearch(e.target.value)}
 							placeholder="Filtrar..."
-							className="flex-1 h-full p-0 min-w-0 bg-transparent border-0 shadow-none text-text-hi text-[14px] placeholder:text-text-lo focus-visible:ring-0"
+							className="flex-1 h-full p-0 min-w-0 bg-transparent dark:bg-transparent border-0 shadow-none text-text-hi text-[14px] placeholder:text-text-lo focus-visible:ring-0 focus-visible:border-0"
 						/>
 					</div>
 
@@ -98,16 +112,22 @@ export function LibraryScreen() {
 					<div className="relative">
 						<button
 							type="button"
-							onClick={() => setSortMenuOpen((o) => !o)}
+							onClick={(e) => {
+								e.stopPropagation();
+								setSortMenuOpen((o) => !o);
+							}}
 							className="inline-flex items-center gap-1.5 h-8 px-2.5 bg-bg-2 border border-border rounded-[7px] text-text-md cursor-pointer text-[13.5px] font-medium"
 							style={{ fontFamily: "inherit" }}
 						>
 							{currentSortLabel} ↕
 						</button>
 						{sortMenuOpen && (
+							// biome-ignore lint/a11y/noStaticElementInteractions: dropdown content should not bubble to window click handler
 							<div
 								className="absolute right-0 top-[calc(100%+4px)] bg-bg-2 border border-border rounded-[8px] p-1 min-w-40 z-10"
 								style={{ boxShadow: "0 6px 24px oklch(0 0 0 / 0.4)" }}
+								onClick={(e) => e.stopPropagation()}
+								onKeyDown={(e) => e.stopPropagation()}
 							>
 								{SORT_OPTIONS.map((opt) => (
 									<button

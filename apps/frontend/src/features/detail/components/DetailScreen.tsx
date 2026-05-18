@@ -1,4 +1,5 @@
 ﻿import { useNavigate } from "@tanstack/react-router";
+import { Calendar } from "lucide-react";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -201,9 +202,9 @@ export function DetailScreen({ game }: DetailScreenProps) {
 								Editar entrada
 							</div>
 
-							<div className="grid grid-cols-1 sm:grid-cols-2 gap-4.5">
+							<div className="grid grid-cols-1 gap-4.5">
 								{/* Status picker */}
-								<div className="col-span-2">
+								<div>
 									<Label className="mono-label block mb-1.5">Status</Label>
 									<Controller
 										control={control}
@@ -344,7 +345,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 
 								{/* Rating slider */}
 								{["PAUSED", "COMPLETED", "DROPPED"].includes(status) && (
-									<div className="col-span-2">
+									<div>
 										<div className="flex items-baseline justify-between mb-1.5">
 											<Label className="mono-label">Avaliação</Label>
 											<span className="text-[17px] text-text-hi">
@@ -391,7 +392,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 								)}
 
 								{/* Notes */}
-								<div className="col-span-2">
+								<div>
 									<Label className="mono-label block mb-1.5">Notas</Label>
 									<Textarea
 										{...register("notes")}
@@ -407,11 +408,18 @@ export function DetailScreen({ game }: DetailScreenProps) {
 										<Label className="mono-label block mb-1.5">
 											Data de conclusão
 										</Label>
-										<Input
-											type="date"
-											{...register("completedAt")}
-											className="bg-bg-2 border-border text-text-hi h-11 text-base md:h-9.5 md:text-sm"
-										/>
+										<div className="relative">
+											<Input
+												type="date"
+												{...register("completedAt")}
+												style={{ colorScheme: theme }}
+												className="bg-bg-2 border-border text-text-hi h-9.5 text-sm w-full pr-9 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+											/>
+											<Calendar
+												size={15}
+												className="absolute right-3 top-1/2 -translate-y-1/2 text-text-lo pointer-events-none"
+											/>
+										</div>
 									</div>
 								)}
 							</div>

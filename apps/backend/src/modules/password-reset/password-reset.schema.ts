@@ -1,4 +1,6 @@
 export {
+  type CheckPasswordResetInput,
+  checkPasswordResetSchema,
   type RequestPasswordResetInput,
   requestPasswordResetSchema,
   type VerifyPasswordResetInput,

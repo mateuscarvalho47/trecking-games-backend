@@ -1,4 +1,4 @@
-﻿import { useNavigate } from "@tanstack/react-router";
+﻿import { Link, useNavigate } from "@tanstack/react-router";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -80,12 +80,12 @@ export function LoginForm() {
 			</div>
 
 			<div className="flex justify-end -mt-1">
-				<a
-					href="/forgot-password"
+				<Link
+					to="/forgot-password"
 					className="text-[12.5px] text-accent-bright no-underline hover:underline"
 				>
 					Esqueci minha senha
-				</a>
+				</Link>
 			</div>
 
 			{login.error && !emailNotVerified && (
@@ -127,12 +127,12 @@ export function LoginForm() {
 
 			<p className="text-center text-[13.5px] text-text-lo mt-1">
 				Não tem conta?{" "}
-				<a
-					href="/register"
+				<Link
+					to="/register"
 					className="text-accent-bright font-semibold no-underline"
 				>
 					Criar conta
-				</a>
+				</Link>
 			</p>
 		</form>
 	);

@@ -78,52 +78,13 @@ export function AuthShell({ mode, children }: AuthShellProps) {
 			<div className="relative z-10 w-full max-w-105 rounded-xl border border-border p-8 backdrop-blur-xl bg-bg-1/85 shadow-panel">
 				{/* Brand */}
 				<div className="flex items-center gap-2.5 mb-7">
-					<svg
-						role="img"
-						aria-label="Detonado"
+					<img
+						src="/logo.svg"
+						alt="Detonado"
 						width="22"
 						height="22"
-						viewBox="0 0 22 22"
-						fill="none"
-						className="text-accent-bright"
-					>
-						<rect
-							x="2"
-							y="2"
-							width="8"
-							height="8"
-							rx="2"
-							fill="currentColor"
-							opacity="0.9"
-						/>
-						<rect
-							x="12"
-							y="2"
-							width="8"
-							height="8"
-							rx="2"
-							fill="currentColor"
-							opacity="0.5"
-						/>
-						<rect
-							x="2"
-							y="12"
-							width="8"
-							height="8"
-							rx="2"
-							fill="currentColor"
-							opacity="0.5"
-						/>
-						<rect
-							x="12"
-							y="12"
-							width="8"
-							height="8"
-							rx="2"
-							fill="currentColor"
-							opacity="0.7"
-						/>
-					</svg>
+						className="rounded-md"
+					/>
 					<span className="text-[19px] font-bold tracking-[-0.02em] text-text-hi">
 						Detonado
 					</span>

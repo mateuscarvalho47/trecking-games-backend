@@ -33,6 +33,8 @@ const PUBLIC_ROUTES = [
 	"/login",
 	"/register",
 	"/verify-email",
+	"/forgot-password",
+	"/reset-password",
 	"/privacy",
 	"/terms",
 ];
@@ -40,6 +42,8 @@ const NO_SHELL_ROUTES = [
 	"/login",
 	"/register",
 	"/verify-email",
+	"/forgot-password",
+	"/reset-password",
 	"/privacy",
 	"/terms",
 ];

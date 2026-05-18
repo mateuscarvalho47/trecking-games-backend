@@ -17,6 +17,7 @@ import {
 	verifyResetSchema,
 } from "../schema/authSchema";
 import {
+	checkPasswordReset,
 	consent,
 	deleteAccount,
 	exportData,
@@ -194,6 +195,10 @@ export function useRequestPasswordReset() {
 
 export function useVerifyPasswordReset() {
 	return useMutation({ mutationFn: verifyPasswordReset });
+}
+
+export function useCheckPasswordReset() {
+	return useMutation({ mutationFn: checkPasswordReset });
 }
 
 export function useRequestResetForm(onSuccess: (email: string) => void) {

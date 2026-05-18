@@ -1,4 +1,5 @@
-﻿import { Button } from "@/components/ui/button";
+﻿import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import {
 	Dialog,
 	DialogContent,
@@ -20,6 +21,14 @@ export function ConfirmRemoveModal({
 	onCancel,
 	isPending,
 }: ConfirmRemoveModalProps) {
+	useEffect(() => {
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key === "Escape") onCancel();
+		};
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, [onCancel]);
+
 	return (
 		<Dialog
 			open
