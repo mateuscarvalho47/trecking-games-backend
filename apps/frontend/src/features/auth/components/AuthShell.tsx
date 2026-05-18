@@ -1,8 +1,10 @@
-﻿import { LoginForm } from "./LoginForm";
+﻿import type { ReactNode } from "react";
+import { LoginForm } from "./LoginForm";
 import { RegisterForm } from "./RegisterForm";
 
 interface AuthShellProps {
-	mode: "login" | "register";
+	mode?: "login" | "register";
+	children?: ReactNode;
 }
 
 const TILES = [
@@ -14,7 +16,7 @@ const TILES = [
 	{ w: 56, h: 76, top: "30%", left: "2%", hue: 200, r: 10, delay: 0.4 },
 ];
 
-export function AuthShell({ mode }: AuthShellProps) {
+export function AuthShell({ mode, children }: AuthShellProps) {
 	return (
 		<div className="relative min-h-screen flex items-center justify-center px-5 py-10 bg-bg-0 overflow-hidden">
 			{/* Grid background */}
@@ -127,7 +129,7 @@ export function AuthShell({ mode }: AuthShellProps) {
 					</span>
 				</div>
 
-				{mode === "login" ? <LoginForm /> : <RegisterForm />}
+				{children ?? (mode === "login" ? <LoginForm /> : <RegisterForm />)}
 
 				<div className="mt-5 pt-4 border-t border-border-soft font-mono text-[11.5px] text-text-dim text-center tracking-[0.04em]">
 					DETONADO · RASTREADOR DE JOGOS

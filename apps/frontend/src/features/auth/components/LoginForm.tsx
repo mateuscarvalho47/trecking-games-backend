@@ -79,6 +79,15 @@ export function LoginForm() {
 				)}
 			</div>
 
+			<div className="flex justify-end -mt-1">
+				<a
+					href="/forgot-password"
+					className="text-[12.5px] text-accent-bright no-underline hover:underline"
+				>
+					Esqueci minha senha
+				</a>
+			</div>
+
 			{login.error && !emailNotVerified && (
 				<p className="text-[14px] m-0 text-error">{login.error.message}</p>
 			)}

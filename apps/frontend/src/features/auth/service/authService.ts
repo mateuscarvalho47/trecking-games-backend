@@ -61,3 +61,16 @@ export function consent() {
 export function exportData() {
 	return api.get<unknown>("/auth/export");
 }
+
+export function requestPasswordReset(data: { email: string }) {
+	return api.post<{ message: string }>("/password-reset/request", data);
+}
+
+export function verifyPasswordReset(data: {
+	email: string;
+	code: string;
+	password: string;
+	confirmPassword: string;
+}) {
+	return api.post<{ message: string }>("/password-reset/verify", data);
+}

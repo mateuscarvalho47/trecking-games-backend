@@ -28,11 +28,29 @@ export const deleteAccountSchema = z.object({
   password: z.string().min(1, 'Senha obrigatória para confirmar a exclusão'),
 });
 
+export const requestPasswordResetSchema = z.object({
+  email: z.email(),
+});
+
+export const verifyPasswordResetSchema = z
+  .object({
+    email: z.email(),
+    code: z.string().regex(/^\d{6}$/, 'O código deve ter 6 dígitos'),
+    password: z.string().min(8).max(100),
+    confirmPassword: z.string().min(8).max(100),
+  })
+  .refine((d) => d.password === d.confirmPassword, {
+    message: 'As senhas não coincidem',
+    path: ['confirmPassword'],
+  });
+
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
 export type ResendVerificationInput = z.infer<typeof resendVerificationSchema>;
 export type UpdateAccountInput = z.infer<typeof updateAccountSchema>;
 export type DeleteAccountInput = z.infer<typeof deleteAccountSchema>;
+export type RequestPasswordResetInput = z.infer<typeof requestPasswordResetSchema>;
+export type VerifyPasswordResetInput = z.infer<typeof verifyPasswordResetSchema>;
 
 // Library
 export const LibraryStatusEnum = z.enum([

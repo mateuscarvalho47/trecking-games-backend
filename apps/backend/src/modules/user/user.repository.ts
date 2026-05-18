@@ -128,4 +128,12 @@ export class UserRepository {
       select: { id: true, email: true },
     });
   }
+
+  updatePasswordHash(id: string, passwordHash: string) {
+    return this.prisma.user.update({
+      where: { id },
+      data: { passwordHash },
+      select: { id: true },
+    });
+  }
 }

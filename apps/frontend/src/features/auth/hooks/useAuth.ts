@@ -8,9 +8,13 @@ import {
 	type LoginFormValues,
 	loginSchema,
 	type RegisterFormValues,
+	type RequestResetFormValues,
 	registerSchema,
+	requestResetSchema,
 	type UpdateAccountFormValues,
 	updateAccountSchema,
+	type VerifyResetFormValues,
+	verifyResetSchema,
 } from "../schema/authSchema";
 import {
 	consent,
@@ -20,9 +24,11 @@ import {
 	login,
 	logout,
 	register,
+	requestPasswordReset,
 	resendVerification,
 	updateAccount,
 	verifyEmail,
+	verifyPasswordReset,
 } from "../service/authService";
 
 export function useMe(opts?: { enabled?: boolean }) {
@@ -178,6 +184,46 @@ export function useDeleteAccountForm(onSuccess: () => void) {
 	const onSubmit = form.handleSubmit((values) =>
 		mutation.mutateAsync(values).then(onSuccess),
 	);
+
+	return { form, onSubmit, mutation };
+}
+
+export function useRequestPasswordReset() {
+	return useMutation({ mutationFn: requestPasswordReset });
+}
+
+export function useVerifyPasswordReset() {
+	return useMutation({ mutationFn: verifyPasswordReset });
+}
+
+export function useRequestResetForm(onSuccess: (email: string) => void) {
+	const mutation = useRequestPasswordReset();
+
+	const form = useForm<RequestResetFormValues>({
+		resolver: zodResolver(requestResetSchema),
+		defaultValues: { email: "" },
+	});
+
+	const onSubmit = form.handleSubmit(async (values) => {
+		await mutation.mutateAsync(values);
+		onSuccess(values.email);
+	});
+
+	return { form, onSubmit, mutation };
+}
+
+export function useVerifyResetForm(email: string, onSuccess: () => void) {
+	const mutation = useVerifyPasswordReset();
+
+	const form = useForm<VerifyResetFormValues>({
+		resolver: zodResolver(verifyResetSchema),
+		defaultValues: { email, code: "", password: "", confirmPassword: "" },
+	});
+
+	const onSubmit = form.handleSubmit(async (values) => {
+		await mutation.mutateAsync(values);
+		onSuccess();
+	});
 
 	return { form, onSubmit, mutation };
 }

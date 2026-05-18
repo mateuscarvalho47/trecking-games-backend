@@ -13,15 +13,29 @@ datasource db {
 }
 
 model User {
-  id                     String         @id @default(cuid())
-  email                  String         @unique
+  id                     String               @id @default(cuid())
+  email                  String               @unique
   passwordHash           String
-  emailVerified          Boolean        @default(false)
-  emailVerificationToken String?        @unique
+  emailVerified          Boolean              @default(false)
+  emailVerificationToken String?              @unique
   consentedAt            DateTime?
-  createdAt              DateTime       @default(now())
-  updatedAt              DateTime       @updatedAt
+  createdAt              DateTime             @default(now())
+  updatedAt              DateTime             @updatedAt
   libraryEntries         LibraryEntry[]
+  passwordResetTokens    PasswordResetToken[]
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  codeHash  String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId, usedAt, expiresAt])
+  @@map("password_reset_tokens")
 }
 
 enum LibraryStatus {

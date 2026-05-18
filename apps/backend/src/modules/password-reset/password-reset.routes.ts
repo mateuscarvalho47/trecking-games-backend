@@ -1,0 +1,38 @@
+import type { FastifyInstance } from 'fastify';
+import { z } from 'zod';
+import { UserRepository } from '@/modules/user/user.repository.js';
+import { PasswordResetController } from './password-reset.controller.js';
+import { PasswordResetRepository } from './password-reset.repository.js';
+import { requestPasswordResetSchema, verifyPasswordResetSchema } from './password-reset.schema.js';
+import { PasswordResetService } from './password-reset.service.js';
+
+const messageResponse = z.object({ message: z.string() });
+
+export async function passwordResetRoutes(app: FastifyInstance) {
+  const userRepo = new UserRepository(app.prisma);
+  const tokenRepo = new PasswordResetRepository(app.prisma);
+  const service = new PasswordResetService(userRepo, tokenRepo);
+  const controller = new PasswordResetController(service);
+
+  app.post('/password-reset/request', {
+    config: { rateLimit: { max: 5, timeWindow: '5 minutes' } },
+    schema: {
+      tags: ['password-reset'],
+      summary: 'Solicitar código de recuperação de senha',
+      body: requestPasswordResetSchema,
+      response: { 200: messageResponse },
+    },
+    handler: controller.request,
+  });
+
+  app.post('/password-reset/verify', {
+    config: { rateLimit: { max: 10, timeWindow: '5 minutes' } },
+    schema: {
+      tags: ['password-reset'],
+      summary: 'Confirmar código e redefinir senha',
+      body: verifyPasswordResetSchema,
+      response: { 200: messageResponse },
+    },
+    handler: controller.verify,
+  });
+}

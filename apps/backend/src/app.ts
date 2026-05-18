@@ -8,6 +8,7 @@ import { env } from '@/config/env.js';
 import { authRoutes } from '@/modules/auth/auth.routes.js';
 import { gameRoutes } from '@/modules/game/game.routes.js';
 import { libraryRoutes } from '@/modules/library/library.routes.js';
+import { passwordResetRoutes } from '@/modules/password-reset/password-reset.routes.js';
 import corsPlugin from '@/plugins/cors.js';
 import cronPlugin from '@/plugins/cron.js';
 import errorHandlerPlugin from '@/plugins/errorHandler.js';
@@ -42,6 +43,7 @@ export async function buildApp() {
   await app.register(swaggerPlugin);
 
   await app.register(authRoutes, { prefix: '/api' });
+  await app.register(passwordResetRoutes, { prefix: '/api' });
   await app.register(gameRoutes, { prefix: '/api' });
   await app.register(libraryRoutes, { prefix: '/api' });
 
