@@ -14,6 +14,7 @@ import type { LibraryEntry } from "@/types/api";
 import { useDetailForm } from "../hooks/useDetailForm";
 import { useRemoveLibraryEntry } from "../hooks/useLibraryEntry";
 import { ConfirmRemoveModal } from "./ConfirmRemoveModal";
+import { HltbPraise } from "./HltbPraise";
 
 const RATING_TICKS = Array.from({ length: 9 }, (_, i) => i);
 
@@ -176,6 +177,17 @@ export function DetailScreen({ game }: DetailScreenProps) {
 									</div>
 								</div>
 							)}
+
+							{status === "COMPLETED" &&
+								game.hoursPlayed != null &&
+								game.hoursPlayed > 0 &&
+								game.hltbMain != null &&
+								game.hltbMain > 0 && (
+									<HltbPraise
+										hoursPlayed={game.hoursPlayed}
+										hltbMain={game.hltbMain}
+									/>
+								)}
 						</div>
 					</div>
 				</div>
