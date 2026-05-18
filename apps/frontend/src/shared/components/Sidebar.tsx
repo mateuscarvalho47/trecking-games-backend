@@ -45,7 +45,7 @@ export function Sidebar({
 		<aside
 			className="sticky top-0 self-start h-screen flex flex-col gap-3 p-[18px_14px]"
 			style={{
-				width: 232,
+				width: 244,
 				background: "var(--color-bg-1)",
 				borderRight: "1px solid var(--color-border-soft)",
 			}}
@@ -60,7 +60,7 @@ export function Sidebar({
 					className="rounded-md"
 				/>
 				<span className="text-[17px] font-bold tracking-[-0.02em] text-text-hi">
-					Cartucheira
+					Detonado
 				</span>
 			</div>
 
@@ -152,45 +152,50 @@ export function Sidebar({
 					</Button>
 				</div>
 
-				<div className="flex items-center gap-2.5 p-2 rounded-md bg-bg-2 border border-border-soft">
-					<div
-						className="flex items-center justify-center shrink-0 text-white text-[11px] font-bold rounded-sm"
-						style={{
-							width: 28,
-							height: 28,
-							background:
-								"linear-gradient(135deg, oklch(0.5 0.15 145), oklch(0.7 0.15 185))",
-							letterSpacing: "0.02em",
-						}}
-					>
-						{initials}
-					</div>
-					<div className="flex-1 min-w-0">
-						<div className="text-[12px] font-semibold text-text-hi">
-							Minha conta
+				<div className="flex flex-col gap-2.5 p-3 rounded-md bg-bg-2 border border-border-soft">
+					<div className="flex items-center gap-2.5">
+						<div
+							className="flex items-center justify-center shrink-0 text-white text-[11px] font-bold rounded-sm"
+							style={{
+								width: 32,
+								height: 32,
+								background:
+									"linear-gradient(135deg, oklch(0.5 0.2 17), oklch(0.55 0.18 350))",
+								letterSpacing: "0.02em",
+							}}
+						>
+							{initials}
 						</div>
-						<div className="text-[10.5px] truncate font-mono text-text-lo">
-							{me?.email ?? "—"}
+						<div className="flex-1 min-w-0">
+							<div className="text-[12px] font-semibold text-text-hi leading-tight">
+								Minha conta
+							</div>
+							<div className="text-[11px] truncate font-mono text-text-lo mt-0.5">
+								{me?.email ?? "—"}
+							</div>
 						</div>
 					</div>
-					<Button
-						variant="ghost"
-						size="icon-sm"
-						onClick={() => navigate({ to: "/account" })}
-						title="Configurações"
-						className="shrink-0 text-text-md"
-					>
-						<Settings size={14} />
-					</Button>
-					<Button
-						variant="ghost"
-						size="icon-sm"
-						onClick={() => logout.mutate()}
-						title="Sair"
-						className="shrink-0 text-text-md"
-					>
-						<LogOut size={14} />
-					</Button>
+					<div className="flex gap-1.5">
+						<Button
+							variant="ghost"
+							size="sm"
+							onClick={() => navigate({ to: "/account" })}
+							title="Configurações"
+							className="flex-1 h-7 text-[11.5px] text-text-md gap-1.5 justify-start px-2"
+						>
+							<Settings size={13} />
+							Configurações
+						</Button>
+						<Button
+							variant="ghost"
+							size="icon-sm"
+							onClick={() => logout.mutate()}
+							title="Sair"
+							className="shrink-0 h-7 w-7 text-text-md"
+						>
+							<LogOut size={13} />
+						</Button>
+					</div>
 				</div>
 			</div>
 		</aside>

@@ -75,7 +75,7 @@ export class AuthController {
   exportData = async (req: FastifyRequest, reply: FastifyReply) => {
     const data = await this.auth.exportData(req.session.userId as string);
     return reply
-      .header('Content-Disposition', 'attachment; filename="cartucheira-dados.json"')
+      .header('Content-Disposition', 'attachment; filename="detonado-dados.json"')
       .send(data);
   };
 }

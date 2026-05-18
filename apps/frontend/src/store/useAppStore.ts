@@ -57,7 +57,7 @@ export const useAppStore = create<AppStore>()(
 				set((s) => ({ theme: s.theme === "dark" ? "light" : "dark" })),
 		}),
 		{
-			name: "cartucheira-ui",
+			name: "detonado-ui",
 			// Only persist non-transient UI state
 			partialize: (state) => ({
 				libraryView: state.libraryView,

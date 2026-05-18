@@ -25,10 +25,9 @@ function PrivacyPage() {
 						1. Quem somos
 					</h2>
 					<p>
-						A <strong className="text-text-hi">Cartucheira</strong> é um
-						aplicativo de rastreamento de biblioteca de jogos pessoal. O
-						controlador dos seus dados é o desenvolvedor responsável pelo
-						serviço (contato:{" "}
+						O <strong className="text-text-hi">Detonado</strong> é um aplicativo
+						de rastreamento de biblioteca de jogos pessoal. O controlador dos
+						seus dados é o desenvolvedor responsável pelo serviço (contato:{" "}
 						<a
 							href="mailto:sac@carvalholabs.com.br"
 							className="text-accent-bright no-underline hover:underline"

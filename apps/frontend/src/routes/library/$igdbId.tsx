@@ -16,7 +16,7 @@ function DetailPage() {
 				<div
 					style={{
 						height: 300,
-						background: "oklch(0.16 0.007 28)",
+						background: "var(--color-bg-1)",
 						borderRadius: 14,
 					}}
 				/>
@@ -37,7 +37,7 @@ function DetailPage() {
 					textAlign: "center",
 				}}
 			>
-				<p style={{ color: "oklch(0.72 0.012 75)", fontSize: 14 }}>
+				<p style={{ color: "var(--color-text-md)", fontSize: 14 }}>
 					Jogo não encontrado na biblioteca.
 				</p>
 			</div>

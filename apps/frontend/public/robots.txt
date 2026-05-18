@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cartucheira.carvalholabs.com.br/sitemap.xml
+Sitemap: https://detonado.carvalholabs.com.br/sitemap.xml

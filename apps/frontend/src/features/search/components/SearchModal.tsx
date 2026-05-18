@@ -173,7 +173,7 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 											</div>
 											<div className="text-[11.5px] font-mono">
 												{owned ? (
-													<span style={{ color: "oklch(0.78 0.18 145)" }}>
+													<span style={{ color: "oklch(0.58 0.25 17)" }}>
 														✓ Na biblioteca
 													</span>
 												) : (

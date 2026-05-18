@@ -43,11 +43,11 @@ export function TimelineChart({ timeline }: TimelineChartProps) {
 				viewBox={`0 0 ${W} ${H}`}
 				preserveAspectRatio="xMidYMid meet"
 			>
-				<path d={areaD} fill="oklch(0.72 0.15 145 / 0.12)" />
+				<path d={areaD} fill="oklch(0.51 0.22 17 / 0.12)" />
 				<path
 					d={pathD}
 					fill="none"
-					stroke="oklch(0.72 0.15 145)"
+					stroke="oklch(0.51 0.22 17)"
 					strokeWidth={2}
 					strokeLinecap="round"
 					strokeLinejoin="round"
@@ -58,7 +58,7 @@ export function TimelineChart({ timeline }: TimelineChartProps) {
 						cx={p.x}
 						cy={p.y}
 						r={4}
-						fill="oklch(0.88 0.14 145)"
+						fill="oklch(0.65 0.22 17)"
 					/>
 				))}
 				{points

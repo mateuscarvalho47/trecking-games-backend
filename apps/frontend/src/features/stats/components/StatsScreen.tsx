@@ -119,7 +119,7 @@ export function StatsScreen() {
 								label: g.genre,
 								count: g.count,
 							}))}
-							color="oklch(0.72 0.15 145)"
+							color="oklch(0.51 0.22 17)"
 						/>
 					</Card>
 				</div>
@@ -132,7 +132,7 @@ export function StatsScreen() {
 								label: p.platform,
 								count: p.count,
 							}))}
-							color="oklch(0.78 0.18 145)"
+							color="oklch(0.58 0.25 17)"
 						/>
 					</Card>
 					<Card title="Distribuição de avaliações" sub="nota 0–10">

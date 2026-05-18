@@ -1,26 +1,35 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark" data-theme="dark">
   <head>
+    <script>
+      try {
+        const s = JSON.parse(localStorage.getItem('detonado-ui') || '{}');
+        const t = s.state?.theme || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        if (t === 'dark') document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+      } catch(_e) {}
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cartucheira — rastreador pessoal de jogos</title>
+    <title>Detonado — rastreador pessoal de jogos</title>
 
     <!-- SEO -->
-    <meta name="description" content="Cartucheira é seu rastreador pessoal de jogos. Organize sua biblioteca, acompanhe seu progresso e veja estatísticas do que você jogou." />
+    <meta name="description" content="Detonado é seu rastreador pessoal de jogos. Organize sua biblioteca, acompanhe seu progresso e veja estatísticas do que você jogou." />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://cartucheira.carvalholabs.com.br/" />
+    <link rel="canonical" href="https://detonado.carvalholabs.com.br/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Cartucheira" />
-    <meta property="og:title" content="Cartucheira — rastreador pessoal de jogos" />
+    <meta property="og:site_name" content="Detonado" />
+    <meta property="og:title" content="Detonado — rastreador pessoal de jogos" />
     <meta property="og:description" content="Organize sua biblioteca de jogos, acompanhe seu progresso e veja estatísticas do que você jogou." />
-    <meta property="og:url" content="https://cartucheira.carvalholabs.com.br/" />
+    <meta property="og:url" content="https://detonado.carvalholabs.com.br/" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Cartucheira — rastreador pessoal de jogos" />
+    <meta name="twitter:title" content="Detonado — rastreador pessoal de jogos" />
     <meta name="twitter:description" content="Organize sua biblioteca de jogos, acompanhe seu progresso e veja estatísticas do que você jogou." />
 
     <link rel="preload" href="/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />

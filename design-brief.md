@@ -1,8 +1,8 @@
-# Cartucheira — Design Brief para Claude Design
+# Detonado — Design Brief para Claude Design
 
 ## O que é o projeto
 
-**Cartucheira** é um rastreador pessoal de jogos. O usuário autentica, busca jogos pelo nome (integração com IGDB — base de dados global de jogos), adiciona à sua biblioteca com um status, e acompanha progresso, notas, horas jogadas e avaliações.
+**Detonado** é um rastreador pessoal de jogos. O usuário autentica, busca jogos pelo nome (integração com IGDB — base de dados global de jogos), adiciona à sua biblioteca com um status, e acompanha progresso, notas, horas jogadas e avaliações.
 
 Pense em algo como Letterboxd, mas para jogos.
 

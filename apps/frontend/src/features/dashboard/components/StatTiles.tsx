@@ -51,10 +51,10 @@ export function StatTiles({ stats }: StatTilesProps) {
 			{tiles.map((t, i) => (
 				<div
 					key={t.label}
-					className={`flex flex-col gap-2 p-5 px-5.5 relative ${tileBorder(i)}${t.accent ? " bg-[linear-gradient(180deg,transparent,oklch(0.4_0.08_145/0.12))]" : ""}`}
+					className={`flex flex-col gap-2 p-5 px-5.5 relative ${tileBorder(i)}${t.accent ? " bg-[linear-gradient(180deg,transparent,oklch(0.4_0.1_17/0.12))]" : ""}`}
 				>
 					{t.accent && (
-						<div className="absolute top-0 left-0 right-0 h-0.5 bg-[linear-gradient(90deg,transparent,oklch(0.72_0.15_145),transparent)]" />
+						<div className="absolute top-0 left-0 right-0 h-0.5 bg-[linear-gradient(90deg,transparent,oklch(0.51_0.22_17),transparent)]" />
 					)}
 					<div className="mono-label">{t.label}</div>
 					<div className="flex items-baseline gap-1">

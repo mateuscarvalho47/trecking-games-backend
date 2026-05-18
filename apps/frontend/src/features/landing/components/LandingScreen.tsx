@@ -105,21 +105,21 @@ export function LandingScreen() {
 				<div className="flex items-center gap-3 mb-10">
 					<img
 						src="/logo.svg"
-						alt="Cartucheira"
+						alt="Detonado"
 						width="36"
 						height="36"
 						className="rounded-[10px]"
 						fetchPriority="high"
 					/>
 					<span className="text-[28px] font-bold tracking-[-0.03em] text-text-hi">
-						Cartucheira
+						Detonado
 					</span>
 				</div>
 
 				{/* Headline */}
 				<h1
 					className="text-[30px] sm:text-[44px] font-bold tracking-[-0.03em] leading-[1.1] mb-4 text-text-hi"
-					style={{ textShadow: "0 0 80px oklch(0.7 0.15 145 / 0.3)" }}
+					style={{ textShadow: "0 0 80px oklch(0.5 0.18 17 / 0.3)" }}
 				>
 					Sua biblioteca de jogos,{" "}
 					<span style={{ color: "var(--color-accent-bright)" }}>
@@ -141,7 +141,7 @@ export function LandingScreen() {
 						style={{
 							background: "var(--color-primary)",
 							color: "var(--color-primary-foreground)",
-							boxShadow: "0 0 24px oklch(0.65 0.16 145 / 0.4)",
+							boxShadow: "0 0 24px oklch(0.5 0.18 17 / 0.4)",
 							fontFamily: "inherit",
 						}}
 					>
@@ -186,7 +186,7 @@ export function LandingScreen() {
 				</div>
 
 				<div className="mt-12 font-mono text-[10.5px] text-text-dim tracking-[0.08em]">
-					CARTUCHEIRA · RASTREADOR DE JOGOS
+					DETONADO · RASTREADOR DE JOGOS
 				</div>
 			</div>
 		</div>

@@ -9,4 +9,4 @@ export {
   resendVerificationSchema,
   type UpdateAccountInput,
   updateAccountSchema,
-} from '@cartucheira/shared';
+} from '@detonado/shared';

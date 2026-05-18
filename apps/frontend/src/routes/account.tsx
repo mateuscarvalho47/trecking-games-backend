@@ -59,7 +59,7 @@ function AccountPage() {
 				const url = URL.createObjectURL(blob);
 				const a = document.createElement("a");
 				a.href = url;
-				a.download = "cartucheira-dados.json";
+				a.download = "detonado-dados.json";
 				a.click();
 				URL.revokeObjectURL(url);
 			},

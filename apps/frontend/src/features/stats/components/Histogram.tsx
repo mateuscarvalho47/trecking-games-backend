@@ -26,9 +26,9 @@ export function Histogram({ distribution }: HistogramProps) {
 								style={{
 									height: `${heightPct}%`,
 									background: isMode
-										? "linear-gradient(180deg, oklch(0.88 0.14 145), oklch(0.72 0.15 145))"
+										? "linear-gradient(180deg, oklch(0.65 0.22 17), oklch(0.51 0.22 17))"
 										: count > 0
-											? "oklch(0.5 0.10 145)"
+											? "oklch(0.4 0.14 17)"
 											: "oklch(0.22 0.009 28)",
 								}}
 							>
