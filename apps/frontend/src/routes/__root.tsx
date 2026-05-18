@@ -113,7 +113,7 @@ function RootLayout() {
 			}}
 		>
 			{me && !NO_SHELL_ROUTES.includes(location.pathname) ? (
-				<div className="flex min-h-screen">
+				<div className="flex h-screen overflow-hidden">
 					<div
 						className="hidden lg:block shrink-0 overflow-hidden"
 						style={{
@@ -123,7 +123,7 @@ function RootLayout() {
 					>
 						<Sidebar me={me} libraryCount={library.length} />
 					</div>
-					<main className="flex-1 min-w-0 pb-20 lg:pb-0">
+					<main className="flex-1 min-w-0 overflow-y-auto pb-20 lg:pb-0">
 						<div
 							className="hidden lg:flex items-center h-10 px-3 sticky top-0 z-30"
 							style={{ background: "var(--color-background)" }}
