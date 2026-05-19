@@ -1,7 +1,12 @@
 import { BookMarked, LayoutGrid, List, Search } from "lucide-react";
-import { useEffect, useState } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { EmptyState } from "@/shared/components/EmptyState";
@@ -23,21 +28,6 @@ export function LibraryScreen() {
 	const { data: library = [], isLoading } = useLibrary();
 	const filters = useLibraryFilters(library);
 	const { setOpen } = useSearchModal();
-	const [sortMenuOpen, setSortMenuOpen] = useState(false);
-
-	useEffect(() => {
-		if (!sortMenuOpen) return;
-		const onKey = (e: KeyboardEvent) => {
-			if (e.key === "Escape") setSortMenuOpen(false);
-		};
-		const onClick = () => setSortMenuOpen(false);
-		window.addEventListener("keydown", onKey);
-		window.addEventListener("click", onClick);
-		return () => {
-			window.removeEventListener("keydown", onKey);
-			window.removeEventListener("click", onClick);
-		};
-	}, [sortMenuOpen]);
 
 	const currentSortLabel =
 		SORT_OPTIONS.find((o) => o.value === filters.sort)?.label ?? "Ordenar";
@@ -106,48 +96,36 @@ export function LibraryScreen() {
 					</div>
 
 					{/* Sort */}
-					<div className="relative">
-						<button
-							type="button"
-							onClick={(e) => {
-								e.stopPropagation();
-								setSortMenuOpen((o) => !o);
-							}}
-							className="inline-flex items-center gap-1.5 h-8 px-2.5 bg-bg-2 border border-border rounded-[7px] text-text-md cursor-pointer text-[13.5px] font-medium"
-						>
-							{currentSortLabel} ↕
-						</button>
-						{sortMenuOpen && (
-							// biome-ignore lint/a11y/noStaticElementInteractions: dropdown content should not bubble to window click handler
-							<div
-								className="absolute right-0 top-[calc(100%+4px)] bg-bg-2 border border-border rounded-[8px] p-1 min-w-40 z-10"
-								style={{ boxShadow: "0 6px 24px oklch(0 0 0 / 0.4)" }}
-								onClick={(e) => e.stopPropagation()}
-								onKeyDown={(e) => e.stopPropagation()}
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<button
+								type="button"
+								className="inline-flex items-center gap-1.5 h-8 px-2.5 bg-bg-2 border border-border rounded-[7px] text-text-md cursor-pointer text-[13.5px] font-medium"
 							>
-								{SORT_OPTIONS.map((opt) => (
-									<button
-										type="button"
-										key={opt.value}
-										onClick={() => {
-											filters.setSort(opt.value as typeof filters.sort);
-											setSortMenuOpen(false);
-										}}
-										className="flex items-center justify-between w-full px-2.5 py-1.5 bg-transparent border-0 text-[13.5px] cursor-pointer rounded-[5px] text-left"
-										style={{
-											color:
-												filters.sort === opt.value
-													? "var(--color-accent-bright)"
-													: "var(--color-text-md)",
-										}}
-									>
-										{opt.label}
-										{filters.sort === opt.value && <span>✓</span>}
-									</button>
-								))}
-							</div>
-						)}
-					</div>
+								{currentSortLabel} ↕
+							</button>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent align="end" className="min-w-40">
+							{SORT_OPTIONS.map((opt) => (
+								<DropdownMenuItem
+									key={opt.value}
+									onClick={() =>
+										filters.setSort(opt.value as typeof filters.sort)
+									}
+									className="flex items-center justify-between text-[13.5px]"
+									style={{
+										color:
+											filters.sort === opt.value
+												? "var(--color-accent-bright)"
+												: undefined,
+									}}
+								>
+									{opt.label}
+									{filters.sort === opt.value && <span>✓</span>}
+								</DropdownMenuItem>
+							))}
+						</DropdownMenuContent>
+					</DropdownMenu>
 
 					{/* View toggle */}
 					<div className="flex p-0.5 bg-bg-2 border border-border rounded-[8px]">

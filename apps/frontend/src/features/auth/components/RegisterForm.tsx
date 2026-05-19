@@ -1,6 +1,7 @@
 ﻿import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRegisterForm, useResendVerification } from "../hooks/useAuth";
@@ -121,21 +122,16 @@ export function RegisterForm() {
 			</div>
 
 			<div className="flex items-start gap-2.5 mt-1">
-				<input
+				<Checkbox
 					id="consent"
-					type="checkbox"
-					{...registerField("consent")}
-					value={undefined}
-					onChange={(e) =>
+					className="mt-0.5 shrink-0"
+					onCheckedChange={(checked) =>
 						form.setValue(
 							"consent",
-							e.target.checked ? true : (undefined as unknown as true),
-							{
-								shouldValidate: true,
-							},
+							checked ? true : (undefined as unknown as true),
+							{ shouldValidate: true },
 						)
 					}
-					className="mt-0.5 shrink-0 accent-[var(--color-accent-bright)] w-3.5 h-3.5 cursor-pointer"
 				/>
 				<label
 					htmlFor="consent"

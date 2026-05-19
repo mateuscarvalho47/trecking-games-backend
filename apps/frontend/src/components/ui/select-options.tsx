@@ -39,7 +39,9 @@ export function SelectOptions({
 				<SelectValue placeholder={placeholder} />
 			</SelectTrigger>
 			<SelectContent>
-				{allowClear && <SelectItem value={CLEAR_SENTINEL}>{clearLabel}</SelectItem>}
+				{allowClear && (
+					<SelectItem value={CLEAR_SENTINEL}>{clearLabel}</SelectItem>
+				)}
 				{options.filter(Boolean).map((opt) => (
 					<SelectItem key={opt} value={opt}>
 						{opt}

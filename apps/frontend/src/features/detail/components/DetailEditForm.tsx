@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SelectOptions } from "@/components/ui/select-options";
 import { Textarea } from "@/components/ui/textarea";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { statusColor } from "@/lib/statusColor";
 import { STATUSES } from "@/shared/constants/statuses";
 import type { LibraryEntry } from "@/types/api";
@@ -47,13 +48,19 @@ export function DetailEditForm({
 								control={control}
 								name="status"
 								render={({ field }) => (
-									<div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+									<ToggleGroup
+										type="single"
+										value={field.value}
+										onValueChange={(v) => {
+											if (v) field.onChange(v);
+										}}
+										className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 justify-start"
+									>
 										{STATUSES.map((s) => (
-											<button
-												type="button"
+											<ToggleGroupItem
 												key={s.key}
-												onClick={() => field.onChange(s.key)}
-												className="flex items-center gap-2 h-8 px-2.5 rounded-[7px] cursor-pointer text-[13px] font-medium border-0"
+												value={s.key}
+												className="flex items-center gap-2 h-8 px-2.5 rounded-[7px] text-[13px] font-medium border w-full justify-start"
 												style={
 													field.value === s.key
 														? {
@@ -82,9 +89,9 @@ export function DetailEditForm({
 													}}
 												/>
 												{s.label}
-											</button>
+											</ToggleGroupItem>
 										))}
-									</div>
+									</ToggleGroup>
 								)}
 							/>
 						</div>
