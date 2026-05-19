@@ -63,7 +63,7 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 						<div className="w-full rounded-xl border border-border overflow-hidden bg-bg-1 shadow-modal">
 							{/* Header */}
 							<DialogPrimitive.Title asChild>
-								<div className="flex items-center gap-2.5 px-4.5 py-3.5 text-text-md border-b border-border-soft">
+								<div className="flex items-center gap-2.5 px-5 py-3.5 text-text-md border-b border-border-soft">
 									<Search size={16} className="shrink-0" />
 									<input
 										ref={inputRef}

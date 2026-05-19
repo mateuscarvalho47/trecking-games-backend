@@ -1,4 +1,4 @@
-import type { LibraryEntry } from "@/types/api";
+﻿import type { LibraryEntry } from "@/types/api";
 import { LibraryCard } from "./LibraryCard";
 
 interface LibraryGridProps {
@@ -8,7 +8,7 @@ interface LibraryGridProps {
 export function LibraryGrid({ games }: LibraryGridProps) {
 	return (
 		<div
-			className="gap-4.5"
+			className="gap-5"
 			style={{
 				display: "grid",
 				gridTemplateColumns:

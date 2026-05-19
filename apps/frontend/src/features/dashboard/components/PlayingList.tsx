@@ -16,7 +16,7 @@ export function PlayingList({ games }: PlayingListProps) {
 	const { setOpen } = useSearchModal();
 
 	return (
-		<div className="bg-bg-1 border border-border-soft rounded-lg px-5.5 py-4.5">
+		<div className="bg-bg-1 border border-border-soft rounded-lg px-6 py-5">
 			<div className="flex items-start justify-between mb-3.5">
 				<div>
 					<div className="text-[15.5px] font-semibold text-text-hi tracking-[-0.01em]">

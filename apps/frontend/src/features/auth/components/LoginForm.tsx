@@ -47,7 +47,7 @@ export function LoginForm() {
 					type="email"
 					{...register("email")}
 					placeholder="seu@email.com"
-					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
+					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10"
 				/>
 				{errors.email && (
 					<p className="text-sm m-0 text-error">{errors.email.message}</p>
@@ -61,7 +61,7 @@ export function LoginForm() {
 						type={showPassword ? "text" : "password"}
 						{...register("password")}
 						placeholder="••••••••"
-						className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5 pr-9"
+						className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10 pr-9"
 					/>
 					<button
 						type="button"

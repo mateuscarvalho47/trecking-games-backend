@@ -19,7 +19,7 @@ Executar na sequência abaixo. Cada etapa é independente e pode ser commitada s
 - [x] **Etapa 7** — Substituir arbitrary text sizes (80+ casos) (2h)
 - [x] **Etapa 8** — Substituir arbitrary `rounded` (20+ casos) (1h)
 - [x] **Etapa 9** — Mover OKLCH hardcoded para utilities (30min)
-- [ ] **Etapa 10** — (opcional) Padronizar spacing inconsistente
+- [x] **Etapa 10** — (opcional) Padronizar spacing inconsistente
 
 ---
 

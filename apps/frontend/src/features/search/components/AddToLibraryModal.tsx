@@ -47,7 +47,7 @@ export function AddToLibraryModal({
 				showCloseButton={false}
 				className="p-0 gap-0 max-w-180 bg-bg-1 border border-border rounded-xl shadow-modal"
 			>
-				<DialogHeader className="flex flex-row items-center justify-between px-4.5 py-3.5 border-b border-border-soft">
+				<DialogHeader className="flex flex-row items-center justify-between px-5 py-3.5 border-b border-border-soft">
 					<DialogTitle className="text-[15px] text-text-hi">
 						Adicionar à biblioteca
 					</DialogTitle>
@@ -174,7 +174,7 @@ export function AddToLibraryModal({
 											value={field.value}
 											onChange={field.onChange}
 											placeholder="Plataforma"
-											className="w-full h-9.5 bg-bg-2 border-border text-text-hi"
+											className="w-full h-10 bg-bg-2 border-border text-text-hi"
 										/>
 									)}
 								/>

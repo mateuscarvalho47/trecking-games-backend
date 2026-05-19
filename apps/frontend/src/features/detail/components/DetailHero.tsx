@@ -32,7 +32,7 @@ export function DetailHero({
 	};
 
 	return (
-		<div className="relative overflow-hidden px-5.5">
+		<div className="relative overflow-hidden px-6">
 			{/* Blurred bg */}
 			<div className="absolute inset-0 z-0 overflow-hidden blur-[60px] saturate-140 opacity-55 scale-[1.2]">
 				<Cover

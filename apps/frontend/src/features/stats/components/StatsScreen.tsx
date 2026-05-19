@@ -36,8 +36,8 @@ export function StatsScreen() {
 
 	if (isLoading || !stats) {
 		return (
-			<div className="px-5.5 pt-7">
-				<div className="flex flex-col gap-4.5">
+			<div className="px-6 pt-7">
+				<div className="flex flex-col gap-5">
 					{[1, 2, 3].map((i) => (
 						<div key={i} className="h-50 bg-bg-1 rounded-lg animate-pulse" />
 					))}
@@ -47,7 +47,7 @@ export function StatsScreen() {
 	}
 
 	return (
-		<div className="px-5.5 pt-7 pb-15">
+		<div className="px-6 pt-7 pb-15">
 			{/* Topbar */}
 			<div className="flex items-end justify-between gap-6 pb-5.5 mb-5.5 border-b border-border-soft">
 				<PageHeader
@@ -57,7 +57,7 @@ export function StatsScreen() {
 				/>
 			</div>
 
-			<div className="flex flex-col gap-4.5">
+			<div className="flex flex-col gap-5">
 				{/* Big numbers */}
 				<div className="grid grid-cols-2 md:grid-cols-4 bg-bg-1 border border-border-soft rounded-lg overflow-hidden">
 					{[
@@ -106,7 +106,7 @@ export function StatsScreen() {
 				</div>
 
 				{/* Status donut + genre bars */}
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-4.5">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 					<Card title="Por status">
 						<DonutChart stats={stats} />
 					</Card>
@@ -122,7 +122,7 @@ export function StatsScreen() {
 				</div>
 
 				{/* Platform bars + rating histogram */}
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-4.5">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 					<Card title="Top plataformas">
 						<HBars
 							items={stats.topPlatforms.map((p) => ({

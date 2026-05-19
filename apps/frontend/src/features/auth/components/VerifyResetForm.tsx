@@ -133,7 +133,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 								type={showPassword ? "text" : "password"}
 								{...register("password")}
 								placeholder="mínimo 8 caracteres"
-								className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5 pr-9"
+								className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10 pr-9"
 							/>
 							<button
 								type="button"
@@ -158,7 +158,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 								type={showConfirm ? "text" : "password"}
 								{...register("confirmPassword")}
 								placeholder="repita a nova senha"
-								className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5 pr-9"
+								className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10 pr-9"
 							/>
 							<button
 								type="button"

@@ -38,7 +38,7 @@ export function AccountEditSection() {
 						type="password"
 						{...regUpdate("currentPassword")}
 						placeholder="sua senha atual"
-						className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
+						className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10"
 					/>
 					{updateErrors.currentPassword && (
 						<p className="text-sm m-0 text-error">
@@ -55,7 +55,7 @@ export function AccountEditSection() {
 						type="email"
 						{...regUpdate("email")}
 						placeholder="novo@email.com"
-						className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
+						className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10"
 					/>
 					{updateErrors.email && (
 						<p className="text-sm m-0 text-error">
@@ -72,7 +72,7 @@ export function AccountEditSection() {
 						type="password"
 						{...regUpdate("newPassword")}
 						placeholder="mínimo 8 caracteres"
-						className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
+						className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10"
 					/>
 					{updateErrors.newPassword && (
 						<p className="text-sm m-0 text-error">

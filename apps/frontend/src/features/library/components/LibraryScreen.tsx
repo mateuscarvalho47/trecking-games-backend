@@ -34,9 +34,9 @@ export function LibraryScreen() {
 
 	if (isLoading) {
 		return (
-			<div className="px-5.5 pt-7">
+			<div className="px-6 pt-7">
 				<div
-					className="grid gap-4.5"
+					className="grid gap-5"
 					style={{
 						gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
 					}}
@@ -53,7 +53,7 @@ export function LibraryScreen() {
 	}
 
 	return (
-		<div className="px-5.5 pt-7 pb-15">
+		<div className="px-6 pt-7 pb-15">
 			{/* Topbar */}
 			<div className="flex items-end justify-between gap-6 pb-5.5 mb-5.5 border-b border-border-soft">
 				<PageHeader
@@ -73,7 +73,7 @@ export function LibraryScreen() {
 
 			{/* Toolbar */}
 			<div className="flex flex-col gap-3 mb-4.5">
-				<div className="overflow-x-auto -mx-5.5 px-5.5">
+				<div className="overflow-x-auto -mx-5.5 px-6">
 					<div className="flex min-w-max">
 						<StatusPills
 							library={library}
@@ -135,7 +135,7 @@ export function LibraryScreen() {
 								key={v}
 								onClick={() => filters.setView(v)}
 								className={cn(
-									"flex items-center justify-center size-7.5 rounded-sm cursor-pointer border-0 transition-all",
+									"flex items-center justify-center size-8 rounded-sm cursor-pointer border-0 transition-all",
 									filters.view === v
 										? "bg-bg-3 text-text-hi"
 										: "bg-transparent text-text-lo",

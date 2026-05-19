@@ -32,15 +32,15 @@ export function DetailEditForm({
 	theme,
 }: DetailEditFormProps) {
 	return (
-		<div className="px-5.5 py-6 pb-15">
-			<div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4.5">
+		<div className="px-6 py-6 pb-15">
+			<div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5">
 				{/* Edit form */}
 				<div className="bg-bg-1 border border-border-soft rounded-lg p-5.5">
 					<div className="text-[15.5px] font-semibold tracking-tight text-text-hi mb-5">
 						Editar entrada
 					</div>
 
-					<div className="grid grid-cols-1 gap-4.5">
+					<div className="grid grid-cols-1 gap-5">
 						{/* Status picker */}
 						<div>
 							<Label className="mono-label block mb-1.5">Status</Label>
@@ -108,7 +108,7 @@ export function DetailEditForm({
 										value={field.value}
 										onChange={field.onChange}
 										allowClear
-										className="w-full h-9.5 bg-bg-2 border-border text-text-hi"
+										className="w-full h-10 bg-bg-2 border-border text-text-hi"
 									/>
 								)}
 							/>
@@ -122,7 +122,7 @@ export function DetailEditForm({
 									control={control}
 									name="hoursPlayed"
 									render={({ field }) => (
-										<div className="flex items-center bg-bg-2 border border-border rounded-lg h-9.5 overflow-hidden">
+										<div className="flex items-center bg-bg-2 border border-border rounded-lg h-10 overflow-hidden">
 											<button
 												type="button"
 												onClick={() =>
@@ -234,7 +234,7 @@ export function DetailEditForm({
 										type="date"
 										{...register("completedAt")}
 										style={{ colorScheme: theme }}
-										className="bg-bg-2 border-border text-text-hi h-9.5 text-sm w-full pr-9 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+										className="bg-bg-2 border-border text-text-hi h-10 text-sm w-full pr-9 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
 									/>
 									<Calendar
 										size={15}

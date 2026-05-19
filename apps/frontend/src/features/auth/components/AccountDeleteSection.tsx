@@ -55,7 +55,7 @@ export function AccountDeleteSection() {
 							type="password"
 							{...regDelete("password")}
 							placeholder="sua senha"
-							className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
+							className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10"
 							autoFocus
 						/>
 						{deleteErrors.password && (

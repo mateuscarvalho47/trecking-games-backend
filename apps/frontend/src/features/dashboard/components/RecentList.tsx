@@ -15,7 +15,7 @@ export function RecentList({ games }: RecentListProps) {
 	const shown = games.slice(0, 3);
 
 	return (
-		<div className="bg-bg-1 border border-border-soft rounded-lg px-5.5 py-4.5">
+		<div className="bg-bg-1 border border-border-soft rounded-lg px-6 py-5">
 			<div className="text-[15.5px] font-semibold text-text-hi tracking-[-0.01em] mb-3.5">
 				Recém-completos
 			</div>
