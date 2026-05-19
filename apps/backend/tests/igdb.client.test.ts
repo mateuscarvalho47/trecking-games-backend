@@ -13,7 +13,7 @@ const RAW_GAME = {
   cover: { url: '//images.igdb.com/igdb/image/upload/t_thumb/co1wyy.jpg' },
   first_release_date: 1431993600,
   platforms: [{ name: 'PC (Microsoft Windows)' }, { name: 'PlayStation 4' }],
-  genres: [{ name: 'Role-playing (RPG)' }, { name: 'Adventure' }],
+  genres: [{ id: 12, name: 'Role-playing (RPG)' }, { id: 31, name: 'Adventure' }],
   summary: 'A story-driven open world RPG.',
 };
 
@@ -96,7 +96,7 @@ describe('IgdbClient — searchGames', () => {
       coverUrl: 'https://images.igdb.com/igdb/image/upload/t_thumb/co1wyy.jpg',
       releaseYear: 2015,
       platforms: ['PC (Microsoft Windows)', 'PlayStation 4'],
-      genres: ['Role-playing (RPG)', 'Adventure'],
+      genres: ['RPG', 'Aventura'],
       summary: 'A story-driven open world RPG.',
     });
   });

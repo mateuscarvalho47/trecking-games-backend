@@ -1,11 +1,12 @@
 import { ForbiddenError, IgdbError, ValidationError } from '@/lib/errors.js';
+import { translateGenres } from '@/lib/igdb/genre-translations.js';
 import { type IgdbGame, igdbGameRawSchema } from '@/lib/igdb/schemas.js';
 
 const TWITCH_TOKEN_URL = 'https://id.twitch.tv/oauth2/token';
 const IGDB_BASE_URL = 'https://api.igdb.com/v4';
 const TOKEN_KEY = 'igdb:token';
 const GAME_FIELDS =
-  'fields id,name,cover.url,first_release_date,platforms.name,genres.name,summary';
+  'fields id,name,cover.url,first_release_date,platforms.name,genres.id,genres.name,summary';
 
 interface RedisLike {
   get(key: string): Promise<string | null>;
@@ -106,7 +107,7 @@ function transformGame(raw: unknown): IgdbGame {
       ? new Date(game.first_release_date * 1000).getUTCFullYear()
       : undefined,
     platforms: game.platforms?.map((p) => p.name) ?? [],
-    genres: game.genres?.map((g) => g.name) ?? [],
+    genres: game.genres ? translateGenres(game.genres) : [],
     summary: game.summary,
   };
 }
