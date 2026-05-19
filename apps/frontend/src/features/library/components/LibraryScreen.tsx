@@ -1,5 +1,6 @@
 ﻿import { BookMarked, LayoutGrid, List, Search } from "lucide-react";
 import { useEffect, useState } from "react";
+import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -65,15 +66,11 @@ export function LibraryScreen() {
 		<div className="px-5.5 pt-7 pb-15">
 			{/* Topbar */}
 			<div className="flex items-end justify-between gap-6 pb-5.5 mb-5.5 border-b border-border-soft">
-				<div>
-					<div className="page-overline">Coleção</div>
-					<h1 className="text-[29px] font-semibold tracking-tight m-0 text-text-hi">
-						Biblioteca
-					</h1>
-					<p className="text-text-md text-[14.5px] mt-1.5 mb-0">
-						{library.length} jogo{library.length !== 1 ? "s" : ""} na coleção
-					</p>
-				</div>
+				<PageHeader
+					overline="Coleção"
+					title="Biblioteca"
+					subtitle={`${library.length} jogo${library.length !== 1 ? "s" : ""} na coleção`}
+				/>
 				<Button
 					variant="accent"
 					size="sm"

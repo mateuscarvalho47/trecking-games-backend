@@ -1,4 +1,5 @@
-﻿import { useStats } from "../hooks/useStats";
+﻿import { PageHeader } from "@/components/PageHeader";
+import { useStats } from "../hooks/useStats";
 import { DonutChart } from "./DonutChart";
 import { HBars } from "./HBars";
 import { Histogram } from "./Histogram";
@@ -49,15 +50,11 @@ export function StatsScreen() {
 		<div className="px-5.5 pt-7 pb-15">
 			{/* Topbar */}
 			<div className="flex items-end justify-between gap-6 pb-5.5 mb-5.5 border-b border-border-soft">
-				<div>
-					<div className="page-overline">Análise</div>
-					<h1 className="text-[29px] font-semibold tracking-tight m-0 text-text-hi">
-						Estatísticas
-					</h1>
-					<p className="text-text-md text-[14.5px] mt-1.5 mb-0">
-						Insights da sua biblioteca
-					</p>
-				</div>
+				<PageHeader
+					overline="Análise"
+					title="Estatísticas"
+					subtitle="Insights da sua biblioteca"
+				/>
 			</div>
 
 			<div className="flex flex-col gap-4.5">
