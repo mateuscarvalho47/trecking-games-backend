@@ -184,7 +184,7 @@ export function AddToLibraryModal({
 												<SelectValue placeholder="Plataforma" />
 											</SelectTrigger>
 											<SelectContent>
-												{game.platforms.map((p) => (
+												{game.platforms.filter(Boolean).map((p) => (
 													<SelectItem key={p} value={p}>
 														{p}
 													</SelectItem>

@@ -102,13 +102,18 @@ export function DetailEditForm({
 								control={control}
 								name="userPlatform"
 								render={({ field }) => (
-									<Select value={field.value} onValueChange={field.onChange}>
+									<Select
+										value={field.value || "__none__"}
+										onValueChange={(v) =>
+											field.onChange(v === "__none__" ? "" : v)
+										}
+									>
 										<SelectTrigger className="w-full h-9.5 bg-bg-2 border-border text-text-hi">
 											<SelectValue placeholder="—" />
 										</SelectTrigger>
 										<SelectContent>
-											<SelectItem value="">—</SelectItem>
-											{game.platforms.map((p) => (
+											<SelectItem value="__none__">—</SelectItem>
+											{game.platforms.filter(Boolean).map((p) => (
 												<SelectItem key={p} value={p}>
 													{p}
 												</SelectItem>
