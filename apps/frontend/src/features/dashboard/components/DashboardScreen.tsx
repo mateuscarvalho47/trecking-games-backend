@@ -1,9 +1,8 @@
 ﻿import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { useLibrary } from "@/features/library/hooks/useLibrary";
-import { STATUSES } from "@/shared/constants/statuses";
+import { useStats } from "@/features/stats/hooks/useStats";
 import { useSearchModal } from "@/shared/hooks/useSearchModal";
-import type { GameStatus, LibraryEntry, LibraryStats } from "@/types/api";
 import { ActivityRibbon } from "./ActivityRibbon";
 import { BacklogList } from "./BacklogList";
 import { PlayingList } from "./PlayingList";
@@ -11,71 +10,22 @@ import { RecentList } from "./RecentList";
 import { StatTiles } from "./StatTiles";
 import { StatusBarsCard } from "./StatusBarsCard";
 
-function computeStats(library: LibraryEntry[]): LibraryStats {
-	const countByStatus = Object.fromEntries(
-		STATUSES.map((s) => [s.key, 0]),
-	) as Record<GameStatus, number>;
-
-	const genreMap = new Map<string, number>();
-	const platformMap = new Map<string, number>();
-	const ratingMap = new Map<number, number>();
-	const timelineMap = new Map<string, number>();
-
-	let totalHours = 0;
-	for (const g of library) {
-		countByStatus[g.status] = (countByStatus[g.status] ?? 0) + 1;
-		if (g.hoursPlayed) totalHours += g.hoursPlayed;
-		for (const genre of g.genres)
-			genreMap.set(genre, (genreMap.get(genre) ?? 0) + 1);
-		const plat = g.userPlatform ?? g.platforms[0];
-		if (plat) platformMap.set(plat, (platformMap.get(plat) ?? 0) + 1);
-		if (g.rating != null) {
-			const r = Math.round(g.rating);
-			ratingMap.set(r, (ratingMap.get(r) ?? 0) + 1);
-		}
-		if (g.completedAt) {
-			const month = g.completedAt.slice(0, 7);
-			timelineMap.set(month, (timelineMap.get(month) ?? 0) + 1);
-		}
-	}
-
-	return {
-		totalGames: library.length,
-		totalHours,
-		countByStatus,
-		topGenres: [...genreMap.entries()]
-			.sort((a, b) => b[1] - a[1])
-			.slice(0, 8)
-			.map(([genre, count]) => ({ genre, count })),
-		topPlatforms: [...platformMap.entries()]
-			.sort((a, b) => b[1] - a[1])
-			.slice(0, 8)
-			.map(([platform, count]) => ({ platform, count })),
-		ratingDistribution: [...ratingMap.entries()]
-			.sort((a, b) => a[0] - b[0])
-			.map(([rating, count]) => ({ rating, count })),
-		completedTimeline: [...timelineMap.entries()]
-			.sort()
-			.map(([month, count]) => ({ month, count })),
-	};
-}
-
 export function DashboardScreen() {
 	const { setOpen } = useSearchModal();
 
-	const { data: library = [], isLoading } = useLibrary();
+	const { data: library = [], isLoading: libraryLoading } = useLibrary();
+	const { data: stats, isLoading: statsLoading } = useStats();
 
-	const { stats, playing, backlog, recent } = useMemo(() => {
-		const stats = computeStats(library);
+	const { playing, backlog, recent } = useMemo(() => {
 		const playing = library.filter((g) => g.status === "PLAYING");
 		const backlog = library.filter((g) => g.status === "BACKLOG");
 		const recent = library
 			.filter((g) => g.status === "COMPLETED")
 			.sort((a, b) => (b.completedAt ?? "").localeCompare(a.completedAt ?? ""));
-		return { stats, playing, backlog, recent };
+		return { playing, backlog, recent };
 	}, [library]);
 
-	if (isLoading) {
+	if (libraryLoading || statsLoading || !stats) {
 		return (
 			<div className="px-5.5 pt-7">
 				<div className="flex flex-col gap-4">
