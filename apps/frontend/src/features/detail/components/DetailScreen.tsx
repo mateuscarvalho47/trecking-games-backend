@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { statusColor } from "@/lib/statusColor";
 import { Cover } from "@/shared/components/Cover";
 import { HltbStat } from "@/shared/components/HltbStat";
 import { StatusBadge } from "@/shared/components/StatusBadge";
@@ -115,7 +116,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 					{/* Content */}
 					<div className="relative z-20 flex flex-col md:grid md:grid-cols-[260px_1fr] gap-6 md:gap-9 py-7 pb-10 items-center md:items-start">
 						{/* Cover */}
-						<div className="w-[140px] md:w-auto aspect-3/4 rounded-md overflow-hidden shadow-[0_28px_60px_oklch(0_0_0/0.6)] shrink-0">
+						<div className="w-35 md:w-auto aspect-3/4 rounded-md overflow-hidden shadow-[0_28px_60px_oklch(0_0_0/0.6)] shrink-0">
 							<Cover
 								game={{
 									name: game.name,
@@ -220,15 +221,9 @@ export function DetailScreen({ game }: DetailScreenProps) {
 														style={
 															field.value === s.key
 																? {
-																		background:
-																			theme === "light"
-																				? s.bgColorLight
-																				: `oklch(0.3 0.06 ${s.hue} / 0.35)`,
-																		border: `1px solid ${theme === "light" ? s.borderColorLight : `oklch(0.6 0.15 ${s.hue} / 0.5)`}`,
-																		color:
-																			theme === "light"
-																				? s.colorLight
-																				: `oklch(0.92 0.05 ${s.hue})`,
+																		background: theme === "light" ? s.bgColorLight : statusColor(s.hue, "dark", "bgActive"),
+																		border: `1px solid ${theme === "light" ? s.borderColorLight : statusColor(s.hue, "dark", "borderActive")}`,
+																		color: theme === "light" ? s.colorLight : statusColor(s.hue, "dark", "textActive"),
 																		fontFamily: "inherit",
 																	}
 																: {
@@ -378,7 +373,7 @@ export function DetailScreen({ game }: DetailScreenProps) {
 														onChange={(e) =>
 															field.onChange(parseFloat(e.target.value))
 														}
-														className="absolute inset-0 w-full h-full appearance-none bg-transparent cursor-pointer m-0 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[3px] [&::-webkit-slider-thumb]:h-9 [&::-webkit-slider-thumb]:rounded-sm [&::-webkit-slider-thumb]:bg-white/60 [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-[3px] [&::-moz-range-thumb]:h-9 [&::-moz-range-thumb]:rounded-sm [&::-moz-range-thumb]:bg-white/60 [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer"
+														className="absolute inset-0 w-full h-full appearance-none bg-transparent cursor-pointer m-0 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-0.75 [&::-webkit-slider-thumb]:h-9 [&::-webkit-slider-thumb]:rounded-sm [&::-webkit-slider-thumb]:bg-white/60 [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-0.75 [&::-moz-range-thumb]:h-9 [&::-moz-range-thumb]:rounded-sm [&::-moz-range-thumb]:bg-white/60 [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer"
 													/>
 												)}
 											/>

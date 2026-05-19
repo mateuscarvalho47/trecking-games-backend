@@ -1,4 +1,5 @@
 ﻿import { useMemo } from "react";
+import { statusColor } from "@/lib/statusColor";
 import { cn } from "@/lib/utils";
 import { STATUSES } from "@/shared/constants/statuses";
 import { useAppStore } from "@/store/useAppStore";
@@ -67,8 +68,8 @@ export function StatusPills({ library, active, onChange }: StatusPillsProps) {
 											fontFamily: "inherit",
 										}
 									: {
-											background: `oklch(0.25 0.06 ${s.hue} / 0.5)`,
-											borderColor: `oklch(0.5 0.15 ${s.hue} / 0.55)`,
+											background: statusColor(s.hue, "dark", "bgPill"),
+											borderColor: statusColor(s.hue, "dark", "borderPill"),
 											color: "oklch(0.96 0.006 75)",
 											fontFamily: "inherit",
 										}

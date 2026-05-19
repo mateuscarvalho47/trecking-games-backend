@@ -1,4 +1,4 @@
-﻿import { XIcon } from "lucide-react";
+import { XIcon } from "lucide-react";
 import { Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,6 +9,7 @@ import {
 	DialogTitle,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
+import { statusColor } from "@/lib/statusColor";
 import { Cover } from "@/shared/components/Cover";
 import { HltbStat, HltbStatSkeleton } from "@/shared/components/HltbStat";
 import { STATUSES } from "@/shared/constants/statuses";
@@ -68,7 +69,7 @@ export function AddToLibraryModal({
 						style={{ gridTemplateColumns: "320px 1fr" }}
 					>
 						{/* Cover */}
-						<div className="w-[160px] sm:w-auto self-stretch rounded-md overflow-hidden mx-auto sm:mx-0">
+						<div className="w-40 sm:w-auto self-stretch rounded-md overflow-hidden mx-auto sm:mx-0">
 							<Cover
 								game={{
 									name: game.name,
@@ -143,12 +144,12 @@ export function AddToLibraryModal({
 													style={{
 														background:
 															field.value === s.key
-																? `oklch(${theme === "dark" ? "0.3" : "0.82"} 0.06 ${s.hue} / 0.35)`
+																? statusColor(s.hue, theme, "bgActive")
 																: "var(--color-bg-2)",
-														border: `1px solid ${field.value === s.key ? `oklch(0.6 0.15 ${s.hue} / 0.5)` : "var(--color-border-soft)"}`,
+														border: `1px solid ${field.value === s.key ? statusColor(s.hue, theme, "borderActive") : "var(--color-border-soft)"}`,
 														color:
 															field.value === s.key
-																? `oklch(${theme === "dark" ? "0.92" : "0.25"} 0.05 ${s.hue})`
+																? statusColor(s.hue, theme, "textActive")
 																: "var(--color-text-md)",
 														fontFamily: "inherit",
 													}}
