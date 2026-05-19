@@ -1,6 +1,8 @@
-﻿import { useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { Search, X } from "lucide-react";
+import { Dialog as DialogPrimitive } from "radix-ui";
 import { useEffect, useRef, useState } from "react";
+import { DialogOverlay, DialogPortal } from "@/components/ui/dialog";
 import { useLibrary } from "@/features/library/hooks/useLibrary";
 import { Cover } from "@/shared/components/Cover";
 import { useDebounce } from "@/shared/hooks/useDebounce";
@@ -29,17 +31,6 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 		}
 	}, [open]);
 
-	useEffect(() => {
-		if (!open) return;
-		const onKey = (e: KeyboardEvent) => {
-			if (e.key === "Escape" && !addGame) onClose();
-		};
-		window.addEventListener("keydown", onKey);
-		return () => window.removeEventListener("keydown", onKey);
-	}, [open, addGame, onClose]);
-
-	if (!open) return null;
-
 	const inLibrary = (igdbId: number) =>
 		library.some((g) => g.igdbId === igdbId);
 
@@ -57,142 +48,133 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 
 	return (
 		<>
-			{/* biome-ignore lint/a11y/noStaticElementInteractions: modal backdrop intentionally captures clicks to close */}
-			<div
-				role="presentation"
-				className="fixed inset-0 z-1000 flex items-start justify-center px-4 pt-5 sm:pt-20"
-				style={{
-					display: addGame ? "none" : undefined,
-					background: "oklch(0 0 0 / 0.6)",
-					backdropFilter: "blur(6px)",
-					WebkitBackdropFilter: "blur(6px)",
-					animation: "scrimIn 0.18s ease-out",
+			<DialogPrimitive.Root
+				open={open && !addGame}
+				onOpenChange={(o) => {
+					if (!o) onClose();
 				}}
-				onClick={onClose}
-				onKeyDown={(e) => e.key === "Escape" && onClose()}
 			>
-				<style>{`
-          @keyframes scrimIn { from { opacity: 0; } to { opacity: 1; } }
-          @keyframes modalIn {
-            from { opacity: 0; transform: translateY(-12px) scale(0.98); }
-            to   { opacity: 1; transform: translateY(0) scale(1); }
-          }
-        `}</style>
-
-				<div
-					role="dialog"
-					aria-modal="true"
-					className="w-full max-w-160 rounded-xl border border-border overflow-hidden bg-bg-1"
-					style={{
-						boxShadow:
-							"0 1px 0 oklch(1 0 0 / 0.06) inset, 0 24px 60px oklch(0 0 0 / 0.55)",
-						animation: "modalIn 0.2s ease-out",
-					}}
-					onClick={(e) => e.stopPropagation()}
-					onKeyDown={(e) => e.stopPropagation()}
-				>
-					{/* Header */}
-					<div className="flex items-center gap-2.5 px-4.5 py-3.5 text-text-md border-b border-border-soft">
-						<Search size={16} className="shrink-0" />
-						<input
-							ref={inputRef}
-							value={query}
-							onChange={(e) => setQuery(e.target.value)}
-							placeholder="Buscar jogos..."
-							className="flex-1 h-7 bg-transparent border-0 outline-none text-text-hi text-[16.5px]"
-							style={{ fontFamily: "inherit" }}
-						/>
-						<button
-							type="button"
-							onClick={onClose}
-							className="flex items-center justify-center size-6 rounded-md text-text-lo hover:text-text-hi hover:bg-bg-2 transition-colors cursor-pointer"
+				<DialogPortal>
+					<DialogOverlay className="bg-black/60 backdrop-blur-md supports-backdrop-filter:backdrop-blur-md" />
+					<DialogPrimitive.Content
+						aria-describedby={undefined}
+						className="fixed top-5 sm:top-20 left-1/2 -translate-x-1/2 z-50 w-full max-w-160 px-4 outline-none data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-3 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-3 duration-200"
+					>
+						<div
+							className="w-full rounded-xl border border-border overflow-hidden bg-bg-1"
+							style={{
+								boxShadow:
+									"0 1px 0 oklch(1 0 0 / 0.06) inset, 0 24px 60px oklch(0 0 0 / 0.55)",
+							}}
 						>
-							<X size={14} />
-						</button>
-					</div>
-
-					{/* Results */}
-					<div className="max-h-90 overflow-y-auto p-1.5">
-						{query.trim().length < 2 ? (
-							<div className="py-10 px-5 text-center text-text-lo text-[14px]">
-								Digite pelo menos 2 caracteres para buscar
-							</div>
-						) : isFetching ? (
-							<div className="py-10 px-5 text-center text-text-lo text-[14px]">
-								Buscando...
-							</div>
-						) : results.length === 0 ? (
-							<div className="py-10 px-5 text-center text-text-lo text-[14px]">
-								Nenhum resultado para "{query}"
-							</div>
-						) : (
-							<>
-								<div className="font-mono text-[11.5px] tracking-[0.08em] uppercase text-text-dim px-3 pt-2.5 pb-1.5">
-									{results.length} resultado{results.length !== 1 ? "s" : ""}
-								</div>
-								{results.map((game) => {
-									const owned = inLibrary(game.igdbId);
-									return (
+							{/* Header */}
+							<DialogPrimitive.Title asChild>
+								<div className="flex items-center gap-2.5 px-4.5 py-3.5 text-text-md border-b border-border-soft">
+									<Search size={16} className="shrink-0" />
+									<input
+										ref={inputRef}
+										value={query}
+										onChange={(e) => setQuery(e.target.value)}
+										placeholder="Buscar jogos..."
+										className="flex-1 h-7 bg-transparent border-0 outline-none text-text-hi text-[16.5px]"
+										style={{ fontFamily: "inherit" }}
+									/>
+									<DialogPrimitive.Close asChild>
 										<button
 											type="button"
-											key={game.igdbId}
-											onClick={() => handleSelect(game)}
-											className="grid gap-3 items-center w-full px-3 py-2.5 bg-transparent border-0 rounded-[8px] cursor-pointer text-left transition-[background] hover:bg-bg-2"
-											style={{
-												gridTemplateColumns: "36px 1fr auto",
-												fontFamily: "inherit",
-											}}
+											className="flex items-center justify-center size-6 rounded-md text-text-lo hover:text-text-hi hover:bg-bg-2 transition-colors cursor-pointer"
 										>
-											<div className="w-9 h-12 rounded-[4px] overflow-hidden">
-												<Cover
-													game={{
-														name: game.name,
-														year: game.releaseYear,
-														platforms: game.platforms,
-														cover: {
-															hue: 295,
-															scheme: "duotone",
-															glyph: game.name[0],
-														},
-														coverUrl: game.coverUrl,
-													}}
-													size="xs"
-													withTitle={false}
-												/>
-											</div>
-											<div className="min-w-0">
-												<div className="text-[14.5px] font-medium text-text-hi truncate">
-													{game.name}
-												</div>
-												<div className="text-[12.5px] font-mono text-text-lo mt-0.5">
-													{game.releaseYear ?? "TBA"}
-													{game.platforms.length
-														? ` · ${game.platforms.slice(0, 2).join(", ")}`
-														: ""}
-												</div>
-											</div>
-											<div className="text-[12.5px] font-mono">
-												{owned ? (
-													<span style={{ color: "oklch(0.58 0.25 17)" }}>
-														✓ Na biblioteca
-													</span>
-												) : (
-													<span className="text-text-lo">+ Adicionar</span>
-												)}
-											</div>
+											<X size={14} />
 										</button>
-									);
-								})}
-							</>
-						)}
-					</div>
+									</DialogPrimitive.Close>
+								</div>
+							</DialogPrimitive.Title>
 
-					{/* Footer */}
-					<div className="flex items-center gap-4 px-4 py-2.5 border-t border-border-soft font-mono text-[12px] text-text-lo bg-bg-2">
-						<span>↵ selecionar</span>
-					</div>
-				</div>
-			</div>
+							{/* Results */}
+							<div className="max-h-90 overflow-y-auto p-1.5">
+								{query.trim().length < 2 ? (
+									<div className="py-10 px-5 text-center text-text-lo text-[14px]">
+										Digite pelo menos 2 caracteres para buscar
+									</div>
+								) : isFetching ? (
+									<div className="py-10 px-5 text-center text-text-lo text-[14px]">
+										Buscando...
+									</div>
+								) : results.length === 0 ? (
+									<div className="py-10 px-5 text-center text-text-lo text-[14px]">
+										Nenhum resultado para "{query}"
+									</div>
+								) : (
+									<>
+										<div className="font-mono text-[11.5px] tracking-[0.08em] uppercase text-text-dim px-3 pt-2.5 pb-1.5">
+											{results.length} resultado
+											{results.length !== 1 ? "s" : ""}
+										</div>
+										{results.map((game) => {
+											const owned = inLibrary(game.igdbId);
+											return (
+												<button
+													type="button"
+													key={game.igdbId}
+													onClick={() => handleSelect(game)}
+													className="grid gap-3 items-center w-full px-3 py-2.5 bg-transparent border-0 rounded-[8px] cursor-pointer text-left transition-[background] hover:bg-bg-2"
+													style={{
+														gridTemplateColumns: "36px 1fr auto",
+														fontFamily: "inherit",
+													}}
+												>
+													<div className="w-9 h-12 rounded-lg overflow-hidden">
+														<Cover
+															game={{
+																name: game.name,
+																year: game.releaseYear,
+																platforms: game.platforms,
+																cover: {
+																	hue: 295,
+																	scheme: "duotone",
+																	glyph: game.name[0],
+																},
+																coverUrl: game.coverUrl,
+															}}
+															size="xs"
+															withTitle={false}
+														/>
+													</div>
+													<div className="min-w-0">
+														<div className="text-[14.5px] font-medium text-text-hi truncate">
+															{game.name}
+														</div>
+														<div className="text-[12.5px] font-mono text-text-lo mt-0.5">
+															{game.releaseYear ?? "TBA"}
+															{game.platforms.length
+																? ` · ${game.platforms.slice(0, 2).join(", ")}`
+																: ""}
+														</div>
+													</div>
+													<div className="text-[12.5px] font-mono">
+														{owned ? (
+															<span style={{ color: "oklch(0.58 0.25 17)" }}>
+																✓ Na biblioteca
+															</span>
+														) : (
+															<span className="text-text-lo">+ Adicionar</span>
+														)}
+													</div>
+												</button>
+											);
+										})}
+									</>
+								)}
+							</div>
+
+							{/* Footer */}
+							<div className="flex items-center gap-4 px-4 py-2.5 border-t border-border-soft font-mono text-[12px] text-text-lo bg-bg-2">
+								<span>↵ selecionar</span>
+							</div>
+						</div>
+					</DialogPrimitive.Content>
+				</DialogPortal>
+			</DialogPrimitive.Root>
 
 			{addGame && (
 				<AddToLibraryModal
