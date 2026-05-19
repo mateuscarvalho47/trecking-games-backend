@@ -36,7 +36,7 @@ export class AuthController {
   };
 
   me = async (req: FastifyRequest, _reply: FastifyReply) => {
-    const user = await this.userService.getById(req.session.userId as string);
+    const user = await this.userService.getById(req.userId);
     return user;
   };
 
@@ -56,24 +56,24 @@ export class AuthController {
 
   updateAccount = async (req: FastifyRequest, reply: FastifyReply) => {
     const input = parse(updateAccountSchema, req.body);
-    const result = await this.auth.updateAccount(req.session.userId as string, input);
+    const result = await this.auth.updateAccount(req.userId, input);
     return reply.send(result);
   };
 
   deleteAccount = async (req: FastifyRequest, reply: FastifyReply) => {
     const input = parse(deleteAccountSchema, req.body);
-    await this.auth.deleteAccount(req.session.userId as string, input);
+    await this.auth.deleteAccount(req.userId, input);
     await req.session.destroy();
     return reply.code(204).send();
   };
 
   consent = async (req: FastifyRequest, reply: FastifyReply) => {
-    await this.userService.consent(req.session.userId as string);
+    await this.userService.consent(req.userId);
     return reply.code(204).send();
   };
 
   exportData = async (req: FastifyRequest, reply: FastifyReply) => {
-    const data = await this.auth.exportData(req.session.userId as string);
+    const data = await this.auth.exportData(req.userId);
     return reply
       .header('Content-Disposition', 'attachment; filename="detonado-dados.json"')
       .send(data);
