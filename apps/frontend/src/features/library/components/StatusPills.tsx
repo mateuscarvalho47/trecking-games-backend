@@ -1,4 +1,4 @@
-﻿import { useMemo } from "react";
+import { useMemo } from "react";
 import { statusColor } from "@/lib/statusColor";
 import { cn } from "@/lib/utils";
 import { STATUSES } from "@/shared/constants/statuses";
@@ -31,7 +31,6 @@ export function StatusPills({ library, active, onChange }: StatusPillsProps) {
 						? "text-text-hi border-border-strong bg-bg-3/50"
 						: "text-text-md border-border-soft bg-bg-1",
 				)}
-				style={{ fontFamily: "inherit" }}
 			>
 				Todos
 				<span
@@ -65,15 +64,13 @@ export function StatusPills({ library, active, onChange }: StatusPillsProps) {
 											background: s.bgColorLight,
 											borderColor: s.borderColorLight,
 											color: s.colorLight,
-											fontFamily: "inherit",
 										}
 									: {
 											background: statusColor(s.hue, "dark", "bgPill"),
 											borderColor: statusColor(s.hue, "dark", "borderPill"),
 											color: "oklch(0.96 0.006 75)",
-											fontFamily: "inherit",
 										}
-								: { fontFamily: "inherit" }
+								: undefined
 						}
 					>
 						{s.label}

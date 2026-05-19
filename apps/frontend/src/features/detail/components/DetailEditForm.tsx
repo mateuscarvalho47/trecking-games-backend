@@ -3,6 +3,13 @@ import type { Control, UseFormRegister } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { statusColor } from "@/lib/statusColor";
 import { STATUSES } from "@/shared/constants/statuses";
@@ -65,13 +72,11 @@ export function DetailEditForm({
 																	theme === "light"
 																		? s.colorLight
 																		: statusColor(s.hue, "dark", "textActive"),
-																fontFamily: "inherit",
 															}
 														: {
 																background: "var(--color-bg-2)",
 																border: "1px solid var(--color-border-soft)",
 																color: "var(--color-text-md)",
-																fontFamily: "inherit",
 															}
 												}
 											>
@@ -93,31 +98,25 @@ export function DetailEditForm({
 						{/* Platform */}
 						<div>
 							<Label className="mono-label block mb-1.5">Plataforma</Label>
-							<div className="relative">
-								<Controller
-									control={control}
-									name="userPlatform"
-									render={({ field }) => (
-										<select
-											{...field}
-											className="w-full h-9.5 px-3 pr-8 bg-bg-2 border border-border rounded-[8px] text-text-hi text-[14.5px] appearance-none cursor-pointer outline-none focus:border-accent"
-											style={{ fontFamily: "inherit" }}
-										>
-											<option value="" className="bg-bg-2">
-												—
-											</option>
+							<Controller
+								control={control}
+								name="userPlatform"
+								render={({ field }) => (
+									<Select value={field.value} onValueChange={field.onChange}>
+										<SelectTrigger className="w-full h-9.5 bg-bg-2 border-border text-text-hi">
+											<SelectValue placeholder="—" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectItem value="">—</SelectItem>
 											{game.platforms.map((p) => (
-												<option key={p} value={p} className="bg-bg-2">
+												<SelectItem key={p} value={p}>
 													{p}
-												</option>
+												</SelectItem>
 											))}
-										</select>
-									)}
-								/>
-								<div className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-text-lo text-[12px]">
-									▾
-								</div>
-							</div>
+										</SelectContent>
+									</Select>
+								)}
+							/>
 						</div>
 
 						{/* Hours */}

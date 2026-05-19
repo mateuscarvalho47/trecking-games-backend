@@ -77,7 +77,6 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 										onChange={(e) => setQuery(e.target.value)}
 										placeholder="Buscar jogos..."
 										className="flex-1 h-7 bg-transparent border-0 outline-none text-text-hi text-[16.5px]"
-										style={{ fontFamily: "inherit" }}
 									/>
 									<DialogPrimitive.Close asChild>
 										<button
@@ -120,7 +119,6 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 													className="grid gap-3 items-center w-full px-3 py-2.5 bg-transparent border-0 rounded-[8px] cursor-pointer text-left transition-[background] hover:bg-bg-2"
 													style={{
 														gridTemplateColumns: "36px 1fr auto",
-														fontFamily: "inherit",
 													}}
 												>
 													<div className="w-9 h-12 rounded-lg overflow-hidden">

@@ -10,9 +10,9 @@ Plano de refatoração focado em padronização de design tokens, substituição
 
 Executar na sequência abaixo. Cada etapa é independente e pode ser commitada separadamente.
 
-- [ ] **Etapa 1** — `fontFamily` global no `index.css` (10min)
-- [ ] **Etapa 2** — Definir `@theme` tokens para text sizes e radius (20min)
-- [ ] **Etapa 3** — Instalar `Select` + substituir `<select>` nativos (1h)
+- [x] **Etapa 1** — `fontFamily` global no `index.css` (10min)
+- [x] **Etapa 2** — Definir `@theme` tokens para text sizes e radius (20min)
+- [x] **Etapa 3** — Instalar `Select` + substituir `<select>` nativos (1h)
 - [ ] **Etapa 4** — Instalar `DropdownMenu` + substituir sort dropdown (30min)
 - [ ] **Etapa 5** — Instalar `Checkbox` + `RadioGroup`/`ToggleGroup` (30min)
 - [ ] **Etapa 6** — Instalar `AlertDialog` + substituir `ConfirmRemoveModal` (20min)

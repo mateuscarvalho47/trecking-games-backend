@@ -1,4 +1,4 @@
-﻿import { useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { Cover } from "@/shared/components/Cover";
 import { StatusBadge } from "@/shared/components/StatusBadge";
 import { STATUS_BY_KEY } from "@/shared/constants/statuses";
@@ -65,7 +65,7 @@ export function LibraryList({ games }: LibraryListProps) {
 							})
 						}
 						className="bg-transparent border-0 cursor-pointer text-left text-[14px] transition-[background] w-full hover:bg-bg-2"
-						style={{ borderBottom: borderStyle, fontFamily: "inherit" }}
+						style={{ borderBottom: borderStyle }}
 					>
 						{/* Mobile row */}
 						<div

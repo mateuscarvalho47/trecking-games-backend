@@ -1,4 +1,4 @@
-﻿import { useNavigate, useRouterState } from "@tanstack/react-router";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
 import {
 	BarChart3,
 	BookMarked,
@@ -68,7 +68,6 @@ export function Sidebar({
 				type="button"
 				onClick={() => setSearchOpen(true)}
 				className="flex items-center gap-2 rounded-md px-2.5 py-2 text-[13.5px] transition-all cursor-pointer w-full bg-bg-2 border border-border-soft text-text-md"
-				style={{ fontFamily: "inherit" }}
 			>
 				<Search size={13} />
 				<span className="flex-1 text-left">Buscar jogos</span>
@@ -104,7 +103,6 @@ export function Sidebar({
 								color: active
 									? "var(--color-accent-bright)"
 									: "var(--color-text-md)",
-								fontFamily: "inherit",
 							}}
 						>
 							<span className="flex opacity-85">

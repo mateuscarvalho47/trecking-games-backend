@@ -1,4 +1,4 @@
-﻿import { useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { usePageTitle } from "@/shared/hooks/usePageTitle";
 
 const TILES = [
@@ -142,7 +142,6 @@ export function LandingScreen() {
 							background: "var(--color-primary)",
 							color: "var(--color-primary-foreground)",
 							boxShadow: "0 0 24px oklch(0.5 0.18 17 / 0.4)",
-							fontFamily: "inherit",
 						}}
 					>
 						Criar conta grátis
@@ -155,7 +154,6 @@ export function LandingScreen() {
 							background: "var(--color-bg-2)",
 							border: "1px solid var(--color-border)",
 							color: "var(--color-text-md)",
-							fontFamily: "inherit",
 						}}
 					>
 						Já tenho conta

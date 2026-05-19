@@ -100,6 +100,14 @@
 	/* Typography */
 	--font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
 	--font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", monospace;
+
+	/* Font sizes */
+	--font-size-2xs: 0.6875rem;
+	--font-size-xs: 0.8125rem;
+	--font-size-sm: 0.875rem;
+	--font-size-md: 1rem;
+	--font-size-xl: 1.4375rem;
+	--font-size-2xl: 1.8125rem;
 }
 
 /* ═══ Light theme (default) ═══ */
@@ -240,6 +248,13 @@
 	*::before,
 	*::after {
 		box-sizing: border-box;
+	}
+
+	button,
+	input,
+	select,
+	textarea {
+		font-family: inherit;
 	}
 
 	* {

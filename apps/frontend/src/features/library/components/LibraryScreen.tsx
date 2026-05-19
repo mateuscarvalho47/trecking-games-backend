@@ -1,4 +1,4 @@
-﻿import { BookMarked, LayoutGrid, List, Search } from "lucide-react";
+import { BookMarked, LayoutGrid, List, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
@@ -114,7 +114,6 @@ export function LibraryScreen() {
 								setSortMenuOpen((o) => !o);
 							}}
 							className="inline-flex items-center gap-1.5 h-8 px-2.5 bg-bg-2 border border-border rounded-[7px] text-text-md cursor-pointer text-[13.5px] font-medium"
-							style={{ fontFamily: "inherit" }}
 						>
 							{currentSortLabel} ↕
 						</button>
@@ -140,7 +139,6 @@ export function LibraryScreen() {
 												filters.sort === opt.value
 													? "var(--color-accent-bright)"
 													: "var(--color-text-md)",
-											fontFamily: "inherit",
 										}}
 									>
 										{opt.label}
@@ -164,7 +162,6 @@ export function LibraryScreen() {
 										? "bg-bg-3 text-text-hi"
 										: "bg-transparent text-text-lo",
 								)}
-								style={{ fontFamily: "inherit" }}
 							>
 								{v === "grid" ? <LayoutGrid size={14} /> : <List size={14} />}
 							</button>

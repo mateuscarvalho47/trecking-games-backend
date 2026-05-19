@@ -49,7 +49,6 @@ export function BottomNav({
 							color: active
 								? "var(--color-accent-bright)"
 								: "var(--color-text-lo)",
-							fontFamily: "inherit",
 						}}
 					>
 						<Icon size={20} />
@@ -61,7 +60,7 @@ export function BottomNav({
 				type="button"
 				onClick={() => setSearchOpen(true)}
 				className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
-				style={{ color: "var(--color-text-lo)", fontFamily: "inherit" }}
+				style={{ color: "var(--color-text-lo)" }}
 			>
 				<Search size={20} />
 				<span style={{ fontSize: 11 }}>Buscar</span>
@@ -70,7 +69,7 @@ export function BottomNav({
 				type="button"
 				onClick={toggleTheme}
 				className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
-				style={{ color: "var(--color-text-lo)", fontFamily: "inherit" }}
+				style={{ color: "var(--color-text-lo)" }}
 			>
 				{theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
 				<span style={{ fontSize: 11 }}>Tema</span>
@@ -79,7 +78,7 @@ export function BottomNav({
 				type="button"
 				onClick={() => logout.mutate()}
 				className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
-				style={{ color: "var(--color-text-lo)", fontFamily: "inherit" }}
+				style={{ color: "var(--color-text-lo)" }}
 			>
 				<LogOut size={20} />
 				<span style={{ fontSize: 11 }}>Sair</span>

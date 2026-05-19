@@ -1,4 +1,4 @@
-﻿import { useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { Cover } from "@/shared/components/Cover";
 import { StatusBadge } from "@/shared/components/StatusBadge";
 import { STATUS_BY_KEY } from "@/shared/constants/statuses";
@@ -35,7 +35,6 @@ export function LibraryCard({ game }: LibraryCardProps) {
 				})
 			}
 			className="flex flex-col gap-2.5 bg-transparent border-0 p-0 cursor-pointer text-left"
-			style={{ fontFamily: "inherit" }}
 		>
 			<div className="relative aspect-3/4 rounded-sm overflow-hidden">
 				<Cover
