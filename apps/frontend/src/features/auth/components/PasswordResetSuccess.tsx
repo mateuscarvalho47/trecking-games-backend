@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+﻿import { useNavigate } from "@tanstack/react-router";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -15,7 +15,7 @@ export function PasswordResetSuccess() {
 				<h1 className="text-2xl font-semibold tracking-tight m-0 text-text-hi text-center">
 					Senha alterada com sucesso!
 				</h1>
-				<p className="text-[14px] text-text-md leading-[1.55] m-0 max-w-[36ch] text-center">
+				<p className="text-sm text-text-md leading-[1.55] m-0 max-w-[36ch] text-center">
 					Sua nova senha já está ativa. Use-a para acessar sua conta.
 				</p>
 			</div>
@@ -23,7 +23,7 @@ export function PasswordResetSuccess() {
 			<Button
 				variant="accent"
 				onClick={() => navigate({ to: "/login" })}
-				className="w-full h-10 rounded-[8px] mt-1.5"
+				className="w-full h-10 rounded-lg mt-1.5"
 			>
 				Fazer login
 			</Button>

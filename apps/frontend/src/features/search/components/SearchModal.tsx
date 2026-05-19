@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+﻿import { useNavigate } from "@tanstack/react-router";
 import { Search, X } from "lucide-react";
 import { Dialog as DialogPrimitive } from "radix-ui";
 import { useEffect, useRef, useState } from "react";
@@ -60,13 +60,7 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 						aria-describedby={undefined}
 						className="fixed top-5 sm:top-20 left-1/2 -translate-x-1/2 z-50 w-full max-w-160 px-4 outline-none data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-3 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-3 duration-200"
 					>
-						<div
-							className="w-full rounded-xl border border-border overflow-hidden bg-bg-1"
-							style={{
-								boxShadow:
-									"0 1px 0 oklch(1 0 0 / 0.06) inset, 0 24px 60px oklch(0 0 0 / 0.55)",
-							}}
-						>
+						<div className="w-full rounded-xl border border-border overflow-hidden bg-bg-1 shadow-modal">
 							{/* Header */}
 							<DialogPrimitive.Title asChild>
 								<div className="flex items-center gap-2.5 px-4.5 py-3.5 text-text-md border-b border-border-soft">
@@ -92,15 +86,15 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 							{/* Results */}
 							<div className="max-h-90 overflow-y-auto p-1.5">
 								{query.trim().length < 2 ? (
-									<div className="py-10 px-5 text-center text-text-lo text-[14px]">
+									<div className="py-10 px-5 text-center text-text-lo text-sm">
 										Digite pelo menos 2 caracteres para buscar
 									</div>
 								) : isFetching ? (
-									<div className="py-10 px-5 text-center text-text-lo text-[14px]">
+									<div className="py-10 px-5 text-center text-text-lo text-sm">
 										Buscando...
 									</div>
 								) : results.length === 0 ? (
-									<div className="py-10 px-5 text-center text-text-lo text-[14px]">
+									<div className="py-10 px-5 text-center text-text-lo text-sm">
 										Nenhum resultado para "{query}"
 									</div>
 								) : (
@@ -116,7 +110,7 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 													type="button"
 													key={game.igdbId}
 													onClick={() => handleSelect(game)}
-													className="grid gap-3 items-center w-full px-3 py-2.5 bg-transparent border-0 rounded-[8px] cursor-pointer text-left transition-[background] hover:bg-bg-2"
+													className="grid gap-3 items-center w-full px-3 py-2.5 bg-transparent border-0 rounded-lg cursor-pointer text-left transition-[background] hover:bg-bg-2"
 													style={{
 														gridTemplateColumns: "36px 1fr auto",
 													}}

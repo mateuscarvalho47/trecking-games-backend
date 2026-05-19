@@ -1,4 +1,4 @@
-import { BookMarked, LayoutGrid, List, Search } from "lucide-react";
+﻿import { BookMarked, LayoutGrid, List, Search } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import {
@@ -65,7 +65,7 @@ export function LibraryScreen() {
 					variant="accent"
 					size="sm"
 					onClick={() => setOpen(true)}
-					className="rounded-[8px]"
+					className="rounded-lg"
 				>
 					+ Adicionar jogo
 				</Button>
@@ -85,13 +85,13 @@ export function LibraryScreen() {
 
 				<div className="flex gap-2 items-center">
 					{/* Search */}
-					<div className="relative flex items-center gap-2 h-9 px-3 bg-bg-2 border border-border rounded-[8px] flex-1 sm:w-55 sm:flex-none text-text-lo">
+					<div className="relative flex items-center gap-2 h-9 px-3 bg-bg-2 border border-border rounded-lg flex-1 sm:w-55 sm:flex-none text-text-lo">
 						<Search size={13} className="shrink-0" />
 						<Input
 							value={filters.search}
 							onChange={(e) => filters.setSearch(e.target.value)}
 							placeholder="Filtrar..."
-							className="flex-1 h-full p-0 min-w-0 bg-transparent dark:bg-transparent border-0 shadow-none text-text-hi text-[14px] placeholder:text-text-lo focus-visible:ring-0 focus-visible:border-0"
+							className="flex-1 h-full p-0 min-w-0 bg-transparent dark:bg-transparent border-0 shadow-none text-text-hi text-sm placeholder:text-text-lo focus-visible:ring-0 focus-visible:border-0"
 						/>
 					</div>
 
@@ -100,7 +100,7 @@ export function LibraryScreen() {
 						<DropdownMenuTrigger asChild>
 							<button
 								type="button"
-								className="inline-flex items-center gap-1.5 h-8 px-2.5 bg-bg-2 border border-border rounded-[7px] text-text-md cursor-pointer text-[13.5px] font-medium"
+								className="inline-flex items-center gap-1.5 h-8 px-2.5 bg-bg-2 border border-border rounded-md text-text-md cursor-pointer text-xs font-medium"
 							>
 								{currentSortLabel} ↕
 							</button>
@@ -112,7 +112,7 @@ export function LibraryScreen() {
 									onClick={() =>
 										filters.setSort(opt.value as typeof filters.sort)
 									}
-									className="flex items-center justify-between text-[13.5px]"
+									className="flex items-center justify-between text-xs"
 									style={{
 										color:
 											filters.sort === opt.value
@@ -128,14 +128,14 @@ export function LibraryScreen() {
 					</DropdownMenu>
 
 					{/* View toggle */}
-					<div className="flex p-0.5 bg-bg-2 border border-border rounded-[8px]">
+					<div className="flex p-0.5 bg-bg-2 border border-border rounded-lg">
 						{(["grid", "list"] as const).map((v) => (
 							<button
 								type="button"
 								key={v}
 								onClick={() => filters.setView(v)}
 								className={cn(
-									"flex items-center justify-center size-7.5 rounded-[5px] cursor-pointer border-0 transition-all",
+									"flex items-center justify-center size-7.5 rounded-sm cursor-pointer border-0 transition-all",
 									filters.view === v
 										? "bg-bg-3 text-text-hi"
 										: "bg-transparent text-text-lo",
@@ -159,7 +159,7 @@ export function LibraryScreen() {
 							variant="accent"
 							size="sm"
 							onClick={() => setOpen(true)}
-							className="rounded-[8px]"
+							className="rounded-lg"
 						>
 							Buscar jogo
 						</Button>

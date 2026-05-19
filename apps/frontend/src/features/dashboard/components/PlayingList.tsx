@@ -36,7 +36,7 @@ export function PlayingList({ games }: PlayingListProps) {
 			</div>
 
 			{games.length === 0 ? (
-				<div className="py-6 text-center text-text-lo text-[14px]">
+				<div className="py-6 text-center text-text-lo text-sm">
 					Nenhum jogo em andamento
 				</div>
 			) : (
@@ -51,7 +51,7 @@ export function PlayingList({ games }: PlayingListProps) {
 									params: { igdbId: String(game.igdbId) },
 								})
 							}
-							className="grid grid-cols-[48px_1fr_auto] gap-3.5 items-center p-2 bg-transparent border-0 rounded-[8px] cursor-pointer text-left transition-[background] w-full hover:bg-bg-2 font-[inherit]"
+							className="grid grid-cols-[48px_1fr_auto] gap-3.5 items-center p-2 bg-transparent border-0 rounded-lg cursor-pointer text-left transition-[background] w-full hover:bg-bg-2 font-[inherit]"
 						>
 							<div className="w-12 h-16 rounded-sm overflow-hidden">
 								<Cover

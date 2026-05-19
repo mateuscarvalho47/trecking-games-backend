@@ -20,7 +20,7 @@ export function RecentList({ games }: RecentListProps) {
 				Recém-completos
 			</div>
 			{shown.length === 0 ? (
-				<div className="py-6 text-center text-text-lo text-[14px]">
+				<div className="py-6 text-center text-text-lo text-sm">
 					Nenhum jogo completado ainda
 				</div>
 			) : (
@@ -54,13 +54,13 @@ export function RecentList({ games }: RecentListProps) {
 								/>
 							</div>
 							<div className="flex flex-col gap-1">
-								<span className="text-[14px] font-medium text-text-hi truncate">
+								<span className="text-sm font-medium text-text-hi truncate">
 									{game.name}
 								</span>
 								<div className="flex items-center justify-between gap-1 flex-wrap">
 									<StatusBadge status={game.status} size="sm" />
 									{game.rating != null && (
-										<span className="font-mono text-[13px] font-semibold text-text-hi">
+										<span className="font-mono text-xs font-semibold text-text-hi">
 											{game.rating}
 											<span className="text-[12px] text-text-lo">/10</span>
 										</span>

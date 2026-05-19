@@ -74,7 +74,7 @@ export function VerifyEmailScreen() {
 						<h1 className="text-2xl font-semibold tracking-tight text-text-hi m-0">
 							Confirmando email...
 						</h1>
-						<p className="text-[14px] text-text-md leading-[1.55] m-0">
+						<p className="text-sm text-text-md leading-[1.55] m-0">
 							Aguarde um momento.
 						</p>
 					</div>
@@ -114,14 +114,14 @@ export function VerifyEmailScreen() {
 							<h1 className="text-2xl font-semibold tracking-tight text-text-hi m-0">
 								Tudo certo!
 							</h1>
-							<p className="text-[14px] text-text-md leading-[1.55] m-0 max-w-[38ch]">
+							<p className="text-sm text-text-md leading-[1.55] m-0 max-w-[38ch]">
 								Seu email foi verificado com sucesso. Sua conta está ativa e
 								pronta para uso.
 							</p>
 						</div>
 
 						<div className="rounded-lg border border-accent-bright/20 bg-accent-bright/5 px-4 py-3">
-							<p className="text-[13.5px] text-accent-bright font-medium m-0 leading-[1.5]">
+							<p className="text-xs text-accent-bright font-medium m-0 leading-[1.5]">
 								Você já pode entrar na sua conta com o email e senha
 								cadastrados.
 							</p>
@@ -129,7 +129,7 @@ export function VerifyEmailScreen() {
 
 						<Button
 							variant="accent"
-							className="w-full h-10 rounded-[8px]"
+							className="w-full h-10 rounded-lg"
 							onClick={() => {
 								localStorage.removeItem(VERIFIED_KEY);
 								navigate({ to: "/login" });
@@ -149,14 +149,14 @@ export function VerifyEmailScreen() {
 							<h1 className="text-2xl font-semibold tracking-tight text-text-hi m-0 mb-2">
 								Link inválido
 							</h1>
-							<p className="text-[14px] text-text-md leading-[1.55] m-0 max-w-[36ch]">
+							<p className="text-sm text-text-md leading-[1.55] m-0 max-w-[36ch]">
 								{(verify.error as Error)?.message ??
 									"Token de verificação inválido ou expirado."}
 							</p>
 						</div>
 						<Button
 							variant="outline"
-							className="w-full h-10 rounded-[8px] mt-1"
+							className="w-full h-10 rounded-lg mt-1"
 							onClick={() => navigate({ to: "/register" })}
 						>
 							Criar nova conta
@@ -173,13 +173,13 @@ export function VerifyEmailScreen() {
 							<h1 className="text-2xl font-semibold tracking-tight text-text-hi m-0 mb-2">
 								Token ausente
 							</h1>
-							<p className="text-[14px] text-text-md leading-[1.55] m-0 max-w-[36ch]">
+							<p className="text-sm text-text-md leading-[1.55] m-0 max-w-[36ch]">
 								Use o link enviado para o seu email.
 							</p>
 						</div>
 						<Button
 							variant="outline"
-							className="w-full h-10 rounded-[8px] mt-1"
+							className="w-full h-10 rounded-lg mt-1"
 							onClick={() => navigate({ to: "/login" })}
 						>
 							Voltar ao login

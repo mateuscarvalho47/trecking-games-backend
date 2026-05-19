@@ -58,7 +58,7 @@ export function StatTiles({ stats }: StatTilesProps) {
 					)}
 					<div className="mono-label">{t.label}</div>
 					<div className="flex items-baseline gap-1">
-						<span className="text-[29px] md:text-[33px] font-bold tracking-[-0.03em] text-text-hi">
+						<span className="text-2xl md:text-[33px] font-bold tracking-[-0.03em] text-text-hi">
 							{t.value}
 						</span>
 						{t.unit && (

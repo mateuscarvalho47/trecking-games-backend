@@ -16,9 +16,9 @@ Executar na sequência abaixo. Cada etapa é independente e pode ser commitada s
 - [x] **Etapa 4** — Instalar `DropdownMenu` + substituir sort dropdown (30min)
 - [x] **Etapa 5** — Instalar `Checkbox` + `RadioGroup`/`ToggleGroup` (30min)
 - [x] **Etapa 6** — Instalar `AlertDialog` + substituir `ConfirmRemoveModal` (20min)
-- [ ] **Etapa 7** — Substituir arbitrary text sizes (80+ casos) (2h)
-- [ ] **Etapa 8** — Substituir arbitrary `rounded` (20+ casos) (1h)
-- [ ] **Etapa 9** — Mover OKLCH hardcoded para utilities (30min)
+- [x] **Etapa 7** — Substituir arbitrary text sizes (80+ casos) (2h)
+- [x] **Etapa 8** — Substituir arbitrary `rounded` (20+ casos) (1h)
+- [x] **Etapa 9** — Mover OKLCH hardcoded para utilities (30min)
 - [ ] **Etapa 10** — (opcional) Padronizar spacing inconsistente
 
 ---

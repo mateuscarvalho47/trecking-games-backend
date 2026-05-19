@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+﻿import { useNavigate } from "@tanstack/react-router";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -24,11 +24,11 @@ export function AccountDeleteSection() {
 
 	return (
 		<section className="flex flex-col gap-3">
-			<h2 className="text-[14px] font-semibold text-text-hi flex items-center gap-2">
+			<h2 className="text-sm font-semibold text-text-hi flex items-center gap-2">
 				<Trash2 size={14} className="text-error" />
 				Excluir conta
 			</h2>
-			<p className="text-[13.5px] text-text-lo">
+			<p className="text-xs text-text-lo">
 				Esta ação remove permanentemente sua conta e toda a sua biblioteca. Não
 				há como desfazer. Seu direito de exclusão pela LGPD (Art. 18).
 			</p>
@@ -37,7 +37,7 @@ export function AccountDeleteSection() {
 				<Button
 					variant="outline"
 					onClick={() => setDeleteOpen(true)}
-					className="w-fit h-9 rounded-[8px] text-[13.5px] text-error border-error/30 hover:bg-error/10"
+					className="w-fit h-9 rounded-lg text-xs text-error border-error/30 hover:bg-error/10"
 				>
 					<Trash2 size={12} />
 					Excluir minha conta
@@ -47,7 +47,7 @@ export function AccountDeleteSection() {
 					onSubmit={onDeleteSubmit}
 					className="flex flex-col gap-3 p-4 rounded-lg border border-error/30 bg-error/5"
 				>
-					<p className="text-[13.5px] text-text-md">
+					<p className="text-xs text-text-md">
 						Para confirmar, insira sua senha abaixo:
 					</p>
 					<div className="flex flex-col gap-1.5">
@@ -59,13 +59,13 @@ export function AccountDeleteSection() {
 							autoFocus
 						/>
 						{deleteErrors.password && (
-							<p className="text-[14px] m-0 text-error">
+							<p className="text-sm m-0 text-error">
 								{deleteErrors.password.message}
 							</p>
 						)}
 					</div>
 					{deleteMutation.error && (
-						<p className="text-[14px] m-0 text-error">
+						<p className="text-sm m-0 text-error">
 							{deleteMutation.error.message}
 						</p>
 					)}
@@ -74,7 +74,7 @@ export function AccountDeleteSection() {
 							variant="outline"
 							type="submit"
 							disabled={deleteMutation.isPending}
-							className="h-9 rounded-[8px] text-[13.5px] text-error border-error/40 hover:bg-error/10"
+							className="h-9 rounded-lg text-xs text-error border-error/40 hover:bg-error/10"
 						>
 							{deleteMutation.isPending ? "Excluindo..." : "Confirmar exclusão"}
 						</Button>
@@ -82,7 +82,7 @@ export function AccountDeleteSection() {
 							variant="ghost"
 							type="button"
 							onClick={() => setDeleteOpen(false)}
-							className="h-9 rounded-[8px] text-[13.5px] text-text-lo"
+							className="h-9 rounded-lg text-xs text-text-lo"
 						>
 							Cancelar
 						</Button>

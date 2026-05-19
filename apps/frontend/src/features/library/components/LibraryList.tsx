@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+﻿import { useNavigate } from "@tanstack/react-router";
 import { Cover } from "@/shared/components/Cover";
 import { StatusBadge } from "@/shared/components/StatusBadge";
 import { STATUS_BY_KEY } from "@/shared/constants/statuses";
@@ -64,7 +64,7 @@ export function LibraryList({ games }: LibraryListProps) {
 								params: { igdbId: String(game.igdbId) },
 							})
 						}
-						className="bg-transparent border-0 cursor-pointer text-left text-[14px] transition-[background] w-full hover:bg-bg-2"
+						className="bg-transparent border-0 cursor-pointer text-left text-sm transition-[background] w-full hover:bg-bg-2"
 						style={{ borderBottom: borderStyle }}
 					>
 						{/* Mobile row */}
@@ -95,9 +95,9 @@ export function LibraryList({ games }: LibraryListProps) {
 							<div className="flex flex-col items-end gap-1">
 								<StatusBadge status={game.status} size="sm" />
 								{game.rating != null && (
-									<span className="font-mono text-[13px] font-semibold text-text-hi">
+									<span className="font-mono text-xs font-semibold text-text-hi">
 										{game.rating}
-										<span className="text-[11px] text-text-lo">/10</span>
+										<span className="text-2xs text-text-lo">/10</span>
 									</span>
 								)}
 							</div>
@@ -133,23 +133,23 @@ export function LibraryList({ games }: LibraryListProps) {
 							<div>
 								<StatusBadge status={game.status} size="sm" />
 							</div>
-							<div className="text-text-md text-[13px]">
+							<div className="text-text-md text-xs">
 								{game.userPlatform ?? game.platforms[0] ?? "—"}
 							</div>
 							<div className="font-mono font-semibold text-text-hi">
 								{game.rating != null ? (
 									<>
 										{game.rating}
-										<span className="text-[11px] text-text-lo">/10</span>
+										<span className="text-2xs text-text-lo">/10</span>
 									</>
 								) : (
 									<span className="text-text-dim">—</span>
 								)}
 							</div>
-							<div className="font-mono text-text-md text-[13px]">
+							<div className="font-mono text-text-md text-xs">
 								{game.hoursPlayed != null ? `${game.hoursPlayed}h` : "—"}
 							</div>
-							<div className="font-mono text-text-lo text-[13px]">
+							<div className="font-mono text-text-lo text-xs">
 								{fmtDate(game.createdAt)}
 							</div>
 						</div>

@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+﻿import { useNavigate } from "@tanstack/react-router";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
@@ -62,7 +62,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 				<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 					{codeValidated ? "Defina sua nova senha" : "Verifique o código"}
 				</h1>
-				<p className="text-[14px] text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
+				<p className="text-sm text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
 					{codeValidated ? (
 						<>
 							Crie uma nova senha para a conta{" "}
@@ -105,7 +105,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 						)}
 					/>
 					{errors.code && (
-						<p className="text-[14px] m-0 text-error self-start">
+						<p className="text-sm m-0 text-error self-start">
 							{errors.code.message}
 						</p>
 					)}
@@ -118,7 +118,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 					type="button"
 					disabled={check.isPending}
 					onClick={handleValidateCode}
-					className="w-full h-10 rounded-[8px] mt-5"
+					className="w-full h-10 rounded-lg mt-5"
 				>
 					{check.isPending ? "Validando..." : "Validar código"}
 				</Button>
@@ -145,7 +145,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 							</button>
 						</div>
 						{errors.password && (
-							<p className="text-[14px] m-0 text-error">
+							<p className="text-sm m-0 text-error">
 								{errors.password.message}
 							</p>
 						)}
@@ -170,14 +170,14 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 							</button>
 						</div>
 						{errors.confirmPassword && (
-							<p className="text-[14px] m-0 text-error">
+							<p className="text-sm m-0 text-error">
 								{errors.confirmPassword.message}
 							</p>
 						)}
 					</div>
 
 					{mutation.error && (
-						<p className="text-[14px] m-0 text-error">
+						<p className="text-sm m-0 text-error">
 							{mutation.error.message}
 						</p>
 					)}
@@ -186,14 +186,14 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 						variant="accent"
 						type="submit"
 						disabled={mutation.isPending}
-						className="w-full h-10 rounded-[8px] mt-1.5"
+						className="w-full h-10 rounded-lg mt-1.5"
 					>
 						{mutation.isPending ? "Redefinindo..." : "Redefinir senha"}
 					</Button>
 				</>
 			)}
 
-			<p className="text-center text-[13.5px] text-text-lo mt-1">
+			<p className="text-center text-xs text-text-lo mt-1">
 				Não recebeu?{" "}
 				<a
 					href="/forgot-password"

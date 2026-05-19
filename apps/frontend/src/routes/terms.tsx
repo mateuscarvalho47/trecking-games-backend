@@ -15,7 +15,7 @@ function TermsPage() {
 			<h1 className="text-2xl font-semibold tracking-tight text-text-hi mb-1">
 				Termos de Uso
 			</h1>
-			<p className="text-[13px] text-text-lo font-mono mb-8">
+			<p className="text-xs text-text-lo font-mono mb-8">
 				Última atualização: maio de 2026
 			</p>
 
@@ -154,7 +154,7 @@ function TermsPage() {
 			<div className="mt-10 pt-6 border-t border-border-soft">
 				<a
 					href="/"
-					className="text-[13.5px] text-accent-bright no-underline hover:underline font-medium"
+					className="text-xs text-accent-bright no-underline hover:underline font-medium"
 				>
 					← Voltar ao início
 				</a>

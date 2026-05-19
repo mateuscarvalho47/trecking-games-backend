@@ -1,4 +1,4 @@
-interface HltbPraiseProps {
+﻿interface HltbPraiseProps {
 	hoursPlayed: number;
 	hltbMain: number;
 }
@@ -25,8 +25,8 @@ export function HltbPraise({ hoursPlayed, hltbMain }: HltbPraiseProps) {
 	const message = buildMessage(diffPct);
 
 	return (
-		<div className="mt-2 bg-bg-2 border border-border-soft rounded-[7px] px-3.5 py-2.5">
-			<div className="text-[14px] font-semibold text-text-hi">{message}</div>
+		<div className="mt-2 bg-bg-2 border border-border-soft rounded-md px-3.5 py-2.5">
+			<div className="text-sm font-semibold text-text-hi">{message}</div>
 			<div className="mono-label text-text-lo text-[10.5px] mt-1">
 				{hoursPlayed}h · média {hltbMain}h
 			</div>

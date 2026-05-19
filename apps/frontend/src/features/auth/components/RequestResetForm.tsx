@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+﻿import { useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -24,7 +24,7 @@ export function RequestResetForm() {
 				<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 					Esqueceu sua senha?
 				</h1>
-				<p className="text-[14px] text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
+				<p className="text-sm text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
 					Informe seu e-mail e enviaremos um código para você redefinir sua
 					senha.
 				</p>
@@ -39,24 +39,24 @@ export function RequestResetForm() {
 					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 				/>
 				{errors.email && (
-					<p className="text-[14px] m-0 text-error">{errors.email.message}</p>
+					<p className="text-sm m-0 text-error">{errors.email.message}</p>
 				)}
 			</div>
 
 			{mutation.error && (
-				<p className="text-[14px] m-0 text-error">{mutation.error.message}</p>
+				<p className="text-sm m-0 text-error">{mutation.error.message}</p>
 			)}
 
 			<Button
 				variant="accent"
 				type="submit"
 				disabled={mutation.isPending}
-				className="w-full h-10 rounded-[8px] mt-1.5"
+				className="w-full h-10 rounded-lg mt-1.5"
 			>
 				{mutation.isPending ? "Enviando..." : "Enviar código"}
 			</Button>
 
-			<p className="text-center text-[13.5px] text-text-lo mt-1">
+			<p className="text-center text-xs text-text-lo mt-1">
 				Lembrou a senha?{" "}
 				<a
 					href="/login"

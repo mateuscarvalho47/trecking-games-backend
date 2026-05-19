@@ -10,7 +10,7 @@ export function HBars({ items, color = "oklch(0.51 0.22 17)" }: HBarsProps) {
 			{items.map((item) => (
 				<div
 					key={item.label}
-					className="grid gap-3 items-center text-[13.5px]"
+					className="grid gap-3 items-center text-xs"
 					style={{ gridTemplateColumns: "130px 1fr 32px" }}
 				>
 					<span className="text-text-md truncate">{item.label}</span>

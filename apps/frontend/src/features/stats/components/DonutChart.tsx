@@ -80,7 +80,7 @@ export function DonutChart({ stats }: DonutChartProps) {
 					return (
 						<li
 							key={s.key}
-							className="grid gap-2.5 items-center text-[13.5px]"
+							className="grid gap-2.5 items-center text-xs"
 							style={{ gridTemplateColumns: "12px 80px 1fr 28px" }}
 						>
 							<div

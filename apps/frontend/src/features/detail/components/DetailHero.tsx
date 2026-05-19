@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+﻿import { Button } from "@/components/ui/button";
 import { Cover } from "@/shared/components/Cover";
 import { HltbStat } from "@/shared/components/HltbStat";
 import { StatusBadge } from "@/shared/components/StatusBadge";
@@ -68,7 +68,7 @@ export function DetailHero({
 				<div className="flex gap-2 items-center">
 					{saved && (
 						<span
-							className="inline-flex items-center gap-1.5 font-mono text-[11.5px] rounded-[5px] py-0.5 px-2"
+							className="inline-flex items-center gap-1.5 font-mono text-[11.5px] rounded-sm py-0.5 px-2"
 							style={{
 								color: "var(--color-accent-bright)",
 								background: "var(--color-accent-soft)",
@@ -114,7 +114,7 @@ export function DetailHero({
 				{/* Head info */}
 				<div className="flex flex-col gap-3.5 pt-2 w-full text-center md:text-left">
 					<div className="mono-label">{game.genres.join(" · ")}</div>
-					<h1 className="text-[29px] md:text-[43px] font-bold leading-[1.05] m-0 text-text-hi tracking-[-0.035em]">
+					<h1 className="text-2xl md:text-[43px] font-bold leading-[1.05] m-0 text-text-hi tracking-[-0.035em]">
 						{game.name}
 					</h1>
 					<div className="text-text-md text-[14.5px]">

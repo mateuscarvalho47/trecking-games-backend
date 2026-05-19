@@ -36,7 +36,7 @@ export function LoginForm() {
 				<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 					Entrar na conta
 				</h1>
-				<p className="text-[14px] text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
+				<p className="text-sm text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
 					Acesse sua biblioteca de jogos.
 				</p>
 			</div>
@@ -50,7 +50,7 @@ export function LoginForm() {
 					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 				/>
 				{errors.email && (
-					<p className="text-[14px] m-0 text-error">{errors.email.message}</p>
+					<p className="text-sm m-0 text-error">{errors.email.message}</p>
 				)}
 			</div>
 
@@ -73,7 +73,7 @@ export function LoginForm() {
 					</button>
 				</div>
 				{errors.password && (
-					<p className="text-[14px] m-0 text-error">
+					<p className="text-sm m-0 text-error">
 						{errors.password.message}
 					</p>
 				)}
@@ -89,7 +89,7 @@ export function LoginForm() {
 			</div>
 
 			{login.error && !emailNotVerified && (
-				<p className="text-[14px] m-0 text-error">{login.error.message}</p>
+				<p className="text-sm m-0 text-error">{login.error.message}</p>
 			)}
 
 			{emailNotVerified && (
@@ -99,7 +99,7 @@ export function LoginForm() {
 						variant="outline"
 						disabled={resend.isPending || resend.isSuccess}
 						onClick={() => resend.mutate(email)}
-						className="w-full h-10 rounded-[8px]"
+						className="w-full h-10 rounded-lg"
 					>
 						{resend.isPending ? "Enviando..." : "Reenviar email de verificação"}
 					</Button>
@@ -109,7 +109,7 @@ export function LoginForm() {
 						</p>
 					)}
 					{resend.error && (
-						<p className="text-[14px] m-0 text-error text-center">
+						<p className="text-sm m-0 text-error text-center">
 							{resend.error.message}
 						</p>
 					)}
@@ -120,12 +120,12 @@ export function LoginForm() {
 				variant="accent"
 				type="submit"
 				disabled={login.isPending}
-				className="w-full h-10 rounded-[8px] mt-1.5"
+				className="w-full h-10 rounded-lg mt-1.5"
 			>
 				{login.isPending ? "Entrando..." : "Entrar"}
 			</Button>
 
-			<p className="text-center text-[13.5px] text-text-lo mt-1">
+			<p className="text-center text-xs text-text-lo mt-1">
 				Não tem conta?{" "}
 				<Link
 					to="/register"

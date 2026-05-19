@@ -1,4 +1,4 @@
-import {
+﻿import {
 	AlertDialog,
 	AlertDialogAction,
 	AlertDialogCancel,
@@ -31,7 +31,7 @@ export function ConfirmRemoveModal({
 		>
 			<AlertDialogContent className="max-w-sm text-center bg-bg-1 border border-border rounded-xl shadow-panel">
 				<div className="flex flex-col items-center gap-3">
-					<div className="size-12 flex items-center justify-center rounded-full text-[23px] bg-[oklch(0.3_0.1_25/0.3)] text-error">
+					<div className="size-12 flex items-center justify-center rounded-full text-xl bg-[oklch(0.3_0.1_25/0.3)] text-error">
 						⚠
 					</div>
 					<AlertDialogHeader className="space-y-0">
@@ -48,14 +48,14 @@ export function ConfirmRemoveModal({
 				<AlertDialogFooter className="flex-row justify-center gap-2.5 sm:justify-center">
 					<AlertDialogCancel
 						onClick={onCancel}
-						className="h-9 border border-border text-text-md rounded-[8px]"
+						className="h-9 border border-border text-text-md rounded-lg"
 					>
 						Cancelar
 					</AlertDialogCancel>
 					<AlertDialogAction
 						onClick={onConfirm}
 						disabled={isPending}
-						className="h-9 rounded-[8px] bg-error text-white hover:bg-error/90"
+						className="h-9 rounded-lg bg-error text-white hover:bg-error/90"
 					>
 						{isPending ? "Removendo..." : "Remover"}
 					</AlertDialogAction>

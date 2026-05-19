@@ -1,4 +1,4 @@
-import { Calendar } from "lucide-react";
+﻿import { Calendar } from "lucide-react";
 import type { Control, UseFormRegister } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { Input } from "@/components/ui/input";
@@ -60,7 +60,7 @@ export function DetailEditForm({
 											<ToggleGroupItem
 												key={s.key}
 												value={s.key}
-												className="flex items-center gap-2 h-8 px-2.5 rounded-[7px] text-[13px] font-medium border w-full justify-start"
+												className="flex items-center gap-2 h-8 px-2.5 rounded-md text-xs font-medium border w-full justify-start"
 												style={
 													field.value === s.key
 														? {
@@ -122,7 +122,7 @@ export function DetailEditForm({
 									control={control}
 									name="hoursPlayed"
 									render={({ field }) => (
-										<div className="flex items-center bg-bg-2 border border-border rounded-[8px] h-9.5 overflow-hidden">
+										<div className="flex items-center bg-bg-2 border border-border rounded-lg h-9.5 overflow-hidden">
 											<button
 												type="button"
 												onClick={() =>
@@ -149,7 +149,7 @@ export function DetailEditForm({
 													}}
 													className="w-14 text-center bg-transparent border-0 outline-none text-text-hi text-[14.5px]"
 												/>
-												<span className="text-text-dim text-[13px]">h</span>
+												<span className="text-text-dim text-xs">h</span>
 											</div>
 											<button
 												type="button"
@@ -176,7 +176,7 @@ export function DetailEditForm({
 										<span className="text-[12px] text-text-lo ml-px">/10</span>
 									</span>
 								</div>
-								<div className="relative h-9 bg-bg-2 border border-border rounded-[8px] overflow-hidden">
+								<div className="relative h-9 bg-bg-2 border border-border rounded-lg overflow-hidden">
 									<div
 										className="absolute top-0 bottom-0 left-0 pointer-events-none transition-[width] duration-150 gradient-accent-fill"
 										style={{ width: `${(rating / 10) * 100}%` }}

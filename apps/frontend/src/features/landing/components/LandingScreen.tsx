@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+﻿import { useNavigate } from "@tanstack/react-router";
 import { usePageTitle } from "@/shared/hooks/usePageTitle";
 
 const TILES = [
@@ -111,7 +111,7 @@ export function LandingScreen() {
 						className="rounded-[10px]"
 						fetchPriority="high"
 					/>
-					<span className="text-[29px] font-bold tracking-[-0.03em] text-text-hi">
+					<span className="text-2xl font-bold tracking-[-0.03em] text-text-hi">
 						Detonado
 					</span>
 				</div>
@@ -176,7 +176,7 @@ export function LandingScreen() {
 							<div className="text-[14.5px] font-semibold text-text-hi mb-1.5">
 								{f.label}
 							</div>
-							<div className="text-[13px] text-text-lo leading-relaxed">
+							<div className="text-xs text-text-lo leading-relaxed">
 								{f.desc}
 							</div>
 						</div>

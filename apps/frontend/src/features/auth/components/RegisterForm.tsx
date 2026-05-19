@@ -28,12 +28,12 @@ export function RegisterForm() {
 					<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 						Quase lá!
 					</h1>
-					<p className="text-[14px] text-text-md leading-[1.55] mt-0 mb-2 max-w-[36ch]">
+					<p className="text-sm text-text-md leading-[1.55] mt-0 mb-2 max-w-[36ch]">
 						Enviamos um link de confirmação para{" "}
 						<span className="text-text-hi font-medium">{email}</span>. Clique no
 						link para ativar sua conta.
 					</p>
-					<p className="text-[13px] text-text-lo leading-normal">
+					<p className="text-xs text-text-lo leading-normal">
 						Não recebeu? Verifique a pasta de spam.
 					</p>
 				</div>
@@ -42,7 +42,7 @@ export function RegisterForm() {
 						variant="outline"
 						disabled={resend.isPending || resend.isSuccess}
 						onClick={() => resend.mutate(email)}
-						className="w-full h-10 rounded-[8px]"
+						className="w-full h-10 rounded-lg"
 					>
 						{resend.isPending ? "Enviando..." : "Reenviar email"}
 					</Button>
@@ -52,12 +52,12 @@ export function RegisterForm() {
 						</p>
 					)}
 					{resend.error && (
-						<p className="text-[14px] m-0 text-error text-center">
+						<p className="text-sm m-0 text-error text-center">
 							{resend.error.message}
 						</p>
 					)}
 				</div>
-				<p className="text-center text-[13.5px] text-text-lo mt-2">
+				<p className="text-center text-xs text-text-lo mt-2">
 					<a
 						href="/login"
 						className="text-accent-bright font-semibold no-underline"
@@ -78,7 +78,7 @@ export function RegisterForm() {
 				<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 					Começar a rastrear
 				</h1>
-				<p className="text-[14px] text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
+				<p className="text-sm text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
 					Monte sua biblioteca de jogos pessoal.
 				</p>
 			</div>
@@ -92,7 +92,7 @@ export function RegisterForm() {
 					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-9.5"
 				/>
 				{errors.email && (
-					<p className="text-[14px] m-0 text-error">{errors.email.message}</p>
+					<p className="text-sm m-0 text-error">{errors.email.message}</p>
 				)}
 			</div>
 
@@ -115,7 +115,7 @@ export function RegisterForm() {
 					</button>
 				</div>
 				{errors.password && (
-					<p className="text-[14px] m-0 text-error">
+					<p className="text-sm m-0 text-error">
 						{errors.password.message}
 					</p>
 				)}
@@ -135,7 +135,7 @@ export function RegisterForm() {
 				/>
 				<label
 					htmlFor="consent"
-					className="text-[13px] text-text-lo leading-relaxed cursor-pointer"
+					className="text-xs text-text-lo leading-relaxed cursor-pointer"
 				>
 					Li e concordo com a{" "}
 					<a
@@ -158,23 +158,23 @@ export function RegisterForm() {
 				</label>
 			</div>
 			{errors.consent && (
-				<p className="text-[14px] m-0 text-error">{errors.consent.message}</p>
+				<p className="text-sm m-0 text-error">{errors.consent.message}</p>
 			)}
 
 			{register.error && (
-				<p className="text-[14px] m-0 text-error">{register.error.message}</p>
+				<p className="text-sm m-0 text-error">{register.error.message}</p>
 			)}
 
 			<Button
 				variant="accent"
 				type="submit"
 				disabled={register.isPending}
-				className="w-full h-10 rounded-[8px] mt-1.5"
+				className="w-full h-10 rounded-lg mt-1.5"
 			>
 				{register.isPending ? "Criando..." : "Criar conta"}
 			</Button>
 
-			<p className="text-center text-[13.5px] text-text-lo mt-1">
+			<p className="text-center text-xs text-text-lo mt-1">
 				Já tem conta?{" "}
 				<a
 					href="/login"

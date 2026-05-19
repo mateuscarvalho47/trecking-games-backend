@@ -33,7 +33,7 @@ export function Histogram({ distribution }: HistogramProps) {
 								}}
 							>
 								{count > 0 && (
-									<span className="text-[11px] text-text-hi font-semibold">
+									<span className="text-2xs text-text-hi font-semibold">
 										{count}
 									</span>
 								)}

@@ -51,7 +51,7 @@ export function DashboardScreen() {
 					variant="accent"
 					size="sm"
 					onClick={() => setOpen(true)}
-					className="rounded-[8px]"
+					className="rounded-lg"
 				>
 					+ Adicionar jogo
 				</Button>

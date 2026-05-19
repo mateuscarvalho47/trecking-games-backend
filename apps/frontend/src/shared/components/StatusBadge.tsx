@@ -18,8 +18,8 @@ export function StatusBadge({ status, size = "md" }: StatusBadgeProps) {
 	return (
 		<span
 			className={cn(
-				"inline-flex items-center px-2 font-semibold tracking-[0.01em] rounded-[5px] whitespace-nowrap",
-				size === "sm" ? "h-5 text-[11px]" : "h-[22px] text-[12px]",
+				"inline-flex items-center px-2 font-semibold tracking-[0.01em] rounded-sm whitespace-nowrap",
+				size === "sm" ? "h-5 text-2xs" : "h-[22px] text-[12px]",
 			)}
 			style={{
 				border: `1px solid ${borderColor}`,

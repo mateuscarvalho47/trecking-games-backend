@@ -36,7 +36,7 @@ export function BacklogList({ games }: BacklogListProps) {
 			</div>
 
 			{shown.length === 0 ? (
-				<div className="py-6 text-center text-text-lo text-[14px]">
+				<div className="py-6 text-center text-text-lo text-sm">
 					Fila vazia
 				</div>
 			) : (
@@ -73,14 +73,14 @@ export function BacklogList({ games }: BacklogListProps) {
 								/>
 							</div>
 							<div>
-								<div className="text-[14px] font-medium text-text-hi">
+								<div className="text-sm font-medium text-text-hi">
 									{game.name}
 								</div>
 								<div className="text-[12.5px] font-mono text-text-lo mt-0.5">
 									{game.userPlatform ?? game.platforms[0] ?? "—"}
 								</div>
 							</div>
-							<span className="text-text-dim text-[13px]">›</span>
+							<span className="text-text-dim text-xs">›</span>
 						</button>
 					))}
 				</div>

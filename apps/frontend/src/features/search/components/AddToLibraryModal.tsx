@@ -1,4 +1,4 @@
-import { XIcon } from "lucide-react";
+﻿import { XIcon } from "lucide-react";
 import { Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -45,11 +45,7 @@ export function AddToLibraryModal({
 		>
 			<DialogContent
 				showCloseButton={false}
-				className="p-0 gap-0 max-w-180 bg-bg-1 border border-border rounded-xl"
-				style={{
-					boxShadow:
-						"0 1px 0 oklch(1 0 0 / 0.06) inset, 0 24px 60px oklch(0 0 0 / 0.55)",
-				}}
+				className="p-0 gap-0 max-w-180 bg-bg-1 border border-border rounded-xl shadow-modal"
 			>
 				<DialogHeader className="flex flex-row items-center justify-between px-4.5 py-3.5 border-b border-border-soft">
 					<DialogTitle className="text-[15px] text-text-hi">
@@ -89,10 +85,10 @@ export function AddToLibraryModal({
 								<div className="mono-label text-accent-bright">
 									{game.genres.slice(0, 2).join(" · ")}
 								</div>
-								<h2 className="text-[23px] font-semibold tracking-tight mt-1 mb-0 text-text-hi">
+								<h2 className="text-xl font-semibold tracking-tight mt-1 mb-0 text-text-hi">
 									{game.name}
 								</h2>
-								<div className="text-[13.5px] text-text-md font-mono mt-0.5">
+								<div className="text-xs text-text-md font-mono mt-0.5">
 									{game.releaseYear ?? "TBA"} ·{" "}
 									{game.platforms.slice(0, 3).join(", ")}
 								</div>
@@ -141,7 +137,7 @@ export function AddToLibraryModal({
 													type="button"
 													key={s.key}
 													onClick={() => field.onChange(s.key)}
-													className="flex items-center gap-2 h-8 px-2.5 rounded-[7px] cursor-pointer text-[13px] font-medium border-0"
+													className="flex items-center gap-2 h-8 px-2.5 rounded-md cursor-pointer text-xs font-medium border-0"
 													style={{
 														background:
 															field.value === s.key
@@ -192,7 +188,7 @@ export function AddToLibraryModal({
 							type="button"
 							variant="ghost"
 							onClick={onClose}
-							className="h-9 border border-border text-text-md rounded-[8px]"
+							className="h-9 border border-border text-text-md rounded-lg"
 						>
 							Cancelar
 						</Button>
@@ -200,7 +196,7 @@ export function AddToLibraryModal({
 							variant="accent"
 							type="submit"
 							disabled={isPending}
-							className="h-9 rounded-[8px]"
+							className="h-9 rounded-lg"
 						>
 							{isPending ? "Adicionando..." : "Adicionar"}
 						</Button>

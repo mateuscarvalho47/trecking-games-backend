@@ -7,7 +7,7 @@ interface TimelineChartProps {
 export function TimelineChart({ timeline }: TimelineChartProps) {
 	if (timeline.length < 2) {
 		return (
-			<div className="h-45 flex items-center justify-center text-text-lo text-[14px]">
+			<div className="h-45 flex items-center justify-center text-text-lo text-sm">
 				Dados insuficientes para o gráfico
 			</div>
 		);

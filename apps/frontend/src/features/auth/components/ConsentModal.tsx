@@ -14,14 +14,10 @@ export function ConsentModal() {
 	return (
 		<Dialog open onOpenChange={() => {}}>
 			<DialogContent
-				className="max-w-md bg-bg-1 border border-border rounded-xl [&>button]:hidden"
-				style={{
-					boxShadow:
-						"0 1px 0 oklch(1 0 0 / 0.06) inset, 0 24px 60px var(--color-shadow-base)",
-				}}
+				className="max-w-md bg-bg-1 border border-border rounded-xl [&>button]:hidden shadow-panel"
 			>
 				<DialogHeader>
-					<DialogTitle className="text-[16px] text-text-hi">
+					<DialogTitle className="text-md text-text-hi">
 						Precisamos da sua confirmação
 					</DialogTitle>
 				</DialogHeader>
@@ -47,7 +43,7 @@ export function ConsentModal() {
 						. Para continuar usando o Detonado, confirme que você leu e concorda
 						com esses documentos.
 					</p>
-					<p className="text-[13px] text-text-lo">
+					<p className="text-xs text-text-lo">
 						Seus dados são armazenados com segurança e nunca serão
 						compartilhados para fins de marketing. Você pode excluir sua conta a
 						qualquer momento.
@@ -59,7 +55,7 @@ export function ConsentModal() {
 						variant="accent"
 						disabled={isPending}
 						onClick={() => mutate()}
-						className="h-9 rounded-[8px]"
+						className="h-9 rounded-lg"
 					>
 						{isPending ? "Salvando..." : "Aceitar e continuar"}
 					</Button>
