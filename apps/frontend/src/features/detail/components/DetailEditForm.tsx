@@ -3,13 +3,7 @@ import type { Control, UseFormRegister } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
+import { SelectOptions } from "@/components/ui/select-options";
 import { Textarea } from "@/components/ui/textarea";
 import { statusColor } from "@/lib/statusColor";
 import { STATUSES } from "@/shared/constants/statuses";
@@ -102,24 +96,13 @@ export function DetailEditForm({
 								control={control}
 								name="userPlatform"
 								render={({ field }) => (
-									<Select
-										value={field.value || "__none__"}
-										onValueChange={(v) =>
-											field.onChange(v === "__none__" ? "" : v)
-										}
-									>
-										<SelectTrigger className="w-full h-9.5 bg-bg-2 border-border text-text-hi">
-											<SelectValue placeholder="—" />
-										</SelectTrigger>
-										<SelectContent>
-											<SelectItem value="__none__">—</SelectItem>
-											{game.platforms.filter(Boolean).map((p) => (
-												<SelectItem key={p} value={p}>
-													{p}
-												</SelectItem>
-											))}
-										</SelectContent>
-									</Select>
+									<SelectOptions
+										options={game.platforms}
+										value={field.value}
+										onChange={field.onChange}
+										allowClear
+										className="w-full h-9.5 bg-bg-2 border-border text-text-hi"
+									/>
 								)}
 							/>
 						</div>

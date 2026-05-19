@@ -9,13 +9,7 @@ import {
 	DialogTitle,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
+import { SelectOptions } from "@/components/ui/select-options";
 import { statusColor } from "@/lib/statusColor";
 import { Cover } from "@/shared/components/Cover";
 import { HltbStat, HltbStatSkeleton } from "@/shared/components/HltbStat";
@@ -179,18 +173,13 @@ export function AddToLibraryModal({
 									control={control}
 									name="userPlatform"
 									render={({ field }) => (
-										<Select value={field.value} onValueChange={field.onChange}>
-											<SelectTrigger className="w-full h-9.5 bg-bg-2 border-border text-text-hi">
-												<SelectValue placeholder="Plataforma" />
-											</SelectTrigger>
-											<SelectContent>
-												{game.platforms.filter(Boolean).map((p) => (
-													<SelectItem key={p} value={p}>
-														{p}
-													</SelectItem>
-												))}
-											</SelectContent>
-										</Select>
+										<SelectOptions
+											options={game.platforms}
+											value={field.value}
+											onChange={field.onChange}
+											placeholder="Plataforma"
+											className="w-full h-9.5 bg-bg-2 border-border text-text-hi"
+										/>
 									)}
 								/>
 							</div>
