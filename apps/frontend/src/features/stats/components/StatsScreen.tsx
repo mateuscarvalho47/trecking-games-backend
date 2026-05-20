@@ -36,7 +36,7 @@ export function StatsScreen() {
 
 	if (isLoading || !stats) {
 		return (
-			<div className="px-6 pt-7">
+			<div className="px-4 pt-6 lg:px-6 lg:pt-7">
 				<div className="flex flex-col gap-5">
 					{[1, 2, 3].map((i) => (
 						<div key={i} className="h-50 bg-bg-1 rounded-lg animate-pulse" />
@@ -47,7 +47,7 @@ export function StatsScreen() {
 	}
 
 	return (
-		<div className="px-6 pt-7 pb-15">
+		<div className="px-4 pt-6 lg:px-6 lg:pt-7 pb-15">
 			{/* Topbar */}
 			<div className="flex items-end justify-between gap-6 pb-5.5 mb-5.5 border-b border-border-soft">
 				<PageHeader

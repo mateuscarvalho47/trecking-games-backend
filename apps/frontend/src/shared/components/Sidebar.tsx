@@ -58,7 +58,7 @@ export function Sidebar({
 					height="22"
 					className="rounded-md"
 				/>
-				<span className="text-title font-bold tracking-[-0.02em] text-text-hi">
+				<span className="text-heading font-bold tracking-[-0.02em] text-text-hi">
 					Detonado
 				</span>
 			</div>
@@ -67,15 +67,15 @@ export function Sidebar({
 			<button
 				type="button"
 				onClick={() => setSearchOpen(true)}
-				className="flex items-center gap-2 rounded-md px-2.5 py-2 text-body transition-all cursor-pointer w-full bg-bg-2 border border-border-soft text-text-md"
+				className="flex items-center gap-2 rounded-md px-2.5 py-2 text-caption transition-all cursor-pointer w-full bg-bg-2 border border-border-soft text-text-md"
 			>
-				<Search size={13} />
+				<Search className="size-3.5" />
 				<span className="flex-1 text-left">Buscar jogos</span>
 				<div className="flex gap-0.5">
 					{["Ctrl", "K"].map((k) => (
 						<kbd
 							key={k}
-							className="inline-flex items-center justify-center h-4 min-w-4 px-1 rounded text-caption font-medium font-mono text-text-md bg-bg-3 border border-border"
+							className="inline-flex items-center justify-center h-4 min-w-4 px-1 rounded text-overline font-medium font-mono text-text-md bg-bg-3 border border-border"
 							style={{ boxShadow: "0 1px 0 oklch(0 0 0 / 0.5)" }}
 						>
 							{k}
@@ -95,7 +95,7 @@ export function Sidebar({
 							onClick={() => navigate({ to })}
 							className={cn(
 								"flex items-center gap-2.5 px-2.5 py-2 rounded-sm",
-								"text-heading font-medium text-left w-full cursor-pointer transition-[background,color]",
+								"text-body font-medium text-left w-full cursor-pointer transition-[background,color]",
 								"border-0",
 							)}
 							style={{
@@ -106,7 +106,7 @@ export function Sidebar({
 							}}
 						>
 							<span className="flex opacity-85">
-								<Icon size={16} />
+								<Icon className="size-4" />
 							</span>
 							<span className="flex-1">{label}</span>
 							{to === "/library" && libraryCount !== undefined && (
@@ -135,7 +135,7 @@ export function Sidebar({
 			<div className="mt-auto flex flex-col gap-2">
 				{/* Theme toggle */}
 				<div className="flex items-center justify-between px-1">
-					<span className="text-caption font-mono text-text-dim uppercase tracking-widest">
+					<span className="text-overline font-mono text-text-dim uppercase tracking-widest">
 						Tema
 					</span>
 					<Button
@@ -145,17 +145,19 @@ export function Sidebar({
 						title={theme === "dark" ? "Mudar para claro" : "Mudar para escuro"}
 						className="text-text-md"
 					>
-						{theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+						{theme === "dark" ? (
+							<Sun className="size-3.5" />
+						) : (
+							<Moon className="size-3.5" />
+						)}
 					</Button>
 				</div>
 
 				<div className="flex flex-col gap-2.5 p-3 rounded-md bg-bg-2 border border-border-soft">
 					<div className="flex items-center gap-2.5">
 						<div
-							className="flex items-center justify-center shrink-0 text-white text-caption font-bold rounded-sm"
+							className="flex items-center justify-center shrink-0 size-8 text-white text-overline font-bold rounded-sm"
 							style={{
-								width: 32,
-								height: 32,
 								background:
 									"linear-gradient(135deg, oklch(0.5 0.2 17), oklch(0.55 0.18 350))",
 								letterSpacing: "0.02em",
@@ -164,10 +166,10 @@ export function Sidebar({
 							{initials}
 						</div>
 						<div className="flex-1 min-w-0">
-							<div className="text-body font-semibold text-text-hi leading-tight">
+							<div className="text-caption font-semibold text-text-hi leading-tight">
 								Minha conta
 							</div>
-							<div className="text-caption truncate font-mono text-text-lo mt-0.5">
+							<div className="text-overline truncate font-mono text-text-lo mt-0.5">
 								{me?.email ?? "—"}
 							</div>
 						</div>
@@ -178,9 +180,9 @@ export function Sidebar({
 							size="sm"
 							onClick={() => navigate({ to: "/account" })}
 							title="Configurações"
-							className="flex-1 h-7 text-caption text-text-md gap-1.5 justify-start px-2"
+							className="flex-1 h-7 text-overline text-text-md gap-1.5 justify-start px-2"
 						>
-							<Settings size={13} />
+							<Settings className="size-3.5" />
 							Configurações
 						</Button>
 						<Button
@@ -190,7 +192,7 @@ export function Sidebar({
 							title="Sair"
 							className="shrink-0 h-7 w-7 text-text-md"
 						>
-							<LogOut size={13} />
+							<LogOut className="size-3.5" />
 						</Button>
 					</div>
 				</div>

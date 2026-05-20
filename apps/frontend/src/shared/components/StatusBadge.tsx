@@ -4,12 +4,12 @@ import { useAppStore } from "@/store/useAppStore";
 import type { GameStatus } from "@/types/api";
 
 const badge = cva(
-	"inline-flex items-center px-2 text-caption leading-none font-semibold tracking-[0.01em] rounded-sm whitespace-nowrap",
+	"inline-flex items-center px-1.5 leading-none font-bold tracking-[0.06em] uppercase rounded-sm whitespace-nowrap",
 	{
 		variants: {
 			size: {
-				sm: "h-5",
-				md: "h-[22px]",
+				sm: "h-[16px] text-[10px]",
+				md: "h-[18px] text-[11px]",
 			},
 		},
 		defaultVariants: {

@@ -34,7 +34,7 @@ export function LibraryScreen() {
 
 	if (isLoading) {
 		return (
-			<div className="px-6 pt-7">
+			<div className="px-4 pt-6 lg:px-6 lg:pt-7">
 				<div
 					className="grid gap-5"
 					style={{
@@ -53,7 +53,7 @@ export function LibraryScreen() {
 	}
 
 	return (
-		<div className="px-6 pt-7 pb-15">
+		<div className="px-4 pt-6 lg:px-6 lg:pt-7 pb-15">
 			{/* Topbar */}
 			<div className="flex items-end justify-between gap-6 pb-5.5 mb-5.5 border-b border-border-soft">
 				<PageHeader
@@ -85,8 +85,8 @@ export function LibraryScreen() {
 
 				<div className="flex gap-2 items-center">
 					{/* Search */}
-					<div className="relative flex items-center gap-2 h-9 px-3 bg-bg-2 border border-border rounded-lg flex-1 sm:w-55 sm:flex-none text-text-lo">
-						<Search size={13} className="shrink-0" />
+					<div className="relative flex items-center gap-2 h-10 px-3 bg-bg-2 border border-border rounded-lg flex-1 sm:w-55 sm:flex-none text-text-lo">
+						<Search className="size-3.5 shrink-0" />
 						<Input
 							value={filters.search}
 							onChange={(e) => filters.setSearch(e.target.value)}
@@ -100,7 +100,7 @@ export function LibraryScreen() {
 						<DropdownMenuTrigger asChild>
 							<button
 								type="button"
-								className="inline-flex items-center gap-1.5 h-8 px-2.5 bg-bg-2 border border-border rounded-md text-text-md cursor-pointer text-body font-medium"
+								className="inline-flex items-center gap-1.5 h-8 min-h-11 lg:min-h-0 px-2.5 bg-bg-2 border border-border rounded-md text-text-md cursor-pointer text-body font-medium"
 							>
 								{currentSortLabel} ↕
 							</button>
@@ -135,13 +135,17 @@ export function LibraryScreen() {
 								key={v}
 								onClick={() => filters.setView(v)}
 								className={cn(
-									"flex items-center justify-center size-8 rounded-sm cursor-pointer border-0 transition-all",
+									"flex items-center justify-center size-8 min-h-11 min-w-11 lg:min-h-0 lg:min-w-0 rounded-sm cursor-pointer border-0 transition-all",
 									filters.view === v
 										? "bg-bg-3 text-text-hi"
 										: "bg-transparent text-text-lo",
 								)}
 							>
-								{v === "grid" ? <LayoutGrid size={14} /> : <List size={14} />}
+								{v === "grid" ? (
+									<LayoutGrid className="size-3.5" />
+								) : (
+									<List className="size-3.5" />
+								)}
 							</button>
 						))}
 					</div>
@@ -151,7 +155,7 @@ export function LibraryScreen() {
 			{/* Content */}
 			{filters.filtered.length === 0 ? (
 				<EmptyState
-					icon={<BookMarked size={28} />}
+					icon={<BookMarked className="size-7" />}
 					title="Biblioteca vazia"
 					body="Adicione seu primeiro jogo usando o botão acima ou pressione Ctrl+K."
 					action={

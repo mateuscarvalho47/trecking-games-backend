@@ -65,7 +65,7 @@ export function ActivityRibbon({ library }: ActivityRibbonProps) {
 						<div
 							key={weekIndex}
 							title={`${cells[weekIndex]} atualizações`}
-							className="aspect-square min-h-4 rounded-[3px] transition-transform cursor-default"
+							className="aspect-square min-h-4 rounded-xs transition-transform cursor-default"
 							style={{
 								background: CELL_COLORS[levelFromCount(cells[weekIndex])],
 							}}
@@ -79,7 +79,7 @@ export function ActivityRibbon({ library }: ActivityRibbonProps) {
 				{([0, 1, 2, 3] as const).map((l) => (
 					<div
 						key={l}
-						className="size-3.5 rounded-[3px]"
+						className="size-3.5 rounded-xs"
 						style={{ background: CELL_COLORS[l] }}
 					/>
 				))}

@@ -28,7 +28,7 @@ export function RegisterForm() {
 					<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 						Quase lá!
 					</h1>
-					<p className="text-body text-text-md leading-[1.55] mt-0 mb-2 max-w-[36ch]">
+					<p className="text-body text-text-md leading-prose mt-0 mb-2 max-w-[36ch]">
 						Enviamos um link de confirmação para{" "}
 						<span className="text-text-hi font-medium">{email}</span>. Clique no
 						link para ativar sua conta.
@@ -78,7 +78,7 @@ export function RegisterForm() {
 				<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 					Começar a rastrear
 				</h1>
-				<p className="text-body text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
+				<p className="text-body text-text-md leading-prose mt-0 mb-6 max-w-[36ch]">
 					Monte sua biblioteca de jogos pessoal.
 				</p>
 			</div>
@@ -89,7 +89,7 @@ export function RegisterForm() {
 					type="email"
 					{...registerField("email")}
 					placeholder="seu@email.com"
-					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10"
+					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-11"
 				/>
 				{errors.email && (
 					<p className="text-body m-0 text-error">{errors.email.message}</p>

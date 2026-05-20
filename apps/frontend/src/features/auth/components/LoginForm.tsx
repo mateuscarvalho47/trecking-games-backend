@@ -36,7 +36,7 @@ export function LoginForm() {
 				<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 					Entrar na conta
 				</h1>
-				<p className="text-body text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
+				<p className="text-body text-text-md leading-prose mt-0 mb-6 max-w-[36ch]">
 					Acesse sua biblioteca de jogos.
 				</p>
 			</div>
@@ -47,7 +47,7 @@ export function LoginForm() {
 					type="email"
 					{...register("email")}
 					placeholder="seu@email.com"
-					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10"
+					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-11"
 				/>
 				{errors.email && (
 					<p className="text-body m-0 text-error">{errors.email.message}</p>

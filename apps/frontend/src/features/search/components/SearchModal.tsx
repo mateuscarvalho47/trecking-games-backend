@@ -64,7 +64,7 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 							{/* Header */}
 							<DialogPrimitive.Title asChild>
 								<div className="flex items-center gap-2.5 px-5 py-3.5 text-text-md border-b border-border-soft">
-									<Search size={16} className="shrink-0" />
+									<Search className="size-4 shrink-0" />
 									<input
 										ref={inputRef}
 										value={query}
@@ -75,9 +75,9 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 									<DialogPrimitive.Close asChild>
 										<button
 											type="button"
-											className="flex items-center justify-center size-6 rounded-md text-text-lo hover:text-text-hi hover:bg-bg-2 transition-colors cursor-pointer"
+											className="flex items-center justify-center size-6 min-h-11 min-w-11 lg:min-h-0 lg:min-w-0 rounded-md text-text-lo hover:text-text-hi hover:bg-bg-2 transition-colors cursor-pointer"
 										>
-											<X size={14} />
+											<X className="size-3.5" />
 										</button>
 									</DialogPrimitive.Close>
 								</div>

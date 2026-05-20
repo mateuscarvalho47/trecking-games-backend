@@ -61,7 +61,7 @@ export function DetailHero({
 					variant="outline"
 					size="sm"
 					onClick={onBack}
-					className="backdrop-blur-sm bg-bg-1/90 border-border-strong text-text-hi hover:bg-bg-1"
+					className="min-h-11 lg:min-h-0 backdrop-blur-sm bg-bg-1/90 border-border-strong text-text-hi hover:bg-bg-1"
 				>
 					← Biblioteca
 				</Button>
@@ -82,7 +82,7 @@ export function DetailHero({
 						variant="ghost"
 						size="sm"
 						onClick={onRemove}
-						className="backdrop-blur-sm bg-bg-1/90 border border-border-strong hover:bg-bg-1"
+						className="min-h-11 lg:min-h-0 backdrop-blur-sm bg-bg-1/90 border border-border-strong hover:bg-bg-1"
 						style={{
 							color:
 								theme === "light"

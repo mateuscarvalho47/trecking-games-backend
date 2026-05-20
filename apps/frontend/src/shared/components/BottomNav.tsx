@@ -33,10 +33,7 @@ export function BottomNav({
 		to === "/" ? currentPath === "/" : currentPath.startsWith(to);
 
 	return (
-		<nav
-			className="lg:hidden fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t border-border-soft"
-			style={{ background: "var(--color-bg-1)", height: 56 }}
-		>
+		<nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 h-14 flex items-center justify-around border-t border-border-soft bg-bg-1">
 			{NAV_ITEMS.map(({ to, label, icon: Icon }) => {
 				const active = isActive(to);
 				return (
@@ -51,8 +48,10 @@ export function BottomNav({
 								: "var(--color-text-lo)",
 						}}
 					>
-						<Icon size={20} />
-						<span style={{ fontSize: 11 }}>{label}</span>
+						<Icon className="size-5" />
+						<span style={{ fontSize: "var(--font-size-overline)" }}>
+							{label}
+						</span>
 					</button>
 				);
 			})}
@@ -62,8 +61,8 @@ export function BottomNav({
 				className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
 				style={{ color: "var(--color-text-lo)" }}
 			>
-				<Search size={20} />
-				<span style={{ fontSize: 11 }}>Buscar</span>
+				<Search className="size-5" />
+				<span style={{ fontSize: "var(--font-size-overline)" }}>Buscar</span>
 			</button>
 			<button
 				type="button"
@@ -71,8 +70,12 @@ export function BottomNav({
 				className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
 				style={{ color: "var(--color-text-lo)" }}
 			>
-				{theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-				<span style={{ fontSize: 11 }}>Tema</span>
+				{theme === "dark" ? (
+					<Sun className="size-5" />
+				) : (
+					<Moon className="size-5" />
+				)}
+				<span style={{ fontSize: "var(--font-size-overline)" }}>Tema</span>
 			</button>
 			<button
 				type="button"
@@ -80,8 +83,8 @@ export function BottomNav({
 				className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
 				style={{ color: "var(--color-text-lo)" }}
 			>
-				<LogOut size={20} />
-				<span style={{ fontSize: 11 }}>Sair</span>
+				<LogOut className="size-5" />
+				<span style={{ fontSize: "var(--font-size-overline)" }}>Sair</span>
 			</button>
 		</nav>
 	);

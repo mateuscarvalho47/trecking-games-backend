@@ -108,7 +108,7 @@ export function LandingScreen() {
 						alt="Detonado"
 						width="36"
 						height="36"
-						className="rounded-[10px]"
+						className="rounded-lg"
 						fetchPriority="high"
 					/>
 					<span className="text-2xl font-bold tracking-[-0.03em] text-text-hi">
@@ -137,7 +137,7 @@ export function LandingScreen() {
 					<button
 						type="button"
 						onClick={() => navigate({ to: "/register" })}
-						className="h-11 px-7 rounded-[10px] text-[15px] font-semibold cursor-pointer border-0"
+						className="h-11 px-7 rounded-lg text-[15px] font-semibold cursor-pointer border-0"
 						style={{
 							background: "var(--color-primary)",
 							color: "var(--color-primary-foreground)",
@@ -149,7 +149,7 @@ export function LandingScreen() {
 					<button
 						type="button"
 						onClick={() => navigate({ to: "/login" })}
-						className="h-11 px-7 rounded-[10px] text-[15px] font-medium cursor-pointer"
+						className="h-11 px-7 rounded-lg text-[15px] font-medium cursor-pointer"
 						style={{
 							background: "var(--color-bg-2)",
 							border: "1px solid var(--color-border)",

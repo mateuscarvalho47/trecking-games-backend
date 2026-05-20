@@ -62,7 +62,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 				<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 					{codeValidated ? "Defina sua nova senha" : "Verifique o código"}
 				</h1>
-				<p className="text-body text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
+				<p className="text-body text-text-md leading-prose mt-0 mb-6 max-w-[36ch]">
 					{codeValidated ? (
 						<>
 							Crie uma nova senha para a conta{" "}
@@ -118,7 +118,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 					type="button"
 					disabled={check.isPending}
 					onClick={handleValidateCode}
-					className="w-full h-10 rounded-lg mt-5"
+					className="w-full h-11 rounded-lg mt-5"
 				>
 					{check.isPending ? "Validando..." : "Validar código"}
 				</Button>
@@ -133,7 +133,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 								type={showPassword ? "text" : "password"}
 								{...register("password")}
 								placeholder="mínimo 8 caracteres"
-								className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10 pr-9"
+								className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-11 pr-9"
 							/>
 							<button
 								type="button"
@@ -158,7 +158,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 								type={showConfirm ? "text" : "password"}
 								{...register("confirmPassword")}
 								placeholder="repita a nova senha"
-								className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10 pr-9"
+								className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-11 pr-9"
 							/>
 							<button
 								type="button"
@@ -184,7 +184,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 						variant="accent"
 						type="submit"
 						disabled={mutation.isPending}
-						className="w-full h-10 rounded-lg mt-1.5"
+						className="w-full h-11 rounded-lg mt-1.5"
 					>
 						{mutation.isPending ? "Redefinindo..." : "Redefinir senha"}
 					</Button>

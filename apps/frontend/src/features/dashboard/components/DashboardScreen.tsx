@@ -28,7 +28,7 @@ export function DashboardScreen() {
 
 	if (libraryLoading || statsLoading || !stats) {
 		return (
-			<div className="px-6 pt-7">
+			<div className="px-4 pt-6 lg:px-6 lg:pt-7">
 				<div className="flex flex-col gap-4">
 					{[1, 2, 3].map((i) => (
 						<div key={i} className="h-20 bg-bg-1 rounded-lg animate-pulse" />
@@ -39,7 +39,7 @@ export function DashboardScreen() {
 	}
 
 	return (
-		<div className="px-6 pt-7 pb-15">
+		<div className="px-4 pt-6 lg:px-6 lg:pt-7 pb-15">
 			{/* Topbar */}
 			<div className="flex items-end justify-between gap-3 pb-5.5 mb-5.5 border-b border-border-soft flex-wrap">
 				<PageHeader

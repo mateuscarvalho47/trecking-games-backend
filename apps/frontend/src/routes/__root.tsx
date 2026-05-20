@@ -95,13 +95,7 @@ function RootLayout() {
 					background: "var(--color-background)",
 				}}
 			>
-				<span
-					style={{
-						color: "var(--color-text-lo)",
-						fontFamily: "'Geist Mono', monospace",
-						fontSize: 13,
-					}}
-				>
+				<span className="text-caption font-mono text-text-lo">
 					carregando...
 				</span>
 			</div>
@@ -139,10 +133,12 @@ function RootLayout() {
 								aria-label={sidebarOpen ? "Fechar menu" : "Abrir menu"}
 								className="text-text-lo hover:text-text-hi"
 							>
-								<Menu size={16} />
+								<Menu className="size-4" />
 							</Button>
 						</div>
-						<Outlet />
+						<div className="max-w-360 mx-auto w-full">
+							<Outlet />
+						</div>
 					</main>
 					<BottomNav libraryCount={library.length} />
 				</div>
