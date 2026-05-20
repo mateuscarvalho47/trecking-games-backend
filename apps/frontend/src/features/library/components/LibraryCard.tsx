@@ -60,9 +60,9 @@ export function LibraryCard({ game }: LibraryCardProps) {
 						{game.userPlatform ?? game.platforms[0] ?? "—"}
 					</span>
 					{STATUSES_WITH_RATING.has(game.status) && game.rating != null && (
-						<span className="font-mono text-xs font-semibold text-text-hi">
+						<span className="font-mono text-body font-semibold text-text-hi">
 							{game.rating}
-							<span className="text-2xs text-text-lo">/10</span>
+							<span className="text-caption text-text-lo">/10</span>
 						</span>
 					)}
 				</div>

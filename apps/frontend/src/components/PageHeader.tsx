@@ -14,7 +14,7 @@ export function PageHeader({ overline, title, subtitle }: PageHeaderProps) {
 				{title}
 			</h1>
 			{subtitle && (
-				<p className="text-text-md text-[14.5px] mt-1.5 mb-0">{subtitle}</p>
+				<p className="text-text-md text-body mt-1.5 mb-0">{subtitle}</p>
 			)}
 		</header>
 	);

@@ -26,7 +26,7 @@ export function StatusPills({ library, active, onChange }: StatusPillsProps) {
 				type="button"
 				onClick={() => onChange(null)}
 				className={cn(
-					"inline-flex items-center gap-1.5 h-8 px-3 rounded-full text-xs font-medium cursor-pointer transition-all border",
+					"inline-flex items-center gap-1.5 h-8 px-3 rounded-full text-body font-medium cursor-pointer transition-all border",
 					active === null
 						? "text-text-hi border-border-strong bg-bg-3/50"
 						: "text-text-md border-border-soft bg-bg-1",
@@ -52,7 +52,7 @@ export function StatusPills({ library, active, onChange }: StatusPillsProps) {
 						key={s.key}
 						onClick={() => onChange(isActive ? null : s.key)}
 						className={cn(
-							"inline-flex items-center gap-1.5 h-8 px-3 rounded-full text-xs font-medium cursor-pointer transition-all border",
+							"inline-flex items-center gap-1.5 h-8 px-3 rounded-full text-body font-medium cursor-pointer transition-all border",
 							isActive
 								? "border-transparent"
 								: "text-text-md border-border-soft bg-bg-1",

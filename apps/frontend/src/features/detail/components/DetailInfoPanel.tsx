@@ -7,7 +7,7 @@ interface DetailInfoPanelProps {
 export function DetailInfoPanel({ game }: DetailInfoPanelProps) {
 	return (
 		<div className="bg-bg-1 border border-border-soft rounded-lg p-5.5 self-start">
-			<div className="text-[15.5px] font-semibold tracking-tight text-text-hi mb-4">
+			<div className="text-heading font-semibold tracking-tight text-text-hi mb-4">
 				Informações
 			</div>
 			<dl>
@@ -31,7 +31,7 @@ export function DetailInfoPanel({ game }: DetailInfoPanelProps) {
 						className="grid grid-cols-[110px_1fr] gap-3 py-2.5 border-b border-border-soft"
 					>
 						<dt className="mono-label">{label}</dt>
-						<dd className="text-sm text-text-hi m-0">{val}</dd>
+						<dd className="text-heading text-text-hi m-0">{val}</dd>
 					</div>
 				))}
 			</dl>

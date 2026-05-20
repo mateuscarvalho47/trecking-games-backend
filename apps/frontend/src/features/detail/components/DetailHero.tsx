@@ -68,7 +68,7 @@ export function DetailHero({
 				<div className="flex gap-2 items-center">
 					{saved && (
 						<span
-							className="inline-flex items-center gap-1.5 font-mono text-[11.5px] rounded-sm py-0.5 px-2"
+							className="inline-flex items-center gap-1.5 font-mono text-overline rounded-sm py-0.5 px-2"
 							style={{
 								color: "var(--color-accent-bright)",
 								background: "var(--color-accent-soft)",
@@ -117,7 +117,7 @@ export function DetailHero({
 					<h1 className="text-2xl md:text-[43px] font-bold leading-[1.05] m-0 text-text-hi tracking-[-0.035em]">
 						{game.name}
 					</h1>
-					<div className="text-text-md text-[14.5px]">
+					<div className="text-text-md text-body">
 						{game.platforms.join(" · ")}
 					</div>
 					<div className="flex gap-1.5 flex-wrap justify-center md:justify-start">
@@ -140,7 +140,7 @@ export function DetailHero({
 						].map(({ label, val }) => (
 							<div key={label} className="flex flex-col gap-1.5">
 								<div className="mono-label">{label}</div>
-								<div className="text-[15px] text-text-hi">{val}</div>
+								<div className="text-heading text-text-hi">{val}</div>
 							</div>
 						))}
 					</div>

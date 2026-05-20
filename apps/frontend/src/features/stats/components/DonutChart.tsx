@@ -33,7 +33,7 @@ export function DonutChart({ stats }: DonutChartProps) {
 
 	return (
 		<div className="flex flex-col items-center gap-6 sm:grid sm:grid-cols-[220px_1fr] sm:items-center sm:gap-7">
-			<div className="relative size-[220px]">
+			<div className="relative size-55">
 				<svg
 					role="img"
 					aria-label="Distribuição de jogos por status"
@@ -80,7 +80,7 @@ export function DonutChart({ stats }: DonutChartProps) {
 					return (
 						<li
 							key={s.key}
-							className="grid gap-2.5 items-center text-xs"
+							className="grid gap-2.5 items-center text-body"
 							style={{ gridTemplateColumns: "12px 80px 1fr 28px" }}
 						>
 							<div

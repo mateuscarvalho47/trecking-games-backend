@@ -86,15 +86,15 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 							{/* Results */}
 							<div className="max-h-90 overflow-y-auto p-1.5">
 								{query.trim().length < 2 ? (
-									<div className="py-10 px-5 text-center text-text-lo text-sm">
+									<div className="py-10 px-5 text-center text-text-lo text-heading">
 										Digite pelo menos 2 caracteres para buscar
 									</div>
 								) : isFetching ? (
-									<div className="py-10 px-5 text-center text-text-lo text-sm">
+									<div className="py-10 px-5 text-center text-text-lo text-heading">
 										Buscando...
 									</div>
 								) : results.length === 0 ? (
-									<div className="py-10 px-5 text-center text-text-lo text-sm">
+									<div className="py-10 px-5 text-center text-text-lo text-heading">
 										Nenhum resultado para "{query}"
 									</div>
 								) : (

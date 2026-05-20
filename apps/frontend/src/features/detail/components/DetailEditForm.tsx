@@ -36,7 +36,7 @@ export function DetailEditForm({
 			<div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5">
 				{/* Edit form */}
 				<div className="bg-bg-1 border border-border-soft rounded-lg p-5.5">
-					<div className="text-[15.5px] font-semibold tracking-tight text-text-hi mb-5">
+					<div className="text-heading font-semibold tracking-tight text-text-hi mb-5">
 						Editar entrada
 					</div>
 
@@ -60,7 +60,7 @@ export function DetailEditForm({
 											<ToggleGroupItem
 												key={s.key}
 												value={s.key}
-												className="flex items-center gap-2 h-8 px-2.5 rounded-md text-xs font-medium border w-full justify-start"
+												className="flex items-center gap-2 h-8 px-2.5 rounded-md text-body font-medium border w-full justify-start"
 												style={
 													field.value === s.key
 														? {
@@ -147,9 +147,9 @@ export function DetailEditForm({
 															Number.isNaN(val) ? 0 : Math.max(0, val),
 														);
 													}}
-													className="w-14 text-center bg-transparent border-0 outline-none text-text-hi text-[14.5px]"
+													className="w-14 text-center bg-transparent border-0 outline-none text-text-hi text-body"
 												/>
-												<span className="text-text-dim text-xs">h</span>
+												<span className="text-text-dim text-body">h</span>
 											</div>
 											<button
 												type="button"
@@ -173,7 +173,7 @@ export function DetailEditForm({
 									<Label className="mono-label">Avaliação</Label>
 									<span className="text-[17px] text-text-hi">
 										<b className="font-bold">{rating}</b>
-										<span className="text-[12px] text-text-lo ml-px">/10</span>
+										<span className="text-caption text-text-lo ml-px">/10</span>
 									</span>
 								</div>
 								<div className="relative h-9 bg-bg-2 border border-border rounded-lg overflow-hidden">
@@ -204,7 +204,7 @@ export function DetailEditForm({
 										)}
 									/>
 								</div>
-								<div className="flex justify-between text-[12px] text-text-dim px-0.5 mt-1">
+								<div className="flex justify-between text-caption text-text-dim px-0.5 mt-1">
 									{[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
 										<span key={n}>{n}</span>
 									))}
@@ -234,7 +234,7 @@ export function DetailEditForm({
 										type="date"
 										{...register("completedAt")}
 										style={{ colorScheme: theme }}
-										className="bg-bg-2 border-border text-text-hi h-10 text-sm w-full pr-9 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
+										className="bg-bg-2 border-border text-text-hi h-10 text-heading w-full pr-9 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
 									/>
 									<Calendar
 										size={15}

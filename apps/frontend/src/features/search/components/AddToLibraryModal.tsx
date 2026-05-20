@@ -89,7 +89,7 @@ export function AddToLibraryModal({
 								<h2 className="text-xl font-semibold tracking-tight mt-1 mb-0 text-text-hi">
 									{game.name}
 								</h2>
-								<div className="text-xs text-text-md font-mono mt-0.5">
+								<div className="text-body text-text-md font-mono mt-0.5">
 									{game.releaseYear ?? "TBA"} ·{" "}
 									{game.platforms.slice(0, 3).join(", ")}
 								</div>
@@ -138,7 +138,7 @@ export function AddToLibraryModal({
 													type="button"
 													key={s.key}
 													onClick={() => field.onChange(s.key)}
-													className="flex items-center gap-2 h-8 px-2.5 rounded-md cursor-pointer text-xs font-medium border-0"
+													className="flex items-center gap-2 h-8 px-2.5 rounded-md cursor-pointer text-body font-medium border-0"
 													style={{
 														background:
 															field.value === s.key

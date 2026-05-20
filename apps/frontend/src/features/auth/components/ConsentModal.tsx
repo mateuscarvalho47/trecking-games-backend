@@ -16,7 +16,7 @@ export function ConsentModal() {
 		<Dialog open onOpenChange={() => {}}>
 			<DialogContent className="max-w-md bg-bg-1 border border-border rounded-xl [&>button]:hidden shadow-panel">
 				<DialogHeader>
-					<DialogTitle className="text-md text-text-hi">
+					<DialogTitle className="text-heading text-text-hi">
 						Precisamos da sua confirmação
 					</DialogTitle>
 					<DialogDescription className="sr-only">

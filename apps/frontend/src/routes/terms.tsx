@@ -9,7 +9,7 @@ function TermsPage() {
 	usePageTitle("Termos de Uso");
 	return (
 		<div className="max-w-2xl mx-auto px-6 py-12">
-			<p className="font-mono text-[11.5px] tracking-widest uppercase text-accent-bright mb-2">
+			<p className="font-mono text-overline tracking-widest uppercase text-accent-bright mb-2">
 				Legal
 			</p>
 			<h1 className="text-2xl font-semibold tracking-tight text-text-hi mb-1">
@@ -19,9 +19,9 @@ function TermsPage() {
 				Última atualização: maio de 2026
 			</p>
 
-			<div className="flex flex-col gap-7 text-[14.5px] text-text-md leading-relaxed">
+			<div className="flex flex-col gap-7 text-body text-text-md leading-relaxed">
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						1. Aceitação
 					</h2>
 					<p>
@@ -39,7 +39,7 @@ function TermsPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						2. O serviço
 					</h2>
 					<p>
@@ -52,7 +52,7 @@ function TermsPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						3. Sua conta
 					</h2>
 					<ul className="list-disc list-inside flex flex-col gap-1.5 pl-1">
@@ -70,7 +70,7 @@ function TermsPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						4. Uso aceitável
 					</h2>
 					<p className="mb-2">É proibido usar o Detonado para:</p>
@@ -83,7 +83,7 @@ function TermsPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						5. Conteúdo do usuário
 					</h2>
 					<p>
@@ -96,7 +96,7 @@ function TermsPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						6. Encerramento de conta
 					</h2>
 					<p>
@@ -113,7 +113,7 @@ function TermsPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						7. Limitação de responsabilidade
 					</h2>
 					<p>
@@ -125,7 +125,7 @@ function TermsPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						8. Lei aplicável
 					</h2>
 					<p>
@@ -136,7 +136,7 @@ function TermsPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						9. Contato
 					</h2>
 					<p>
@@ -154,7 +154,7 @@ function TermsPage() {
 			<div className="mt-10 pt-6 border-t border-border-soft">
 				<a
 					href="/"
-					className="text-xs text-accent-bright no-underline hover:underline font-medium"
+					className="text-body text-accent-bright no-underline hover:underline font-medium"
 				>
 					← Voltar ao início
 				</a>

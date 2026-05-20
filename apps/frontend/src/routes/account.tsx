@@ -14,7 +14,7 @@ function AccountPage() {
 	return (
 		<div className="max-w-xl mx-auto px-6 py-12 flex flex-col gap-10">
 			<div>
-				<p className="font-mono text-[11.5px] tracking-widest uppercase text-accent-bright mb-2">
+				<p className="font-mono text-overline tracking-widest uppercase text-accent-bright mb-2">
 					Conta
 				</p>
 				<h1 className="text-2xl font-semibold tracking-tight text-text-hi">
@@ -32,7 +32,7 @@ function AccountPage() {
 
 			<AccountDeleteSection />
 
-			<div className="pt-2 border-t border-border-soft flex gap-4 text-[12.5px] text-text-lo">
+			<div className="pt-2 border-t border-border-soft flex gap-4 text-caption text-text-lo">
 				<a
 					href="/privacy"
 					className="text-accent-bright no-underline hover:underline"

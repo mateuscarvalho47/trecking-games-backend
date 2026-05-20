@@ -91,7 +91,7 @@ export function LibraryScreen() {
 							value={filters.search}
 							onChange={(e) => filters.setSearch(e.target.value)}
 							placeholder="Filtrar..."
-							className="flex-1 h-full p-0 min-w-0 bg-transparent dark:bg-transparent border-0 shadow-none text-text-hi text-sm placeholder:text-text-lo focus-visible:ring-0 focus-visible:border-0"
+							className="flex-1 h-full p-0 min-w-0 bg-transparent dark:bg-transparent border-0 shadow-none text-text-hi text-heading placeholder:text-text-lo focus-visible:ring-0 focus-visible:border-0"
 						/>
 					</div>
 
@@ -100,7 +100,7 @@ export function LibraryScreen() {
 						<DropdownMenuTrigger asChild>
 							<button
 								type="button"
-								className="inline-flex items-center gap-1.5 h-8 px-2.5 bg-bg-2 border border-border rounded-md text-text-md cursor-pointer text-xs font-medium"
+								className="inline-flex items-center gap-1.5 h-8 px-2.5 bg-bg-2 border border-border rounded-md text-text-md cursor-pointer text-body font-medium"
 							>
 								{currentSortLabel} ↕
 							</button>
@@ -112,7 +112,7 @@ export function LibraryScreen() {
 									onClick={() =>
 										filters.setSort(opt.value as typeof filters.sort)
 									}
-									className="flex items-center justify-between text-xs"
+									className="flex items-center justify-between text-body"
 									style={{
 										color:
 											filters.sort === opt.value

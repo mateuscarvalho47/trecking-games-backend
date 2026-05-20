@@ -62,12 +62,12 @@ export function StatTiles({ stats }: StatTilesProps) {
 							{t.value}
 						</span>
 						{t.unit && (
-							<span className="text-[15px] md:text-[17px] font-medium text-text-lo font-mono">
+							<span className="text-heading md:text-[17px] font-medium text-text-lo font-mono">
 								{t.unit}
 							</span>
 						)}
 					</div>
-					<div className="text-[12.5px] text-text-md font-mono">{t.sub}</div>
+					<div className="text-caption text-text-md font-mono">{t.sub}</div>
 				</div>
 			))}
 		</div>

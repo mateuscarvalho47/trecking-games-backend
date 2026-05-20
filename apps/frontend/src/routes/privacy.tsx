@@ -9,7 +9,7 @@ function PrivacyPage() {
 	usePageTitle("Política de Privacidade");
 	return (
 		<div className="max-w-2xl mx-auto px-6 py-12">
-			<p className="font-mono text-[11.5px] tracking-widest uppercase text-accent-bright mb-2">
+			<p className="font-mono text-overline tracking-widest uppercase text-accent-bright mb-2">
 				Legal
 			</p>
 			<h1 className="text-2xl font-semibold tracking-tight text-text-hi mb-1">
@@ -19,9 +19,9 @@ function PrivacyPage() {
 				Última atualização: maio de 2026
 			</p>
 
-			<div className="flex flex-col gap-7 text-[14.5px] text-text-md leading-relaxed">
+			<div className="flex flex-col gap-7 text-body text-text-md leading-relaxed">
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						1. Quem somos
 					</h2>
 					<p>
@@ -39,7 +39,7 @@ function PrivacyPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						2. Dados que coletamos
 					</h2>
 					<ul className="list-disc list-inside flex flex-col gap-1.5 pl-1">
@@ -70,7 +70,7 @@ function PrivacyPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						3. Por que tratamos seus dados
 					</h2>
 					<ul className="list-disc list-inside flex flex-col gap-1.5 pl-1">
@@ -88,7 +88,7 @@ function PrivacyPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						4. Com quem compartilhamos
 					</h2>
 					<ul className="list-disc list-inside flex flex-col gap-1.5 pl-1">
@@ -119,7 +119,7 @@ function PrivacyPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						5. Por quanto tempo guardamos
 					</h2>
 					<p>
@@ -131,7 +131,7 @@ function PrivacyPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						6. Seus direitos (LGPD)
 					</h2>
 					<p className="mb-2">
@@ -188,7 +188,7 @@ function PrivacyPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						7. Segurança
 					</h2>
 					<p>
@@ -199,7 +199,7 @@ function PrivacyPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						8. Alterações nesta política
 					</h2>
 					<p>
@@ -211,7 +211,7 @@ function PrivacyPage() {
 				</section>
 
 				<section>
-					<h2 className="text-[15px] font-semibold text-text-hi mb-2">
+					<h2 className="text-heading font-semibold text-text-hi mb-2">
 						9. Contato
 					</h2>
 					<p>
@@ -229,7 +229,7 @@ function PrivacyPage() {
 			<div className="mt-10 pt-6 border-t border-border-soft">
 				<a
 					href="/"
-					className="text-xs text-accent-bright no-underline hover:underline font-medium"
+					className="text-body text-accent-bright no-underline hover:underline font-medium"
 				>
 					← Voltar ao início
 				</a>

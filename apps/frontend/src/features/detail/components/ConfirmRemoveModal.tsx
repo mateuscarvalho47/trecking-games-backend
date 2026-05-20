@@ -35,10 +35,10 @@ export function ConfirmRemoveModal({
 						⚠
 					</div>
 					<AlertDialogHeader className="space-y-0">
-						<AlertDialogTitle className="text-[19px] text-text-hi">
+						<AlertDialogTitle className="text-title text-text-hi">
 							Remover jogo?
 						</AlertDialogTitle>
-						<AlertDialogDescription className="text-text-md text-[14.5px] leading-relaxed max-w-[34ch]">
+						<AlertDialogDescription className="text-text-md text-body leading-relaxed max-w-[34ch]">
 							<strong className="text-text-hi">{gameName}</strong> será removido
 							permanentemente da sua biblioteca.
 						</AlertDialogDescription>
