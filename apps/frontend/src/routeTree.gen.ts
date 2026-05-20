@@ -18,10 +18,11 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LibraryIndexRouteImport } from './routes/library/index'
+import { Route as AccountIndexRouteImport } from './routes/account/index'
 import { Route as LibraryIgdbIdRouteImport } from './routes/library/$igdbId'
+import { Route as AccountDataRouteImport } from './routes/account/data'
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: '/verify-email',
@@ -68,11 +69,6 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AccountRoute = AccountRouteImport.update({
-  id: '/account',
-  path: '/account',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -83,15 +79,24 @@ const LibraryIndexRoute = LibraryIndexRouteImport.update({
   path: '/library/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountIndexRoute = AccountIndexRouteImport.update({
+  id: '/account/',
+  path: '/account/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LibraryIgdbIdRoute = LibraryIgdbIdRouteImport.update({
   id: '/library/$igdbId',
   path: '/library/$igdbId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountDataRoute = AccountDataRouteImport.update({
+  id: '/account/data',
+  path: '/account/data',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/account': typeof AccountRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
@@ -101,12 +106,13 @@ export interface FileRoutesByFullPath {
   '/stats': typeof StatsRoute
   '/terms': typeof TermsRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/account/data': typeof AccountDataRoute
   '/library/$igdbId': typeof LibraryIgdbIdRoute
+  '/account/': typeof AccountIndexRoute
   '/library/': typeof LibraryIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/account': typeof AccountRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
@@ -116,13 +122,14 @@ export interface FileRoutesByTo {
   '/stats': typeof StatsRoute
   '/terms': typeof TermsRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/account/data': typeof AccountDataRoute
   '/library/$igdbId': typeof LibraryIgdbIdRoute
+  '/account': typeof AccountIndexRoute
   '/library': typeof LibraryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/account': typeof AccountRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/privacy': typeof PrivacyRoute
@@ -132,14 +139,15 @@ export interface FileRoutesById {
   '/stats': typeof StatsRoute
   '/terms': typeof TermsRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/account/data': typeof AccountDataRoute
   '/library/$igdbId': typeof LibraryIgdbIdRoute
+  '/account/': typeof AccountIndexRoute
   '/library/': typeof LibraryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/account'
     | '/forgot-password'
     | '/login'
     | '/privacy'
@@ -149,12 +157,13 @@ export interface FileRouteTypes {
     | '/stats'
     | '/terms'
     | '/verify-email'
+    | '/account/data'
     | '/library/$igdbId'
+    | '/account/'
     | '/library/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/account'
     | '/forgot-password'
     | '/login'
     | '/privacy'
@@ -164,12 +173,13 @@ export interface FileRouteTypes {
     | '/stats'
     | '/terms'
     | '/verify-email'
+    | '/account/data'
     | '/library/$igdbId'
+    | '/account'
     | '/library'
   id:
     | '__root__'
     | '/'
-    | '/account'
     | '/forgot-password'
     | '/login'
     | '/privacy'
@@ -179,13 +189,14 @@ export interface FileRouteTypes {
     | '/stats'
     | '/terms'
     | '/verify-email'
+    | '/account/data'
     | '/library/$igdbId'
+    | '/account/'
     | '/library/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AccountRoute: typeof AccountRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -195,7 +206,9 @@ export interface RootRouteChildren {
   StatsRoute: typeof StatsRoute
   TermsRoute: typeof TermsRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
+  AccountDataRoute: typeof AccountDataRoute
   LibraryIgdbIdRoute: typeof LibraryIgdbIdRoute
+  AccountIndexRoute: typeof AccountIndexRoute
   LibraryIndexRoute: typeof LibraryIndexRoute
 }
 
@@ -264,13 +277,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/account': {
-      id: '/account'
-      path: '/account'
-      fullPath: '/account'
-      preLoaderRoute: typeof AccountRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -285,6 +291,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LibraryIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account/': {
+      id: '/account/'
+      path: '/account'
+      fullPath: '/account/'
+      preLoaderRoute: typeof AccountIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/library/$igdbId': {
       id: '/library/$igdbId'
       path: '/library/$igdbId'
@@ -292,12 +305,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LibraryIgdbIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account/data': {
+      id: '/account/data'
+      path: '/account/data'
+      fullPath: '/account/data'
+      preLoaderRoute: typeof AccountDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AccountRoute: AccountRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
   PrivacyRoute: PrivacyRoute,
@@ -307,7 +326,9 @@ const rootRouteChildren: RootRouteChildren = {
   StatsRoute: StatsRoute,
   TermsRoute: TermsRoute,
   VerifyEmailRoute: VerifyEmailRoute,
+  AccountDataRoute: AccountDataRoute,
   LibraryIgdbIdRoute: LibraryIgdbIdRoute,
+  AccountIndexRoute: AccountIndexRoute,
   LibraryIndexRoute: LibraryIndexRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,14 +1,5 @@
 import { useNavigate, useRouterState } from "@tanstack/react-router";
-import {
-	BarChart3,
-	BookMarked,
-	Home,
-	LogOut,
-	Moon,
-	Search,
-	Sun,
-} from "lucide-react";
-import { useLogout } from "@/features/auth/hooks/useAuth";
+import { BarChart3, BookMarked, Home, Search, User } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 
 const NAV_ITEMS = [
@@ -26,8 +17,6 @@ export function BottomNav({
 	const routerState = useRouterState();
 	const currentPath = routerState.location.pathname;
 	const setSearchOpen = useAppStore((s) => s.setSearchOpen);
-	const { theme, toggleTheme } = useAppStore();
-	const logout = useLogout();
 
 	const isActive = (to: string) =>
 		to === "/" ? currentPath === "/" : currentPath.startsWith(to);
@@ -66,25 +55,16 @@ export function BottomNav({
 			</button>
 			<button
 				type="button"
-				onClick={toggleTheme}
+				onClick={() => navigate({ to: "/account" })}
 				className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
-				style={{ color: "var(--color-text-lo)" }}
+				style={{
+					color: currentPath.startsWith("/account")
+						? "var(--color-accent-bright)"
+						: "var(--color-text-lo)",
+				}}
 			>
-				{theme === "dark" ? (
-					<Sun className="size-5" />
-				) : (
-					<Moon className="size-5" />
-				)}
-				<span style={{ fontSize: "var(--font-size-overline)" }}>Tema</span>
-			</button>
-			<button
-				type="button"
-				onClick={() => logout.mutate()}
-				className="flex flex-col items-center gap-1 flex-1 py-2 border-0 bg-transparent cursor-pointer"
-				style={{ color: "var(--color-text-lo)" }}
-			>
-				<LogOut className="size-5" />
-				<span style={{ fontSize: "var(--font-size-overline)" }}>Sair</span>
+				<User className="size-5" />
+				<span style={{ fontSize: "var(--font-size-overline)" }}>Conta</span>
 			</button>
 		</nav>
 	);
