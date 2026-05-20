@@ -70,9 +70,9 @@ export function DetailHero({
 						<span
 							className="inline-flex items-center gap-1.5 font-mono text-overline rounded-sm py-0.5 px-2"
 							style={{
-								color: "var(--color-accent-bright)",
-								background: "var(--color-accent-soft)",
-								border: "1px solid var(--color-accent-rim)",
+								color: "oklch(0.88 0.18 145)",
+								background: "oklch(0.18 0.1 145 / 0.72)",
+								border: "1px solid oklch(0.5 0.15 145 / 0.5)",
 							}}
 						>
 							✓ Salvo
@@ -151,9 +151,9 @@ export function DetailHero({
 						<div className="mt-2">
 							<div className="mono-label mb-1.5">Tempo para zerar</div>
 							<div className="grid grid-cols-3 gap-2">
-								<HltbStat label="Main" hours={game.hltbMain} />
-								<HltbStat label="Main + Extra" hours={game.hltbMainExtra} />
-								<HltbStat label="Completista" hours={game.hltbCompletionist} />
+								<HltbStat label="Principal" hours={game.hltbMain} />
+								<HltbStat label="+ Extras" hours={game.hltbMainExtra} />
+								<HltbStat label="Completo" hours={game.hltbCompletionist} />
 							</div>
 						</div>
 					)}

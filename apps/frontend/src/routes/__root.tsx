@@ -123,7 +123,22 @@ function RootLayout() {
 					</div>
 					<main className="flex-1 min-w-0 overflow-y-auto pb-20 lg:pb-0">
 						<div
-							className="hidden lg:flex items-center h-10 px-3 sticky top-0 z-30"
+							className="lg:hidden flex items-center gap-2 px-4 h-12 sticky top-0 z-30 border-b border-border-soft"
+							style={{ background: "var(--color-bg-1)" }}
+						>
+							<img
+								src="/logo.svg"
+								alt=""
+								width="20"
+								height="20"
+								className="rounded-md"
+							/>
+							<span className="text-heading font-bold tracking-[-0.02em] text-text-hi">
+								Detonado
+							</span>
+						</div>
+						<div
+							className="hidden lg:flex items-center justify-between h-10 px-3 sticky top-0 z-30"
 							style={{ background: "var(--color-background)" }}
 						>
 							<Button
@@ -135,6 +150,20 @@ function RootLayout() {
 							>
 								<Menu className="size-4" />
 							</Button>
+							{!sidebarOpen && (
+								<div className="flex items-center gap-1.5">
+									<img
+										src="/logo.svg"
+										alt=""
+										width="20"
+										height="20"
+										className="rounded-md"
+									/>
+									<span className="text-heading font-bold tracking-[-0.02em] text-text-hi">
+										Detonado
+									</span>
+								</div>
+							)}
 						</div>
 						<div className="max-w-360 mx-auto w-full">
 							<Outlet />

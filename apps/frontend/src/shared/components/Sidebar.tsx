@@ -39,8 +39,6 @@ export function Sidebar({
 	const isActive = (to: string) =>
 		to === "/" ? currentPath === "/" : currentPath.startsWith(to);
 
-	const initials = me?.email ? me.email.slice(0, 2).toUpperCase() : "??";
-
 	return (
 		<aside
 			className="sticky top-0 self-start h-screen flex flex-col gap-3 p-[18px_14px] w-full"
@@ -70,7 +68,7 @@ export function Sidebar({
 				className="flex items-center gap-2 rounded-md px-2.5 py-2 text-caption transition-all cursor-pointer w-full bg-bg-2 border border-border-soft text-text-md"
 			>
 				<Search className="size-3.5" />
-				<span className="flex-1 text-left">Buscar jogos</span>
+				<span className="flex-1 text-left text-body">Buscar jogos</span>
 				<div className="flex gap-0.5">
 					{["Ctrl", "K"].map((k) => (
 						<kbd
@@ -135,7 +133,7 @@ export function Sidebar({
 			<div className="mt-auto flex flex-col gap-2">
 				{/* Theme toggle */}
 				<div className="flex items-center justify-between px-1">
-					<span className="text-overline font-mono text-text-dim uppercase tracking-widest">
+					<span className="text-body font-mono text-text-dim uppercase tracking-widest">
 						Tema
 					</span>
 					<Button
@@ -155,21 +153,11 @@ export function Sidebar({
 
 				<div className="flex flex-col gap-2.5 p-3 rounded-md bg-bg-2 border border-border-soft">
 					<div className="flex items-center gap-2.5">
-						<div
-							className="flex items-center justify-center shrink-0 size-8 text-white text-overline font-bold rounded-sm"
-							style={{
-								background:
-									"linear-gradient(135deg, oklch(0.5 0.2 17), oklch(0.55 0.18 350))",
-								letterSpacing: "0.02em",
-							}}
-						>
-							{initials}
-						</div>
 						<div className="flex-1 min-w-0">
-							<div className="text-caption font-semibold text-text-hi leading-tight">
+							<div className="text-body font-semibold text-text-hi leading-tight">
 								Minha conta
 							</div>
-							<div className="text-overline truncate font-mono text-text-lo mt-0.5">
+							<div className="text-caption truncate font-mono text-text-lo mt-0.5">
 								{me?.email ?? "—"}
 							</div>
 						</div>
@@ -180,10 +168,10 @@ export function Sidebar({
 							size="sm"
 							onClick={() => navigate({ to: "/account" })}
 							title="Configurações"
-							className="flex-1 h-7 text-overline text-text-md gap-1.5 justify-start px-2"
+							className="flex-1 h-7 text-text-md gap-1.5 justify-start px-1"
 						>
 							<Settings className="size-3.5" />
-							Configurações
+							<span className="text-overline">Configurações</span>
 						</Button>
 						<Button
 							variant="ghost"

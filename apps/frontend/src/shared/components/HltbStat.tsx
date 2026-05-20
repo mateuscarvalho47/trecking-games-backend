@@ -8,8 +8,8 @@ interface HltbStatProps {
 export function HltbStat({ label, hours }: HltbStatProps) {
 	return (
 		<div className="flex flex-col gap-1 px-3 py-2 bg-bg-2 border border-border-soft rounded-md">
-			<div className="mono-label text-text-lo text-overline">{label}</div>
-			<div className="text-heading font-semibold text-text-hi tabular-nums">
+			<div className="mono-label text-text-lo text-caption">{label}</div>
+			<div className="text-body font-semibold text-text-hi tabular-nums">
 				{formatHours(hours)}
 			</div>
 		</div>

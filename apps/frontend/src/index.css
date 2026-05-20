@@ -117,6 +117,13 @@
 	--font-size-heading: 0.8611rem; /* 15.5px — card/section heading, CTA */
 	--font-size-title: 1rem; /* 18px   — page/modal title, emphasis */
 
+	/* Tailwind v4 utility aliases — --text-* gera as classes text-{name} */
+	--text-overline: var(--font-size-overline);
+	--text-caption: var(--font-size-caption);
+	--text-body: var(--font-size-body);
+	--text-heading: var(--font-size-heading);
+	--text-title: var(--font-size-title);
+
 	/* Icon sizes — semantic scale aligned to text roles */
 	--icon-inline: 0.875rem; /* 14px — inline w/ caption/body text */
 	--icon-nav: 1rem; /* 16px — nav/toolbar icons */

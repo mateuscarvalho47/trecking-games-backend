@@ -8,6 +8,7 @@ export const Route = createFileRoute("/")({
 });
 
 function IndexPage() {
-	const { data: me } = useMe();
+	const { data: me, isLoading } = useMe();
+	if (isLoading) return null;
 	return me ? <DashboardScreen /> : <LandingScreen />;
 }

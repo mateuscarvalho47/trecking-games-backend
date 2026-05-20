@@ -70,7 +70,7 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 										value={query}
 										onChange={(e) => setQuery(e.target.value)}
 										placeholder="Buscar jogos..."
-										className="flex-1 h-7 bg-transparent border-0 outline-none text-text-hi text-[16.5px]"
+										className="flex-1 h-7 bg-transparent border-0 outline-none text-text-hi text-body"
 									/>
 									<DialogPrimitive.Close asChild>
 										<button
