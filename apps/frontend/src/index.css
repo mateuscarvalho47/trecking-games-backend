@@ -101,13 +101,20 @@
 	--font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
 	--font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", monospace;
 
-	/* Font sizes */
+	/* Font sizes — legacy tokens (root 16px era; kept for shadcn + gradual migration) */
 	--font-size-2xs: 0.6875rem;
 	--font-size-xs: 0.8125rem;
 	--font-size-sm: 0.875rem;
 	--font-size-md: 1rem;
 	--font-size-xl: 1.4375rem;
 	--font-size-2xl: 1.8125rem;
+
+	/* Font sizes — semantic tokens (root 16px) */
+	--font-size-overline: 0.6389rem; /* ~10px — mono uppercase, badge, nav-label */
+	--font-size-caption: 0.6944rem; /* ~11px — meta, subtitle, form hint, timestamp */
+	--font-size-body: 0.8056rem; /* ~13px — body copy, prose, card subtitle */
+	--font-size-heading: 0.8611rem; /* ~14px — card/section heading, CTA */
+	--font-size-title: 1rem; /* 16px  — page/modal title, emphasis */
 }
 
 /* ═══ Light theme (default) ═══ */
@@ -262,13 +269,7 @@
 	}
 
 	html {
-		font-size: 18px;
-	}
-
-	@media (max-width: 767px) {
-		html {
-			font-size: 17px;
-		}
+		font-size: 16px;
 	}
 
 	html,

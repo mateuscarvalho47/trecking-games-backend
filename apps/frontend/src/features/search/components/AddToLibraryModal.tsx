@@ -45,6 +45,7 @@ export function AddToLibraryModal({
 		>
 			<DialogContent
 				showCloseButton={false}
+				aria-describedby={undefined}
 				className="p-0 gap-0 max-w-180 bg-bg-1 border border-border rounded-xl shadow-modal"
 			>
 				<DialogHeader className="flex flex-row items-center justify-between px-5 py-3.5 border-b border-border-soft">

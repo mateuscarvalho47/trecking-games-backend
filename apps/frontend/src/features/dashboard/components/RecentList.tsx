@@ -16,11 +16,11 @@ export function RecentList({ games }: RecentListProps) {
 
 	return (
 		<div className="bg-bg-1 border border-border-soft rounded-lg px-6 py-5">
-			<div className="text-[15.5px] font-semibold text-text-hi tracking-[-0.01em] mb-3.5">
+			<div className="text-heading font-semibold text-text-hi tracking-[-0.01em] mb-3.5">
 				Recém-completos
 			</div>
 			{shown.length === 0 ? (
-				<div className="py-6 text-center text-text-lo text-sm">
+				<div className="py-6 text-center text-text-lo text-body">
 					Nenhum jogo completado ainda
 				</div>
 			) : (
@@ -54,15 +54,15 @@ export function RecentList({ games }: RecentListProps) {
 								/>
 							</div>
 							<div className="flex flex-col gap-1">
-								<span className="text-sm font-medium text-text-hi truncate">
+								<span className="text-body font-medium text-text-hi truncate">
 									{game.name}
 								</span>
 								<div className="flex items-center justify-between gap-1 flex-wrap">
 									<StatusBadge status={game.status} size="sm" />
 									{game.rating != null && (
-										<span className="font-mono text-xs font-semibold text-text-hi">
+										<span className="font-mono text-caption font-semibold text-text-hi">
 											{game.rating}
-											<span className="text-[12px] text-text-lo">/10</span>
+											<span className="text-caption text-text-lo">/10</span>
 										</span>
 									)}
 								</div>

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import {
 	Dialog,
 	DialogContent,
+	DialogDescription,
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
@@ -18,9 +19,12 @@ export function ConsentModal() {
 					<DialogTitle className="text-md text-text-hi">
 						Precisamos da sua confirmação
 					</DialogTitle>
+					<DialogDescription className="sr-only">
+						Confirmação de leitura dos Termos de Uso e Política de Privacidade.
+					</DialogDescription>
 				</DialogHeader>
 
-				<div className="flex flex-col gap-4 text-[14.5px] text-text-md leading-relaxed">
+				<div className="flex flex-col gap-4 text-body text-text-md leading-relaxed">
 					<p>
 						Atualizamos nossa{" "}
 						<Link
@@ -41,7 +45,7 @@ export function ConsentModal() {
 						. Para continuar usando o Detonado, confirme que você leu e concorda
 						com esses documentos.
 					</p>
-					<p className="text-xs text-text-lo">
+					<p className="text-captiontext-text-lo">
 						Seus dados são armazenados com segurança e nunca serão
 						compartilhados para fins de marketing. Você pode excluir sua conta a
 						qualquer momento.

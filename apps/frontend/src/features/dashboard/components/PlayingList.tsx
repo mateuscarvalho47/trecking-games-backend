@@ -19,24 +19,24 @@ export function PlayingList({ games }: PlayingListProps) {
 		<div className="bg-bg-1 border border-border-soft rounded-lg px-6 py-5">
 			<div className="flex items-start justify-between mb-3.5">
 				<div>
-					<div className="text-[15.5px] font-semibold text-text-hi tracking-[-0.01em]">
+					<div className="text-heading font-semibold text-text-hi tracking-[-0.01em]">
 						Jogando agora
 					</div>
-					<div className="font-mono text-[12.5px] text-text-lo mt-0.5">
+					<div className="font-mono text-caption text-text-lo mt-0.5">
 						{games.length} jogo{games.length !== 1 ? "s" : ""}
 					</div>
 				</div>
 				<button
 					type="button"
 					onClick={() => setOpen(true)}
-					className="inline-flex items-center gap-1 bg-transparent border-0 text-text-md text-[12.5px] font-mono cursor-pointer px-1.5 py-1"
+					className="inline-flex items-center gap-1 bg-transparent border-0 text-text-md text-caption font-mono cursor-pointer px-1.5 py-1"
 				>
 					+ Adicionar
 				</button>
 			</div>
 
 			{games.length === 0 ? (
-				<div className="py-6 text-center text-text-lo text-sm">
+				<div className="py-6 text-center text-text-lo text-body">
 					Nenhum jogo em andamento
 				</div>
 			) : (
@@ -71,10 +71,10 @@ export function PlayingList({ games }: PlayingListProps) {
 								/>
 							</div>
 							<div className="flex flex-col gap-1 min-w-0">
-								<span className="text-[14.5px] font-medium text-text-hi truncate">
+								<span className="text-body font-medium text-text-hi truncate">
 									{game.name}
 								</span>
-								<span className="text-[12.5px] text-text-md">
+								<span className="text-caption text-text-md">
 									{game.userPlatform ?? game.platforms[0]}
 									{game.hoursPlayed ? ` · ${game.hoursPlayed}h` : ""}
 								</span>

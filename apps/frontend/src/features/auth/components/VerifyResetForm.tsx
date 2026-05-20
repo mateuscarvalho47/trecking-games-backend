@@ -56,13 +56,13 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 	return (
 		<form onSubmit={onSubmit} className="flex flex-col gap-3.5">
 			<div>
-				<span className="font-mono text-[11.5px] tracking-widest uppercase text-accent-bright block mb-2">
+				<span className="font-mono text-overline tracking-widest uppercase text-accent-bright block mb-2">
 					Redefinir senha
 				</span>
 				<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 					{codeValidated ? "Defina sua nova senha" : "Verifique o código"}
 				</h1>
-				<p className="text-sm text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
+				<p className="text-body text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
 					{codeValidated ? (
 						<>
 							Crie uma nova senha para a conta{" "}
@@ -105,7 +105,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 						)}
 					/>
 					{errors.code && (
-						<p className="text-sm m-0 text-error self-start">
+						<p className="text-body m-0 text-error self-start">
 							{errors.code.message}
 						</p>
 					)}
@@ -145,7 +145,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 							</button>
 						</div>
 						{errors.password && (
-							<p className="text-sm m-0 text-error">
+							<p className="text-body m-0 text-error">
 								{errors.password.message}
 							</p>
 						)}
@@ -170,14 +170,14 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 							</button>
 						</div>
 						{errors.confirmPassword && (
-							<p className="text-sm m-0 text-error">
+							<p className="text-body m-0 text-error">
 								{errors.confirmPassword.message}
 							</p>
 						)}
 					</div>
 
 					{mutation.error && (
-						<p className="text-sm m-0 text-error">{mutation.error.message}</p>
+						<p className="text-body m-0 text-error">{mutation.error.message}</p>
 					)}
 
 					<Button
@@ -191,7 +191,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 				</>
 			)}
 
-			<p className="text-center text-xs text-text-lo mt-1">
+			<p className="text-center text-captiontext-text-lo mt-1">
 				Não recebeu?{" "}
 				<a
 					href="/forgot-password"

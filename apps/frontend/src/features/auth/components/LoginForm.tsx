@@ -30,13 +30,13 @@ export function LoginForm() {
 	return (
 		<form onSubmit={onSubmit} className="flex flex-col gap-3.5">
 			<div>
-				<span className="font-mono text-[11.5px] tracking-widest uppercase text-accent-bright block mb-2">
+				<span className="font-mono text-overline tracking-widest uppercase text-accent-bright block mb-2">
 					Bem-vindo de volta
 				</span>
 				<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 					Entrar na conta
 				</h1>
-				<p className="text-sm text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
+				<p className="text-body text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
 					Acesse sua biblioteca de jogos.
 				</p>
 			</div>
@@ -50,7 +50,7 @@ export function LoginForm() {
 					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10"
 				/>
 				{errors.email && (
-					<p className="text-sm m-0 text-error">{errors.email.message}</p>
+					<p className="text-body m-0 text-error">{errors.email.message}</p>
 				)}
 			</div>
 
@@ -73,21 +73,21 @@ export function LoginForm() {
 					</button>
 				</div>
 				{errors.password && (
-					<p className="text-sm m-0 text-error">{errors.password.message}</p>
+					<p className="text-body m-0 text-error">{errors.password.message}</p>
 				)}
 			</div>
 
 			<div className="flex justify-end -mt-1">
 				<Link
 					to="/forgot-password"
-					className="text-[12.5px] text-accent-bright no-underline hover:underline"
+					className="text-caption text-accent-bright no-underline hover:underline"
 				>
 					Esqueci minha senha
 				</Link>
 			</div>
 
 			{login.error && !emailNotVerified && (
-				<p className="text-sm m-0 text-error">{login.error.message}</p>
+				<p className="text-body m-0 text-error">{login.error.message}</p>
 			)}
 
 			{emailNotVerified && (
@@ -102,12 +102,12 @@ export function LoginForm() {
 						{resend.isPending ? "Enviando..." : "Reenviar email de verificação"}
 					</Button>
 					{resend.isSuccess && (
-						<p className="text-[12.5px] m-0 text-text-md text-center">
+						<p className="text-caption m-0 text-text-md text-center">
 							Novo link enviado para {email}.
 						</p>
 					)}
 					{resend.error && (
-						<p className="text-sm m-0 text-error text-center">
+						<p className="text-body m-0 text-error text-center">
 							{resend.error.message}
 						</p>
 					)}
@@ -123,7 +123,7 @@ export function LoginForm() {
 				{login.isPending ? "Entrando..." : "Entrar"}
 			</Button>
 
-			<p className="text-center text-xs text-text-lo mt-1">
+			<p className="text-center text-captiontext-text-lo mt-1">
 				Não tem conta?{" "}
 				<Link
 					to="/register"

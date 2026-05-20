@@ -9,13 +9,13 @@ export function PasswordResetSuccess() {
 		<div className="flex flex-col gap-4">
 			<div className="flex flex-col items-center gap-3 mb-2">
 				<CheckCircle2 size={48} className="text-accent-bright" />
-				<span className="font-mono text-[11.5px] tracking-widest uppercase text-accent-bright">
+				<span className="font-mono text-overline tracking-widest uppercase text-accent-bright">
 					Senha atualizada
 				</span>
 				<h1 className="text-2xl font-semibold tracking-tight m-0 text-text-hi text-center">
 					Senha alterada com sucesso!
 				</h1>
-				<p className="text-sm text-text-md leading-[1.55] m-0 max-w-[36ch] text-center">
+				<p className="text-body text-text-md leading-[1.55] m-0 max-w-[36ch] text-center">
 					Sua nova senha já está ativa. Use-a para acessar sua conta.
 				</p>
 			</div>

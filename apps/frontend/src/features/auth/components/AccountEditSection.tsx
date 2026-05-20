@@ -24,11 +24,11 @@ export function AccountEditSection() {
 
 	return (
 		<section className="flex flex-col gap-4">
-			<h2 className="text-sm font-semibold text-text-hi flex items-center gap-2">
+			<h2 className="text-body font-semibold text-text-hi flex items-center gap-2">
 				<Mail size={14} className="text-accent-bright" />
 				Editar conta
 			</h2>
-			<p className="text-xs text-text-lo -mt-2">
+			<p className="text-captiontext-text-lo -mt-2">
 				Informe a senha atual e altere o e-mail, a senha, ou ambos.
 			</p>
 			<form onSubmit={onUpdateSubmit} className="flex flex-col gap-3">
@@ -41,7 +41,7 @@ export function AccountEditSection() {
 						className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10"
 					/>
 					{updateErrors.currentPassword && (
-						<p className="text-sm m-0 text-error">
+						<p className="text-body m-0 text-error">
 							{updateErrors.currentPassword.message}
 						</p>
 					)}
@@ -58,7 +58,7 @@ export function AccountEditSection() {
 						className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10"
 					/>
 					{updateErrors.email && (
-						<p className="text-sm m-0 text-error">
+						<p className="text-body m-0 text-error">
 							{updateErrors.email.message}
 						</p>
 					)}
@@ -75,19 +75,19 @@ export function AccountEditSection() {
 						className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10"
 					/>
 					{updateErrors.newPassword && (
-						<p className="text-sm m-0 text-error">
+						<p className="text-body m-0 text-error">
 							{updateErrors.newPassword.message}
 						</p>
 					)}
 				</div>
 
 				{updateMutation.error && (
-					<p className="text-sm m-0 text-error">
+					<p className="text-body m-0 text-error">
 						{updateMutation.error.message}
 					</p>
 				)}
 				{updateSuccess && (
-					<p className="text-[12.5px] m-0 text-accent-bright">
+					<p className="text-caption m-0 text-accent-bright">
 						Dados atualizados com sucesso.
 					</p>
 				)}
@@ -96,7 +96,7 @@ export function AccountEditSection() {
 					variant="outline"
 					type="submit"
 					disabled={updateMutation.isPending}
-					className="w-fit h-9 rounded-lg mt-1 text-xs"
+					className="w-fit h-9 rounded-lg mt-1 text-caption"
 				>
 					<Lock size={12} />
 					{updateMutation.isPending ? "Salvando..." : "Salvar alterações"}

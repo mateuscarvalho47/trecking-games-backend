@@ -23,11 +23,11 @@ export function AccountExportSection() {
 
 	return (
 		<section className="flex flex-col gap-3">
-			<h2 className="text-sm font-semibold text-text-hi flex items-center gap-2">
+			<h2 className="text-body font-semibold text-text-hi flex items-center gap-2">
 				<Download size={14} className="text-accent-bright" />
 				Exportar meus dados
 			</h2>
-			<p className="text-xs text-text-lo">
+			<p className="text-captiontext-text-lo">
 				Baixe um arquivo JSON com todos os seus dados — perfil e biblioteca
 				completa. Seu direito de portabilidade pela LGPD (Art. 19).
 			</p>
@@ -35,13 +35,15 @@ export function AccountExportSection() {
 				variant="outline"
 				onClick={handleExport}
 				disabled={exportMutation.isPending}
-				className="w-fit h-9 rounded-lg text-xs"
+				className="w-fit h-9 rounded-lg text-caption"
 			>
 				<Download size={12} />
 				{exportMutation.isPending ? "Preparando..." : "Baixar dados (.json)"}
 			</Button>
 			{exportMutation.error && (
-				<p className="text-sm m-0 text-error">{exportMutation.error.message}</p>
+				<p className="text-body m-0 text-error">
+					{exportMutation.error.message}
+				</p>
 			)}
 		</section>
 	);

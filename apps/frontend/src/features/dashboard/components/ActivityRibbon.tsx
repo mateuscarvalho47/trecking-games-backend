@@ -47,10 +47,10 @@ export function ActivityRibbon({ library }: ActivityRibbonProps) {
 	return (
 		<div className="bg-bg-1 border border-border-soft rounded-lg px-6 py-5">
 			<div className="flex items-center justify-between mb-3">
-				<span className="text-[15.5px] font-semibold text-text-hi tracking-[-0.01em]">
+				<span className="text-heading font-semibold text-text-hi tracking-[-0.01em]">
 					Atividade recente
 				</span>
-				<span className="font-mono text-[11.5px] text-text-lo">
+				<span className="font-mono text-overline text-text-lo">
 					{WEEKS} semanas
 				</span>
 			</div>
@@ -74,7 +74,7 @@ export function ActivityRibbon({ library }: ActivityRibbonProps) {
 				</div>
 			</div>
 
-			<div className="flex items-center gap-1.5 mt-2.5 font-mono text-[12px] text-text-lo">
+			<div className="flex items-center gap-1.5 mt-2.5 font-mono text-caption text-text-lo">
 				<span>Menos</span>
 				{([0, 1, 2, 3] as const).map((l) => (
 					<div

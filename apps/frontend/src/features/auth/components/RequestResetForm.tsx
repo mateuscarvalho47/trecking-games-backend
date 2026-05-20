@@ -18,13 +18,13 @@ export function RequestResetForm() {
 	return (
 		<form onSubmit={onSubmit} className="flex flex-col gap-3.5">
 			<div>
-				<span className="font-mono text-[11.5px] tracking-widest uppercase text-accent-bright block mb-2">
+				<span className="font-mono text-overline tracking-widest uppercase text-accent-bright block mb-2">
 					Recuperar acesso
 				</span>
 				<h1 className="text-2xl font-semibold tracking-tight m-0 mb-2 text-text-hi">
 					Esqueceu sua senha?
 				</h1>
-				<p className="text-sm text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
+				<p className="text-body text-text-md leading-[1.55] mt-0 mb-6 max-w-[36ch]">
 					Informe seu e-mail e enviaremos um código para você redefinir sua
 					senha.
 				</p>
@@ -39,12 +39,12 @@ export function RequestResetForm() {
 					className="bg-bg-2 border-border text-text-hi placeholder:text-text-lo h-10"
 				/>
 				{errors.email && (
-					<p className="text-sm m-0 text-error">{errors.email.message}</p>
+					<p className="text-body m-0 text-error">{errors.email.message}</p>
 				)}
 			</div>
 
 			{mutation.error && (
-				<p className="text-sm m-0 text-error">{mutation.error.message}</p>
+				<p className="text-body m-0 text-error">{mutation.error.message}</p>
 			)}
 
 			<Button
@@ -56,7 +56,7 @@ export function RequestResetForm() {
 				{mutation.isPending ? "Enviando..." : "Enviar código"}
 			</Button>
 
-			<p className="text-center text-xs text-text-lo mt-1">
+			<p className="text-center text-captiontext-text-lo mt-1">
 				Lembrou a senha?{" "}
 				<a
 					href="/login"

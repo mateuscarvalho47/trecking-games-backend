@@ -12,7 +12,7 @@ export function StatusBarsCard({ stats }: StatusBarsCardProps) {
 
 	return (
 		<div className="bg-bg-1 border border-border-soft rounded-lg px-6 py-5">
-			<div className="text-[15.5px] font-semibold text-text-hi tracking-[-0.01em] mb-3.5">
+			<div className="text-heading font-semibold text-text-hi tracking-[-0.01em] mb-3.5">
 				Por status
 			</div>
 			<div className="flex flex-col gap-1">
@@ -24,9 +24,9 @@ export function StatusBarsCard({ stats }: StatusBarsCardProps) {
 							type="button"
 							key={s.key}
 							onClick={() => navigate({ to: "/library" })}
-							className="grid grid-cols-[120px_1fr_32px] gap-3 items-center py-1.5 bg-transparent border-0 cursor-pointer text-left rounded-[4px] w-full transition-[background] hover:bg-bg-2 font-[inherit]"
+							className="grid grid-cols-[120px_1fr_32px] gap-3 items-center py-1.5 bg-transparent border-0 cursor-pointer text-left rounded-lg w-full transition-[background] hover:bg-bg-2 font-[inherit]"
 						>
-							<div className="flex items-center gap-2 text-xs text-text-md">
+							<div className="flex items-center gap-2 text-caption text-text-md">
 								<div
 									className="size-2 rounded-full shrink-0"
 									style={{ background: s.color }}
@@ -39,7 +39,7 @@ export function StatusBarsCard({ stats }: StatusBarsCardProps) {
 									style={{ width: `${pct}%`, background: s.color }}
 								/>
 							</div>
-							<span className="text-xs text-text-hi text-right font-medium">
+							<span className="text-caption text-text-hi text-right font-medium">
 								{count}
 							</span>
 						</button>
