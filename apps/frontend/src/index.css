@@ -109,12 +109,12 @@
 	--font-size-xl: 1.4375rem;
 	--font-size-2xl: 1.8125rem;
 
-	/* Font sizes — semantic tokens (root 16px) */
-	--font-size-overline: 0.6389rem; /* ~10px — mono uppercase, badge, nav-label */
-	--font-size-caption: 0.6944rem; /* ~11px — meta, subtitle, form hint, timestamp */
-	--font-size-body: 0.8056rem; /* ~13px — body copy, prose, card subtitle */
-	--font-size-heading: 0.8611rem; /* ~14px — card/section heading, CTA */
-	--font-size-title: 1rem; /* 16px  — page/modal title, emphasis */
+	/* Font sizes — semantic tokens (calibrated for html { 18px }) */
+	--font-size-overline: 0.6389rem; /* 11.5px — mono uppercase, badge, nav-label */
+	--font-size-caption: 0.6944rem; /* 12.5px — meta, subtitle, form hint, timestamp */
+	--font-size-body: 0.8056rem; /* 14.5px — body copy, prose, card subtitle */
+	--font-size-heading: 0.8611rem; /* 15.5px — card/section heading, CTA */
+	--font-size-title: 1rem; /* 18px   — page/modal title, emphasis */
 }
 
 /* ═══ Light theme (default) ═══ */

@@ -49,7 +49,7 @@ export function AddToLibraryModal({
 				className="p-0 gap-0 max-w-180 bg-bg-1 border border-border rounded-xl shadow-modal"
 			>
 				<DialogHeader className="flex flex-row items-center justify-between px-5 py-3.5 border-b border-border-soft">
-					<DialogTitle className="text-[15px] text-text-hi">
+					<DialogTitle className="text-heading text-text-hi">
 						Adicionar à biblioteca
 					</DialogTitle>
 					<DialogClose asChild>

@@ -35,7 +35,7 @@ export function StatusPills({ library, active, onChange }: StatusPillsProps) {
 				Todos
 				<span
 					className={cn(
-						"text-[11.5px] pl-1.5 ml-0.5 border-l border-border-soft",
+						"text-overline pl-1.5 ml-0.5 border-l border-border-soft",
 						active === null ? "text-text-md" : "text-text-lo",
 					)}
 				>
@@ -74,7 +74,7 @@ export function StatusPills({ library, active, onChange }: StatusPillsProps) {
 						}
 					>
 						{s.label}
-						<span className="text-[11.5px] pl-1.5 ml-0.5 border-l border-border-soft text-text-lo">
+						<span className="text-overline pl-1.5 ml-0.5 border-l border-border-soft text-text-lo">
 							{count}
 						</span>
 					</button>

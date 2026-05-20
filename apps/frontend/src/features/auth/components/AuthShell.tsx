@@ -85,14 +85,14 @@ export function AuthShell({ mode, children }: AuthShellProps) {
 						height="22"
 						className="rounded-md"
 					/>
-					<span className="text-[19px] font-bold tracking-[-0.02em] text-text-hi">
+					<span className="text-title font-bold tracking-[-0.02em] text-text-hi">
 						Detonado
 					</span>
 				</div>
 
 				{children ?? (mode === "login" ? <LoginForm /> : <RegisterForm />)}
 
-				<div className="mt-5 pt-4 border-t border-border-soft font-mono text-[11.5px] text-text-dim text-center tracking-[0.04em]">
+				<div className="mt-5 pt-4 border-t border-border-soft font-mono text-overline text-text-dim text-center tracking-[0.04em]">
 					DETONADO · RASTREADOR DE JOGOS
 				</div>
 			</div>

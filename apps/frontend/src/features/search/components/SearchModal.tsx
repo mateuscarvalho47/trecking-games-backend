@@ -99,7 +99,7 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 									</div>
 								) : (
 									<>
-										<div className="font-mono text-[11.5px] tracking-[0.08em] uppercase text-text-dim px-3 pt-2.5 pb-1.5">
+										<div className="font-mono text-overline tracking-[0.08em] uppercase text-text-dim px-3 pt-2.5 pb-1.5">
 											{results.length} resultado
 											{results.length !== 1 ? "s" : ""}
 										</div>
@@ -133,17 +133,17 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 														/>
 													</div>
 													<div className="min-w-0">
-														<div className="text-[14.5px] font-medium text-text-hi truncate">
+														<div className="text-body font-medium text-text-hi truncate">
 															{game.name}
 														</div>
-														<div className="text-[12.5px] font-mono text-text-lo mt-0.5">
+														<div className="text-caption font-mono text-text-lo mt-0.5">
 															{game.releaseYear ?? "TBA"}
 															{game.platforms.length
 																? ` · ${game.platforms.slice(0, 2).join(", ")}`
 																: ""}
 														</div>
 													</div>
-													<div className="text-[12.5px] font-mono">
+													<div className="text-caption font-mono">
 														{owned ? (
 															<span style={{ color: "oklch(0.58 0.25 17)" }}>
 																✓ Na biblioteca
@@ -160,7 +160,7 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
 							</div>
 
 							{/* Footer */}
-							<div className="flex items-center gap-4 px-4 py-2.5 border-t border-border-soft font-mono text-[12px] text-text-lo bg-bg-2">
+							<div className="flex items-center gap-4 px-4 py-2.5 border-t border-border-soft font-mono text-caption text-text-lo bg-bg-2">
 								<span>↵ selecionar</span>
 							</div>
 						</div>

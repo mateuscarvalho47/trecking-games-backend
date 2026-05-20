@@ -34,7 +34,7 @@ export function LibraryList({ games }: LibraryListProps) {
 		<div className="flex flex-col bg-bg-1 border border-border-soft rounded-lg overflow-hidden">
 			{/* Header — desktop only */}
 			<div
-				className="hidden md:grid gap-3.5 items-center px-4 py-3 font-mono text-[11.5px] uppercase tracking-[0.06em] text-text-lo border-b border-border-soft bg-bg-2"
+				className="hidden md:grid gap-3.5 items-center px-4 py-3 font-mono text-overline uppercase tracking-[0.06em] text-text-lo border-b border-border-soft bg-bg-2"
 				style={{ gridTemplateColumns: DESKTOP_GRID }}
 			>
 				<div />
@@ -72,7 +72,7 @@ export function LibraryList({ games }: LibraryListProps) {
 							className="md:hidden grid items-center gap-3 px-4 py-2.5"
 							style={{ gridTemplateColumns: MOBILE_GRID }}
 						>
-							<div className="w-10 h-[54px] rounded-[3px] overflow-hidden">
+							<div className="w-10 h-13.5 rounded-[3px] overflow-hidden">
 								<Cover
 									game={{
 										name: game.name,
@@ -88,7 +88,7 @@ export function LibraryList({ games }: LibraryListProps) {
 								<span className="text-text-hi font-medium truncate">
 									{game.name}
 								</span>
-								<span className="text-[12px] font-mono text-text-lo">
+								<span className="text-caption font-mono text-text-lo">
 									{game.userPlatform ?? game.platforms[0] ?? "—"}
 								</span>
 							</div>
@@ -125,7 +125,7 @@ export function LibraryList({ games }: LibraryListProps) {
 									{game.name}
 								</span>
 								{game.genres.length > 0 && (
-									<span className="text-[12px] font-mono text-text-lo truncate">
+									<span className="text-caption font-mono text-text-lo truncate">
 										{game.genres.slice(0, 2).join(" · ")}
 									</span>
 								)}
