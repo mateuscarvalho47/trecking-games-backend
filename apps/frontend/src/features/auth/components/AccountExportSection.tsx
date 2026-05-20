@@ -41,9 +41,7 @@ export function AccountExportSection() {
 				{exportMutation.isPending ? "Preparando..." : "Baixar dados (.json)"}
 			</Button>
 			{exportMutation.error && (
-				<p className="text-sm m-0 text-error">
-					{exportMutation.error.message}
-				</p>
+				<p className="text-sm m-0 text-error">{exportMutation.error.message}</p>
 			)}
 		</section>
 	);

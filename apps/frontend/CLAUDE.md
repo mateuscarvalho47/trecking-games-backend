@@ -1,149 +1,59 @@
-# CLAUDE.md — Frontend
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+Frontend app of the `ludex` monorepo. React 19 + Vite + TanStack Router/Query. See root `../../CLAUDE.md` for monorepo-wide setup. Run all commands from this directory (`apps/frontend`).
 
 ## Commands
 
 ```bash
-pnpm dev          # Vite dev server
-pnpm build        # tsc + vite build
-pnpm lint         # Biome check
-pnpm lint:fix     # Biome auto-fix
-pnpm test         # Vitest (run once)
-pnpm test:watch   # Vitest watch
+pnpm dev            # Vite dev server → http://localhost:5173
+pnpm build          # tsr generate → tsc -b → vite build (route tree regenerated first)
+pnpm routes:gen     # regenerate src/routeTree.gen.ts (also runs in dev via plugin)
+pnpm lint           # biome check .
+pnpm lint:fix       # biome check --write .
+pnpm test           # vitest run (once)
+pnpm test:watch     # vitest watch
+pnpm test:cov       # vitest run --coverage
 ```
+
+Run a single test file: `pnpm vitest run src/lib/api.test.ts`. Filter by name: `pnpm vitest run -t "name"`.
+
+## Backend dependency
+
+Dev server proxies `/api` → `http://localhost:3000` (see `vite.config.ts`). Backend must run for auth/data. In prod, `VITE_API_URL` prefixes requests (`src/lib/api.ts`). Auth is cookie-session — every request uses `credentials: "include"`; there are no tokens in JS.
 
 ## Architecture
 
-React 19 + Vite + TanStack Router (file-based). Path alias `@` maps to `src/`.
+Feature-sliced. Each `src/features/<name>/` owns its slice with a consistent shape:
 
-**State**: TanStack Query for server state, Zustand (`src/store/`) for UI state.
+- `service/` — thin functions calling the `api` client; return typed data. No React.
+- `hooks/` — TanStack Query `useQuery`/`useMutation` wrappers + react-hook-form glue. UI talks to these, never to `service/` directly.
+- `schema/` — Zod schemas + inferred form types, used with `@hookform/resolvers/zod`.
+- `components/` — feature-specific screens/components.
 
-**API layer**: `src/lib/api.ts` — thin `fetch` wrapper, throws `ApiError` on non-2xx.
+Features: `auth`, `dashboard`, `detail`, `landing`, `library`, `search`, `stats`.
 
-**Shared types**: `src/types/api.ts` — types shared across features (`LibraryEntry`, `GameSearchResult`, `User`, etc.). Keep types here only when consumed by more than one feature.
+Shared layers:
+- `src/components/ui/` — shadcn primitives (style `radix-vega`, `components.json`). Generated; don't hand-edit casually.
+- `src/shared/` — cross-feature components (`Sidebar`, `BottomNav`, `StatusBadge`…), hooks, constants.
+- `src/lib/` — `api.ts` (fetch wrapper + `ApiError`), `utils.ts`, `statusColor.ts`.
+- `src/store/useAppStore.ts` — Zustand store for transient + persisted UI state (theme, sidebar, library view/sort/filter). Persisted slice is whitelisted via `partialize` under key `detonado-ui`. Not for server data — that lives in Query cache.
+- `src/types/api.ts` — local API types. Shared types come from `@tracking-games/shared`.
 
-## Feature folder structure
+### Data flow
 
-Every feature that has queries or mutations **must** follow this layout:
+`api` client (`src/lib/api.ts`) throws `ApiError(code, message, details, status)` on non-2xx; returns `undefined` for 204. Services catch where a non-error outcome is expected (e.g. `fetchMe` maps 401 → `null`). Server state = TanStack Query; query keys are bare arrays like `["me"]`, `["library"]`. Mutations update the cache via `setQueryData` / `invalidateQueries` (see `useAuth.ts`); logout calls `qc.clear()`.
 
-```
-features/<name>/
-├── components/   # UI only — import from ../hooks/, never from service/ or lib/api directly
-├── hooks/        # React Query hooks + RHF form hooks
-├── service/      # Raw API calls (plain async functions, no React)
-└── schema/       # Zod schemas for RHF forms (only when form is feature-specific)
-```
+### Routing & auth gating
 
-Features with no queries or mutations (`landing`, `dashboard` sub-components) do not need `service/` or `hooks/`.
+File-based via `@tanstack/router-plugin` (`autoCodeSplitting`). Routes in `src/routes/` map a file to a screen with `createFileRoute`. `routeTree.gen.ts` is generated — never edit it (excluded from Biome + coverage).
 
-### service/
+Auth gating is **centralized in `src/routes/__root.tsx`**, not per-route `beforeLoad`. `RootLayout` reads `useMe()`, and a `useEffect` redirects to `/` when there's no session and the path isn't in `PUBLIC_ROUTES`. `NO_SHELL_ROUTES` controls whether the sidebar/bottom-nav shell renders. When adding a public or chromeless page, update those arrays.
 
-Pure functions that call `api.*`. No React, no business logic beyond shaping the request/response.
+## Conventions
 
-```ts
-// features/library/service/libraryService.ts
-export function fetchLibrary() {
-  return api.get<LibraryEntry[]>("/library");
-}
-export function addToLibrary(data: { igdbId: number; status: string; userPlatform?: string }) {
-  return api.post<LibraryEntry>("/library", data);
-}
-```
-
-### hooks/
-
-Two responsibilities:
-
-1. **Query/mutation hooks** — wrap `useQuery`/`useMutation` around service calls.
-2. **RHF form hooks** (`useXxxForm`) — bundle `useForm` + `zodResolver` + the mutation, return `{ form, onSubmit, mutation }`.
-
-```ts
-// query hook
-export function useLibrary(opts?: { enabled?: boolean }) {
-  return useQuery<LibraryEntry[]>({
-    queryKey: ["library"],
-    queryFn: fetchLibrary,
-    enabled: opts?.enabled,
-  });
-}
-
-// RHF form hook
-export function useLoginForm(onSuccess: () => void) {
-  const mutation = useLogin();
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
-  });
-  const onSubmit = form.handleSubmit(async (values) => {
-    await mutation.mutateAsync(values);
-    onSuccess();
-  });
-  return { form, onSubmit, mutation };
-}
-```
-
-### schema/
-
-Feature-specific Zod schemas used only by RHF in that feature. If a schema is truly shared, keep it in `src/types/api.ts` instead.
-
-```ts
-// features/auth/schema/authSchema.ts
-export const loginSchema = z.object({
-  email: z.string().email("E-mail inválido"),
-  password: z.string().min(1, "Senha obrigatória"),
-});
-export type LoginFormValues = z.infer<typeof loginSchema>;
-```
-
-### components/
-
-- Import hooks from `../hooks/`, never from `../service/` or `@/lib/api`.
-- No inline `useForm` setup — all form state lives in a `useXxxForm` hook.
-- Use `register()`/`Controller` for controlled inputs.
-
-```tsx
-export function LoginForm() {
-  const navigate = useNavigate();
-  const { form, onSubmit, mutation } = useLoginForm(() => navigate({ to: "/" }));
-  const { register, formState: { errors } } = form;
-
-  return (
-    <form onSubmit={onSubmit}>
-      <Input {...register("email")} />
-      {errors.email && <p>{errors.email.message}</p>}
-      <Button type="submit" disabled={mutation.isPending}>Entrar</Button>
-    </form>
-  );
-}
-```
-
-## Form patterns
-
-### Standard submit form (auth, add-to-library)
-
-`useForm` + `zodResolver` + mutation inside a `useXxxForm` hook. Component calls `form.handleSubmit` via `onSubmit` returned by the hook.
-
-### Auto-save form (detail screen)
-
-`useForm` + `zodResolver` + `watch()` + per-field `useDebounce` + `useMutation`. All logic lives in `useDetailForm`. Component uses `Controller`/`register` with no local state for form fields.
-
-## Query key conventions
-
-| Key | Data |
-|-----|------|
-| `["me"]` | Authenticated user |
-| `["library"]` | Full library list |
-| `["library", igdbId]` | Single library entry |
-| `["search", query]` | Game search results |
-| `["stats"]` | Library statistics |
-
-## Current features
-
-| Feature | service/ | hooks/ | schema/ | Notes |
-|---------|----------|--------|---------|-------|
-| `auth` | `authService.ts` | `useAuth.ts` | `authSchema.ts` | `useLoginForm`, `useRegisterForm` |
-| `library` | `libraryService.ts` | `useLibrary.ts` | — | `useLibrary`, `useAddToLibrary` |
-| `search` | `searchService.ts` | `useGameSearch.ts`, `useAddToLibraryForm.ts` | `addToLibrarySchema.ts` | Search + add-to-library modal |
-| `detail` | `detailService.ts` | `useLibraryEntry.ts`, `useDetailForm.ts` | `detailSchema.ts` | Auto-save with debounce |
-| `stats` | `statsService.ts` | `useStats.ts` | — | Read-only stats query |
-| `dashboard` | — | — | — | Uses `useLibrary()` from library feature |
-| `landing` | — | — | — | No queries or mutations |
+- **Biome** formats with **tabs** and (frontend default) **double quotes** — note this differs from the backend. Run `pnpm lint:fix` before committing.
+- Path alias `@` → `src/`.
+- Theme via `data-theme` attr + `.dark` class on `<html>`, applied in `__root.tsx`; colors are CSS vars (`var(--color-*)`).
+- Tests colocated as `*.test.ts(x)`, jsdom env, globals on, `@testing-library/react` (`src/test/setup.ts`).

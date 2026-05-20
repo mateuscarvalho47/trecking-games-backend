@@ -177,9 +177,7 @@ export function VerifyResetForm({ email }: VerifyResetFormProps) {
 					</div>
 
 					{mutation.error && (
-						<p className="text-sm m-0 text-error">
-							{mutation.error.message}
-						</p>
+						<p className="text-sm m-0 text-error">{mutation.error.message}</p>
 					)}
 
 					<Button

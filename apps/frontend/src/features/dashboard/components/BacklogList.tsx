@@ -36,9 +36,7 @@ export function BacklogList({ games }: BacklogListProps) {
 			</div>
 
 			{shown.length === 0 ? (
-				<div className="py-6 text-center text-text-lo text-sm">
-					Fila vazia
-				</div>
+				<div className="py-6 text-center text-text-lo text-sm">Fila vazia</div>
 			) : (
 				<div className="flex flex-col">
 					{shown.map((game, idx) => (
@@ -56,7 +54,7 @@ export function BacklogList({ games }: BacklogListProps) {
 							<span className="text-[12px] text-text-dim font-medium">
 								#{idx + 1}
 							</span>
-							<div className="w-9 h-12 rounded-[4px] overflow-hidden">
+							<div className="w-9 h-12 rounded-lg overflow-hidden">
 								<Cover
 									game={{
 										name: game.name,

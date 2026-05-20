@@ -115,9 +115,7 @@ export function RegisterForm() {
 					</button>
 				</div>
 				{errors.password && (
-					<p className="text-sm m-0 text-error">
-						{errors.password.message}
-					</p>
+					<p className="text-sm m-0 text-error">{errors.password.message}</p>
 				)}
 			</div>
 
